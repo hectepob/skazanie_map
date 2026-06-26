@@ -68,8 +68,15 @@ function render() {
 function format(list) {
   return (list || [])
     .map(i => {
-      const name = i.name + (i.group ? " +" : "");
-      return i.type === "monster" ? `<b>${name}</b>` : name;
+      let text = i.name;
+
+      if (i.type === "monster") {
+        if (i.level) text += " (" + i.level + ")";
+        if (i.group) text += " +";
+        return "<b>" + text + "</b>";
+      }
+
+      return text;
     })
     .join("<br>");
 }
