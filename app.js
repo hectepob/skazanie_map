@@ -5,17 +5,27 @@ let data = [];
 let byId = new Map();
 let currentFloor = 0;
 
+function toBool(v) {
+    return v === true || v === "true";
+}
+
+function toId(v) {
+    if (v === "" || v === null || v === undefined) return null;
+    const n = Number(v);
+    return isNaN(n) ? null : n;
+}
+
 fetch("./map.json")
     .then(r => r.json())
     .then(json => {
         data = json || [];
 
+        byId = new Map();
         data.forEach(cell => {
             byId.set(cell.id, cell);
         });
 
-        if (data.length)
-            currentFloor = data[0].floor;
+        if (data.length) currentFloor = data[0].floor;
 
         render();
     });
@@ -46,16 +56,20 @@ function render() {
         el.style.gridColumn = cellData.col;
         el.style.gridRow = cellData.row;
 
-        // стрелка вниз
-        if (cellData.stairs && cellData.stairs.down) {
+        // -------------------------
+        // DOWN
+        // -------------------------
+        const downId = toId(cellData.stairs?.down);
+
+        if (downId !== null) {
             const down = document.createElement("span");
             down.className = "stairs down";
-	    down.textContent = "▼";
+            down.textContent = "▼";
 
             down.onclick = function (e) {
                 e.stopPropagation();
 
-                const target = byId.get(Number(cellData.stairs.down));
+                const target = byId.get(downId);
                 if (!target) return;
 
                 currentFloor = target.floor;
@@ -65,14 +79,20 @@ function render() {
             el.appendChild(down);
         }
 
-        // номер клетки
+        // -------------------------
+        // ID
+        // -------------------------
         const num = document.createElement("span");
         num.className = "cellId";
         num.textContent = cellData.id;
         el.appendChild(num);
 
-        // стрелка вверх
-        if (cellData.stairs && cellData.stairs.up) {
+        // -------------------------
+        // UP
+        // -------------------------
+        const upId = toId(cellData.stairs?.up);
+
+        if (upId !== null) {
             const up = document.createElement("span");
             up.className = "stairs up";
             up.textContent = "▲";
@@ -80,7 +100,7 @@ function render() {
             up.onclick = function (e) {
                 e.stopPropagation();
 
-                const target = byId.get(Number(cellData.stairs.up));
+                const target = byId.get(upId);
                 if (!target) return;
 
                 currentFloor = target.floor;
@@ -90,7 +110,9 @@ function render() {
             el.appendChild(up);
         }
 
-        // tooltip
+        // -------------------------
+        // TOOLTIP
+        // -------------------------
         el.addEventListener("mouseenter", () => {
             tooltip.innerHTML = format(cellData.objects || []);
             tooltip.style.display = "block";
@@ -107,7 +129,6 @@ function render() {
 
         mapContainer.appendChild(el);
     });
-
 }
 
 function format(list) {
@@ -123,7 +144,6 @@ function format(list) {
             }
 
             return text;
-
         })
         .join("<br>");
 }
