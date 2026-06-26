@@ -95,7 +95,7 @@ function render() {
 
         // -------------------------
         // UP
-        -------------------------
+        //-------------------------
         const upId = toId(cellData.stairs?.up);
 
         if (upId !== null) {
