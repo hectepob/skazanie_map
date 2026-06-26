@@ -1,60 +1,47 @@
-#map{
-    position:relative;
+#map {
+    display: grid;
+    gap: 2px;
 }
 
-.cell{
-    position:absolute;
-    width:40px;
-    height:40px;
-    border:1px solid #777;
-    box-sizing:border-box;
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #888;
+    background: #f8f8f8;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
 
-    font-weight:bold;
+    box-sizing: border-box;
 }
 
-.num{
-    pointer-events:none;
+.cellId {
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.up,
-.down{
-    position:absolute;
-    cursor:pointer;
-    font-size:11px;
-    line-height:1;
-    user-select:none;
-    color:#0066cc;
-    font-weight:bold;
+.stairs {
+    cursor: pointer;
+    user-select: none;
+    font-size: 11px;
+    color: #0066cc;
 }
 
-.up{
-    top:2px;
-    right:2px;
+.stairs:hover {
+    color: red;
 }
 
-.down{
-    bottom:2px;
-    left:2px;
-}
-
-.up:hover,
-.down:hover{
-    color:#ff6600;
-}
-
-#tooltip{
-    position:absolute;
-    display:none;
-    background:rgba(20,20,20,.95);
-    color:#fff;
-    padding:8px;
-    border-radius:6px;
-    font-size:13px;
-    pointer-events:none;
-    white-space:nowrap;
-    z-index:1000;
+#tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(20,20,20,0.95);
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
 }
