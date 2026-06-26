@@ -1,111 +1,57 @@
 [
-{"id":1,"col":8,"row":8,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"","south":"+","east":""},"objects":[{"type":"npc","id":2003,"name":"Милена","level":"","group":"","text_color":""}]}
-,
-{"id":2,"col":6,"row":5,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":3,"col":8,"row":9,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"","south":"+","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":4,"col":8,"row":7,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":5,"col":8,"row":5,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":6,"col":8,"row":4,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"item","id":3002,"name":"Башня магов","level":"","group":"","text_color":""}]}
-,
-{"id":7,"col":8,"row":4,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":8,"col":9,"row":4,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"item","id":3011,"name":"Стальной ключ","level":"","group":"","text_color":""}]}
-,
-{"id":9,"col":8,"row":3,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"","south":"+","east":""},"objects":[{"type":"npc","id":2004,"name":"Наставник","level":"","group":"","text_color":""},{"type":"item","id":3004,"name":"Заклинание Магическая стрела","level":"","group":"","text_color":""}]}
-,
-{"id":10,"col":7,"row":4,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"","south":"","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"item","id":3007,"name":"Заклинание Разряд молнии","level":"","group":"","text_color":""},{"type":"item","id":3006,"name":"Заклинание Огненный шар","level":"","group":"","text_color":""}]}
-,
-{"id":11,"col":8,"row":5,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"","south":"","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""}]}
-,
-{"id":12,"col":9,"row":3,"floor":-1,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"item","id":3009,"name":"Использовать Стальной ключ из 8","level":"","group":"","text_color":""}]}
-,
-{"id":13,"col":9,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"+","south":"","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":14,"col":8,"row":4,"floor":2,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":""},"objects":[{"type":"item","id":3010,"name":"Свиток с заклинанием Лечение легких ран","level":"","group":"","text_color":""}]}
-,
-{"id":15,"col":8,"row":4,"floor":3,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":""},"objects":[{"type":"item","id":3008,"name":"Заклинания Шаровая молния и Магическая стрела","level":"","group":"","text_color":""}]}
-,
-{"id":16,"col":9,"row":7,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":17,"col":9,"row":6,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"npc","id":2002,"name":"Лавочница","level":"","group":"","text_color":""}]}
-,
-{"id":18,"col":7,"row":7,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":19,"col":7,"row":6,"floor":0,"area":"Тэйл","passages":{"north":"","west":"+","south":"+","east":""},"objects":[{"type":"npc","id":2006,"name":"Оружейник (оружие)","level":"","group":"","text_color":""}]}
-,
-{"id":20,"col":6,"row":6,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":"+"},"objects":[{"type":"npc","id":2005,"name":"Оружейник (доспехи)","level":"","group":"","text_color":""}]}
-,
-{"id":21,"col":7,"row":5,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":22,"col":7,"row":4,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"npc","id":2007,"name":"Храм","level":"","group":"","text_color":""},{"type":"item","id":3005,"name":"Заклинание Молот богов","level":"","group":"","text_color":""}]}
-,
-{"id":23,"col":5,"row":7,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":24,"col":5,"row":6,"floor":0,"area":"Тэйл","passages":{"north":"","west":"+","south":"+","east":""},"objects":[{"type":"npc","id":2001,"name":"Гильдия воинов","level":"","group":"","text_color":""}]}
-,
-{"id":25,"col":4,"row":6,"floor":0,"area":"Тэйл","passages":{"north":"+","west":"","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":26,"col":4,"row":5,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":27,"col":4,"row":5,"floor":1,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":28,"col":4,"row":5,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":""},"objects":[{"type":"npc","id":2004,"name":"Наставник","level":"","group":"","text_color":""}]}
-,
-{"id":29,"col":4,"row":6,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":30,"col":3,"row":6,"floor":-1,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":"+"},"objects":[{"type":"item","id":3012,"name":"Чаша с родниковой водой","level":"","group":"","text_color":""}]}
-,
-{"id":31,"col":5,"row":6,"floor":-1,"area":"Тэйл","passages":{"north":"","west":"+","south":"","east":""},"objects":[{"type":"monster","id":1003,"name":"Огромная крыса","level":"1","group":"","text_color":""}]}
-,
-{"id":33,"col":4,"row":7,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1003,"name":"Огромная крыса","level":"1","group":"","text_color":""}]}
-,
-{"id":34,"col":7,"row":8,"floor":0,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":""},"objects":[{"type":"monster","id":1004,"name":"Тестовый монстр 1","level":"100-120","group":"+","text_color":"red"},{"type":"monster","id":1005,"name":"Тестовый монстр 2","level":"1-2","group":"+","text_color":"red"}]}
-,
-{"id":36,"col":4,"row":4,"floor":-1,"area":"Тэйл","passages":{"north":"","west":"+","south":"+","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":37,"col":1,"row":4,"floor":-1,"area":"Тэйл","passages":{"north":"+","west":"","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":38,"col":1,"row":2,"floor":-1,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":39,"col":1,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"","south":"","east":"+"},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":40,"col":2,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"+","south":"","east":"+"},"objects":[{"type":"item","id":3003,"name":"Дверь из стальной решетки","level":"","group":"","text_color":""}]}
-,
-{"id":41,"col":3,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""}]}
-,
-{"id":42,"col":3,"row":1,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"2-3","group":"","text_color":""},{"type":"item","id":3001,"name":"Амулет ядовитых вод","level":"","group":"","text_color":""}]}
-,
-{"id":43,"col":3,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""}]}
-,
-{"id":44,"col":4,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":""},"objects":[{"type":"null","id":0,"name":"","level":"","group":"","text_color":""}]}
-,
-{"id":45,"col":5,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"+","south":"","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":46,"col":4,"row":1,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1","group":"","text_color":""}]}
-,
-{"id":47,"col":2,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"","south":"+","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""}]}
-,
-{"id":48,"col":2,"row":4,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"","south":"+","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":49,"col":3,"row":4,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]}
-,
-{"id":50,"col":4,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"+","south":"","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1","group":"","text_color":""}]}
-,
-{"id":51,"col":6,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":52,"col":6,"row":4,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"","south":"","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":53,"col":7,"row":4,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":54,"col":8,"row":4,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]}
-,
-{"id":55,"col":8,"row":3,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]}
-,
-{"id":56,"col":8,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"","west":"+","south":"+","east":""},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
-,
-{"id":57,"col":7,"row":2,"floor":-2,"area":"Тэйл","passages":{"north":"+","west":"+","south":"+","east":"+"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
+{"id":1,"col":8,"row":8,"floor":0,"area":"Тэйл","north":"true","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2003,"name":"Милена","level":"","group":"","text_color":""}]},
+{"id":2,"col":6,"row":5,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":3,"col":8,"row":9,"floor":0,"area":"Тэйл","north":"true","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":4,"col":8,"row":7,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":5,"col":8,"row":5,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":6,"col":8,"row":4,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"234","down":"7"},"objects":[{"type":"item","id":3002,"name":"Башня магов","level":"","group":"","text_color":""}]},
+{"id":7,"col":8,"row":4,"floor":-1,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"6","down":"false"},"objects":[]},
+{"id":8,"col":9,"row":4,"floor":-1,"area":"Тэйл","north":"true","west":"true","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"item","id":3011,"name":"Стальной ключ","level":"","group":"","text_color":""}]},
+{"id":9,"col":8,"row":3,"floor":-1,"area":"Тэйл","north":"true","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2004,"name":"Наставник","level":"","group":"","text_color":""},{"type":"item","id":3004,"name":"Заклинание Магическая стрела","level":"","group":"","text_color":""}]},
+{"id":10,"col":7,"row":4,"floor":-1,"area":"Тэйл","north":"true","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"item","id":3007,"name":"Заклинание Разряд молнии","level":"","group":"","text_color":""},{"type":"item","id":3006,"name":"Заклинание Огненный шар","level":"","group":"","text_color":""}]},
+{"id":11,"col":8,"row":5,"floor":-1,"area":"Тэйл","north":"true","west":"false","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""}]},
+{"id":12,"col":9,"row":3,"floor":-1,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"13"},"objects":[{"type":"item","id":3009,"name":"Использовать Стальной ключ из 8","level":"","group":"","text_color":""}]},
+{"id":13,"col":9,"row":3,"floor":-2,"area":"Тэйл","north":"false","west":"true","south":"false","east":"false","stairs":{"up":"12","down":"false"},"objects":[]},
+{"id":14,"col":8,"row":4,"floor":2,"area":"Тэйл","north":"false","west":"false","south":"false","east":"false","stairs":{"up":"15","down":"234"},"objects":[{"type":"item","id":3010,"name":"Свиток с заклинанием Лечение легких ран","level":"","group":"","text_color":""}]},
+{"id":15,"col":8,"row":4,"floor":3,"area":"Тэйл","north":"false","west":"false","south":"false","east":"false","stairs":{"up":"false","down":"14"},"objects":[{"type":"item","id":3008,"name":"Заклинания Шаровая молния и Магическая стрела","level":"","group":"","text_color":""}]},
+{"id":16,"col":9,"row":7,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":17,"col":9,"row":6,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2002,"name":"Лавочница","level":"","group":"","text_color":""}]},
+{"id":18,"col":7,"row":7,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":19,"col":7,"row":6,"floor":0,"area":"Тэйл","north":"false","west":"true","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2006,"name":"Оружейник (оружие)","level":"","group":"","text_color":""}]},
+{"id":20,"col":6,"row":6,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2005,"name":"Оружейник (доспехи)","level":"","group":"","text_color":""}]},
+{"id":21,"col":7,"row":5,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":22,"col":7,"row":4,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"328","down":"false"},"objects":[{"type":"npc","id":2007,"name":"Храм","level":"","group":"","text_color":""},{"type":"item","id":3005,"name":"Заклинание Молот богов","level":"","group":"","text_color":""}]},
+{"id":23,"col":5,"row":7,"floor":0,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":24,"col":5,"row":6,"floor":0,"area":"Тэйл","north":"false","west":"true","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"npc","id":2001,"name":"Гильдия воинов","level":"","group":"","text_color":""}]},
+{"id":25,"col":4,"row":6,"floor":0,"area":"Тэйл","north":"true","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":26,"col":4,"row":5,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"27","down":"28"},"objects":[]},
+{"id":27,"col":4,"row":5,"floor":1,"area":"Тэйл","north":"false","west":"false","south":"false","east":"false","stairs":{"up":"false","down":"26"},"objects":[]},
+{"id":28,"col":4,"row":5,"floor":-1,"area":"Тэйл","north":"true","west":"true","south":"true","east":"false","stairs":{"up":"26","down":"false"},"objects":[{"type":"npc","id":2004,"name":"Наставник","level":"","group":"","text_color":""}]},
+{"id":29,"col":4,"row":6,"floor":-1,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":30,"col":3,"row":6,"floor":-1,"area":"Тэйл","north":"false","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"item","id":3012,"name":"Чаша с родниковой водой","level":"","group":"","text_color":""}]},
+{"id":31,"col":5,"row":6,"floor":-1,"area":"Тэйл","north":"false","west":"true","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1003,"name":"Огромная крыса","level":"1","group":"","text_color":""}]},
+{"id":33,"col":4,"row":7,"floor":-1,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1003,"name":"Огромная крыса","level":"1","group":"","text_color":""}]},
+{"id":34,"col":7,"row":8,"floor":0,"area":"Тэйл","north":"false","west":"false","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1004,"name":"Тестовый монстр 1","level":"100-120","group":"+","text_color":"red"},{"type":"monster","id":1005,"name":"Тестовый монстр 2","level":"1-2","group":"+","text_color":"red"}]},
+{"id":36,"col":4,"row":4,"floor":-1,"area":"Тэйл","north":"false","west":"true","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":37,"col":1,"row":4,"floor":-1,"area":"Тэйл","north":"true","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":38,"col":1,"row":2,"floor":-1,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"39"},"objects":[]},
+{"id":39,"col":1,"row":2,"floor":-2,"area":"Тэйл","north":"false","west":"false","south":"false","east":"true","stairs":{"up":"38","down":"false"},"objects":[]},
+{"id":40,"col":2,"row":2,"floor":-2,"area":"Тэйл","north":"false","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"item","id":3003,"name":"Дверь из стальной решетки","level":"","group":"","text_color":""}]},
+{"id":41,"col":3,"row":2,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""}]},
+{"id":42,"col":3,"row":1,"floor":-2,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"2-3","group":"","text_color":""},{"type":"item","id":3001,"name":"Амулет ядовитых вод","level":"","group":"","text_color":""}]},
+{"id":43,"col":3,"row":3,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""}]},
+{"id":44,"col":4,"row":2,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[]},
+{"id":45,"col":5,"row":3,"floor":-2,"area":"Тэйл","north":"false","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":46,"col":4,"row":1,"floor":-2,"area":"Тэйл","north":"false","west":"false","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1","group":"","text_color":""}]},
+{"id":47,"col":2,"row":3,"floor":-2,"area":"Тэйл","north":"false","west":"false","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""},{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""}]},
+{"id":48,"col":2,"row":4,"floor":-2,"area":"Тэйл","north":"true","west":"false","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":49,"col":3,"row":4,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]},
+{"id":50,"col":4,"row":3,"floor":-2,"area":"Тэйл","north":"false","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1","group":"","text_color":""}]},
+{"id":51,"col":6,"row":3,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":52,"col":6,"row":4,"floor":-2,"area":"Тэйл","north":"true","west":"false","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":53,"col":7,"row":4,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"false","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":54,"col":8,"row":4,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"false","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]},
+{"id":55,"col":8,"row":3,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"2","group":"","text_color":""}]},
+{"id":56,"col":8,"row":2,"floor":-2,"area":"Тэйл","north":"false","west":"true","south":"true","east":"false","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]},
+{"id":57,"col":7,"row":2,"floor":-2,"area":"Тэйл","north":"true","west":"true","south":"true","east":"true","stairs":{"up":"false","down":"false"},"objects":[{"type":"monster","id":1001,"name":"Большая крыса","level":"1-2","group":"","text_color":""},{"type":"monster","id":1002,"name":"Летучая мышь","level":"1-2","group":"","text_color":""}]}
 ]
