@@ -71,7 +71,7 @@ function format(list) {
       let text = i.name;
 
       if (i.type === "monster") {
-        if (i.level) text += " (" + i.level + ")";
+        if (i.level) text += " " + i.level;
         if (i.group) text += " +";
         return "<b>" + text + "</b>";
       }
