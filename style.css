@@ -1,47 +1,67 @@
 #map {
     display: grid;
-    gap: 2px;
+    gap: 0;                 /* убрали зазоры между ячейками */
+    background: #111;       /* фон, чтобы “стены” читались */
 }
 
+/* базовая ячейка */
 .cell {
     width: 40px;
     height: 40px;
-    border: 1px solid #888;
-    background: #f8f8f8;
+    box-sizing: border-box;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2px;
 
-    box-sizing: border-box;
+    position: relative;
+
+    background: #1b1b1b;
+
+    /* толстые границы = стены */
+    border: 2px solid #000;
 }
 
+/* если хочешь чуть “плиточный” эффект */
 .cellId {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
+    color: #e6e6e6;
 }
 
+/* стрелки */
 .stairs {
+    position: absolute;
+    font-size: 10px;
+    color: #bbb;
+    opacity: 0.9;
     cursor: pointer;
     user-select: none;
-    font-size: 11px;
-    color: #0066cc;
 }
 
-.stairs:hover {
-    color: red;
+.stairs.down {
+    left: 2px;
+    bottom: 2px;
 }
 
-#tooltip {
-    position: absolute;
-    display: none;
-    background: rgba(20,20,20,0.95);
-    color: #fff;
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 13px;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 1000;
+.stairs.up {
+    right: 2px;
+    top: 2px;
+}
+
+/* БЛЕДНЫЕ ПРОХОДЫ */
+.cell.open-north {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell.open-south {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell.open-west {
+    border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell.open-east {
+    border-right-color: rgba(255, 255, 255, 0.15);
 }
