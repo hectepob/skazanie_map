@@ -2,81 +2,128 @@ const mapContainer = document.getElementById("map");
 const tooltip = document.getElementById("tooltip");
 
 let data = [];
+let byId = new Map();
+let currentFloor = 0;
 
 fetch("./map.json")
-  .then(r => r.json())
-  .then(json => {
-    data = json || [];
-    render();
-  });
+    .then(r => r.json())
+    .then(json => {
+        data = json || [];
+
+        data.forEach(cell => {
+            byId.set(cell.id, cell);
+        });
+
+        if (data.length)
+            currentFloor = data[0].floor;
+
+        render();
+    });
 
 function render() {
-  if (!data.length) return;
 
-  const index = new Map();
+    mapContainer.innerHTML = "";
 
-  let minCol = Infinity;
-  let minRow = Infinity;
+    const floorData = data.filter(c => c.floor === currentFloor);
 
-  data.forEach(c => {
-    index.set(`${c.col}:${c.row}:${c.floor}`, c);
+    if (!floorData.length) return;
 
-    if (c.col < minCol) minCol = c.col;
-    if (c.row < minRow) minRow = c.row;
-  });
+    let maxCol = 0;
+    let maxRow = 0;
 
-  // нормализуем координаты (сдвиг в 0..N)
-  const shiftCol = minCol;
-  const shiftRow = minRow;
-
-  // контейнер больше не обязан быть grid
-  mapContainer.innerHTML = "";
-  mapContainer.style.position = "relative";
-
-  data.forEach(cellData => {
-
-    const el = document.createElement("div");
-    el.className = "cell";
-
-    // позиционирование вместо grid
-    el.style.position = "absolute";
-    el.style.left = ((cellData.col - shiftCol) * 40) + "px";
-    el.style.top = ((cellData.row - shiftRow) * 40) + "px";
-    el.style.width = "40px";
-    el.style.height = "40px";
-
-    el.textContent = cellData.id;
-
-    el.addEventListener("mouseenter", () => {
-      tooltip.innerHTML = format(cellData.objects || []);
-      tooltip.style.display = "block";
+    floorData.forEach(c => {
+        if (c.col > maxCol) maxCol = c.col;
+        if (c.row > maxRow) maxRow = c.row;
     });
 
-    el.addEventListener("mousemove", e => {
-      tooltip.style.left = e.pageX + 10 + "px";
-      tooltip.style.top = e.pageY + 10 + "px";
+    mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
+
+    floorData.forEach(cellData => {
+
+        const el = document.createElement("div");
+        el.className = "cell";
+
+        el.style.gridColumn = cellData.col;
+        el.style.gridRow = cellData.row;
+
+        // стрелка вниз
+        if (cellData.stairs && cellData.stairs.down) {
+            const down = document.createElement("span");
+            down.className = "stairs down";
+            down.textContent = "↓";
+
+            down.onclick = function (e) {
+                e.stopPropagation();
+
+                const target = byId.get(Number(cellData.stairs.down));
+                if (!target) return;
+
+                currentFloor = target.floor;
+                render();
+            };
+
+            el.appendChild(down);
+        }
+
+        // номер клетки
+        const num = document.createElement("span");
+        num.className = "cellId";
+        num.textContent = cellData.id;
+        el.appendChild(num);
+
+        // стрелка вверх
+        if (cellData.stairs && cellData.stairs.up) {
+            const up = document.createElement("span");
+            up.className = "stairs up";
+            up.textContent = "↑";
+
+            up.onclick = function (e) {
+                e.stopPropagation();
+
+                const target = byId.get(Number(cellData.stairs.up));
+                if (!target) return;
+
+                currentFloor = target.floor;
+                render();
+            };
+
+            el.appendChild(up);
+        }
+
+        // tooltip
+        el.addEventListener("mouseenter", () => {
+            tooltip.innerHTML = format(cellData.objects || []);
+            tooltip.style.display = "block";
+        });
+
+        el.addEventListener("mousemove", e => {
+            tooltip.style.left = (e.pageX + 10) + "px";
+            tooltip.style.top = (e.pageY + 10) + "px";
+        });
+
+        el.addEventListener("mouseleave", () => {
+            tooltip.style.display = "none";
+        });
+
+        mapContainer.appendChild(el);
     });
 
-    el.addEventListener("mouseleave", () => {
-      tooltip.style.display = "none";
-    });
-
-    mapContainer.appendChild(el);
-  });
 }
 
 function format(list) {
-  return (list || [])
-    .map(i => {
-      let text = i.name;
+    return (list || [])
+        .map(i => {
 
-      if (i.type === "monster") {
-        if (i.level) text += " " + i.level;
-        if (i.group) text += " +";
-        return "<b>" + text + "</b>";
-      }
+            let text = i.name;
 
-      return text;
-    })
-    .join("<br>");
+            if (i.type === "monster") {
+                if (i.level) text += " (" + i.level + ")";
+                if (i.group) text += " +";
+                return "<b>" + text + "</b>";
+            }
+
+            return text;
+
+        })
+        .join("<br>");
 }
