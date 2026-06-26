@@ -1,35 +1,47 @@
 #map {
-display: grid;
-gap: 2px;
+    display: grid;
+    gap: 2px;
 }
 
-.cell{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:3px;
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #888;
+    background: #f8f8f8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    box-sizing: border-box;
 }
 
-.down,
-.up{
-    cursor:pointer;
-    user-select:none;
-    font-size:12px;
+.cellId {
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.num{
-    font-weight:bold;
+.stairs {
+    cursor: pointer;
+    user-select: none;
+    font-size: 11px;
+    color: #0066cc;
+}
+
+.stairs:hover {
+    color: red;
 }
 
 #tooltip {
-position: absolute;
-display: none;
-background: rgba(20, 20, 20, 0.95);
-color: #ffffff;
-padding: 8px;
-border-radius: 6px;
-font-size: 13px;
-pointer-events: none;
-white-space: nowrap;
-z-index: 1000;
+    position: absolute;
+    display: none;
+    background: rgba(20,20,20,0.95);
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
 }
