@@ -21,9 +21,7 @@ fetch("./map.json")
         data = json || [];
 
         byId = new Map();
-        data.forEach(cell => {
-            byId.set(cell.id, cell);
-        });
+        data.forEach(cell => byId.set(cell.id, cell));
 
         if (data.length) currentFloor = data[0].floor;
 
@@ -35,7 +33,6 @@ function render() {
     mapContainer.innerHTML = "";
 
     const floorData = data.filter(c => c.floor === currentFloor);
-
     if (!floorData.length) return;
 
     let maxCol = 0;
@@ -55,6 +52,15 @@ function render() {
 
         el.style.gridColumn = cellData.col;
         el.style.gridRow = cellData.row;
+
+        // -------------------------
+        // ГОРИЗОНТАЛЬНЫЕ / ВЕРТИКАЛЬНЫЕ ПРОХОДЫ
+        // -------------------------
+
+        if (toBool(cellData.north)) el.classList.add("open-north");
+        if (toBool(cellData.south)) el.classList.add("open-south");
+        if (toBool(cellData.west)) el.classList.add("open-west");
+        if (toBool(cellData.east)) el.classList.add("open-east");
 
         // -------------------------
         // DOWN
@@ -89,7 +95,7 @@ function render() {
 
         // -------------------------
         // UP
-        // -------------------------
+        -------------------------
         const upId = toId(cellData.stairs?.up);
 
         if (upId !== null) {
