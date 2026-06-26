@@ -50,7 +50,7 @@ function render() {
         if (cellData.stairs && cellData.stairs.down) {
             const down = document.createElement("span");
             down.className = "stairs down";
-	    down.textContent = "▼";
+	    down.textContent = "↓";
 
             down.onclick = function (e) {
                 e.stopPropagation();
@@ -75,7 +75,7 @@ function render() {
         if (cellData.stairs && cellData.stairs.up) {
             const up = document.createElement("span");
             up.className = "stairs up";
-            up.textContent = "▲";
+            up.textContent = "↑";
 
             up.onclick = function (e) {
                 e.stopPropagation();
