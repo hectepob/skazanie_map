@@ -8,37 +8,42 @@
     height:40px;
     border:1px solid #777;
     box-sizing:border-box;
-}
 
-.cellId{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     font-weight:bold;
 }
 
-.stairs{
+.num{
+    pointer-events:none;
+}
+
+.up,
+.down{
     position:absolute;
-    font-size:12px;
     cursor:pointer;
-    user-select:none;
-    font-weight:bold;
+    font-size:11px;
     line-height:1;
+    user-select:none;
+    color:#0066cc;
+    font-weight:bold;
 }
 
-.stairs.up{
+.up{
     top:2px;
     right:2px;
 }
 
-.stairs.down{
+.down{
     bottom:2px;
     left:2px;
 }
 
-.stairs:hover{
-    color:#d00;
+.up:hover,
+.down:hover{
+    color:#ff6600;
 }
 
 #tooltip{
