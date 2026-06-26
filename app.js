@@ -3,7 +3,7 @@ const tooltip = document.getElementById("tooltip");
 
 let data = [];
 
-fetch("./map.json")
+fetch("/skazanie_map/map.json")
   .then(r => r.json())
   .then(json => {
     data = json || [];
