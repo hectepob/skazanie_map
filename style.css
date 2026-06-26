@@ -8,42 +8,37 @@
     height:40px;
     border:1px solid #777;
     box-sizing:border-box;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
 }
 
-.num{
-    pointer-events:none;
-}
-
-.up,
-.down{
+.cellId{
     position:absolute;
-    cursor:pointer;
-    font-size:11px;
-    line-height:1;
-    user-select:none;
-    color:#0066cc;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
     font-weight:bold;
 }
 
-.up{
+.stairs{
+    position:absolute;
+    font-size:12px;
+    cursor:pointer;
+    user-select:none;
+    font-weight:bold;
+    line-height:1;
+}
+
+.stairs.up{
     top:2px;
     right:2px;
 }
 
-.down{
+.stairs.down{
     bottom:2px;
     left:2px;
 }
 
-.up:hover,
-.down:hover{
-    color:#ff6600;
+.stairs:hover{
+    color:#d00;
 }
 
 #tooltip{
