@@ -72,6 +72,10 @@ function render() {
             const el = document.createElement("div");
             el.className = "cell";
 
+	if (cellData && cellData.text_color) {
+    	el.style.color = cellData.text_color;
+	}
+
             el.style.gridColumn = c;
             el.style.gridRow = r;
 
