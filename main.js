@@ -49,14 +49,15 @@ function render() {
     let maxRow = 0;
 
     // считаем размеры ТЕКУЩЕГО этажа
-    data.forEach(c => {
-        if (c.floor !== currentFloor) return;
-        if (currentArea && c.area !== currentArea) return;
-        if (currentSubarea && c.subarea !== currentSubarea) return;
+	data.forEach(c => {
+	    if (c.floor !== currentFloor) return;
+	    if (currentArea && c.area !== currentArea) return;
+	    if (currentSubarea && c.subarea !== currentSubarea) return;
+	    if (c.parent_id && c.parent_id !== "0") return;
 
-        if (c.col > maxCol) maxCol = c.col;
-        if (c.row > maxRow) maxRow = c.row;
-    });
+	    if (c.col > maxCol) maxCol = c.col;
+	    if (c.row > maxRow) maxRow = c.row;
+	});
 
     mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
