@@ -46,7 +46,9 @@ fetch("./map.json")
                 cellStack.set(key, []);
             }
 
-            cellStack.get(key).push(cell);
+if (cell.objects && cell.objects.length > 0) {
+    cellStack.get(key).push(...cell.objects);
+}
         });
 
         if (data.length) {
@@ -174,7 +176,6 @@ function render() {
             // -------------------------
             // TOOLTIP
             // -------------------------
-console.log("TOOLTIP KEY:", key, stack);
             el.addEventListener("mouseenter", () => {
                 tooltip.innerHTML = format(stack);
                 tooltip.style.display = "block";
