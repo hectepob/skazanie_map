@@ -174,22 +174,22 @@ body {
 ========================= */
 
 .cell.door-north {
-    border-top-color: rgba(0, 0, 0, 0.7);
+    border-top-color: rgba(0, 0, 0, 0.5);
     border-top-width: 1px;
 }
 
 .cell.door-south {
-    border-bottom-color: rgba(0, 0, 0, 0.7);
+    border-bottom-color: rgba(0, 0, 0, 0.5);
     border-bottom-width: 1px;
 }
 
 .cell.door-west {
-    border-left-color: rgba(0, 0, 0, 0.7);
+    border-left-color: rgba(0, 0, 0, 0.5);
     border-left-width: 1px;
 }
 
 .cell.door-east {
-    border-right-color: rgba(0, 0, 0, 0.7);
+    border-right-color: rgba(0, 0, 0, 0.5);
     border-right-width: 1px;
 }
 
