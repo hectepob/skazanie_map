@@ -174,6 +174,7 @@ function render() {
             // -------------------------
             // TOOLTIP
             // -------------------------
+console.log("TOOLTIP KEY:", key, stack);
             el.addEventListener("mouseenter", () => {
                 tooltip.innerHTML = format(stack);
                 tooltip.style.display = "block";
