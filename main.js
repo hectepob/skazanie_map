@@ -75,7 +75,6 @@ function render() {
             if (cellData && cellData.text_color) {
                 el.style.setProperty("--cell-color", cellData.text_color);
             }
-
             el.style.gridColumn = c;
             el.style.gridRow = r;
 
