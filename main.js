@@ -13,39 +13,30 @@ let currentSubarea = "";
 // -------------------------
 // LOAD
 // -------------------------
-fetch("./map.json")
-    .then(r => r.json())
-    .then(json => {
-        data = json || [];
+data = json || [];
 
-        data.forEach(c => {
-            c.parent_id = Number(c.parent_id);
-        });
+data.forEach(c => {
+    c.parent_id = Number(c.parent_id);
+});
 
-        byId = new Map();
-        gridIndex = new Map();
+byId = new Map();
+gridIndex = new Map();
+cellStack = new Map();
 
-        data.forEach(cell => {
-            byId.set(cell.id, cell);
+data.forEach(cell => {
 
-            const key = `${cell.floor}:${cell.row}:${cell.col}`;
+    byId.set(cell.id, cell);
 
-            if (!gridIndex.has(key)) {
-                gridIndex.set(key, []);
-            }
+    const key = `${cell.floor}:${cell.row}:${cell.col}`;
 
-            gridIndex.get(key).push(cell);
-        });
+    gridIndex.set(key, cell);
 
-        if (data.length) {
-            currentFloor = data[0].floor;
-        }
+    if (!cellStack.has(key)) {
+        cellStack.set(key, []);
+    }
 
-        topPanel.init(data);
-        leftPanel.init(data);
-
-        render();
-    });
+    cellStack.get(key).push(cell);
+});
 
 // -------------------------
 // RENDER MAP
