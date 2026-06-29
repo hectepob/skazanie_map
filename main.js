@@ -77,10 +77,12 @@ function render() {
         // PASSAGES
         // -------------------------
 
-        if (cellData.north === "true") el.classList.add("open-north");
-        if (cellData.south === "true") el.classList.add("open-south");
-        if (cellData.west === "true") el.classList.add("open-west");
-        if (cellData.east === "true") el.classList.add("open-east");
+    const dirs = ["north", "south", "west", "east"];
+
+    dirs.forEach(dir => {
+        if (cellData[dir] === "true") el.classList.add(`open-${dir}`);
+        if (cellData[dir] === "door") el.classList.add(`door-${dir}`);
+    });
 
         // -------------------------
         // DOWN
