@@ -18,6 +18,10 @@ fetch("./map.json")
     .then(json => {
         data = json || [];
 
+        data.forEach(c => {
+            c.parent_id = Number(c.parent_id);
+        });
+
         byId = new Map();
         gridIndex = new Map();
 
@@ -25,7 +29,12 @@ fetch("./map.json")
             byId.set(cell.id, cell);
 
             const key = `${cell.floor}:${cell.row}:${cell.col}`;
-            gridIndex.set(key, cell);
+
+            if (!gridIndex.has(key)) {
+                gridIndex.set(key, []);
+            }
+
+            gridIndex.get(key).push(cell);
         });
 
         if (data.length) {
