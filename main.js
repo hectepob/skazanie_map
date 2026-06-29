@@ -3,8 +3,10 @@ const tooltip = document.getElementById("tooltip");
 const mapViewport = document.getElementById("mapViewport");
 
 let data = [];
+
 let byId = new Map();
-let gridIndex = new Map();
+let gridIndex = new Map();   // 1 клетка = 1 "основной" объект
+let cellStack = new Map();    // 1 клетка = массив объектов
 
 let currentFloor = 0;
 let currentArea = "";
@@ -13,30 +15,49 @@ let currentSubarea = "";
 // -------------------------
 // LOAD
 // -------------------------
-data = json || [];
+fetch("./map.json")
+    .then(r => r.json())
+    .then(json => {
 
-data.forEach(c => {
-    c.parent_id = Number(c.parent_id);
-});
+        data = json || [];
 
-byId = new Map();
-gridIndex = new Map();
-cellStack = new Map();
+        // нормализация parent_id
+        data.forEach(c => {
+            c.parent_id = Number(c.parent_id || 0);
+        });
 
-data.forEach(cell => {
+        byId = new Map();
+        gridIndex = new Map();
+        cellStack = new Map();
 
-    byId.set(cell.id, cell);
+        data.forEach(cell => {
 
-    const key = `${cell.floor}:${cell.row}:${cell.col}`;
+            byId.set(cell.id, cell);
 
-    gridIndex.set(key, cell);
+            const key = `${cell.floor}:${cell.row}:${cell.col}`;
 
-    if (!cellStack.has(key)) {
-        cellStack.set(key, []);
-    }
+            // основной объект (первый попавшийся)
+            if (!gridIndex.has(key)) {
+                gridIndex.set(key, cell);
+            }
 
-    cellStack.get(key).push(cell);
-});
+            // стек объектов
+            if (!cellStack.has(key)) {
+                cellStack.set(key, []);
+            }
+
+            cellStack.get(key).push(cell);
+        });
+
+        if (data.length) {
+            currentFloor = data[0].floor;
+        }
+
+        topPanel.init(data);
+        leftPanel.init(data);
+
+        render();
+    });
 
 // -------------------------
 // RENDER MAP
@@ -49,117 +70,118 @@ function render() {
     let maxRow = 0;
 
     // считаем размеры ТЕКУЩЕГО этажа
-	data.forEach(c => {
-	    if (c.floor !== currentFloor) return;
-	    if (currentArea && c.area !== currentArea) return;
-	    if (currentSubarea && c.subarea !== currentSubarea) return;
-	    if (c.parent_id && c.parent_id !== "0") return;
+    data.forEach(c => {
 
-	    if (c.col > maxCol) maxCol = c.col;
-	    if (c.row > maxRow) maxRow = c.row;
-	});
+        if (c.floor !== currentFloor) return;
+        if (currentArea && c.area !== currentArea) return;
+        if (currentSubarea && c.subarea !== currentSubarea) return;
+
+        if (c.col > maxCol) maxCol = c.col;
+        if (c.row > maxRow) maxRow = c.row;
+    });
 
     mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
     // -------------------------
-    // ВАЖНО: рендерим ВСЮ сетку
+    // GRID RENDER
     // -------------------------
     for (let r = 1; r <= maxRow; r++) {
         for (let c = 1; c <= maxCol; c++) {
 
             const key = `${currentFloor}:${r}:${c}`;
-            const cellData = gridIndex.get(key);
+
+            const baseCell = gridIndex.get(key);
+            const stack = cellStack.get(key) || [];
 
             const el = document.createElement("div");
             el.className = "cell";
 
-            if (cellData && cellData.text_color) {
-                el.style.setProperty("--cell-color", cellData.text_color);
-            }
             el.style.gridColumn = c;
             el.style.gridRow = r;
+
+            // пустая клетка
+            if (!baseCell) {
+                el.classList.add("empty");
+                mapContainer.appendChild(el);
+                continue;
+            }
+
+            // цвет текста
+            if (baseCell.text_color) {
+                el.style.setProperty("--cell-color", baseCell.text_color);
+                el.style.color = baseCell.text_color;
+            }
 
             // -------------------------
             // PASSAGES
             // -------------------------
-            if (cellData) {
+            const dirs = ["north", "south", "west", "east"];
 
-                const dirs = ["north", "south", "west", "east"];
+            dirs.forEach(dir => {
+                if (baseCell[dir] === "true") el.classList.add(`open-${dir}`);
+                if (baseCell[dir] === "door") el.classList.add(`door-${dir}`);
+            });
 
-                dirs.forEach(dir => {
-                    if (cellData[dir] === "true") el.classList.add(`open-${dir}`);
-                    if (cellData[dir] === "door") el.classList.add(`door-${dir}`);
-                });
+            // -------------------------
+            // STAIRS
+            // -------------------------
+            const downId = toId(baseCell.stairs?.down);
 
-                // -------------------------
-                // DOWN
-                // -------------------------
-                const downId = toId(cellData.stairs?.down);
+            if (downId !== null) {
+                const down = document.createElement("span");
+                down.className = "stairs down";
+                down.textContent = "▼";
 
-                if (downId !== null) {
-                    const down = document.createElement("span");
-                    down.className = "stairs down";
-                    down.textContent = "▼";
+                down.onclick = (e) => {
+                    e.stopPropagation();
+                    const target = byId.get(downId);
+                    if (!target) return;
 
-                    down.onclick = function (e) {
-                        e.stopPropagation();
+                    currentFloor = target.floor;
+                    render();
+                };
 
-                        const target = byId.get(downId);
-                        if (!target) return;
-
-                        currentFloor = target.floor;
-                        render();
-                    };
-
-                    el.appendChild(down);
-                }
-
-                // -------------------------
-                // ID
-                // -------------------------
-                const num = document.createElement("span");
-                num.className = "cellId";
-                num.textContent = cellData.id;
-                el.appendChild(num);
-
-                // -------------------------
-                // UP
-                // -------------------------
-                const upId = toId(cellData.stairs?.up);
-
-                if (upId !== null) {
-                    const up = document.createElement("span");
-                    up.className = "stairs up";
-                    up.textContent = "▲";
-
-                    up.onclick = function (e) {
-                        e.stopPropagation();
-
-                        const target = byId.get(upId);
-                        if (!target) return;
-
-                        currentFloor = target.floor;
-                        render();
-                    };
-
-                    el.appendChild(up);
-                }
-
-                // -------------------------
-                // TOOLTIP
-                // -------------------------
-                el.addEventListener("mouseenter", () => {
-                    tooltip.innerHTML = format(cellData.objects || []);
-                    tooltip.style.display = "block";
-                });
-
-            } else {
-                // пустая клетка
-                el.classList.add("empty");
+                el.appendChild(down);
             }
+
+            const upId = toId(baseCell.stairs?.up);
+
+            if (upId !== null) {
+                const up = document.createElement("span");
+                up.className = "stairs up";
+                up.textContent = "▲";
+
+                up.onclick = (e) => {
+                    e.stopPropagation();
+                    const target = byId.get(upId);
+                    if (!target) return;
+
+                    currentFloor = target.floor;
+                    render();
+                };
+
+                el.appendChild(up);
+            }
+
+            // -------------------------
+            // ID
+            // -------------------------
+            const num = document.createElement("span");
+            num.className = "cellId";
+            num.textContent = baseCell.id;
+            el.appendChild(num);
+
+            // -------------------------
+            // TOOLTIP
+            // -------------------------
+            el.addEventListener("mouseenter", () => {
+                tooltip.innerHTML = format(stack);
+                tooltip.style.display = "block";
+            });
 
             el.addEventListener("mousemove", e => {
                 const rect = mapViewport.getBoundingClientRect();
+
                 tooltip.style.left = (e.clientX - rect.left + 10) + "px";
                 tooltip.style.top = (e.clientY - rect.top + 10) + "px";
             });
@@ -183,19 +205,23 @@ function toId(v) {
 }
 
 function format(list) {
+
     const order = {
         monster: 1,
         npc: 2,
         item: 3,
-	comment: 4
+        comment: 4
     };
 
     return (list || [])
         .slice()
-        .sort((a, b) => {
-            return (order[a.type] || 99) - (order[b.type] || 99);
-        })
+        .sort((a, b) => (order[a.type] || 99) - (order[b.type] || 99))
         .map(i => {
+
+            if (i.type === "comment") {
+                return `<i>${i.name}</i>`;
+            }
+
             let text = i.name;
 
             if (i.type === "monster") {
