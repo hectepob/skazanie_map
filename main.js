@@ -171,8 +171,15 @@ function render() {
 }
 
 // -------------------------
-// SORT TOOLTIP
+// HELPERS
 // -------------------------
+
+function toId(v) {
+    if (v === "" || v === null || v === undefined) return null;
+
+    const n = Number(v);
+    return isNaN(n) ? null : n;
+}
 
 function format(list) {
 
@@ -187,35 +194,6 @@ function format(list) {
         .sort((a, b) => {
             return (order[a.type] || 99) - (order[b.type] || 99);
         })
-        .map(i => {
-
-            let text = i.name;
-
-            if (i.type === "monster") {
-                if (i.level) text += " (" + i.level + ")";
-                if (i.group) text += " +";
-                return "<b>" + text + "</b>";
-            }
-
-            return text;
-        })
-        .join("<br>");
-}
-
-// -------------------------
-// HELPERS
-// -------------------------
-
-function toId(v) {
-    if (v === "" || v === null || v === undefined) return null;
-
-    const n = Number(v);
-    return isNaN(n) ? null : n;
-}
-
-function format(list) {
-
-    return (list || [])
         .map(i => {
 
             let text = i.name;
