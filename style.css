@@ -116,6 +116,12 @@ body {
     position: relative;
 }
 
+.cell.empty {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+}
+
 /* ID */
 .cellId {
     font-weight: bold;
