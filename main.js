@@ -1,5 +1,6 @@
 const mapContainer = document.getElementById("map");
 const tooltip = document.getElementById("tooltip");
+const mapViewport = document.getElementById("mapViewport");
 
 let data = [];
 let byId = new Map();
@@ -72,6 +73,7 @@ function render() {
 
         el.style.gridColumn = cellData.col;
         el.style.gridRow = cellData.row;
+
 
         // -------------------------
         // PASSAGES
@@ -153,8 +155,11 @@ function render() {
         });
 
         el.addEventListener("mousemove", e => {
-            tooltip.style.left = (e.pageX + 10) + "px";
-            tooltip.style.top = (e.pageY + 10) + "px";
+
+            const rect = mapViewport.getBoundingClientRect();
+
+            tooltip.style.left = (e.clientX - rect.left + 10) + "px";
+            tooltip.style.top = (e.clientY - rect.top + 10) + "px";
         });
 
         el.addEventListener("mouseleave", () => {
@@ -163,6 +168,38 @@ function render() {
 
         mapContainer.appendChild(el);
     });
+}
+
+// -------------------------
+// SORT TOOLTIP
+// -------------------------
+
+function format(list) {
+
+    const order = {
+        monster: 1,
+        npc: 2,
+        item: 3
+    };
+
+    return (list || [])
+        .slice()
+        .sort((a, b) => {
+            return (order[a.type] || 99) - (order[b.type] || 99);
+        })
+        .map(i => {
+
+            let text = i.name;
+
+            if (i.type === "monster") {
+                if (i.level) text += " (" + i.level + ")";
+                if (i.group) text += " +";
+                return "<b>" + text + "</b>";
+            }
+
+            return text;
+        })
+        .join("<br>");
 }
 
 // -------------------------
