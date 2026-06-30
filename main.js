@@ -77,7 +77,7 @@ fetch("./map.json")
 
             group.displayId = group.cells
                 .map(c => c.id)
-                .join("/");
+                .join("<br>");
 
         });
 
@@ -105,8 +105,6 @@ mapViewport.addEventListener("mousedown", e => {
     dragStartX = e.clientX - offsetX;
     dragStartY = e.clientY - offsetY;
 
-    mapViewport.style.cursor = "grabbing";
-
 });
 
 window.addEventListener("mousemove", e => {
@@ -124,8 +122,6 @@ window.addEventListener("mousemove", e => {
 window.addEventListener("mouseup", () => {
 
     dragging = false;
-
-    mapViewport.style.cursor = "grab";
 
 });
 
@@ -239,7 +235,10 @@ function render() {
             const num = document.createElement("span");
 
             num.className = "cellId";
-            num.textContent = group.displayId;
+if (group.cells.length > 1) {
+    num.classList.add("multi");
+}
+            num.innerHTML = group.displayId;
 
             el.appendChild(num);
 
