@@ -12,6 +12,18 @@ let currentArea = "";
 let currentSubarea = "";
 
 // -------------------------
+// MAP DRAG
+// -------------------------
+
+let offsetX = 0;
+let offsetY = 0;
+
+let dragging = false;
+
+let dragStartX = 0;
+let dragStartY = 0;
+
+// -------------------------
 // LOAD
 // -------------------------
 
@@ -79,6 +91,43 @@ fetch("./map.json")
         render();
 
     });
+
+// -------------------------
+// MAP DRAG
+// -------------------------
+
+mapViewport.addEventListener("mousedown", e => {
+
+    if (e.button !== 0) return;
+
+    dragging = true;
+
+    dragStartX = e.clientX - offsetX;
+    dragStartY = e.clientY - offsetY;
+
+    mapViewport.style.cursor = "grabbing";
+
+});
+
+window.addEventListener("mousemove", e => {
+
+    if (!dragging) return;
+
+    offsetX = e.clientX - dragStartX;
+    offsetY = e.clientY - dragStartY;
+
+    mapContainer.style.transform =
+        `translate(${offsetX}px, ${offsetY}px)`;
+
+});
+
+window.addEventListener("mouseup", () => {
+
+    dragging = false;
+
+    mapViewport.style.cursor = "grab";
+
+});
 
 // -------------------------
 // RENDER MAP
