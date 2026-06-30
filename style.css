@@ -80,6 +80,9 @@ body {
     overflow: hidden;
 
     background: #fff;
+
+    cursor: grab;
+    user-select: none;
 }
 
 /* сама карта */
@@ -93,6 +96,8 @@ body {
 
     width: max-content;
     height: max-content;
+
+    will-change: transform;
 }
 
 /* =========================
