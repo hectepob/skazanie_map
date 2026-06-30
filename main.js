@@ -5,8 +5,7 @@ const mapViewport = document.getElementById("mapViewport");
 let data = [];
 
 let byId = new Map();
-let gridIndex = new Map();   // base cell (одна клетка = один основной объект)
-let overlays = new Map();    // parent_id слои
+let gridMap = new Map();
 
 let currentFloor = 0;
 let currentArea = "";
@@ -15,53 +14,59 @@ let currentSubarea = "";
 // -------------------------
 // LOAD
 // -------------------------
+
 fetch("./map.json")
     .then(r => r.json())
     .then(json => {
 
         data = json || [];
 
-        // нормализация parent_id
-        data.forEach(c => {
-            c.parent_id = Number(c.parent_id || 0);
+        byId.clear();
+        gridMap.clear();
+
+        // parent_id всегда число
+        data.forEach(cell => {
+            cell.parent_id = Number(cell.parent_id || 0);
+            byId.set(cell.id, cell);
         });
 
-        byId = new Map();
-        gridIndex = new Map();
-        overlays = new Map();
-
+        // строим карту
         data.forEach(cell => {
 
-            byId.set(cell.id, cell);
+            // ищем корневую клетку
+            let root = cell;
 
-            const key = `${cell.floor}:${cell.row}:${cell.col}`;
-
-            // -------------------------
-            // BASE CELL (только если нет parent)
-            // -------------------------
-            if (!cell.parent_id || cell.parent_id === 0) {
-                if (!gridIndex.has(key)) {
-                    gridIndex.set(key, cell);
-                }
+            while (root.parent_id !== 0) {
+                root = byId.get(root.parent_id);
+                if (!root) break;
             }
 
-            // -------------------------
-            // OVERLAY CELLS (parent_id != 0)
-            // -------------------------
-            if (cell.parent_id && cell.parent_id !== 0) {
+            if (!root) return;
 
-                const parent = byId.get(cell.parent_id);
+            const key = `${root.floor}:${root.row}:${root.col}`;
 
-                if (parent) {
-                    const pkey = `${parent.floor}:${parent.row}:${parent.col}`;
+            if (!gridMap.has(key)) {
 
-                    if (!overlays.has(pkey)) {
-                        overlays.set(pkey, []);
-                    }
+                gridMap.set(key, {
+                    root: root,
+                    cells: []
+                });
 
-                    overlays.get(pkey).push(cell);
-                }
             }
+
+            gridMap.get(key).cells.push(cell);
+
+        });
+
+        // сортировка и подпись ID
+        gridMap.forEach(group => {
+
+            group.cells.sort((a, b) => a.id - b.id);
+
+            group.displayId = group.cells
+                .map(c => c.id)
+                .join("/");
+
         });
 
         if (data.length) {
@@ -72,11 +77,13 @@ fetch("./map.json")
         leftPanel.init(data);
 
         render();
+
     });
 
 // -------------------------
 // RENDER MAP
 // -------------------------
+
 function render() {
 
     mapContainer.innerHTML = "";
@@ -84,151 +91,191 @@ function render() {
     let maxCol = 0;
     let maxRow = 0;
 
-    // считаем размеры ТЕКУЩЕГО этажа
-    data.forEach(c => {
+    // определяем размеры отображаемой карты
+    gridMap.forEach(group => {
 
-        if (c.floor !== currentFloor) return;
-        if (currentArea && c.area !== currentArea) return;
-        if (currentSubarea && c.subarea !== currentSubarea) return;
+        const cell = group.root;
 
-        if (!c.parent_id || c.parent_id === 0) {
-            if (c.col > maxCol) maxCol = c.col;
-            if (c.row > maxRow) maxRow = c.row;
-        }
+        if (cell.floor !== currentFloor) return;
+        if (currentArea && cell.area !== currentArea) return;
+        if (currentSubarea && cell.subarea !== currentSubarea) return;
+
+        if (cell.col > maxCol) maxCol = cell.col;
+        if (cell.row > maxRow) maxRow = cell.row;
+
     });
 
     mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
-    // -------------------------
-    // GRID RENDER
-    // -------------------------
-    for (let r = 1; r <= maxRow; r++) {
-        for (let c = 1; c <= maxCol; c++) {
+    // рисуем всю сетку
+    for (let row = 1; row <= maxRow; row++) {
 
-            const key = `${currentFloor}:${r}:${c}`;
+        for (let col = 1; col <= maxCol; col++) {
 
-            const baseCell = gridIndex.get(key);
-            const overlayCells = overlays.get(key) || [];
+            const key = `${currentFloor}:${row}:${col}`;
+
+            const group = gridMap.get(key);
 
             const el = document.createElement("div");
-            el.className = "cell";
 
-            el.style.gridColumn = c;
-            el.style.gridRow = r;
+            el.className = "cell";
+            el.style.gridColumn = col;
+            el.style.gridRow = row;
 
             // пустая клетка
-            if (!baseCell) {
+            if (!group) {
+
                 el.classList.add("empty");
                 mapContainer.appendChild(el);
                 continue;
+
             }
 
-            // -------------------------
-            // COLOR
-            // -------------------------
-            if (baseCell.text_color) {
-                el.style.setProperty("--cell-color", baseCell.text_color);
-                el.style.color = baseCell.text_color;
+            const cell = group.root;
+
+            // цвет текста
+            if (cell.text_color) {
+                el.style.color = cell.text_color;
             }
 
             // -------------------------
             // PASSAGES
             // -------------------------
-            const dirs = ["north", "south", "west", "east"];
 
-            dirs.forEach(dir => {
-                if (baseCell[dir] === "true") el.classList.add(`open-${dir}`);
-                if (baseCell[dir] === "door") el.classList.add(`door-${dir}`);
+            ["north", "south", "west", "east"].forEach(dir => {
+
+                if (cell[dir] === "true")
+                    el.classList.add(`open-${dir}`);
+
+                if (cell[dir] === "door")
+                    el.classList.add(`door-${dir}`);
+
             });
 
             // -------------------------
-            // STAIRS
+            // STAIRS DOWN
             // -------------------------
-            const downId = toId(baseCell.stairs?.down);
+
+            const downId = toId(cell.stairs?.down);
 
             if (downId !== null) {
+
                 const down = document.createElement("span");
+
                 down.className = "stairs down";
                 down.textContent = "▼";
 
-                down.onclick = (e) => {
+                down.onclick = e => {
+
                     e.stopPropagation();
+
                     const target = byId.get(downId);
+
                     if (!target) return;
 
                     currentFloor = target.floor;
+
                     render();
+
                 };
 
                 el.appendChild(down);
-            }
 
-            const upId = toId(baseCell.stairs?.up);
-
-            if (upId !== null) {
-                const up = document.createElement("span");
-                up.className = "stairs up";
-                up.textContent = "▲";
-
-                up.onclick = (e) => {
-                    e.stopPropagation();
-                    const target = byId.get(upId);
-                    if (!target) return;
-
-                    currentFloor = target.floor;
-                    render();
-                };
-
-                el.appendChild(up);
             }
 
             // -------------------------
             // ID
             // -------------------------
+
             const num = document.createElement("span");
+
             num.className = "cellId";
-            num.textContent = baseCell.id;
+            num.textContent = group.displayId;
+
             el.appendChild(num);
 
             // -------------------------
-            // TOOLTIP STACK (base + overlays)
+            // STAIRS UP
             // -------------------------
-            const stack = [
-                ...(baseCell.objects || []),
-                ...overlayCells.flatMap(o => o.objects || [])
-            ];
+
+            const upId = toId(cell.stairs?.up);
+
+            if (upId !== null) {
+
+                const up = document.createElement("span");
+
+                up.className = "stairs up";
+                up.textContent = "▲";
+
+                up.onclick = e => {
+
+                    e.stopPropagation();
+
+                    const target = byId.get(upId);
+
+                    if (!target) return;
+
+                    currentFloor = target.floor;
+
+                    render();
+
+                };
+
+                el.appendChild(up);
+
+            }
+
+            // -------------------------
+            // TOOLTIP
+            // -------------------------
 
             el.addEventListener("mouseenter", () => {
-                tooltip.innerHTML = format(stack);
+
+                tooltip.innerHTML = format(group.cells);
+
                 tooltip.style.display = "block";
+
             });
 
             el.addEventListener("mousemove", e => {
+
                 const rect = mapViewport.getBoundingClientRect();
 
                 tooltip.style.left = (e.clientX - rect.left + 10) + "px";
                 tooltip.style.top = (e.clientY - rect.top + 10) + "px";
+
             });
 
             el.addEventListener("mouseleave", () => {
+
                 tooltip.style.display = "none";
+
             });
 
             mapContainer.appendChild(el);
+
         }
+
     }
+
 }
 
 // -------------------------
 // HELPERS
 // -------------------------
+
 function toId(v) {
-    if (v === "" || v === null || v === undefined) return null;
+
+    if (v === "" || v === null || v === undefined)
+        return null;
+
     const n = Number(v);
+
     return isNaN(n) ? null : n;
+
 }
 
-function format(list) {
+function format(cells) {
 
     const order = {
         monster: 1,
@@ -237,24 +284,63 @@ function format(list) {
         comment: 4
     };
 
-    return (list || [])
-        .slice()
-        .sort((a, b) => (order[a.type] || 99) - (order[b.type] || 99))
-        .map(i => {
+    let html = [];
 
-            if (i.type === "comment") {
-                return `<i>${i.name}</i>`;
+    cells.forEach(cell => {
+
+        const objects = (cell.objects || []).slice();
+
+        // если в локации ничего нет — пропускаем
+        if (objects.length === 0)
+            return;
+
+        objects.sort((a, b) =>
+            (order[a.type] || 99) - (order[b.type] || 99)
+        );
+
+        // если в клетке несколько ID — выводим заголовок
+        if (cells.length > 1) {
+            html.push(`<div class="tooltip-location"><b>${cell.id}</b></div>`);
+        }
+
+        objects.forEach(obj => {
+
+            let text = obj.name;
+
+            switch (obj.type) {
+
+                case "monster":
+
+                    if (obj.level)
+                        text += ` (${obj.level})`;
+
+                    if (obj.group)
+                        text += " +";
+
+                    html.push(`<b>${text}</b>`);
+
+                    break;
+
+                case "comment":
+
+                    html.push(`<i>${text}</i>`);
+
+                    break;
+
+                default:
+
+                    html.push(text);
+
             }
 
-            let text = i.name;
+        });
 
-            if (i.type === "monster") {
-                if (i.level) text += " (" + i.level + ")";
-                if (i.group) text += " +";
-                return "<b>" + text + "</b>";
-            }
+        // пустая строка между локациями
+        if (cells.length > 1)
+            html.push("");
 
-            return text;
-        })
-        .join("<br>");
+    });
+
+    return html.join("<br>");
+
 }
