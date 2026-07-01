@@ -5,68 +5,107 @@ const topPanel = (function () {
     let areaSelect;
     let subareaSelect;
 
-    function init(data) {
+    let findButton;
+    let gotoButton;
+
+    function init(areaData) {
 
         panel.innerHTML = "";
 
         areaSelect = document.createElement("select");
         subareaSelect = document.createElement("select");
 
+        findButton = document.createElement("button");
+        gotoButton = document.createElement("button");
+
+        findButton.textContent = "Найти";
+        gotoButton.textContent = "Перейти";
+
         panel.appendChild(areaSelect);
         panel.appendChild(subareaSelect);
+        panel.appendChild(findButton);
+        panel.appendChild(gotoButton);
 
-        buildAreas(data);
+        buildAreas(areaData);
 
         areaSelect.onchange = function () {
-            buildSubareas(data, areaSelect.value);
-        };
 
-        subareaSelect.onchange = function () {
-
-            // позже здесь будет:
-            // currentArea = ...
-            // currentSubarea = ...
-            // render();
+            buildSubareas(areaData, areaSelect.value);
 
         };
+
+        findButton.onclick = function () {
+
+            // позже
+
+        };
+
+        gotoButton.onclick = function () {
+
+            // позже
+
+        };
+
     }
 
-    function buildAreas(data) {
+    function buildAreas(areaData) {
 
         areaSelect.innerHTML = "";
 
-        const areas = [...new Set(data.map(c => c.area))].sort();
+        const areas = [];
+
+        areaData.forEach(a => {
+
+            if (!areas.find(x => x.area === a.area)) {
+                areas.push({
+                    id: a.id_area,
+                    area: a.area
+                });
+            }
+
+        });
+
+        areas.sort((a, b) => a.id - b.id);
 
         areas.forEach(a => {
 
             const opt = document.createElement("option");
-            opt.value = a;
-            opt.textContent = a;
+
+            opt.value = a.area;
+            opt.textContent = a.area;
 
             areaSelect.appendChild(opt);
 
         });
 
         if (areas.length)
-            buildSubareas(data, areas[0]);
+            buildSubareas(areaData, areas[0].area);
+
     }
 
-    function buildSubareas(data, area) {
+    function buildSubareas(areaData, area) {
 
         subareaSelect.innerHTML = "";
 
-        const subs =
-            [...new Set(
-                data
-                    .filter(c => c.area === area)
-                    .map(c => c.subarea)
-            )].sort();
+        // пустой пункт
+
+        const empty = document.createElement("option");
+
+        empty.value = "";
+        empty.textContent = "────────";
+
+        subareaSelect.appendChild(empty);
+
+        const subs = areaData
+            .filter(x => x.area === area)
+            .sort((a, b) => a.id_subarea - b.id_subarea);
 
         subs.forEach(s => {
 
             const opt = document.createElement("option");
-            opt.value = s;
-            opt.textContent = s;
+
+            opt.value = s.subarea;
+            opt.textContent = s.subarea;
 
             subareaSelect.appendChild(opt);
 
