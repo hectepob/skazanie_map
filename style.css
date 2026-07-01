@@ -77,7 +77,7 @@ body {
     grid-row: 2;
 
     position: relative;
-    overflow: hidden;
+    overflow: auto;
 
     background: #fff;
 
@@ -136,15 +136,15 @@ body {
 }
 
 .cellId.multi2 {
-    font-size: 12px; /*поменял*/
-    line-height: 12px; /*поменял*/
-    text-align: center; /*добавил*/
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
 }
 
 .cellId.multi3 {
-    font-size: 11px; /*поменял*/
-    line-height: 11px; /*поменял*/
-    text-align: center; /*добавил*/
+    font-size: 11px;
+    line-height: 11px;
+    text-align: center;
 }
 
 /* =========================
