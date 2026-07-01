@@ -288,19 +288,24 @@ if (cell.text_color) {
 
             }
 
-            // -------------------------
-            // ID
-            // -------------------------
+// -------------------------
+// ID
+// -------------------------
 
-            const num = document.createElement("span");
+const num = document.createElement("span");
 
-            num.className = "cellId";
-if (group.cells.length > 1) {
-    num.classList.add("multi");
+num.className = "cellId";
+
+if (group.cells.length === 2) {
+    num.classList.add("multi2");
 }
-            num.innerHTML = group.displayId;
+else if (group.cells.length >= 3) {
+    num.classList.add("multi3");
+}
 
-            el.appendChild(num);
+num.innerHTML = group.displayId;
+
+el.appendChild(num);
 
             // -------------------------
             // STAIRS UP
@@ -394,7 +399,7 @@ function format(cells) {
 
     let html = [];
 
-    cells.forEach(cell => {
+    cells.forEach((cell, index) => {
 
         const objects = (cell.objects || []).slice();
 
@@ -408,9 +413,10 @@ function format(cells) {
 
         // если в клетке несколько ID — выводим заголовок
         if (cells.length > 1) {
-            html.push(`<div class="tooltip-location"><b>${cell.id}</b></div>`);
+            html.push(`<b class="tooltip-location">${cell.id}</b>`);
         }
 
+        // вывод объектов
         objects.forEach(obj => {
 
             let text = obj.name;
@@ -443,9 +449,10 @@ function format(cells) {
 
         });
 
-        // пустая строка между локациями
-        if (cells.length > 1)
-            html.push("");
+        // разделитель между локациями
+        if (index < cells.length - 1) {
+            html.push(`<div class="tooltip-divider"></div>`);
+        }
 
     });
 
