@@ -113,8 +113,20 @@ const topPanel = (function () {
 
     }
 
-    return {
-        init: init
-    };
+return {
+    init: init,
+
+    getArea() {
+        return areaSelect.value;
+    },
+
+    getSubarea() {
+        return subareaSelect.value;
+    },
+
+    setSubarea(value) {
+        subareaSelect.value = value;
+    }
+};
 
 })();
