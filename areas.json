@@ -19,12 +19,12 @@
 {"id_area":3,"id_subarea":1,"area":"Поганая земля","subarea":"Поганая земля","bg_color":"#4080A8","font_color":"","central_cell":96},
 {"id_area":3,"id_subarea":2,"area":"Поганая земля","subarea":"Черная река","bg_color":"#4080A8","font_color":"","central_cell":223},
 {"id_area":3,"id_subarea":3,"area":"Поганая земля","subarea":"Избушка торговца","bg_color":"#4080A8","font_color":"","central_cell":185},
-{"id_area":4,"id_subarea":1,"area":"Туманные горы","subarea":"Южные пещреры","bg_color":"#E0C38D","font_color":"","central_cell":99},
-{"id_area":4,"id_subarea":2,"area":"Туманные горы","subarea":"Пещеры злых духов","bg_color":"#E0C38D","font_color":"","central_cell":142},
-{"id_area":4,"id_subarea":3,"area":"Туманные горы","subarea":"Призрачные пещеры","bg_color":"#E0C38D","font_color":"","central_cell":109},
-{"id_area":4,"id_subarea":4,"area":"Туманные горы","subarea":"Восточные пещеры","bg_color":"#E0C38D","font_color":"","central_cell":206},
-{"id_area":4,"id_subarea":100,"area":"Туманные горы","subarea":"Мрачные пещеры","bg_color":"#E0C38D","font_color":"","central_cell":107},
-{"id_area":4,"id_subarea":101,"area":"Туманные горы","subarea":"Ущелье","bg_color":"#E0C38D","font_color":"","central_cell":106},
+{"id_area":4,"id_subarea":1,"area":"Туманные горы","subarea":"Южные пещреры","bg_color":"#F2E3C0","font_color":"","central_cell":99},
+{"id_area":4,"id_subarea":2,"area":"Туманные горы","subarea":"Пещеры злых духов","bg_color":"#F2E3C0","font_color":"","central_cell":142},
+{"id_area":4,"id_subarea":3,"area":"Туманные горы","subarea":"Призрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":109},
+{"id_area":4,"id_subarea":4,"area":"Туманные горы","subarea":"Восточные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":206},
+{"id_area":4,"id_subarea":100,"area":"Туманные горы","subarea":"Мрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":107},
+{"id_area":4,"id_subarea":101,"area":"Туманные горы","subarea":"Ущелье","bg_color":"#F2E3C0","font_color":"","central_cell":106},
 {"id_area":100,"id_subarea":1,"area":"Земли орков и гоблинов","subarea":"Деревня гоблинов","bg_color":"#7A8E45","font_color":"","central_cell":3020},
 {"id_area":100,"id_subarea":2,"area":"Земли орков и гоблинов","subarea":"Могучий дуб","bg_color":"#7A8E45","font_color":"","central_cell":226}
 ]
