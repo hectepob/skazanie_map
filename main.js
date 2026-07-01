@@ -451,7 +451,7 @@ function format(cells) {
 
         // разделитель между локациями
         if (index < cells.length - 1) {
-            html.push(`<div class="tooltip-divider"></div>`);
+            html.push(`<hr class="tooltip-divider">`);
         }
 
     });
