@@ -3,9 +3,11 @@ const tooltip = document.getElementById("tooltip");
 const mapViewport = document.getElementById("mapViewport");
 
 let data = [];
+let areaData = [];
 
 let byId = new Map();
 let gridMap = new Map();
+let areaMap = new Map();
 
 let currentFloor = 0;
 let currentArea = "";
@@ -27,70 +29,110 @@ let dragStartY = 0;
 // LOAD
 // -------------------------
 
-fetch("./map.json")
-    .then(r => r.json())
-    .then(json => {
+Promise.all([
+    fetch("./map.json").then(r => r.json()),
+    fetch("./areas.json").then(r => r.json())
+])
 
-        data = json || [];
+.then(([mapJson, areasJson]) => {
 
-        byId.clear();
-        gridMap.clear();
+    data = mapJson || [];
+    areaData = areasJson || [];
 
-        // parent_id всегда число
-        data.forEach(cell => {
-            cell.parent_id = Number(cell.parent_id || 0);
-            byId.set(cell.id, cell);
-        });
+    byId.clear();
+    gridMap.clear();
+    areaMap.clear();
 
-        // строим карту
-        data.forEach(cell => {
+    // -------------------------
+    // AREA COLORS
+    // -------------------------
 
-            // ищем корневую клетку
-            let root = cell;
+    areaData.forEach(a => {
 
-            while (root.parent_id !== 0) {
-                root = byId.get(root.parent_id);
-                if (!root) break;
-            }
+        if (!areaMap.has(a.area)) {
 
-            if (!root) return;
+            areaMap.set(a.area, {
+                bg_color: a.bg_color,
+                font_color: a.font_color
+            });
 
-            const key = `${root.floor}:${root.row}:${root.col}`;
-
-            if (!gridMap.has(key)) {
-
-                gridMap.set(key, {
-                    root: root,
-                    cells: []
-                });
-
-            }
-
-            gridMap.get(key).cells.push(cell);
-
-        });
-
-        // сортировка и подпись ID
-        gridMap.forEach(group => {
-
-            group.cells.sort((a, b) => a.id - b.id);
-
-            group.displayId = group.cells
-                .map(c => c.id)
-                .join("<br>");
-
-        });
-
-        if (data.length) {
-            currentFloor = data[0].floor;
         }
 
-        topPanel.init(data);
-        leftPanel.init(data);
+    });
 
-        render();
+    // -------------------------
+    // MAP DATA
+    // -------------------------
+
+    data.forEach(cell => {
+
+        cell.parent_id = Number(cell.parent_id || 0);
+
+        byId.set(cell.id, cell);
 
     });
+
+    // -------------------------
+    // BUILD GRID
+    // -------------------------
+
+    data.forEach(cell => {
+
+        let root = cell;
+
+        while (root.parent_id !== 0) {
+
+            root = byId.get(root.parent_id);
+
+            if (!root) break;
+
+        }
+
+        if (!root) return;
+
+        const key = `${root.floor}:${root.row}:${root.col}`;
+
+        if (!gridMap.has(key)) {
+
+            gridMap.set(key, {
+
+                root: root,
+                cells: []
+
+            });
+
+        }
+
+        gridMap.get(key).cells.push(cell);
+
+    });
+
+    // -------------------------
+    // GROUPS
+    // -------------------------
+
+    gridMap.forEach(group => {
+
+        group.cells.sort((a, b) => a.id - b.id);
+
+        group.displayId = group.cells
+            .map(c => c.id)
+            .join("<br>");
+
+    });
+
+    if (data.length) {
+
+        currentFloor = data[0].floor;
+
+    }
+
+    topPanel.init(data);
+    leftPanel.init(data);
+
+    render();
+
+});
 
 // -------------------------
 // MAP DRAG
@@ -178,10 +220,28 @@ function render() {
 
             const cell = group.root;
 
-            // цвет текста
-            if (cell.text_color) {
-                el.style.color = cell.text_color;
-            }
+// -------------------------
+// AREA COLORS
+// -------------------------
+
+const areaStyle = areaMap.get(cell.area);
+
+if (areaStyle) {
+
+    if (areaStyle.bg_color) {
+        el.style.backgroundColor = areaStyle.bg_color;
+    }
+
+    if (areaStyle.font_color) {
+        el.style.color = areaStyle.font_color;
+    }
+
+}
+
+// индивидуальный цвет клетки имеет приоритет
+if (cell.text_color) {
+    el.style.color = cell.text_color;
+}
 
             // -------------------------
             // PASSAGES
