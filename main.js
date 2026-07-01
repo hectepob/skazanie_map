@@ -373,6 +373,33 @@ el.appendChild(num);
 
 }
 
+
+function gotoCell(id) {
+
+    const cell = byId.get(Number(id));
+
+    if (!cell)
+        return;
+
+    currentFloor = cell.floor;
+
+    render();
+
+    const x = (cell.col - 1) * 40;
+    const y = (cell.row - 1) * 40;
+
+    const vw = mapViewport.clientWidth;
+    const vh = mapViewport.clientHeight;
+
+    offsetX = vw / 2 - x - 20;
+    offsetY = vh / 2 - y - 20;
+
+    mapContainer.style.transform =
+        `translate(${offsetX}px, ${offsetY}px)`;
+
+}
+
+
 // -------------------------
 // HELPERS
 // -------------------------
