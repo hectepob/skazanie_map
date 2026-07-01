@@ -244,6 +244,7 @@ body {
 }
 
 .tooltip-divider {
-    margin: 5px 0;
-    border-top: 1px solid #999;
+    border: none;
+    border-top: 1px solid #777;
+    margin: 6px 0;
 }
