@@ -127,7 +127,7 @@ Promise.all([
 
     }
 
-    topPanel.init(data);
+    topPanel.init(areaData);
     leftPanel.init(data);
 
     render();
