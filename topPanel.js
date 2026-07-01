@@ -14,6 +14,7 @@ const topPanel = (function () {
 
         areaSelect = document.createElement("select");
         subareaSelect = document.createElement("select");
+        subareaSelect.style.width = "260px";
 
         findButton = document.createElement("button");
         gotoButton = document.createElement("button");
@@ -42,15 +43,25 @@ const topPanel = (function () {
 
 gotoButton.onclick = function () {
 
-    const rec = areaData.find(a =>
-        a.area === areaSelect.value &&
-        (subareaSelect.value === "" || a.subarea === subareaSelect.value)
-    );
+    let rec;
+
+    if (subareaSelect.value === "") {
+
+        rec = areaData.find(a =>
+            a.area === areaSelect.value
+        );
+
+    } else {
+
+        rec = areaData.find(a =>
+            a.area === areaSelect.value &&
+            a.subarea === subareaSelect.value
+        );
+
+    }
 
     if (!rec)
         return;
-
-    subareaSelect.value = "";
 
     gotoCell(rec.central_cell);
 
