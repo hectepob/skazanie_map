@@ -136,13 +136,15 @@ body {
 }
 
 .cellId.multi2 {
-    font-size: 11px; /*поменял*/
-    line-height: 11px; /*поменял*/
+    font-size: 12px; /*поменял*/
+    line-height: 12px; /*поменял*/
+    text-align: center; /*добавил*/
 }
 
 .cellId.multi3 {
-    font-size: 10px; /*поменял*/
-    line-height: 10px; /*поменял*/
+    font-size: 11px; /*поменял*/
+    line-height: 11px; /*поменял*/
+    text-align: center; /*добавил*/
 }
 
 /* =========================
@@ -241,7 +243,7 @@ body {
 .tooltip-location {
     display: inline;
     font-weight: bold;
-    font-size: 15px; /*убрать, если плохо*/
+    font-size: 14px;
 }
 
 .tooltip-divider {
