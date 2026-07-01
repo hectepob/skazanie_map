@@ -23,8 +23,14 @@
 {"id_area":4,"id_subarea":2,"area":"Туманные горы","subarea":"Пещеры злых духов","bg_color":"#F2E3C0","font_color":"","central_cell":142},
 {"id_area":4,"id_subarea":3,"area":"Туманные горы","subarea":"Призрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":109},
 {"id_area":4,"id_subarea":4,"area":"Туманные горы","subarea":"Восточные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":206},
-{"id_area":4,"id_subarea":100,"area":"Туманные горы","subarea":"Мрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":107},
-{"id_area":4,"id_subarea":101,"area":"Туманные горы","subarea":"Ущелье","bg_color":"#F2E3C0","font_color":"","central_cell":106},
+{"id_area":4,"id_subarea":5,"area":"Туманные горы","subarea":"Северные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":1059},
+{"id_area":4,"id_subarea":6,"area":"Туманные горы","subarea":"Шахты дварфов","bg_color":"#F2E3C0","font_color":"","central_cell":1096},
+{"id_area":4,"id_subarea":7,"area":"Туманные горы","subarea":"Ущелье","bg_color":"#F2E3C0","font_color":"","central_cell":106},
+{"id_area":4,"id_subarea":8,"area":"Туманные горы","subarea":"Мрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":107},
+{"id_area":4,"id_subarea":9,"area":"Туманные горы","subarea":"Королевство дварфов","bg_color":"#F2E3C0","font_color":"","central_cell":1165},
+{"id_area":4,"id_subarea":10,"area":"Туманные горы","subarea":"Пещеры дварфов","bg_color":"#F2E3C0","font_color":"","central_cell":1181},
+{"id_area":4,"id_subarea":11,"area":"Туманные горы","subarea":"Логово гигантского паука","bg_color":"#F2E3C0","font_color":"","central_cell":1233},
+{"id_area":5,"id_subarea":1,"area":"Зарам-Дум","subarea":"Город Зарам-Дум","bg_color":"#6F6F6F","font_color":"#FFFFFF","central_cell":1188},
 {"id_area":100,"id_subarea":1,"area":"Земли орков и гоблинов","subarea":"Деревня гоблинов","bg_color":"#7A8E45","font_color":"","central_cell":3020},
 {"id_area":100,"id_subarea":2,"area":"Земли орков и гоблинов","subarea":"Могучий дуб","bg_color":"#7A8E45","font_color":"","central_cell":226}
 ]
