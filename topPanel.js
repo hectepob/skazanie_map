@@ -92,7 +92,7 @@ const topPanel = (function () {
         const empty = document.createElement("option");
 
         empty.value = "";
-        empty.textContent = "────────";
+        empty.textContent = "Все области";
 
         subareaSelect.appendChild(empty);
 
