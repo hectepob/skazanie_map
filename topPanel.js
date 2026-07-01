@@ -40,12 +40,21 @@ const topPanel = (function () {
 
         };
 
-        gotoButton.onclick = function () {
+gotoButton.onclick = function () {
 
-            // позже
+    const rec = areaData.find(a =>
+        a.area === areaSelect.value &&
+        (subareaSelect.value === "" || a.subarea === subareaSelect.value)
+    );
 
-        };
+    if (!rec)
+        return;
 
+    subareaSelect.value = "";
+
+    gotoCell(rec.central_cell);
+
+};
     }
 
     function buildAreas(areaData) {
