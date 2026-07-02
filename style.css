@@ -137,7 +137,6 @@ body {
 
 /* ID */
 .cellId {
-/*    font-weight: bold; - ПОКА УБИРАЮ ЭТО!!!!!*/
     font-size: 12px;
     color: inherit;
 }
@@ -257,4 +256,10 @@ body {
     border: none;
     border-top: 1px solid #777;
     margin: 6px 0;
+}
+/* =========================
+   RED BORDER ON INPUT FIELD
+========================= */
+.inputError{
+    border:2px solid #d00000 !important;
 }
