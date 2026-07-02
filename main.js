@@ -393,6 +393,8 @@ el.addEventListener("click", () => {
 
     selectedCellId = cell.id;
 
+    topPanel.selectCell(cell);
+
     render();
 
 });
@@ -414,6 +416,8 @@ function gotoCell(id) {
 
     if (!cell)
         return;
+
+	topPanel.selectCell(cell);
 
     currentFloor = cell.floor;
 
