@@ -12,6 +12,7 @@ let areaMap = new Map();
 let currentFloor = 0;
 let currentArea = "";
 let currentSubarea = "";
+let selectedCellId = 0;
 
 // -------------------------
 // MAP DRAG
@@ -218,7 +219,15 @@ function render() {
 
             }
 
-            const cell = group.root;
+const cell = group.root;
+
+// -------------------------
+// SELECTED CELL
+// -------------------------
+
+if (group.cells.some(c => c.id === selectedCellId)) {
+    el.classList.add("selected");
+}
 
 // -------------------------
 // AREA COLORS
@@ -257,37 +266,38 @@ if (cell.text_color) {
 
             });
 
-            // -------------------------
-            // STAIRS DOWN
-            // -------------------------
+// -------------------------
+// STAIRS DOWN
+// -------------------------
 
-            const downId = toId(cell.stairs?.down);
+const downId = toId(cell.stairs?.down);
 
-            if (downId !== null) {
+if (downId !== null) {
 
-                const down = document.createElement("span");
+    const down = document.createElement("span");
 
-                down.className = "stairs down";
-                down.textContent = "▼";
+    down.className = "stairs down";
+    down.textContent = "▼";
 
-                down.onclick = e => {
+    down.onclick = e => {
 
-                    e.stopPropagation();
+        e.stopPropagation();
 
-                    const target = byId.get(downId);
+        const target = byId.get(downId);
 
-                    if (!target) return;
+        if (!target) return;
 
-                    currentFloor = target.floor;
+        selectedCellId = downId;
 
-                    render();
+        currentFloor = target.floor;
 
-                };
+        render();
 
-                el.appendChild(down);
+    };
 
-            }
+    el.appendChild(down);
 
+}
 // -------------------------
 // ID
 // -------------------------
@@ -307,37 +317,38 @@ num.innerHTML = group.displayId;
 
 el.appendChild(num);
 
-            // -------------------------
-            // STAIRS UP
-            // -------------------------
+// -------------------------
+// STAIRS UP
+// -------------------------
 
-            const upId = toId(cell.stairs?.up);
+const upId = toId(cell.stairs?.up);
 
-            if (upId !== null) {
+if (upId !== null) {
 
-                const up = document.createElement("span");
+    const up = document.createElement("span");
 
-                up.className = "stairs up";
-                up.textContent = "▲";
+    up.className = "stairs up";
+    up.textContent = "▲";
 
-                up.onclick = e => {
+    up.onclick = e => {
 
-                    e.stopPropagation();
+        e.stopPropagation();
 
-                    const target = byId.get(upId);
+        const target = byId.get(upId);
 
-                    if (!target) return;
+        if (!target) return;
 
-                    currentFloor = target.floor;
+        selectedCellId = upId;
 
-                    render();
+        currentFloor = target.floor;
 
-                };
+        render();
 
-                el.appendChild(up);
+    };
 
-            }
+    el.appendChild(up);
 
+}
             // -------------------------
             // TOOLTIP
             // -------------------------
