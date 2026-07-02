@@ -195,6 +195,16 @@ function render() {
 
         const cell = group.root;
 
+
+			// -------------------------
+			// HIGHLIGHT
+			// -------------------------
+
+			if (highlightCells.has(cell.id)) {
+			    el.classList.add("highlight");
+			}
+
+
         if (cell.floor !== currentFloor) return;
         if (currentArea && cell.area !== currentArea) return;
         if (currentSubarea && cell.subarea !== currentSubarea) return;
