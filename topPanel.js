@@ -191,46 +191,46 @@ const topPanel = (function () {
 
     }
 
-    return {
+return {
 
-        init,
+    init,
 
-        getArea() {
-            return areaSelect.value;
-        },
+    getArea() {
+        return areaSelect.value;
+    },
 
-        getSubarea() {
-            return subareaSelect.value;
-        },
+    getSubarea() {
+        return subareaSelect.value;
+    },
 
-        getLocationId() {
-            return locationInput.value;
-        },
+    getLocationId() {
+        return locationInput.value;
+    },
 
-        setArea(value) {
-            areaSelect.value = value;
-        },
+    setArea(value) {
+        areaSelect.value = value;
+    },
 
-        setSubarea(value) {
-            subareaSelect.value = value;
-        },
+    setSubarea(value) {
+        subareaSelect.value = value;
+    },
 
-        setLocationId(value) {
-            locationInput.value = value;
-        }
+    setLocationId(value) {
+        locationInput.value = value;
+    },
 
-	selectCell(cell) {
-	
-	    areaSelect.value = cell.area;
+    selectCell(cell) {
 
-	    buildSubareas(areaData, cell.area);
+        areaSelect.value = cell.area;
 
-	    subareaSelect.value = cell.subarea;
+        buildSubareas(areaData, cell.area);
 
-	    locationInput.value = cell.id;
+        subareaSelect.value = cell.subarea;
 
-}
+        locationInput.value = cell.id;
 
-    };
+    }
+
+};
 
 })();
