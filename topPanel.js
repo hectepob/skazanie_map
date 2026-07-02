@@ -8,13 +8,11 @@ const topPanel = (function () {
 
     let findButton;
     let areaData = [];
-    let locationInput;
 
 	function init(data) {
 
     	areaData = data;
 
-       	 areaData = structuredClone(areaData);
        	 panel.innerHTML = "";
 
         // ---------- подписи ----------
