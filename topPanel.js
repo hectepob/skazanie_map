@@ -7,10 +7,15 @@ const topPanel = (function () {
     let locationInput;
 
     let findButton;
+    let areaData = [];
+    let locationInput;
 
-    function init(areaData) {
+	function init(data) {
 
-        panel.innerHTML = "";
+    	areaData = data;
+
+       	 areaData = structuredClone(areaData);
+       	 panel.innerHTML = "";
 
         // ---------- подписи ----------
 
@@ -215,6 +220,18 @@ const topPanel = (function () {
         setLocationId(value) {
             locationInput.value = value;
         }
+
+	selectCell(cell) {
+	
+	    areaSelect.value = cell.area;
+
+	    buildSubareas(areaData, cell.area);
+
+	    subareaSelect.value = cell.subarea;
+
+	    locationInput.value = cell.id;
+
+}
 
     };
 
