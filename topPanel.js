@@ -99,6 +99,8 @@ findButton.onclick = function () {
 
         }
 
+        setHighlight(areaSelect.value, subareaSelect.value, id);
+
         gotoCell(id);
         return;
 
@@ -126,7 +128,9 @@ findButton.onclick = function () {
     if (!rec)
         return;
 
-    gotoCell(rec.central_cell);
+	setHighlight(areaSelect.value, subareaSelect.value);
+
+	gotoCell(rec.central_cell);
 
 };
 
@@ -241,5 +245,28 @@ return {
     }
 
 };
+
+function setHighlight(area, subarea, singleId = null) {
+
+    if (typeof window.setHighlightCells !== "function")
+        return;
+
+    if (singleId !== null) {
+
+        window.setHighlightCells([singleId]);
+        return;
+
+    }
+
+    const ids = areaData
+        .filter(x =>
+            x.area === area &&
+            (subarea === "" || x.subarea === subarea)
+        )
+        .map(x => x.central_cell);
+
+    window.setHighlightCells(ids);
+
+}
 
 })();
