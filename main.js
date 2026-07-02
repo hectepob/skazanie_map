@@ -13,6 +13,7 @@ let currentFloor = 0;
 let currentArea = "";
 let currentSubarea = "";
 let selectedCellId = 0;
+let highlightCells = new Set();
 
 // -------------------------
 // MAP DRAG
@@ -437,6 +438,40 @@ function gotoCell(id) {
 
 }
 
+// -------------------------
+// HIGHLIGHT
+// -------------------------
+
+window.setHighlightCells = function (ids) {
+
+    highlightCells.clear();
+
+    ids.forEach(id => {
+
+        const cell = byId.get(Number(id));
+
+        if (!cell)
+            return;
+
+        // ищем корневую клетку
+        let root = cell;
+
+        while (root.parent_id !== 0) {
+
+            root = byId.get(root.parent_id);
+
+            if (!root)
+                return;
+
+        }
+
+        highlightCells.add(root.id);
+
+    });
+
+    render();
+
+};
 
 // -------------------------
 // HELPERS
