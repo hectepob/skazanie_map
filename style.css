@@ -137,7 +137,7 @@ body {
 
 /* ID */
 .cellId {
-    font-weight: bold;
+/*    font-weight: bold; - ПОКА УБИРАЮ ЭТО!!!!!
     font-size: 12px;
     color: inherit;
 }
