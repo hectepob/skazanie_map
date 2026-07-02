@@ -83,43 +83,52 @@ const topPanel = (function () {
         // Найти
         // ---------------------------------
 
-        findButton.onclick = function () {
+findButton.onclick = function () {
 
-            // поиск по ID клетки имеет приоритет
+    locationInput.classList.remove("inputError");
 
-            if (locationInput.value.trim() !== "") {
+    // Поиск по ID имеет приоритет
+    if (locationInput.value.trim() !== "") {
 
-                gotoCell(Number(locationInput.value));
+        const id = Number(locationInput.value);
 
-                return;
+        if (!byId.has(id)) {
 
-            }
+            locationInput.classList.add("inputError");
+            return;
 
-            let rec;
+        }
 
-            if (subareaSelect.value === "") {
+        gotoCell(id);
+        return;
 
-                rec = areaData.find(a =>
-                    a.area === areaSelect.value &&
-                    a.id_subarea === 1
-                );
+    }
 
-            }
-            else {
+    let rec;
 
-                rec = areaData.find(a =>
-                    a.area === areaSelect.value &&
-                    a.subarea === subareaSelect.value
-                );
+    if (subareaSelect.value === "") {
 
-            }
+        rec = areaData.find(a =>
+            a.area === areaSelect.value &&
+            a.id_subarea === 1
+        );
 
-            if (!rec)
-                return;
+    }
+    else {
 
-            gotoCell(rec.central_cell);
+        rec = areaData.find(a =>
+            a.area === areaSelect.value &&
+            a.subarea === subareaSelect.value
+        );
 
-        };
+    }
+
+    if (!rec)
+        return;
+
+    gotoCell(rec.central_cell);
+
+};
 
     }
 
