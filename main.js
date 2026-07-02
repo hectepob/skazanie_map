@@ -25,6 +25,7 @@ let dragging = false;
 
 let dragStartX = 0;
 let dragStartY = 0;
+let dragMoved = false;
 
 // -------------------------
 // LOAD
@@ -144,6 +145,7 @@ mapViewport.addEventListener("mousedown", e => {
     if (e.button !== 0) return;
 
     dragging = true;
+    dragMoved = false;
 
     dragStartX = e.clientX - offsetX;
     dragStartY = e.clientY - offsetY;
@@ -153,6 +155,12 @@ mapViewport.addEventListener("mousedown", e => {
 window.addEventListener("mousemove", e => {
 
     if (!dragging) return;
+
+	if (Math.abs(e.clientX - dragStartX - offsetX) > 5 ||
+	    Math.abs(e.clientY - dragStartY - offsetY) > 5) {
+
+	    dragMoved = true;
+	}
 
     offsetX = e.clientX - dragStartX;
     offsetY = e.clientY - dragStartY;
@@ -375,6 +383,17 @@ if (upId !== null) {
                 tooltip.style.display = "none";
 
             });
+
+el.addEventListener("click", () => {
+
+    if (dragMoved)
+        return;
+
+    selectedCellId = cell.id;
+
+    render();
+
+});
 
             mapContainer.appendChild(el);
 
