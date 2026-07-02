@@ -129,10 +129,12 @@ Promise.all([
 
     }
 
-    topPanel.init(areaData);
-    leftPanel.init(data);
+topPanel.init(areaData);
+leftPanel.init(data);
 
-    render();
+selectedCellId = 1;
+
+gotoCell(1);
 
 });
 
@@ -405,6 +407,8 @@ el.addEventListener("click", () => {
 
 
 function gotoCell(id) {
+
+    selectedCellId = Number(id);
 
     const cell = byId.get(Number(id));
 
