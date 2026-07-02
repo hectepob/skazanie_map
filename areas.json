@@ -30,9 +30,12 @@
 {"id_area":4,"id_subarea":8,"area":"Туманные горы","subarea":"Мрачные пещеры","bg_color":"#F2E3C0","font_color":"","central_cell":107},
 {"id_area":4,"id_subarea":9,"area":"Туманные горы","subarea":"Королевство дварфов","bg_color":"#F2E3C0","font_color":"","central_cell":1165},
 {"id_area":4,"id_subarea":10,"area":"Туманные горы","subarea":"Пещеры дварфов","bg_color":"#F2E3C0","font_color":"","central_cell":1181},
-{"id_area":4,"id_subarea":11,"area":"Туманные горы","subarea":"Восточный склон","bg_color":"#F2E3C0","font_color":"","central_cell":1329},
 {"id_area":4,"id_subarea":11,"area":"Туманные горы","subarea":"Логово гигантского паука","bg_color":"#F2E3C0","font_color":"","central_cell":1233},
+{"id_area":4,"id_subarea":12,"area":"Туманные горы","subarea":"Восточный склон","bg_color":"#F2E3C0","font_color":"","central_cell":1329},
 {"id_area":5,"id_subarea":1,"area":"Зарам-Дум","subarea":"Город Зарам-Дум","bg_color":"#6F6F6F","font_color":"#FFFFFF","central_cell":1188},
+{"id_area":6,"id_subarea":1,"area":"Кленовый лес","subarea":"Северный склон","bg_color":"#A7D65A","font_color":"","central_cell":1360},
+{"id_area":6,"id_subarea":2,"area":"Кленовый лес","subarea":"Кленовый лес","bg_color":"#A7D65A","font_color":"","central_cell":1388},
+{"id_area":6,"id_subarea":3,"area":"Кленовый лес","subarea":"Заброшенная деревня","bg_color":"#A7D65A","font_color":"","central_cell":1394},
 {"id_area":100,"id_subarea":1,"area":"Земли орков и гоблинов","subarea":"Деревня гоблинов","bg_color":"#7A8E45","font_color":"","central_cell":3020},
 {"id_area":100,"id_subarea":2,"area":"Земли орков и гоблинов","subarea":"Могучий дуб","bg_color":"#7A8E45","font_color":"","central_cell":226},
 {"id_area":200,"id_subarea":1,"area":"Замки","subarea":"Изумрудный замок","bg_color":"#45B39D","font_color":"","central_cell":1340}
