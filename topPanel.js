@@ -4,69 +4,123 @@ const topPanel = (function () {
 
     let areaSelect;
     let subareaSelect;
+    let locationInput;
 
     let findButton;
-    let gotoButton;
 
     function init(areaData) {
 
         panel.innerHTML = "";
 
+        // ---------- подписи ----------
+
+        const areaLabel = document.createElement("span");
+        areaLabel.textContent = "Регион:";
+
+        const subareaLabel = document.createElement("span");
+        subareaLabel.textContent = "Область:";
+
+        const locationLabel = document.createElement("span");
+        locationLabel.textContent = "Номер локации:";
+
+        // ---------- поля ----------
+
         areaSelect = document.createElement("select");
+
         subareaSelect = document.createElement("select");
         subareaSelect.style.width = "260px";
 
+        locationInput = document.createElement("input");
+        locationInput.type = "text";
+        locationInput.style.width = "80px";
+
+        // ---------- кнопка ----------
+
         findButton = document.createElement("button");
-        gotoButton = document.createElement("button");
-
         findButton.textContent = "Найти";
-        gotoButton.textContent = "Перейти";
 
+        // ---------- размещение ----------
+
+        panel.appendChild(areaLabel);
         panel.appendChild(areaSelect);
+
+        panel.appendChild(subareaLabel);
         panel.appendChild(subareaSelect);
+
+        panel.appendChild(locationLabel);
+        panel.appendChild(locationInput);
+
         panel.appendChild(findButton);
-        panel.appendChild(gotoButton);
 
         buildAreas(areaData);
+
+        // ---------------------------------
+        // смена региона
+        // ---------------------------------
 
         areaSelect.onchange = function () {
 
             buildSubareas(areaData, areaSelect.value);
 
+            locationInput.value = "";
+
         };
+
+        // ---------------------------------
+        // смена области
+        // ---------------------------------
+
+        subareaSelect.onchange = function () {
+
+            locationInput.value = "";
+
+        };
+
+        // ---------------------------------
+        // Найти
+        // ---------------------------------
 
         findButton.onclick = function () {
 
-            // позже
+            // поиск по ID клетки имеет приоритет
+
+            if (locationInput.value.trim() !== "") {
+
+                gotoCell(Number(locationInput.value));
+
+                return;
+
+            }
+
+            let rec;
+
+            if (subareaSelect.value === "") {
+
+                rec = areaData.find(a =>
+                    a.area === areaSelect.value &&
+                    a.id_subarea === 1
+                );
+
+            }
+            else {
+
+                rec = areaData.find(a =>
+                    a.area === areaSelect.value &&
+                    a.subarea === subareaSelect.value
+                );
+
+            }
+
+            if (!rec)
+                return;
+
+            gotoCell(rec.central_cell);
 
         };
 
-gotoButton.onclick = function () {
-
-    let rec;
-
-    if (subareaSelect.value === "") {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value
-        );
-
-    } else {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value &&
-            a.subarea === subareaSelect.value
-        );
-
     }
 
-    if (!rec)
-        return;
-
-    gotoCell(rec.central_cell);
-
-};
-    }
+    // ---------------------------------
 
     function buildAreas(areaData) {
 
@@ -77,10 +131,12 @@ gotoButton.onclick = function () {
         areaData.forEach(a => {
 
             if (!areas.find(x => x.area === a.area)) {
+
                 areas.push({
                     id: a.id_area,
                     area: a.area
                 });
+
             }
 
         });
@@ -103,11 +159,11 @@ gotoButton.onclick = function () {
 
     }
 
+    // ---------------------------------
+
     function buildSubareas(areaData, area) {
 
         subareaSelect.innerHTML = "";
-
-        // пустой пункт
 
         const empty = document.createElement("option");
 
@@ -116,37 +172,50 @@ gotoButton.onclick = function () {
 
         subareaSelect.appendChild(empty);
 
-        const subs = areaData
+        areaData
             .filter(x => x.area === area)
-            .sort((a, b) => a.id_subarea - b.id_subarea);
+            .sort((a, b) => a.id_subarea - b.id_subarea)
+            .forEach(s => {
 
-        subs.forEach(s => {
+                const opt = document.createElement("option");
 
-            const opt = document.createElement("option");
+                opt.value = s.subarea;
+                opt.textContent = s.subarea;
 
-            opt.value = s.subarea;
-            opt.textContent = s.subarea;
+                subareaSelect.appendChild(opt);
 
-            subareaSelect.appendChild(opt);
-
-        });
+            });
 
     }
 
-return {
-    init: init,
+    return {
 
-    getArea() {
-        return areaSelect.value;
-    },
+        init,
 
-    getSubarea() {
-        return subareaSelect.value;
-    },
+        getArea() {
+            return areaSelect.value;
+        },
 
-    setSubarea(value) {
-        subareaSelect.value = value;
-    }
-};
+        getSubarea() {
+            return subareaSelect.value;
+        },
+
+        getLocationId() {
+            return locationInput.value;
+        },
+
+        setArea(value) {
+            areaSelect.value = value;
+        },
+
+        setSubarea(value) {
+            subareaSelect.value = value;
+        },
+
+        setLocationId(value) {
+            locationInput.value = value;
+        }
+
+    };
 
 })();
