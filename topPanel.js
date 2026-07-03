@@ -184,23 +184,23 @@ findButton.onclick = function () {
     // Этаж вверх
     // ---------------------------------
 
-    floorUpButton.onclick = function () {
+	floorUpButton.onclick = function () {
 
-        if (typeof changeFloor === "function")
-            changeFloor(1);
+	    if (typeof window.changeFloor === "function")
+	        window.changeFloor(1);
 
-    };
+	};
 
     // ---------------------------------
     // Этаж вниз
     // ---------------------------------
 
-    floorDownButton.onclick = function () {
+	floorDownButton.onclick = function () {
 
-        if (typeof changeFloor === "function")
-            changeFloor(-1);
+	    if (typeof window.changeFloor === "function")
+	        window.changeFloor(-1);
 
-    };
+	};
 
         }
 
