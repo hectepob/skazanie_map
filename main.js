@@ -484,6 +484,14 @@ window.changeFloor = function(step) {
 
     if (!target)
         return;
+			console.log(	//КОНСОЛЬ
+			"ищем:",	//КОНСОЛЬ
+			currentCol,	//КОНСОЛЬ
+			currentRow,	//КОНСОЛЬ
+			"=>",		//КОНСОЛЬ
+			newFloor,	//КОНСОЛЬ
+			target		//КОНСОЛЬ
+			);		//КОНСОЛЬ
 
     gotoCell(target.id);
 
