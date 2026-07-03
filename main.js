@@ -478,16 +478,38 @@ window.changeFloor = function(step) {
     if (newFloor < minFloor || newFloor > maxFloor)
         return;
 
+    currentFloor = newFloor;
+
     const target = data.find(c =>
         c.col === current.col &&
         c.row === current.row &&
         c.floor === newFloor
     );
 
-    if (!target)
+    if (target) {
+
+        gotoCell(target.id);
         return;
 
-    gotoCell(target.id);
+    }
+
+    // -------------------------
+    // если клетки нет — просто смена этажа
+    // -------------------------
+
+    render();
+
+    const x = (current.col - 1) * 40;
+    const y = (current.row - 1) * 40;
+
+    const vw = mapViewport.clientWidth;
+    const vh = mapViewport.clientHeight;
+
+    offsetX = vw / 2 - x - 20;
+    offsetY = vh / 2 - y - 20;
+
+    mapContainer.style.transform =
+        `translate(${offsetX}px, ${offsetY}px)`;
 
 };
 
