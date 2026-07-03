@@ -484,14 +484,6 @@ window.changeFloor = function(step) {
 
     if (!target)
         return;
-			console.log(	//КОНСОЛЬ
-			"ищем:",	//КОНСОЛЬ
-			currentCol,	//КОНСОЛЬ
-			currentRow,	//КОНСОЛЬ
-			"=>",		//КОНСОЛЬ
-			newFloor,	//КОНСОЛЬ
-			target		//КОНСОЛЬ
-			);		//КОНСОЛЬ
 
     gotoCell(target.id);
 
@@ -529,6 +521,30 @@ window.setHighlightCells = function (ids) {
     });
 
     render();
+
+};
+
+// -------------------------
+// CHANGE FLOOR
+// -------------------------
+
+window.changeFloor = function(step) {
+
+    const newFloor = currentFloor + step;
+
+    if (newFloor < minFloor || newFloor > maxFloor)
+        return;
+
+    const target = data.find(c =>
+        c.col === currentCol &&
+        c.row === currentRow &&
+        c.floor === newFloor
+    );
+
+    if (!target)
+        return;
+
+    gotoCell(target.id);
 
 };
 
