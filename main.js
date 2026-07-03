@@ -145,9 +145,10 @@ if (data.length) {
 topPanel.init(areaData, data);
 leftPanel.init(data);
 
-selectedCellId = 1;
+selectedCellId = 0;
 
-gotoCell(1);
+if (data.length)
+    gotoCell(data[0].id);
 
 });
 
@@ -310,25 +311,18 @@ if (downId !== null) {
     down.className = "stairs down";
     down.textContent = "▼";
 
-    down.onclick = e => {
+down.onclick = e => {
 
-        e.stopPropagation();
+    e.stopPropagation();
 
-        const target = byId.get(downId);
+    const target = byId.get(downId);
 
-        if (!target) return;
+    if (!target)
+        return;
 
-        down.onclick = e => {
+    gotoCell(target.id);
 
-            e.stopPropagation();
-
-            if (!downId)
-                return;
-
-            gotoCell(downId);
-
-        };
-    };
+};
 
     el.appendChild(down);
 
@@ -365,25 +359,18 @@ if (upId !== null) {
     up.className = "stairs up";
     up.textContent = "▲";
 
-    up.onclick = e => {
+up.onclick = e => {
 
-        e.stopPropagation();
+    e.stopPropagation();
 
-        const target = byId.get(upId);
+    const target = byId.get(upId);
 
-        if (!target) return;
+    if (!target)
+        return;
 
-        up.onclick = e => {
+    gotoCell(target.id);
 
-            e.stopPropagation();
-
-            if (!upId)
-                return;
-
-            gotoCell(upId);
-
-        };
-    };
+};
 
     el.appendChild(up);
 
@@ -471,28 +458,28 @@ function gotoCell(id) {
 }
 
 // -------------------------
-// CHANGE FLOOR
+// CHANGE FLOOR (FIXED)
 // -------------------------
 
 window.changeFloor = function(step) {
 
-    const current = byId.get(selectedCellId);
+    const base = byId.get(selectedCellId);
 
-    if (!current)
+    if (!base)
         return;
 
-    const newFloor = current.floor + step;
+    const newFloor = base.floor + step;
 
     if (newFloor < minFloor || newFloor > maxFloor)
         return;
 
-    currentFloor = newFloor;
-
     const target = data.find(c =>
-        c.col === current.col &&
-        c.row === current.row &&
+        c.col === base.col &&
+        c.row === base.row &&
         c.floor === newFloor
     );
+
+    currentFloor = newFloor;
 
     if (target) {
 
@@ -501,14 +488,11 @@ window.changeFloor = function(step) {
 
     }
 
-    // -------------------------
-    // если клетки нет — просто смена этажа
-    // -------------------------
-
+    // нет клетки → просто перерисовать "пустую позицию"
     render();
 
-    const x = (current.col - 1) * 40;
-    const y = (current.row - 1) * 40;
+    const x = (base.col - 1) * 40;
+    const y = (base.row - 1) * 40;
 
     const vw = mapViewport.clientWidth;
     const vh = mapViewport.clientHeight;
@@ -518,7 +502,6 @@ window.changeFloor = function(step) {
 
     mapContainer.style.transform =
         `translate(${offsetX}px, ${offsetY}px)`;
-
 };
 
 // -------------------------
