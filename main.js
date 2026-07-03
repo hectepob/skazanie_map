@@ -397,8 +397,12 @@ if (upId !== null) {
 
 el.addEventListener("click", () => {
 
+    
+
     if (dragMoved)
         return;
+
+    highlightCells.clear();
 
     selectedCellId = cell.id;
 
