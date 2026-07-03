@@ -9,10 +9,12 @@ const topPanel = (function () {
     let findButton;
     let areaData = [];
 
-	function init(data) {
+    let mapData = [];
 
-    	areaData = data;
+    function init(areas, map) {
 
+         areaData = areas;
+         mapData = map;
        	 panel.innerHTML = "";
 
         // ---------- подписи ----------
@@ -251,19 +253,27 @@ function setHighlight(area, subarea, singleId = null) {
     if (typeof window.setHighlightCells !== "function")
         return;
 
+    // Если поиск по номеру локации — подсветку зон не делаем
     if (singleId !== null) {
 
-        window.setHighlightCells([singleId]);
+        window.setHighlightCells([]);
         return;
 
     }
 
-    const ids = areaData
-        .filter(x =>
-            x.area === area &&
-            (subarea === "" || x.subarea === subarea)
-        )
-        .map(x => x.central_cell);
+    const ids = [];
+
+    mapData.forEach(cell => {
+
+        if (cell.area !== area)
+            return;
+
+        if (subarea !== "" && cell.subarea !== subarea)
+            return;
+
+        ids.push(cell.id);
+
+    });
 
     window.setHighlightCells(ids);
 
