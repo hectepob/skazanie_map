@@ -416,6 +416,8 @@ el.addEventListener("click", () => {
 
     }
 
+    topPanel.setFloor(currentFloor);
+
 }
 
 
@@ -447,6 +449,33 @@ function gotoCell(id) {
         `translate(${offsetX}px, ${offsetY}px)`;
 
 }
+
+// -------------------------
+// CHANGE FLOOR
+// -------------------------
+
+window.changeFloor = function(step) {
+
+    const cell = byId.get(selectedCellId);
+
+    if (!cell)
+        return;
+
+    const target = data.find(c =>
+        c.col === cell.col &&
+        c.row === cell.row &&
+        c.floor === cell.floor + step
+    );
+
+    if (!target)
+        return;
+
+    selectedCellId = target.id;
+    currentFloor = target.floor;
+
+    render();
+
+};
 
 // -------------------------
 // HIGHLIGHT
