@@ -7,6 +7,9 @@ const topPanel = (function () {
     let locationInput;
 
     let findButton;
+    let floorUpButton;
+    let floorDownButton;
+    let floorLabel;
     let areaData = [];
 
     let mapData = [];
@@ -54,6 +57,23 @@ const topPanel = (function () {
         findButton = document.createElement("button");
         findButton.textContent = "Найти";
 
+        // ---------- этаж ----------
+
+        const floorText = document.createElement("span");
+        floorText.textContent = "Этаж:";
+
+        floorUpButton = document.createElement("button");
+        floorUpButton.textContent = "▲";
+
+        floorDownButton = document.createElement("button");
+        floorDownButton.textContent = "▼";
+
+        floorLabel = document.createElement("span");
+        floorLabel.textContent = "0";
+        floorLabel.style.minWidth = "24px";
+        floorLabel.style.textAlign = "center";
+        floorLabel.style.display = "inline-block";
+
         // ---------- размещение ----------
 
         panel.appendChild(areaLabel);
@@ -66,6 +86,13 @@ const topPanel = (function () {
         panel.appendChild(locationInput);
 
         panel.appendChild(findButton);
+
+        panel.appendChild(document.createTextNode("   "));
+
+        panel.appendChild(floorText);
+        panel.appendChild(floorUpButton);
+        panel.appendChild(floorLabel);
+        panel.appendChild(floorDownButton);
 
         buildAreas(areaData);
 
@@ -142,11 +169,33 @@ findButton.onclick = function () {
 
 	setHighlight(areaSelect.value, subareaSelect.value);
 
-	gotoCell(rec.central_cell);
+        gotoCell(rec.central_cell);
 
-};
+    };
 
-    }
+    // ---------------------------------
+    // Этаж вверх
+    // ---------------------------------
+
+    floorUpButton.onclick = function () {
+
+        if (typeof changeFloor === "function")
+            changeFloor(1);
+
+    };
+
+    // ---------------------------------
+    // Этаж вниз
+    // ---------------------------------
+
+    floorDownButton.onclick = function () {
+
+        if (typeof changeFloor === "function")
+            changeFloor(-1);
+
+    };
+
+        }
 
     // ---------------------------------
 
@@ -244,14 +293,15 @@ return {
         locationInput.value = value;
     },
 
+    setFloor(value) {
+        floorLabel.textContent = value;
+    },
+
     selectCell(cell) {
 
         areaSelect.value = cell.area;
-
         buildSubareas(areaData, cell.area);
-
         subareaSelect.value = cell.subarea;
-
         locationInput.value = cell.id;
 
     }
