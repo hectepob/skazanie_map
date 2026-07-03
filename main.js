@@ -190,29 +190,19 @@ function render() {
     let maxCol = 0;
     let maxRow = 0;
 
-    // определяем размеры отображаемой карты
-    gridMap.forEach(group => {
+// определяем размеры отображаемой карты
+gridMap.forEach(group => {
 
-        const cell = group.root;
+    const cell = group.root;
 
+    if (cell.floor !== currentFloor) return;
+    if (currentArea && cell.area !== currentArea) return;
+    if (currentSubarea && cell.subarea !== currentSubarea) return;
 
-			// -------------------------
-			// HIGHLIGHT
-			// -------------------------
+    if (cell.col > maxCol) maxCol = cell.col;
+    if (cell.row > maxRow) maxRow = cell.row;
 
-			if (highlightCells.has(cell.id)) {
-			    el.classList.add("highlight");
-			}
-
-
-        if (cell.floor !== currentFloor) return;
-        if (currentArea && cell.area !== currentArea) return;
-        if (currentSubarea && cell.subarea !== currentSubarea) return;
-
-        if (cell.col > maxCol) maxCol = cell.col;
-        if (cell.row > maxRow) maxRow = cell.row;
-
-    });
+});
 
     mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
@@ -241,6 +231,14 @@ function render() {
             }
 
 const cell = group.root;
+
+// -------------------------
+// HIGHLIGHT
+// -------------------------
+
+if (highlightCells.has(cell.id)) {
+    el.classList.add("highlight");
+}
 
 // -------------------------
 // SELECTED CELL
