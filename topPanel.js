@@ -185,6 +185,7 @@ findButton.onclick = function () {
     // ---------------------------------
 
     floorUpButton.onclick = function () {
+			console.log("UP", currentFloor); //КОНСОЛЬ
 
         if (typeof changeFloor === "function")
             changeFloor(1);
@@ -196,6 +197,9 @@ findButton.onclick = function () {
     // ---------------------------------
 
     floorDownButton.onclick = function () {
+
+			console.log("DOWN", currentFloor); //КОНСОЛЬ
+
 
         if (typeof changeFloor === "function")
             changeFloor(-1);
