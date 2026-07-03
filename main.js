@@ -10,14 +10,13 @@ let gridMap = new Map();
 let areaMap = new Map();
 
 let currentFloor = 0;
-let currentCol = 1;
-let currentRow = 1;
 
 let minFloor = 0;
 let maxFloor = 0;
 
 let currentArea = "";
 let currentSubarea = "";
+
 let selectedCellId = 0;
 let highlightCells = new Set();
 
@@ -446,8 +445,6 @@ function gotoCell(id) {
 	topPanel.selectCell(cell);
 
     currentFloor = cell.floor;
-    currentCol = cell.col;
-    currentRow = cell.row;
 
     render();
 
@@ -471,14 +468,19 @@ function gotoCell(id) {
 
 window.changeFloor = function(step) {
 
-    const newFloor = currentFloor + step;
+    const current = byId.get(selectedCellId);
+
+    if (!current)
+        return;
+
+    const newFloor = current.floor + step;
 
     if (newFloor < minFloor || newFloor > maxFloor)
         return;
 
     const target = data.find(c =>
-        c.col === currentCol &&
-        c.row === currentRow &&
+        c.col === current.col &&
+        c.row === current.row &&
         c.floor === newFloor
     );
 
@@ -521,30 +523,6 @@ window.setHighlightCells = function (ids) {
     });
 
     render();
-
-};
-
-// -------------------------
-// CHANGE FLOOR
-// -------------------------
-
-window.changeFloor = function(step) {
-
-    const newFloor = currentFloor + step;
-
-    if (newFloor < minFloor || newFloor > maxFloor)
-        return;
-
-    const target = data.find(c =>
-        c.col === currentCol &&
-        c.row === currentRow &&
-        c.floor === newFloor
-    );
-
-    if (!target)
-        return;
-
-    gotoCell(target.id);
 
 };
 
