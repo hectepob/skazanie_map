@@ -38,6 +38,16 @@ const topPanel = (function () {
         locationInput = document.createElement("input");
         locationInput.type = "text";
         locationInput.style.width = "80px";
+        locationInput.addEventListener("keydown", function(e) {
+
+            if (e.key !== "Enter")
+                return;
+
+            e.preventDefault();
+
+            findButton.click();
+
+        });
 
         // ---------- кнопка ----------
 
