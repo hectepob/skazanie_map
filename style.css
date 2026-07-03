@@ -36,6 +36,13 @@ body {
     padding: 5px;
 }
 
+.floorBlock {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
 /* =========================
    LEFT PANEL
 ========================= */
