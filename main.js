@@ -10,6 +10,12 @@ let gridMap = new Map();
 let areaMap = new Map();
 
 let currentFloor = 0;
+let currentCol = 1;
+let currentRow = 1;
+
+let minFloor = 0;
+let maxFloor = 0;
+
 let currentArea = "";
 let currentSubarea = "";
 let selectedCellId = 0;
@@ -39,8 +45,15 @@ Promise.all([
 
 .then(([mapJson, areasJson]) => {
 
-    data = mapJson || [];
-    areaData = areasJson || [];
+data = mapJson || [];
+areaData = areasJson || [];
+
+if (data.length) {
+
+    minFloor = Math.min(...data.map(c => c.floor));
+    maxFloor = Math.max(...data.map(c => c.floor));
+
+}
 
     byId.clear();
     gridMap.clear();
@@ -433,6 +446,8 @@ function gotoCell(id) {
 	topPanel.selectCell(cell);
 
     currentFloor = cell.floor;
+    currentCol = cell.col;
+    currentRow = cell.row;
 
     render();
 
@@ -456,24 +471,21 @@ function gotoCell(id) {
 
 window.changeFloor = function(step) {
 
-    const cell = byId.get(selectedCellId);
+    const newFloor = currentFloor + step;
 
-    if (!cell)
+    if (newFloor < minFloor || newFloor > maxFloor)
         return;
 
     const target = data.find(c =>
-        c.col === cell.col &&
-        c.row === cell.row &&
-        c.floor === cell.floor + step
+        c.col === currentCol &&
+        c.row === currentRow &&
+        c.floor === newFloor
     );
 
     if (!target)
         return;
 
-    selectedCellId = target.id;
-    currentFloor = target.floor;
-
-    render();
+    gotoCell(target.id);
 
 };
 
