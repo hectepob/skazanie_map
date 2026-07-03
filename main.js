@@ -397,8 +397,6 @@ if (upId !== null) {
 
 el.addEventListener("click", () => {
 
-    
-
     if (dragMoved)
         return;
 
