@@ -318,12 +318,16 @@ if (downId !== null) {
 
         if (!target) return;
 
-        selectedCellId = downId;
+        down.onclick = e => {
 
-        currentFloor = target.floor;
+            e.stopPropagation();
 
-        render();
+            if (!downId)
+                return;
 
+            gotoCell(downId);
+
+        };
     };
 
     el.appendChild(down);
@@ -369,12 +373,16 @@ if (upId !== null) {
 
         if (!target) return;
 
-        selectedCellId = upId;
+        up.onclick = e => {
 
-        currentFloor = target.floor;
+            e.stopPropagation();
 
-        render();
+            if (!upId)
+                return;
 
+            gotoCell(upId);
+
+        };
     };
 
     el.appendChild(up);
