@@ -120,6 +120,9 @@ body {
     position: relative;
 
     color: var(--cell-color, #000);
+
+    position: relative;
+    overflow: hidden;
 }
 
 .cell.empty {
@@ -262,4 +265,50 @@ body {
 ========================= */
 .inputError{
     border:2px solid #d00000 !important;
+}
+
+/* =========================
+   HIGHLIGHT
+========================= */
+
+.cell.highlight::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 2px;
+
+    pointer-events: none;
+
+    background: rgba(0,0,0,0.16);
+
+    z-index: 0;
+
+}
+
+/* Для темных зон */
+.cell.highlight.lighten::before {
+
+    background: rgba(255,255,255,0.22);
+
+}
+
+/* Номер клетки поверх подсветки */
+
+.cell.highlight .cellId {
+
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+
+}
+
+/* Лестницы поверх подсветки */
+
+.cell.highlight .stairs {
+
+    position: relative;
+    z-index: 2;
+
 }
