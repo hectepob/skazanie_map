@@ -308,7 +308,6 @@ body {
 
 .cell.highlight .stairs {
 
-    position: relative;
     z-index: 2;
 
 }
