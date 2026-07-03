@@ -57,7 +57,10 @@ const topPanel = (function () {
         findButton = document.createElement("button");
         findButton.textContent = "Найти";
 
-        // ---------- этаж ----------
+        // ---------- этаж (UI) ----------
+
+        const floorWrapper = document.createElement("span");
+        floorWrapper.className = "floorBlock";
 
         const floorText = document.createElement("span");
         floorText.textContent = "Этаж:";
@@ -74,7 +77,14 @@ const topPanel = (function () {
         floorLabel.style.textAlign = "center";
         floorLabel.style.display = "inline-block";
 
+        // собрать блок
+        floorWrapper.appendChild(floorText);
+        floorWrapper.appendChild(floorUpButton);
+        floorWrapper.appendChild(floorLabel);
+        floorWrapper.appendChild(floorDownButton);
+
         // ---------- размещение ----------
+
 
         panel.appendChild(areaLabel);
         panel.appendChild(areaSelect);
@@ -89,10 +99,7 @@ const topPanel = (function () {
 
         panel.appendChild(document.createTextNode("   "));
 
-        panel.appendChild(floorText);
-        panel.appendChild(floorUpButton);
-        panel.appendChild(floorLabel);
-        panel.appendChild(floorDownButton);
+        panel.appendChild(floorWrapper);
 
         buildAreas(areaData);
 
