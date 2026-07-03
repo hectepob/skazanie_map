@@ -130,7 +130,7 @@ Promise.all([
 
     }
 
-topPanel.init(areaData);
+topPanel.init(areaData, data);
 leftPanel.init(data);
 
 selectedCellId = 1;
