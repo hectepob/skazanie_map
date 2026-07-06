@@ -340,6 +340,6 @@ function setHighlight(area, subarea, singleId = null) {
 
     highlight.setCells(ids);
 
-}
+};
 
 })();
