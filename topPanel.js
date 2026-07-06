@@ -1,4 +1,4 @@
-const topPanel = (function () {
+const topPanelModule = (function () {
 
     const panel = document.getElementById("topPanel");
 
@@ -342,4 +342,4 @@ return {
 
 };
 
-}();
+})();
