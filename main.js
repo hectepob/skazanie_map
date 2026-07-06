@@ -152,7 +152,7 @@ navigation.init({
     mapContainer,
     mapViewport,
 
-    topPanel,
+    topPanel: topPanelModule,
 
     getCurrentFloor: () => currentFloor,
     setCurrentFloor: v => currentFloor = v,
@@ -202,7 +202,7 @@ renderMap.init({
     areaMap,
     byId,
 
-    topPanel,
+    topPanel: topPanelModule,
     tooltip,
     drag,
 
