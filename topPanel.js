@@ -1,5 +1,6 @@
 const topPanelModule = (function () {
 
+	
 	const panel = document.getElementById("topPanel");
 
     let areaSelect;
