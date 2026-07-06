@@ -5,13 +5,11 @@ const topPanelModule = (function () {
     let areaSelect;
     let subareaSelect;
     let locationInput;
-
     let findButton;
     let floorUpButton;
     let floorDownButton;
     let floorLabel;
     let areaData = [];
-
     let mapData = [];
 
     function init(areas, map) {
@@ -47,7 +45,6 @@ const topPanelModule = (function () {
                 return;
 
             e.preventDefault();
-
             findButton.click();
 
         });
@@ -85,7 +82,6 @@ const topPanelModule = (function () {
 
         // ---------- размещение ----------
 
-
         panel.appendChild(areaLabel);
         panel.appendChild(areaSelect);
 
@@ -108,11 +104,8 @@ const topPanelModule = (function () {
         // ---------------------------------
 
         areaSelect.onchange = function () {
-
             buildSubareas(areaData, areaSelect.value);
-
             locationInput.value = "";
-
         };
 
         // ---------------------------------
@@ -120,9 +113,7 @@ const topPanelModule = (function () {
         // ---------------------------------
 
         subareaSelect.onchange = function () {
-
             locationInput.value = "";
-
         };
 
         // ---------------------------------
@@ -139,10 +130,8 @@ findButton.onclick = function () {
         const id = Number(locationInput.value);
 
         if (!byId.has(id)) {
-
             locationInput.classList.add("inputError");
             return;
-
         }
 
         setHighlight(areaSelect.value, subareaSelect.value, id);
@@ -185,9 +174,7 @@ findButton.onclick = function () {
 // ---------------------------------
 
 floorUpButton.onclick = function () {
-
     navigation.changeFloor(1);
-
 };
 
 // ---------------------------------
@@ -195,9 +182,7 @@ floorUpButton.onclick = function () {
 // ---------------------------------
 
 floorDownButton.onclick = function () {
-
     navigation.changeFloor(-1);
-
 };
 
     // ---------------------------------
@@ -205,33 +190,24 @@ floorDownButton.onclick = function () {
     function buildAreas(areaData) {
 
         areaSelect.innerHTML = "";
-
         const areas = [];
 
         areaData.forEach(a => {
-
             if (!areas.find(x => x.area === a.area)) {
-
                 areas.push({
                     id: a.id_area,
                     area: a.area
                 });
-
             }
-
         });
 
         areas.sort((a, b) => a.id - b.id);
 
         areas.forEach(a => {
-
             const opt = document.createElement("option");
-
             opt.value = a.area;
             opt.textContent = a.area;
-
             areaSelect.appendChild(opt);
-
         });
 
         if (areas.length)
@@ -242,30 +218,20 @@ floorDownButton.onclick = function () {
     // ---------------------------------
 
     function buildSubareas(areaData, area) {
-
         subareaSelect.innerHTML = "";
-
         const empty = document.createElement("option");
-
         empty.value = "";
         empty.textContent = "Все области";
-
         subareaSelect.appendChild(empty);
-
         areaData
             .filter(x => x.area === area)
             .sort((a, b) => a.id_subarea - b.id_subarea)
             .forEach(s => {
-
                 const opt = document.createElement("option");
-
                 opt.value = s.subarea;
                 opt.textContent = s.subarea;
-
                 subareaSelect.appendChild(opt);
-
             });
-
     }
 
 function setHighlight(area, subarea, singleId = null) {
@@ -275,10 +241,8 @@ function setHighlight(area, subarea, singleId = null) {
 
     // Если поиск по номеру локации — подсветку зон не делаем
     if (singleId !== null) {
-
         highlight.clear();
         return;
-
     }
 
     const ids = [];
@@ -302,42 +266,18 @@ function setHighlight(area, subarea, singleId = null) {
 return {
 
     init,
-
-    getArea() {
-        return areaSelect.value;
-    },
-
-    getSubarea() {
-        return subareaSelect.value;
-    },
-
-    getLocationId() {
-        return locationInput.value;
-    },
-
-    setArea(value) {
-        areaSelect.value = value;
-    },
-
-    setSubarea(value) {
-        subareaSelect.value = value;
-    },
-
-    setLocationId(value) {
-        locationInput.value = value;
-    },
-
-    setFloor(value) {
-        floorLabel.textContent = value;
-    },
-
+    getArea() {return areaSelect.value},
+    getSubarea() {return subareaSelect.value},
+    getLocationId() {return locationInput.value},
+    setArea(value) {areaSelect.value = value},
+    setSubarea(value) {subareaSelect.value = value},
+    setLocationId(value) {locationInput.value = value},
+    setFloor(value) {floorLabel.textContent = value},
     selectCell(cell) {
-
         areaSelect.value = cell.area;
         buildSubareas(areaData, cell.area);
         subareaSelect.value = cell.subarea;
         locationInput.value = cell.id;
-
     }
 
 };
