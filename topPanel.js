@@ -268,6 +268,37 @@ floorDownButton.onclick = function () {
 
     }
 
+function setHighlight(area, subarea, singleId = null) {
+
+    if (typeof window.setHighlightCells !== "function")
+        return;
+
+    // Если поиск по номеру локации — подсветку зон не делаем
+    if (singleId !== null) {
+
+        highlight.clear();
+        return;
+
+    }
+
+    const ids = [];
+
+    mapData.forEach(cell => {
+
+        if (cell.area !== area)
+            return;
+
+        if (subarea !== "" && cell.subarea !== subarea)
+            return;
+
+        ids.push(cell.id);
+
+    });
+
+    highlight.setCells(ids);
+
+}
+
 return {
 
     init,
@@ -308,37 +339,6 @@ return {
         locationInput.value = cell.id;
 
     }
-
-};
-
-function setHighlight(area, subarea, singleId = null) {
-
-    if (typeof window.setHighlightCells !== "function")
-        return;
-
-    // Если поиск по номеру локации — подсветку зон не делаем
-    if (singleId !== null) {
-
-        highlight.clear();
-        return;
-
-    }
-
-    const ids = [];
-
-    mapData.forEach(cell => {
-
-        if (cell.area !== area)
-            return;
-
-        if (subarea !== "" && cell.subarea !== subarea)
-            return;
-
-        ids.push(cell.id);
-
-    });
-
-    highlight.setCells(ids);
 
 };
 
