@@ -265,22 +265,42 @@ function setHighlight(area, subarea, singleId = null) {
 }
 
 return {
+    init: init,
 
-    init,
-    getArea() {return areaSelect.value},
-    getSubarea() {return subareaSelect.value},
-    getLocationId() {return locationInput.value},
-    setArea(value) {areaSelect.value = value},
-    setSubarea(value) {subareaSelect.value = value},
-    setLocationId(value) {locationInput.value = value},
-    setFloor(value) {floorLabel.textContent = value},
+    getArea() {
+        return areaSelect.value;
+    },
+
+    getSubarea() {
+        return subareaSelect.value;
+    },
+
+    getLocationId() {
+        return locationInput.value;
+    },
+
+    setArea(value) {
+        areaSelect.value = value;
+    },
+
+    setSubarea(value) {
+        subareaSelect.value = value;
+    },
+
+    setLocationId(value) {
+        locationInput.value = value;
+    },
+
+    setFloor(value) {
+        floorLabel.textContent = value;
+    },
+
     selectCell(cell) {
         areaSelect.value = cell.area;
         buildSubareas(areaData, cell.area);
         subareaSelect.value = cell.subarea;
         locationInput.value = cell.id;
     }
-
 };
 
 })();
