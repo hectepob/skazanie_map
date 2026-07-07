@@ -302,5 +302,3 @@ return {
         locationInput.value = cell.id;
     }
 };
-
-})();
