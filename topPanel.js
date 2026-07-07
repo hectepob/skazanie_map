@@ -19,10 +19,14 @@ const topPanelModule = (function () {
 
     function init(areas, map) {
 
+        console.log("topPanel init start");// КОНСОЛЬ 
+
         areaData = areas;
         mapData = map;
 
         panel.innerHTML = "";
+
+        console.log("panel found");//КОНСОЛЬ 
 
 
         const areaLabel = document.createElement("span");
@@ -112,6 +116,8 @@ const topPanelModule = (function () {
             console.log("floor down");
 
         };
+
+        console.log("topPanel init end");//КОНСОЛЬ
         
     }
 
