@@ -1,25 +1,30 @@
 const topPanelModule = (function () {
 
-	
-	const panel = document.getElementById("topPanel");
+    const panel = document.getElementById("topPanel");
 
     let areaSelect;
     let subareaSelect;
     let locationInput;
+
     let findButton;
+
     let floorUpButton;
     let floorDownButton;
     let floorLabel;
+
     let areaData = [];
     let mapData = [];
 
     function init(areas, map) {
 
-         areaData = areas;
-         mapData = map;
-       	 panel.innerHTML = "";
+        areaData = areas;
+        mapData = map;
 
-        // ---------- подписи ----------
+        panel.innerHTML = "";
+
+        // -------------------------
+        // LABELS
+        // -------------------------
 
         const areaLabel = document.createElement("span");
         areaLabel.textContent = "Регион:";
@@ -30,7 +35,9 @@ const topPanelModule = (function () {
         const locationLabel = document.createElement("span");
         locationLabel.textContent = "Номер локации:";
 
-        // ---------- поля ----------
+        // -------------------------
+        // CONTROLS
+        // -------------------------
 
         areaSelect = document.createElement("select");
 
@@ -40,7 +47,8 @@ const topPanelModule = (function () {
         locationInput = document.createElement("input");
         locationInput.type = "text";
         locationInput.style.width = "80px";
-        locationInput.addEventListener("keydown", function(e) {
+
+        locationInput.addEventListener("keydown", e => {
 
             if (e.key !== "Enter")
                 return;
@@ -50,12 +58,12 @@ const topPanelModule = (function () {
 
         });
 
-        // ---------- кнопка ----------
-
         findButton = document.createElement("button");
         findButton.textContent = "Найти";
 
-        // ---------- этаж (UI) ----------
+        // -------------------------
+        // FLOOR
+        // -------------------------
 
         const floorWrapper = document.createElement("span");
         floorWrapper.className = "floorBlock";
@@ -70,18 +78,19 @@ const topPanelModule = (function () {
         floorDownButton.textContent = "▼";
 
         floorLabel = document.createElement("span");
-        floorLabel.textContent = "0";
+        floorLabel.style.display = "inline-block";
         floorLabel.style.minWidth = "24px";
         floorLabel.style.textAlign = "center";
-        floorLabel.style.display = "inline-block";
+        floorLabel.textContent = "0";
 
-        // собрать блок
         floorWrapper.appendChild(floorText);
         floorWrapper.appendChild(floorUpButton);
         floorWrapper.appendChild(floorLabel);
         floorWrapper.appendChild(floorDownButton);
 
-        // ---------- размещение ----------
+        // -------------------------
+        // LAYOUT
+        // -------------------------
 
         panel.appendChild(areaLabel);
         panel.appendChild(areaSelect);
@@ -98,119 +107,107 @@ const topPanelModule = (function () {
 
         panel.appendChild(floorWrapper);
 
-        buildAreas(areaData);
+        // -------------------------
+        // DATA
+        // -------------------------
 
-        // ---------------------------------
-        // смена региона
-        // ---------------------------------
+        buildAreas();
+
+        // -------------------------
+        // EVENTS
+        // -------------------------
 
         areaSelect.onchange = function () {
-            buildSubareas(areaData, areaSelect.value);
-            locationInput.value = "";
-        };
 
-        // ---------------------------------
-        // смена области
-        // ---------------------------------
+            buildSubareas(areaSelect.value);
+
+            locationInput.value = "";
+
+        };
 
         subareaSelect.onchange = function () {
+
             locationInput.value = "";
+
         };
 
-        // ---------------------------------
-        // Найти
-        // ---------------------------------
+        findButton.onclick = onFindClick;
 
-findButton.onclick = function () {
+        floorUpButton.onclick = function () {
 
-    locationInput.classList.remove("inputError");
+            navigation.changeFloor(1);
 
-    // Поиск по ID имеет приоритет
-    if (locationInput.value.trim() !== "") {
+        };
 
-        const id = Number(locationInput.value);
+        floorDownButton.onclick = function () {
 
-        if (!byId.has(id)) {
-            locationInput.classList.add("inputError");
+            navigation.changeFloor(-1);
+
+        };
+
+    }
+
+    // -------------------------
+    // SEARCH
+    // -------------------------
+
+    function onFindClick() {
+
+        locationInput.classList.remove("inputError");
+
+        const text = locationInput.value.trim();
+
+        if (text !== "") {
+
+            const id = Number(text);
+
+            const cell = mapData.find(c => c.id === id);
+
+            if (!cell) {
+
+                locationInput.classList.add("inputError");
+                return;
+
+            }
+
+            highlight.clear();
+
+            navigation.gotoCell(id);
+
             return;
+
         }
-
-        setHighlight(areaSelect.value, subareaSelect.value, id);
-
-        navigation.gotoCell(id);
-        return;
-
-    }
-
-    let rec;
-
-    if (subareaSelect.value === "") {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value &&
-            a.id_subarea === 1
-        );
-
-    }
-    else {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value &&
-            a.subarea === subareaSelect.value
-        );
-
-    }
-
-    if (!rec)
-        return;
-
-	setHighlight(areaSelect.value, subareaSelect.value);
-
-        navigation.gotoCell(rec.central_cell);
-
-    };
-
-// ---------------------------------
-// Этаж вверх
-// ---------------------------------
-
-floorUpButton.onclick = function () {
-    navigation.changeFloor(1);
-};
-
-// ---------------------------------
-// Этаж вниз
-// ---------------------------------
-
-floorDownButton.onclick = function () {
-    navigation.changeFloor(-1);
-};
-
-	}
-
-    // ---------------------------------
 
     function buildAreas(areaData) {
 
         areaSelect.innerHTML = "";
+
         const areas = [];
 
         areaData.forEach(a => {
+
             if (!areas.find(x => x.area === a.area)) {
+
                 areas.push({
                     id: a.id_area,
                     area: a.area
                 });
+
             }
+
         });
 
         areas.sort((a, b) => a.id - b.id);
 
         areas.forEach(a => {
+
             const opt = document.createElement("option");
+
             opt.value = a.area;
             opt.textContent = a.area;
+
             areaSelect.appendChild(opt);
+
         });
 
         if (areas.length)
@@ -221,68 +218,106 @@ floorDownButton.onclick = function () {
     // ---------------------------------
 
     function buildSubareas(areaData, area) {
+
         subareaSelect.innerHTML = "";
+
         const empty = document.createElement("option");
         empty.value = "";
         empty.textContent = "Все области";
+
         subareaSelect.appendChild(empty);
+
         areaData
             .filter(x => x.area === area)
             .sort((a, b) => a.id_subarea - b.id_subarea)
             .forEach(s => {
+
                 const opt = document.createElement("option");
+
                 opt.value = s.subarea;
                 opt.textContent = s.subarea;
+
                 subareaSelect.appendChild(opt);
+
             });
+
     }
 
-function setHighlight(area, subarea, singleId = null) {
+    // ---------------------------------
 
-    if (typeof window.setHighlightCells !== "function")
-        return;
+    function setHighlight(area, subarea, singleId = null) {
 
-    // Если поиск по номеру локации — подсветку зон не делаем
-    if (singleId !== null) {
-        highlight.clear();
-        return;
-    }
+        if (singleId !== null) {
 
-    const ids = [];
-
-    mapData.forEach(cell => {
-
-        if (cell.area !== area)
+            highlight.clear();
             return;
 
-        if (subarea !== "" && cell.subarea !== subarea)
-            return;
+        }
 
-        ids.push(cell.id);
+        const ids = [];
 
-    });
+        mapData.forEach(cell => {
 
-    highlight.setCells(ids);
+            if (cell.area !== area)
+                return;
 
-}
+            if (subarea !== "" && cell.subarea !== subarea)
+                return;
 
-return {
+            ids.push(cell.id);
 
-    init,
-    getArea() {return areaSelect.value},
-    getSubarea() {return subareaSelect.value},
-    getLocationId() {return locationInput.value},
-    setArea(value) {areaSelect.value = value},
-    setSubarea(value) {subareaSelect.value = value},
-    setLocationId(value) {locationInput.value = value},
-    setFloor(value) {floorLabel.textContent = value},
-    selectCell(cell) {
-        areaSelect.value = cell.area;
-        buildSubareas(areaData, cell.area);
-        subareaSelect.value = cell.subarea;
-        locationInput.value = cell.id;
+        });
+
+        highlight.setCells(ids);
+
     }
 
-};
+    // ---------------------------------
+
+    return {
+
+        init,
+
+        getArea() {
+            return areaSelect.value;
+        },
+
+        getSubarea() {
+            return subareaSelect.value;
+        },
+
+        getLocationId() {
+            return locationInput.value;
+        },
+
+        setArea(value) {
+            areaSelect.value = value;
+        },
+
+        setSubarea(value) {
+            subareaSelect.value = value;
+        },
+
+        setLocationId(value) {
+            locationInput.value = value;
+        },
+
+        setFloor(value) {
+            floorLabel.textContent = value;
+        },
+
+        selectCell(cell) {
+
+            areaSelect.value = cell.area;
+
+            buildSubareas(areaData, cell.area);
+
+            subareaSelect.value = cell.subarea;
+
+            locationInput.value = cell.id;
+
+        }
+
+    };
 
 })();
