@@ -84,10 +84,35 @@ const topPanelModule = (function () {
         panel.appendChild(floorLabel);
         panel.appendChild(floorDownButton);
 
-
-
         buildAreas();
 
+        areaSelect.onchange = function () {
+
+            buildSubareas(areaSelect.value);
+
+        };
+
+
+        subareaSelect.onchange = function () {
+
+            locationInput.value = "";
+
+        };
+
+
+        floorUpButton.onclick = function () {
+
+            console.log("floor up");
+
+        };
+
+
+        floorDownButton.onclick = function () {
+
+            console.log("floor down");
+
+        };
+        
     }
 
 
@@ -157,11 +182,51 @@ const topPanelModule = (function () {
 
     }
 
-
-
-    return {
+        return {
 
         init,
+
+
+        getArea() {
+
+            return areaSelect.value;
+
+        },
+
+
+        getSubarea() {
+
+            return subareaSelect.value;
+
+        },
+
+
+        getLocationId() {
+
+            return locationInput.value;
+
+        },
+
+
+        setArea(value) {
+
+            areaSelect.value = value;
+
+        },
+
+
+        setSubarea(value) {
+
+            subareaSelect.value = value;
+
+        },
+
+
+        setLocationId(value) {
+
+            locationInput.value = value;
+
+        },
 
 
         setFloor(value) {
