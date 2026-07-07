@@ -186,6 +186,8 @@ floorDownButton.onclick = function () {
     navigation.changeFloor(-1);
 };
 
+	}
+
     // ---------------------------------
 
     function buildAreas(areaData) {
