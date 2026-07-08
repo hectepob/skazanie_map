@@ -94,6 +94,41 @@ function init(areas, map) {
     buildAreas();
 
     console.log("areas built"); // КОНСОЛЬ
+
+// ---------- обработчики ----------
+
+areaSelect.onchange = function () {
+
+    buildSubareas(areaSelect.value);
+
+    locationInput.value = "";
+
+};
+
+subareaSelect.onchange = function () {
+
+    locationInput.value = "";
+
+};
+
+findButton.onclick = function () {
+
+    console.log("find"); // КОНСОЛЬ
+
+};
+
+floorUpButton.onclick = function () {
+
+    console.log("up"); // КОНСОЛЬ
+
+};
+
+floorDownButton.onclick = function () {
+
+    console.log("down"); // КОНСОЛЬ
+
+};
+    
     console.log("topPanel init end"); // КОНСОЛЬ
 
 }   
