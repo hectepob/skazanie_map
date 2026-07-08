@@ -95,42 +95,25 @@ function init(areas, map) {
     panel.appendChild(floorLabel);
     panel.appendChild(floorDownButton);
 
+   
     buildAreas();
 
     console.log("areas built"); // КОНСОЛЬ
-
     console.log("topPanel init end"); // КОНСОЛЬ
 
 }
     
-    function buildSubareas(area) {
+    function buildAreas() {
 
-        subareaSelect.innerHTML = "";
+    console.log("buildAreas"); // КОНСОЛЬ
 
+}
 
-        const empty = document.createElement("option");
+function buildSubareas() {
 
-        empty.value = "";
-        empty.textContent = "Все области";
+    console.log("buildSubareas"); // КОНСОЛЬ
 
-        subareaSelect.appendChild(empty);
-
-
-
-        areaData
-            .filter(x => x.area === area)
-            .forEach(x => {
-
-                const opt = document.createElement("option");
-
-                opt.value = x.subarea;
-                opt.textContent = x.subarea;
-
-                subareaSelect.appendChild(opt);
-
-            });
-
-    }
+}                                  
 
     return {
 
