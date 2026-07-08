@@ -40,94 +40,14 @@ Promise.all([
 data = mapJson || [];
 areaData = areasJson || [];
 
-if (data.length) {
+const built = dataBuilder.build(data, areaData);
 
-    minFloor = Math.min(...data.map(c => c.floor));
-    maxFloor = Math.max(...data.map(c => c.floor));
+byId = built.byId;
+gridMap = built.gridMap;
+areaMap = built.areaMap;
 
-}
-
-    byId.clear();
-    gridMap.clear();
-    areaMap.clear();
-
-    // -------------------------
-    // AREA COLORS
-    // -------------------------
-
-    areaData.forEach(a => {
-
-        if (!areaMap.has(a.area)) {
-
-            areaMap.set(a.area, {
-                bg_color: a.bg_color,
-                font_color: a.font_color
-            });
-
-        }
-
-    });
-
-    // -------------------------
-    // MAP DATA
-    // -------------------------
-
-    data.forEach(cell => {
-
-        cell.parent_id = Number(cell.parent_id || 0);
-
-        byId.set(cell.id, cell);
-
-    });
-
-    // -------------------------
-    // BUILD GRID
-    // -------------------------
-
-    data.forEach(cell => {
-
-        let root = cell;
-
-        while (root.parent_id !== 0) {
-
-            root = byId.get(root.parent_id);
-
-            if (!root) break;
-
-        }
-
-        if (!root) return;
-
-        const key = `${root.floor}:${root.row}:${root.col}`;
-
-        if (!gridMap.has(key)) {
-
-            gridMap.set(key, {
-
-                root: root,
-                cells: []
-
-            });
-
-        }
-
-        gridMap.get(key).cells.push(cell);
-
-    });
-
-    // -------------------------
-    // GROUPS
-    // -------------------------
-
-    gridMap.forEach(group => {
-
-        group.cells.sort((a, b) => a.id - b.id);
-
-        group.displayId = group.cells
-            .map(c => c.id)
-            .join("<br>");
-
-    });
+minFloor = built.minFloor;
+maxFloor = built.maxFloor;
 
     if (data.length) {
 
