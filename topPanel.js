@@ -113,10 +113,56 @@ subareaSelect.onchange = function () {
 
 findButton.onclick = function () {
 
-    console.log("find"); // КОНСОЛЬ
+    locationInput.classList.remove("inputError");
+
+    // Поиск по ID
+    if (locationInput.value.trim() !== "") {
+
+        const id = Number(locationInput.value);
+
+        if (!byId.has(id)) {
+
+            locationInput.classList.add("inputError");
+            return;
+
+        }
+
+        setHighlight(areaSelect.value, subareaSelect.value, id);
+
+        navigation.gotoCell(id);
+
+        return;
+
+    }
+
+    let rec;
+
+    if (subareaSelect.value === "") {
+
+        rec = areaData.find(a =>
+            a.area === areaSelect.value &&
+            a.id_subarea === 1
+        );
+
+    }
+    else {
+
+        rec = areaData.find(a =>
+            a.area === areaSelect.value &&
+            a.subarea === subareaSelect.value
+        );
+
+    }
+
+    if (!rec)
+        return;
+
+    setHighlight(areaSelect.value, subareaSelect.value);
+
+    navigation.gotoCell(rec.central_cell);
 
 };
-
+    
 floorUpButton.onclick = function () {
 
     console.log("up"); // КОНСОЛЬ
@@ -196,6 +242,33 @@ function buildSubareas(area) {
         });
 
 }
+
+function setHighlight(area, subarea, singleId = null) {
+
+    if (singleId !== null) {
+
+        highlight.clear();
+        return;
+
+    }
+
+    const ids = [];
+
+    mapData.forEach(cell => {
+
+        if (cell.area !== area)
+            return;
+
+        if (subarea !== "" && cell.subarea !== subarea)
+            return;
+
+        ids.push(cell.id);
+
+    });
+
+    highlight.setCells(ids);
+
+}    
     
 return {
 
