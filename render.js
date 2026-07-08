@@ -8,20 +8,7 @@ const renderMap = (function () {
 
     }
 
-function drawCell(group, row, col) {
-
-    const el = document.createElement("div");
-
-    el.className = "cell";
-    el.style.gridColumn = col;
-    el.style.gridRow = row;
-
-    if (!group) {
-
-        el.classList.add("empty");
-        return el;
-
-    }
+function applyCellStyle(el, group) {
 
     const cell = group.root;
 
@@ -44,7 +31,28 @@ function drawCell(group, row, col) {
     }
 
     if (cell.text_color)
-        el.style.color = cell.text_color;
+        el.style.color = cell.textColor || cell.text_color;
+
+}
+    
+function drawCell(group, row, col) {
+
+    const el = document.createElement("div");
+
+    el.className = "cell";
+    el.style.gridColumn = col;
+    el.style.gridRow = row;
+
+    if (!group) {
+
+        el.classList.add("empty");
+        return el;
+
+    }
+
+    const cell = group.root;
+
+applyCellStyle(el, group);
 
     ["north", "south", "west", "east"].forEach(dir => {
 
