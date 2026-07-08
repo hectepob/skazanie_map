@@ -97,14 +97,71 @@ function init(areas, map) {
     console.log("topPanel init end"); // КОНСОЛЬ
 
 }   
+    
     function buildAreas() {
-    console.log("buildAreas"); // КОНСОЛЬ
-    }
 
-    function buildSubareas() {
-    console.log("buildSubareas"); // КОНСОЛЬ
-    }                                  
+    areaSelect.innerHTML = "";
 
+    const areas = [];
+
+    areaData.forEach(a => {
+
+        if (!areas.find(x => x.id === a.id_area)) {
+
+            areas.push({
+                id: a.id_area,
+                area: a.area
+            });
+
+        }
+
+    });
+
+    areas.sort((a, b) => a.id - b.id);
+
+    areas.forEach(a => {
+
+        const opt = document.createElement("option");
+
+        opt.value = a.area;
+        opt.textContent = a.area;
+
+        areaSelect.appendChild(opt);
+
+    });
+
+    if (areas.length)
+        buildSubareas(areas[0].area);
+
+}
+
+function buildSubareas(area) {
+
+    subareaSelect.innerHTML = "";
+
+    const empty = document.createElement("option");
+
+    empty.value = "";
+    empty.textContent = "Все области";
+
+    subareaSelect.appendChild(empty);
+
+    areaData
+        .filter(x => x.area === area)
+        .sort((a, b) => a.id_subarea - b.id_subarea)
+        .forEach(x => {
+
+            const opt = document.createElement("option");
+
+            opt.value = x.subarea;
+            opt.textContent = x.subarea;
+
+            subareaSelect.appendChild(opt);
+
+        });
+
+}
+    
     return {
 
     init,
