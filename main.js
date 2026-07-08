@@ -4,24 +4,20 @@ const mapViewport = document.getElementById("mapViewport");
 let data = [];
 let areaData = [];
 
-let byId = new Map();
-let gridMap = new Map();
-let areaMap = new Map();
+let byId;
+let gridMap;
+let areaMap;
+
+let minFloor;
+let maxFloor;
 
 let currentFloor = 0;
-
-let minFloor = 0;
-let maxFloor = 0;
-
 let currentArea = "";
 let currentSubarea = "";
 
 let selectedCellId = 0;
-let highlightCells = new Set();
 
-// -------------------------
-// MAP DRAG
-// -------------------------
+const highlightCells = new Set();
 
 let offsetX = 0;
 let offsetY = 0;
