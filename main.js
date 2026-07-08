@@ -154,6 +154,8 @@ navigation.init({
 
     topPanel: topPanelModule,
 
+    render: () => renderMap.draw(),
+
     getCurrentFloor: () => currentFloor,
     setCurrentFloor: v => currentFloor = v,
 
