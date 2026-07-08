@@ -90,6 +90,8 @@ const topPanelModule = (function () {
 
         buildAreas();
 
+        console.log("areas built");//КОНСОЛЬ
+
         areaSelect.onchange = function () {
 
             buildSubareas(areaSelect.value);
