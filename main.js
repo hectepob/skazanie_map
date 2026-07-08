@@ -219,7 +219,12 @@ renderMap.init({
 
 });
 
-topPanelModule.init(areaData, data);
+console.log("calling topPanel.init");//КОНСОЛЬ
+
+topPanel.init(areaData, data);
+
+console.log("topPanel.init finished");//КОНСОЛЬ
+    
 leftPanel.init(data);
 
 selectedCellId = 0;
