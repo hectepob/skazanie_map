@@ -197,7 +197,7 @@ function buildSubareas(area) {
 
 }
     
-    return {
+return {
 
     init,
 
