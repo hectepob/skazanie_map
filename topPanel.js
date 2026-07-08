@@ -52,8 +52,12 @@ const topPanelModule = (function () {
         locationInput = document.createElement("input");
         locationInput.type = "text";
         locationInput.style.width = "80px";
-
-
+        locationInput.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter")
+        return;
+    e.preventDefault();
+    findButton.click();
+        });
 
         findButton = document.createElement("button");
         findButton.textContent = "Найти";
@@ -88,40 +92,41 @@ const topPanelModule = (function () {
         panel.appendChild(floorLabel);
         panel.appendChild(floorDownButton);
 
-        buildAreas();
+ buildAreas();
 
-        console.log("areas built");//КОНСОЛЬ
+areaSelect.onchange = function () {
 
-        areaSelect.onchange = function () {
+    buildSubareas(areaSelect.value);
 
-            buildSubareas(areaSelect.value);
+    locationInput.value = "";
 
-        };
+};
 
+subareaSelect.onchange = function () {
 
-        subareaSelect.onchange = function () {
+    locationInput.value = "";
 
-            locationInput.value = "";
+};
 
-        };
+findButton.onclick = function () {
 
+    console.log("find");
 
-        floorUpButton.onclick = function () {
+};
 
-            console.log("floor up");
+floorUpButton.onclick = function () {
 
-        };
+    console.log("up");
 
+};
 
-        floorDownButton.onclick = function () {
+floorDownButton.onclick = function () {
 
-            console.log("floor down");
+    console.log("down");
 
-        };
+};
 
-        console.log("topPanel init end");//КОНСОЛЬ
-        
-    }
+console.log("topPanel init end");
 
 
 
@@ -190,70 +195,67 @@ const topPanelModule = (function () {
 
     }
 
-        return {
+    return {
 
-        init,
+    init,
 
+    getArea() {
 
-        getArea() {
+        return areaSelect.value;
 
-            return areaSelect.value;
+    },
 
-        },
+    getSubarea() {
 
+        return subareaSelect.value;
 
-        getSubarea() {
+    },
 
-            return subareaSelect.value;
+    getLocationId() {
 
-        },
+        return locationInput.value;
 
+    },
 
-        getLocationId() {
+    setArea(value) {
 
-            return locationInput.value;
+        areaSelect.value = value;
 
-        },
+    },
 
+    setSubarea(value) {
 
-        setArea(value) {
+        subareaSelect.value = value;
 
-            areaSelect.value = value;
+    },
 
-        },
+    setLocationId(value) {
 
+        locationInput.value = value;
 
-        setSubarea(value) {
+    },
 
-            subareaSelect.value = value;
+    setFloor(value) {
 
-        },
+        floorLabel.textContent = value;
 
+    },
 
-        setLocationId(value) {
+    selectCell(cell) {
 
-            locationInput.value = value;
+        if (!cell)
+            return;
 
-        },
+        areaSelect.value = cell.area;
 
+        buildSubareas(cell.area);
 
-        setFloor(value) {
+        subareaSelect.value = cell.subarea;
 
-            floorLabel.textContent = value;
+        locationInput.value = cell.id;
 
-        },
+    }
 
-
-        selectCell(cell) {
-
-            if (!cell)
-                return;
-
-            locationInput.value = cell.id;
-
-        }
-
-    };
-
+};
 
 })();
