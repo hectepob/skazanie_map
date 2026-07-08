@@ -8,6 +8,30 @@ const renderMap = (function () {
 
     }
 
+function drawCell(group, row, col) {
+
+    const el = document.createElement("div");
+
+    el.className = "cell";
+    el.style.gridColumn = col;
+    el.style.gridRow = row;
+
+    if (!group) {
+
+        el.classList.add("empty");
+
+        return el;
+
+    }
+
+    const cell = group.root;
+
+    // дальше сюда постепенно переедет весь код клетки
+
+    return el;
+
+}
+    
     function draw() {
 
         cfg.mapContainer.innerHTML = "";
@@ -40,7 +64,8 @@ const renderMap = (function () {
 
                 const group = cfg.gridMap.get(key);
 
-                const el = document.createElement("div");
+                const el = drawCell(group, row, col);
+                mapContainer.appendChild(el);
 
                 el.className = "cell";
                 el.style.gridColumn = col;
