@@ -95,25 +95,19 @@ function init(areas, map) {
     panel.appendChild(floorLabel);
     panel.appendChild(floorDownButton);
 
-   
     buildAreas();
 
     console.log("areas built"); // КОНСОЛЬ
     console.log("topPanel init end"); // КОНСОЛЬ
 
-}
-    
+}   
     function buildAreas() {
-
     console.log("buildAreas"); // КОНСОЛЬ
+    }
 
-}
-
-function buildSubareas() {
-
+    function buildSubareas() {
     console.log("buildSubareas"); // КОНСОЛЬ
-
-}                                  
+    }                                  
 
     return {
 
