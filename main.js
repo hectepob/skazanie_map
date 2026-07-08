@@ -219,11 +219,11 @@ renderMap.init({
 
 });
 
-console.log("calling topPanel.init");//КОНСОЛЬ
+console.log("calling topPanelModule.init");//КОНСОЛЬ
 
-topPanel.init(areaData, data);
+topPanelModule.init(areaData, data);
 
-console.log("topPanel.init finished");//КОНСОЛЬ
+console.log("topPanelModule.init finished");//КОНСОЛЬ
     
 leftPanel.init(data);
 
