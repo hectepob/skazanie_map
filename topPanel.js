@@ -1,171 +1,108 @@
 const topPanelModule = (function () {
 
-    const panel = document.getElementById("topPanel");
+const panel = document.getElementById("topPanel");
 
-    let areaSelect;
-    let subareaSelect;
-    let locationInput;
+let areaSelect;
+let subareaSelect;
+let locationInput;
 
-    let findButton;
+let findButton;
 
-    let floorUpButton;
-    let floorDownButton;
-    let floorLabel;
+let floorUpButton;
+let floorDownButton;
+let floorLabel;
 
+let areaData = [];
+let mapData = [];
 
-    let areaData = [];
-    let mapData = [];
+function init(areas, map) {
 
+    console.log("topPanel init start"); // КОНСОЛЬ
 
-    function init(areas, map) {
+    areaData = areas;
+    mapData = map;
 
-        console.log("topPanel init start");// КОНСОЛЬ 
+    panel.innerHTML = "";
 
-        areaData = areas;
-        mapData = map;
+    console.log("panel found"); // КОНСОЛЬ
 
-        panel.innerHTML = "";
+    // ---------- подписи ----------
 
-        console.log("panel found");//КОНСОЛЬ 
+    const areaLabel = document.createElement("span");
+    areaLabel.textContent = "Регион:";
 
+    const subareaLabel = document.createElement("span");
+    subareaLabel.textContent = "Область:";
 
-        const areaLabel = document.createElement("span");
-        areaLabel.textContent = "Регион:";
+    const locationLabel = document.createElement("span");
+    locationLabel.textContent = "Номер локации:";
 
+    // ---------- поля ----------
 
-        const subareaLabel = document.createElement("span");
-        subareaLabel.textContent = "Область:";
+    areaSelect = document.createElement("select");
 
+    subareaSelect = document.createElement("select");
+    subareaSelect.style.width = "260px";
 
-        const locationLabel = document.createElement("span");
-        locationLabel.textContent = "Номер локации:";
+    locationInput = document.createElement("input");
+    locationInput.type = "text";
+    locationInput.style.width = "80px";
 
+    locationInput.addEventListener("keydown", function (e) {
 
+        if (e.key !== "Enter")
+            return;
 
-        areaSelect = document.createElement("select");
+        e.preventDefault();
 
+        findButton.click();
 
-        subareaSelect = document.createElement("select");
-        subareaSelect.style.width = "260px";
+    });
 
+    // ---------- кнопки ----------
 
-        locationInput = document.createElement("input");
-        locationInput.type = "text";
-        locationInput.style.width = "80px";
-        locationInput.addEventListener("keydown", function (e) {
-    if (e.key !== "Enter")
-        return;
-    e.preventDefault();
-    findButton.click();
-        });
+    findButton = document.createElement("button");
+    findButton.textContent = "Найти";
 
-        findButton = document.createElement("button");
-        findButton.textContent = "Найти";
+    floorUpButton = document.createElement("button");
+    floorUpButton.textContent = "▲";
 
+    floorDownButton = document.createElement("button");
+    floorDownButton.textContent = "▼";
 
+    floorLabel = document.createElement("span");
+    floorLabel.textContent = "0";
+    floorLabel.style.minWidth = "24px";
+    floorLabel.style.display = "inline-block";
+    floorLabel.style.textAlign = "center";
 
-        floorUpButton = document.createElement("button");
-        floorUpButton.textContent = "▲";
+    // ---------- размещение ----------
 
+    panel.appendChild(areaLabel);
+    panel.appendChild(areaSelect);
 
-        floorDownButton = document.createElement("button");
-        floorDownButton.textContent = "▼";
+    panel.appendChild(subareaLabel);
+    panel.appendChild(subareaSelect);
 
+    panel.appendChild(locationLabel);
+    panel.appendChild(locationInput);
 
-        floorLabel = document.createElement("span");
-        floorLabel.textContent = "0";
+    panel.appendChild(findButton);
 
+    panel.appendChild(document.createTextNode(" "));
 
+    panel.appendChild(floorUpButton);
+    panel.appendChild(floorLabel);
+    panel.appendChild(floorDownButton);
 
-        panel.appendChild(areaLabel);
-        panel.appendChild(areaSelect);
+    buildAreas();
 
-        panel.appendChild(subareaLabel);
-        panel.appendChild(subareaSelect);
+    console.log("areas built"); // КОНСОЛЬ
 
-        panel.appendChild(locationLabel);
-        panel.appendChild(locationInput);
+    console.log("topPanel init end"); // КОНСОЛЬ
 
-        panel.appendChild(findButton);
-
-        panel.appendChild(floorUpButton);
-        panel.appendChild(floorLabel);
-        panel.appendChild(floorDownButton);
-
- buildAreas();
-
-areaSelect.onchange = function () {
-
-    buildSubareas(areaSelect.value);
-
-    locationInput.value = "";
-
-};
-
-subareaSelect.onchange = function () {
-
-    locationInput.value = "";
-
-};
-
-findButton.onclick = function () {
-
-    console.log("find");
-
-};
-
-floorUpButton.onclick = function () {
-
-    console.log("up");
-
-};
-
-floorDownButton.onclick = function () {
-
-    console.log("down");
-
-};
-
-console.log("topPanel init end");
-
-
-
-    function buildAreas() {
-
-        areaSelect.innerHTML = "";
-
-
-        const areas = [];
-
-
-        areaData.forEach(a => {
-
-            if (!areas.includes(a.area))
-                areas.push(a.area);
-
-        });
-
-
-
-        areas.forEach(a => {
-
-            const opt = document.createElement("option");
-
-            opt.value = a;
-            opt.textContent = a;
-
-            areaSelect.appendChild(opt);
-
-        });
-
-
-        if (areas.length)
-            buildSubareas(areas[0]);
-
-    }
-
-
-
+}
+    
     function buildSubareas(area) {
 
         subareaSelect.innerHTML = "";
