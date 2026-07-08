@@ -40,6 +40,23 @@ function applyCellStyle(el, group) {
 drawPassages(el, cell);
 
     }
+
+function drawCellId(el, group) {
+
+    const num = document.createElement("span");
+
+    num.className = "cellId";
+
+    if (group.cells.length === 2)
+        num.classList.add("multi2");
+    else if (group.cells.length >= 3)
+        num.classList.add("multi3");
+
+    num.innerHTML = group.displayId;
+
+    el.appendChild(num);
+
+}
     
 function drawCell(group, row, col) {
 
@@ -96,18 +113,7 @@ applyCellStyle(el, group);
 
     }
 
-    const num = document.createElement("span");
-
-    num.className = "cellId";
-
-    if (group.cells.length === 2)
-        num.classList.add("multi2");
-    else if (group.cells.length >= 3)
-        num.classList.add("multi3");
-
-    num.innerHTML = group.displayId;
-
-    el.appendChild(num);
+drawCellId(el, group);
 
     const upId = cfg.toId(cell.stairs?.up);
 
