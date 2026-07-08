@@ -27,7 +27,6 @@ function init(areas, map) {
     console.log("panel found"); // КОНСОЛЬ
 
     // ---------- подписи ----------
-
     const areaLabel = document.createElement("span");
     areaLabel.textContent = "Регион:";
 
@@ -38,7 +37,6 @@ function init(areas, map) {
     locationLabel.textContent = "Номер локации:";
 
     // ---------- поля ----------
-
     areaSelect = document.createElement("select");
 
     subareaSelect = document.createElement("select");
@@ -60,7 +58,6 @@ function init(areas, map) {
     });
 
     // ---------- кнопки ----------
-
     findButton = document.createElement("button");
     findButton.textContent = "Найти";
 
@@ -77,7 +74,6 @@ function init(areas, map) {
     floorLabel.style.textAlign = "center";
 
     // ---------- размещение ----------
-
     panel.appendChild(areaLabel);
     panel.appendChild(areaSelect);
 
