@@ -98,7 +98,7 @@ const dataBuilder = (function () {
 
         });
 
-        return {
+                return {
 
             byId,
             gridMap,
@@ -109,10 +109,10 @@ const dataBuilder = (function () {
 
         };
 
-    }
+    }   // <-- закрывает function build()
 
     return {
-
         build
-
     };
+
+})();
