@@ -165,13 +165,13 @@ findButton.onclick = function () {
     
 floorUpButton.onclick = function () {
 
-    console.log("up"); // КОНСОЛЬ
+    navigation.changeFloor(1);
 
 };
 
 floorDownButton.onclick = function () {
 
-    console.log("down"); // КОНСОЛЬ
+    navigation.changeFloor(-1);
 
 };
     
