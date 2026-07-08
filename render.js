@@ -34,6 +34,12 @@ function applyCellStyle(el, group) {
         el.style.color = cell.textColor || cell.text_color;
 
 }
+
+    function drawPassages(el, cell) {
+
+drawPassages(el, cell);
+
+    }
     
 function drawCell(group, row, col) {
 
