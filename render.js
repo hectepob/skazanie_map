@@ -35,11 +35,19 @@ function applyCellStyle(el, group) {
 
 }
 
-    function drawPassages(el, cell) {
+function drawPassages(el, cell) {
 
-drawPassages(el, cell);
+    ["north", "south", "west", "east"].forEach(dir => {
 
-    }
+        if (cell[dir] === "true")
+            el.classList.add(`open-${dir}`);
+
+        if (cell[dir] === "door")
+            el.classList.add(`door-${dir}`);
+
+    });
+
+}
 
 function drawCellId(el, group) {
 
@@ -77,15 +85,7 @@ function drawCell(group, row, col) {
 
 applyCellStyle(el, group);
 
-    ["north", "south", "west", "east"].forEach(dir => {
-
-        if (cell[dir] === "true")
-            el.classList.add(`open-${dir}`);
-
-        if (cell[dir] === "door")
-            el.classList.add(`door-${dir}`);
-
-    });
+drawPassages(el, cell);
 
     const downId = cfg.toId(cell.stairs?.down);
 
