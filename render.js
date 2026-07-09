@@ -49,6 +49,50 @@ function drawPassages(el, cell) {
 
 }
 
+function drawStairs(el, cell) {
+
+    const stairs = [
+        {
+            id: cfg.toId(cell.stairs?.down),
+            className: "stairs down",
+            symbol: "▼"
+        },
+        {
+            id: cfg.toId(cell.stairs?.up),
+            className: "stairs up",
+            symbol: "▲"
+        }
+    ];
+
+    stairs.forEach(stair => {
+
+        if (stair.id === null)
+            return;
+
+        const span = document.createElement("span");
+
+        span.className = stair.className;
+        span.textContent = stair.symbol;
+
+        span.onclick = e => {
+
+            e.stopPropagation();
+
+            const target = cfg.byId.get(stair.id);
+
+            if (!target)
+                return;
+
+            navigation.gotoCell(target.id);
+
+        };
+
+        el.appendChild(span);
+
+    });
+
+}    
+
 function drawCellId(el, group) {
 
     const num = document.createElement("span");
@@ -87,59 +131,9 @@ applyCellStyle(el, group);
 
 drawPassages(el, cell);
 
-    const downId = cfg.toId(cell.stairs?.down);
-
-    if (downId !== null) {
-
-        const down = document.createElement("span");
-
-        down.className = "stairs down";
-        down.textContent = "▼";
-
-        down.onclick = e => {
-
-            e.stopPropagation();
-
-            const target = cfg.byId.get(downId);
-
-            if (!target)
-                return;
-
-            navigation.gotoCell(target.id);
-
-        };
-
-        el.appendChild(down);
-
-    }
+drawStairs(el, cell);
 
 drawCellId(el, group);
-
-    const upId = cfg.toId(cell.stairs?.up);
-
-    if (upId !== null) {
-
-        const up = document.createElement("span");
-
-        up.className = "stairs up";
-        up.textContent = "▲";
-
-        up.onclick = e => {
-
-            e.stopPropagation();
-
-            const target = cfg.byId.get(upId);
-
-            if (!target)
-                return;
-
-            navigation.gotoCell(target.id);
-
-        };
-
-        el.appendChild(up);
-
-    }
 
     el.addEventListener("mouseenter", () => {
 
