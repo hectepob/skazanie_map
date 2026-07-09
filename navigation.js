@@ -50,31 +50,37 @@ const navigation = (function () {
 
     }
 
-    function gotoCell(id) {
+function centerOnCell(cell) {
 
-        setSelectedCellId(Number(id));
+    const x = (cell.col - 1) * 40;
+    const y = (cell.row - 1) * 40;
 
-        const cell = byId.get(Number(id));
+    offset.x = mapViewport.clientWidth / 2 - x - 20;
+    offset.y = mapViewport.clientHeight / 2 - y - 20;
 
-        if (!cell)
-            return;
+    mapContainer.style.transform =
+        `translate(${offset.x}px, ${offset.y}px)`;
 
-        topPanel.selectCell(cell);
+}
 
-        setCurrentFloor(cell.floor);
+function gotoCell(id) {
 
-        render();
+    setSelectedCellId(Number(id));
 
-        const x = (cell.col - 1) * 40;
-        const y = (cell.row - 1) * 40;
+    const cell = byId.get(Number(id));
 
-        offset.x = mapViewport.clientWidth / 2 - x - 20;
-        offset.y = mapViewport.clientHeight / 2 - y - 20;
+    if (!cell)
+        return;
 
-        mapContainer.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)`;
+    topPanel.selectCell(cell);
 
-    }
+    setCurrentFloor(cell.floor);
+
+    render();
+
+    centerOnCell(cell);
+
+}
 
     function changeFloor(step) {
 
@@ -94,25 +100,18 @@ const navigation = (function () {
             c.floor === newFloor
         );
 
-        setCurrentFloor(newFloor);
+setCurrentFloor(newFloor);
 
-        if (target) {
+if (target) {
 
-            gotoCell(target.id);
-            return;
+    gotoCell(target.id);
+    return;
 
-        }
+}
 
-        render();
+render();
 
-        const x = (base.col - 1) * 40;
-        const y = (base.row - 1) * 40;
-
-        offset.x = mapViewport.clientWidth / 2 - x - 20;
-        offset.y = mapViewport.clientHeight / 2 - y - 20;
-
-        mapContainer.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)`;
+centerOnCell(base);
 
     }
 
