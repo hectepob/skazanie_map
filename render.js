@@ -134,6 +134,8 @@ function attachTooltip(el, group) {
         cfg.tooltip.hide();
 
     });
+
+}
 function attachClick(el, cell) {
 
     el.addEventListener("click", () => {
