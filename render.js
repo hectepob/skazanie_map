@@ -31,7 +31,7 @@ function applyCellStyle(el, group) {
     }
 
     if (cell.text_color)
-        el.style.color = cell.textColor || cell.text_color;
+        el.style.color = cell.text_color;
 
 }
 
