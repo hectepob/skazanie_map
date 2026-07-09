@@ -134,6 +134,22 @@ function attachTooltip(el, group) {
         cfg.tooltip.hide();
 
     });
+function attachClick(el, cell) {
+
+    el.addEventListener("click", () => {
+
+        if (cfg.drag.moved())
+            return;
+
+        cfg.highlightCells.clear();
+
+        cfg.setSelectedCellId(cell.id);
+
+        cfg.topPanel.selectCell(cell);
+
+        draw();
+
+    });
 
 }
     
@@ -164,20 +180,7 @@ drawCellId(el, group);
 
 attachTooltip(el, group);
 
-    el.addEventListener("click", () => {
-
-        if (cfg.drag.moved())
-            return;
-
-        cfg.highlightCells.clear();
-
-        cfg.setSelectedCellId(cell.id);
-
-        cfg.topPanel.selectCell(cell);
-
-        draw();
-
-    });
+attachClick(el, cell);
 
     return el;
 
