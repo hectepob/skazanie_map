@@ -1,5 +1,8 @@
 const navigation = (function () {
 
+    const CELL_SIZE = 40;
+    const HALF_CELL = CELL_SIZE / 2;
+    
     let data;
     let byId;
 
@@ -44,24 +47,28 @@ const navigation = (function () {
 
     }
 
-    function getCurrentCell() {
-
-        return byId.get(getSelectedCellId());
-
-    }
-
 function centerOnCell(cell) {
 
-    const x = (cell.col - 1) * 40;
-    const y = (cell.row - 1) * 40;
+const x = (cell.col - 1) * CELL_SIZE;
+const y = (cell.row - 1) * CELL_SIZE;
 
-    offset.x = mapViewport.clientWidth / 2 - x - 20;
-    offset.y = mapViewport.clientHeight / 2 - y - 20;
+offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
+offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
 
     mapContainer.style.transform =
         `translate(${offset.x}px, ${offset.y}px)`;
 
 }
+
+    function findCellOnFloor(base, floor) {
+
+    return data.find(cell =>
+        cell.col === base.col &&
+        cell.row === base.row &&
+        cell.floor === floor
+    );
+
+    }
 
 function gotoCell(id) {
 
@@ -84,7 +91,7 @@ function gotoCell(id) {
 
     function changeFloor(step) {
 
-        const base = getCurrentCell();
+        const base = byId.get(getSelectedCellId());
 
         if (!base)
             return;
@@ -94,11 +101,7 @@ function gotoCell(id) {
         if (newFloor < minFloor || newFloor > maxFloor)
             return;
 
-        const target = data.find(c =>
-            c.col === base.col &&
-            c.row === base.row &&
-            c.floor === newFloor
-        );
+const target = findCellOnFloor(base, newFloor);
 
 setCurrentFloor(newFloor);
 
