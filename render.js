@@ -109,6 +109,33 @@ function drawCellId(el, group) {
     el.appendChild(num);
 
 }
+
+function attachTooltip(el, group) {
+
+    el.addEventListener("mouseenter", () => {
+
+        cfg.tooltip.show(group.cells);
+
+    });
+
+    el.addEventListener("mousemove", e => {
+
+        const rect = cfg.mapViewport.getBoundingClientRect();
+
+        cfg.tooltip.move(
+            e.clientX - rect.left + 10,
+            e.clientY - rect.top + 10
+        );
+
+    });
+
+    el.addEventListener("mouseleave", () => {
+
+        cfg.tooltip.hide();
+
+    });
+
+}
     
 function drawCell(group, row, col) {
 
@@ -135,28 +162,7 @@ drawStairs(el, cell);
 
 drawCellId(el, group);
 
-    el.addEventListener("mouseenter", () => {
-
-        cfg.tooltip.show(group.cells);
-
-    });
-
-    el.addEventListener("mousemove", e => {
-
-        const rect = cfg.mapViewport.getBoundingClientRect();
-
-        cfg.tooltip.move(
-            e.clientX - rect.left + 10,
-            e.clientY - rect.top + 10
-        );
-
-    });
-
-    el.addEventListener("mouseleave", () => {
-
-        cfg.tooltip.hide();
-
-    });
+attachTooltip(el, group);
 
     el.addEventListener("click", () => {
 
