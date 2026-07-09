@@ -70,7 +70,7 @@ offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
 
     }
 
-function gotoCell(id) {
+function gotoCell(id, center = true) {
 
     setSelectedCellId(Number(id));
 
@@ -83,8 +83,9 @@ function gotoCell(id) {
 
     setCurrentFloor(cell.floor);
 
-    render();
+render();
 
+if (center)
     centerOnCell(cell);
 
 }
