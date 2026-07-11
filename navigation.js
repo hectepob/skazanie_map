@@ -52,11 +52,15 @@ const navigation = (function () {
 
 function centerOnCell(cell) {
 
-const x = (cell.col - 1) * CELL_SIZE;
-const y = (cell.row - 1) * CELL_SIZE;
+    setCurrentFloor(cell.floor);
 
-offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
-offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
+    render();
+
+    const x = (cell.col - 1) * CELL_SIZE;
+    const y = (cell.row - 1) * CELL_SIZE;
+
+    offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
+    offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
 
     mapContainer.style.transform =
         `translate(${offset.x}px, ${offset.y}px)`;
@@ -84,25 +88,18 @@ function gotoCell(id, center = true) {
 
     topPanel.selectCell(cell);
 
-    setCurrentFloor(cell.floor);
-
-render();
-
-if (center)
     centerOnCell(cell);
 
 }
 
 function changeFloor(step) {
-    console.log("changeFloor", step);//КОНСОЛЬ 
 
     const newFloor = getCurrentFloor() + step;
 
     if (newFloor < getMinFloor() || newFloor > getMaxFloor())
         return;
 
-    setCurrentFloor(newFloor);
-    console.log("new floor =", newFloor);//КОНСОЛЬ 
+    setCurrentFloor(newFloor); 
 
     setSelectedCellId(0);
 
