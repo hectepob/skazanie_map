@@ -88,6 +88,7 @@ function init(areas, map) {
     panel.appendChild(floorDownButton);
 
     buildAreas();
+    clearSelection();
 
 // ---------- обработчики ----------
 
@@ -262,12 +263,16 @@ function setHighlight(area, subarea, singleId = null) {
 
 }    
 
-     function clearSelection() {
+function clearSelection() {
 
-         locationInput.value = "";
-         locationInput.classList.remove("inputError");
+    areaSelect.selectedIndex = -1;
 
-     }
+    subareaSelect.innerHTML = "";
+
+    locationInput.value = "";
+    locationInput.classList.remove("inputError");
+
+}
     
 return {
 
