@@ -94,6 +94,7 @@ if (center)
 }
 
 function changeFloor(step) {
+    console.log("changeFloor", step);//КОНСОЛЬ 
 
     const newFloor = getCurrentFloor() + step;
 
@@ -101,6 +102,7 @@ function changeFloor(step) {
         return;
 
     setCurrentFloor(newFloor);
+    console.log("new floor =", newFloor);//КОНСОЛЬ 
 
     setSelectedCellId(0);
 
@@ -109,6 +111,7 @@ function changeFloor(step) {
     topPanel.clearSelection();
 
     render();
+    console.log("render done");//КОНСОЛЬ 
 
 }
 
