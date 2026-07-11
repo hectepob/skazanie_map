@@ -150,7 +150,7 @@ leftPanel.init(data);
 selectedCellId = 0;
 
 if (data.length)
-    navigation.gotoCell(data[0].id);
+    navigation.centerOnCell(data[0]);
 
 });
 
