@@ -23,6 +23,8 @@ const navigation = (function () {
 
     let offset;
 
+    let clearHighlight;
+
     function init(cfg) {
 
         data = cfg.data;
@@ -44,6 +46,7 @@ const navigation = (function () {
         maxFloor = cfg.maxFloor;
 
         offset = cfg.offset;
+        clearHighlight = cfg.clearHighlight;
 
     }
 
@@ -90,34 +93,24 @@ if (center)
 
 }
 
-    function changeFloor(step) {
+function changeFloor(step) {
 
-        const base = byId.get(getSelectedCellId());
+    const newFloor = getCurrentFloor() + step;
 
-        if (!base)
-            return;
+    if (newFloor < minFloor || newFloor > maxFloor)
+        return;
 
-        const newFloor = base.floor + step;
+    setCurrentFloor(newFloor);
 
-        if (newFloor < minFloor || newFloor > maxFloor)
-            return;
+    setSelectedCellId(0);
 
-const target = findCellOnFloor(base, newFloor);
+    clearHighlight();
 
-setCurrentFloor(newFloor);
+    topPanel.clearSelection();
 
-if (target) {
-
-    gotoCell(target.id);
-    return;
+    render();
 
 }
-
-render();
-
-centerOnCell(base);
-
-    }
 
     return {
 
