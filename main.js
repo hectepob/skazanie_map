@@ -72,6 +72,8 @@ navigation.init({
 
     render: () => renderMap.draw(),
 
+    clearHighlight: () => highlight.clear(),
+
     getCurrentFloor: () => currentFloor,
     setCurrentFloor: v => currentFloor = v,
 
