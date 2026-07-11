@@ -18,8 +18,8 @@ const navigation = (function () {
     let getSelectedCellId;
     let setSelectedCellId;
 
-    let minFloor;
-    let maxFloor;
+    let getMinFloor;
+    let getMaxFloor;
 
     let offset;
 
@@ -42,8 +42,8 @@ const navigation = (function () {
         getSelectedCellId = cfg.getSelectedCellId;
         setSelectedCellId = cfg.setSelectedCellId;
 
-        minFloor = cfg.minFloor;
-        maxFloor = cfg.maxFloor;
+        getMinFloor = cfg.getMinFloor;
+        getMaxFloor = cfg.getMaxFloor;
 
         offset = cfg.offset;
         clearHighlight = cfg.clearHighlight;
@@ -98,7 +98,7 @@ function changeFloor(step) {
 
     const newFloor = getCurrentFloor() + step;
 
-    if (newFloor < minFloor || newFloor > maxFloor)
+    if (newFloor < getMinFloor() || newFloor > getMaxFloor())
         return;
 
     setCurrentFloor(newFloor);
