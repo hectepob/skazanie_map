@@ -17,14 +17,10 @@ let mapData = [];
 
 function init(areas, map) {
 
-    console.log("topPanel init start"); // КОНСОЛЬ
-
     areaData = areas;
     mapData = map;
 
     panel.innerHTML = "";
-
-    console.log("panel found"); // КОНСОЛЬ
 
     // ---------- подписи ----------
     const areaLabel = document.createElement("span");
@@ -92,8 +88,6 @@ function init(areas, map) {
     panel.appendChild(floorDownButton);
 
     buildAreas();
-
-    console.log("areas built"); // КОНСОЛЬ
 
 // ---------- обработчики ----------
 
@@ -174,8 +168,6 @@ floorDownButton.onclick = function () {
     navigation.changeFloor(-1);
 
 };
-    
-    console.log("topPanel init end"); // КОНСОЛЬ
 
 }   
     
