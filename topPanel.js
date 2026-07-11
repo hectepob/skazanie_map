@@ -261,6 +261,13 @@ function setHighlight(area, subarea, singleId = null) {
     highlight.setCells(ids);
 
 }    
+
+     function clearSelection() {
+
+         locationInput.value = "";
+         locationInput.classList.remove("inputError");
+
+     }
     
 return {
 
@@ -307,6 +314,8 @@ return {
         floorLabel.textContent = value;
 
     },
+
+    clearSelection,
 
     selectCell(cell) {
 
