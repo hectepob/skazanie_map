@@ -112,12 +112,13 @@ function changeFloor(step) {
 
 }
 
-    return {
+return {
 
-        init,
-        gotoCell,
-        changeFloor
+    init,
+    gotoCell,
+    changeFloor,
+    centerOnCell
 
-    };
+};
 
 })();
