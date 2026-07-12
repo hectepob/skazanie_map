@@ -34,6 +34,8 @@ const drag = (function () {
         dragStartX = e.clientX - offset.x;
         dragStartY = e.clientY - offset.y;
 
+        viewport.setPointerCapture(e.pointerId);
+
     }
 
     function onMove(e) {
@@ -58,11 +60,14 @@ const drag = (function () {
 
     }
 
-    function onUp() {
+function onUp(e) {
 
-        dragging = false;
+    dragging = false;
 
-    }
+    if (viewport.hasPointerCapture(e.pointerId))
+        viewport.releasePointerCapture(e.pointerId);
+
+}
 
     return {
 
