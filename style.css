@@ -91,13 +91,6 @@ body {
     user-select: none;
 }
 
-#mapTranslate {
-    position: absolute;
-    top: 0;
-    left: 0;
-    will-change: transform;
-}
-
 /* сама карта */
 #map {
     display: grid;
