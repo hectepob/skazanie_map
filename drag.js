@@ -1,6 +1,6 @@
 const drag = (function () {
 
-    console.log("drag.js VERSION 3");//КОНСОЛЬ
+   // console.log("drag.js VERSION 3");//КОНСОЛЬ
 
     let viewport;
     let container;
@@ -84,10 +84,8 @@ function onMove(e) {
 
     if (pointers.has(e.pointerId)) {
 
-        const p = pointers.get(e.pointerId);
-
-        p.x = e.clientX;
-        p.y = e.clientY;
+        pointers.get(e.pointerId).x = e.clientX;
+        pointers.get(e.pointerId).y = e.clientY;
 
     }
 
@@ -97,24 +95,27 @@ function onMove(e) {
 
         const rect = viewport.getBoundingClientRect();
 
-        const cx = (pts[0].x + pts[1].x) * 0.5 - rect.left;
-        const cy = (pts[0].y + pts[1].y) * 0.5 - rect.top;
+        const centerX = (pts[0].x + pts[1].x) / 2 - rect.left;
+        const centerY = (pts[0].y + pts[1].y) / 2 - rect.top;
 
         const d = distance(pts[0], pts[1]);
 
-        let newScale = pinchStartScale * (d / pinchStartDistance);
+        const factor = d / pinchStartDistance;
 
+        let newScale = pinchStartScale * factor;
         newScale = Math.max(0.5, Math.min(newScale, 3));
 
-        const worldX = (cx - offset.x) / scale.value;
-        const worldY = (cy - offset.y) / scale.value;
+        const k = newScale / scale.value;
+
+        offset.x = centerX - (centerX - offset.x) * k;
+        offset.y = centerY - (centerY - offset.y) * k;
 
         scale.value = newScale;
 
-        offset.x = cx - worldX * scale.value;
-        offset.y = cy - worldY * scale.value;
-
         updateTransform();
+
+        pinchStartDistance = d;
+        pinchStartScale = scale.value;
 
         return;
 
