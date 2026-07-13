@@ -1,3 +1,5 @@
+console.log("#1");//КОНСОЛЬ
+
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
 const mapTranslate = document.getElementById("mapTranslate");
@@ -148,11 +150,7 @@ renderMap.init({
 
 });
 
-console.log("calling topPanelModule.init");//КОНСОЛЬ
-
 topPanelModule.init(areaData, data);
-
-console.log("topPanelModule.init finished");//КОНСОЛЬ
     
 leftPanel.init(data);
 
