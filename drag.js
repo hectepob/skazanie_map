@@ -36,6 +36,13 @@ const drag = (function () {
             x: e.clientX,
             y: e.clientY
         });
+
+        if (pointers.size > 1) {
+
+           dragging = false;
+           return;
+
+        }
         
         dragStartX = e.clientX - offset.x;
         dragStartY = e.clientY - offset.y;
@@ -50,6 +57,9 @@ const drag = (function () {
            pointers.get(e.pointerId).x = e.clientX;
            pointers.get(e.pointerId).y = e.clientY;
         }
+
+        if (pointers.size > 1)
+            return;
         
         if (!dragging)
             return;
@@ -74,7 +84,7 @@ const drag = (function () {
 function onUp(e) {
 
     pointers.delete(e.pointerId);
-    
+
     dragging = false;
 
     if (viewport.hasPointerCapture(e.pointerId))
