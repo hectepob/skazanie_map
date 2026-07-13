@@ -110,6 +110,7 @@ function onMove(e) {
         offset.y = centerY - (centerY - offset.y) * k;
 
         scale.value = newScale;
+        console.log(offset.x, offset.y, scale.value);//КОНСОЛЬ
 
         updateTransform();
 
