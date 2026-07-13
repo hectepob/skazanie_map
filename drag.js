@@ -1,5 +1,7 @@
 const drag = (function () {
 
+    console.log("drag.js VERSION 2");
+
     let viewport;
     let container;
     let offset;
