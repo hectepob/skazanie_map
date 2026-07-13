@@ -11,7 +11,7 @@ const drag = (function () {
 
     let moved = false;
     
-    let scale = 1;
+    let scale;
 
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
@@ -23,6 +23,7 @@ const drag = (function () {
         viewport = cfg.viewport;
         container = cfg.container;
         offset = cfg.offset;
+        scale = config.scale;
 
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
@@ -57,7 +58,7 @@ if (pointers.size === 2) {
     const pts = [...pointers.values()];
 
     pinchStartDistance = distance(pts[0], pts[1]);
-    pinchStartScale = scale;
+    pinchStartScale = scale.value;
 
     dragging = false;
     return;
@@ -83,11 +84,11 @@ if (pointers.size === 2) {
     const pts = [...pointers.values()];
     const d = distance(pts[0], pts[1]);
 
-    scale = pinchStartScale * (d / pinchStartDistance);
-    scale = Math.max(0.5, Math.min(scale, 3));
+    scale.value = pinchStartScale * (d / pinchStartDistance);
+    scale.value = Math.max(0.5, Math.min(scale.value, 3));
 
     container.style.transform =
-        `translate(${offset.x}px, ${offset.y}px) scale(${scale})`;
+        `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
 
     return;
 
