@@ -89,12 +89,17 @@ body {
     background: #fff;
 
     user-select: none;
+    touch-action: none;
 }
 
 /* сама карта */
 #map {
     display: grid;
     gap: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
 
     width: max-content;
     height: max-content;
@@ -118,11 +123,7 @@ body {
     justify-content: center;
 
     background: #fff;
-
     border: 2px solid #000;
-
-    position: relative;
-
     color: var(--cell-color, #000);
 
     position: relative;
@@ -314,10 +315,4 @@ body {
 
     z-index: 2;
 
-}
-/* =========================
-   DRAGGING BLOCK 
-========================= */
-#mapViewport {
-    touch-action: none;
 }
