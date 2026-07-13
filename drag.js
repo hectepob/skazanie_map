@@ -10,6 +10,12 @@ const drag = (function () {
     let dragStartY = 0;
 
     let moved = false;
+    
+    let scale = 1;
+
+    let pinchStartDistance = 0;
+    let pinchStartScale = 1;
+    
     let pointers = new Map();
 
     function init(cfg) {
@@ -21,6 +27,15 @@ const drag = (function () {
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
         window.addEventListener("pointerup", onUp);
+
+    }
+
+    function distance(p1, p2) {
+
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
+
+    return Math.hypot(dx, dy);
 
     }
 
@@ -37,12 +52,17 @@ const drag = (function () {
             y: e.clientY
         });
 
-        if (pointers.size > 1) {
+if (pointers.size === 2) {
 
-           dragging = false;
-           return;
+    const pts = [...pointers.values()];
 
-        }
+    pinchStartDistance = distance(pts[0], pts[1]);
+    pinchStartScale = scale;
+
+    dragging = false;
+    return;
+
+}
         
         dragStartX = e.clientX - offset.x;
         dragStartY = e.clientY - offset.y;
@@ -58,8 +78,20 @@ const drag = (function () {
            pointers.get(e.pointerId).y = e.clientY;
         }
 
-        if (pointers.size > 1)
-            return;
+if (pointers.size === 2) {
+
+    const pts = [...pointers.values()];
+    const d = distance(pts[0], pts[1]);
+
+    scale = pinchStartScale * (d / pinchStartDistance);
+    scale = Math.max(0.5, Math.min(scale, 3));
+
+    container.style.transform =
+        `translate(${offset.x}px, ${offset.y}px) scale(${scale})`;
+
+    return;
+
+}
         
         if (!dragging)
             return;
@@ -77,7 +109,7 @@ const drag = (function () {
         offset.y = e.clientY - dragStartY;
 
         container.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)`;
+           `translate(${offset.x}px, ${offset.y}px) scale(${scale})`;
 
     }
 
