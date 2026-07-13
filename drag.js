@@ -88,7 +88,7 @@ if (pointers.size === 2) {
     scale.value = Math.max(0.5, Math.min(scale.value, 3));
 
     container.style.transform =
-        `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
+       `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
 
     return;
 
@@ -110,7 +110,7 @@ if (pointers.size === 2) {
         offset.y = e.clientY - dragStartY;
 
         container.style.transform =
-           `translate(${offset.x}px, ${offset.y}px) scale(${scale})`;
+           `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
 
     }
 
