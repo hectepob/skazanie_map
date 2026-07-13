@@ -101,8 +101,7 @@ navigation.init({
 drag.init({
 
     viewport: mapViewport,
-    translateContainer: mapTranslate,
-    scaleContainer: mapContainer,
+    container: mapContainer,
 
     offset: {
 
