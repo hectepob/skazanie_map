@@ -3,8 +3,10 @@ const drag = (function () {
    // console.log("drag.js VERSION 3");//КОНСОЛЬ
 
     let viewport;
-    let container;
+    let translateContainer;
+    let scaleContainer;
     let offset;
+   
     let scale;
 
     let dragging = false;
@@ -21,7 +23,8 @@ const drag = (function () {
     function init(cfg) {
 
         viewport = cfg.viewport;
-        container = cfg.container;
+        translateContainer = cfg.translateContainer;
+        scaleContainer = cfg.scaleContainer;
         offset = cfg.offset;
         scale = cfg.scale;
 
@@ -33,8 +36,11 @@ const drag = (function () {
 
     function updateTransform() {
 
-        container.style.transform =
-            `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
+        translateContainer.style.transform =
+            `translate(${offset.x}px, ${offset.y}px)`;
+
+        scaleContainer.style.transform =
+            `scale(${scale.value})`;
 
     }
 
