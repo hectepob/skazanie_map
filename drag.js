@@ -23,7 +23,7 @@ const drag = (function () {
         viewport = cfg.viewport;
         container = cfg.container;
         offset = cfg.offset;
-        scale = config.scale;
+        scale = cfg.scale;
 
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
