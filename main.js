@@ -1,5 +1,6 @@
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
+const mapTranslate = document.getElementById("mapTranslate");
 
 let data = [];
 let areaData = [];
@@ -67,6 +68,7 @@ navigation.init({
     byId,
 
     mapContainer,
+    mapTranslate,
     mapViewport,
 
     topPanel: topPanelModule,
@@ -99,8 +101,8 @@ navigation.init({
 drag.init({
 
     viewport: mapViewport,
-
-    container: mapContainer,
+    translateContainer: mapTranslate,
+    scaleContainer: mapContainer,
 
     offset: {
 
