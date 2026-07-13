@@ -1,6 +1,6 @@
 const drag = (function () {
 
-   // console.log("drag.js VERSION 3");//КОНСОЛЬ
+   console.log("drag.js VERSION 3");//КОНСОЛЬ
 
     let viewport;
     let container;
