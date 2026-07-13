@@ -40,79 +40,95 @@ const drag = (function () {
 
     }
 
-    function onDown(e) {
+function onDown(e) {
 
-        if (e.button !== undefined && e.button !== 0)
-            return;
+    if (e.button !== undefined && e.button !== 0)
+        return;
 
-        dragging = true;
-        moved = false;
+    pointers.set(e.pointerId, {
+        x: e.clientX,
+        y: e.clientY
+    });
 
-        pointers.set(e.pointerId, {
-            x: e.clientX,
-            y: e.clientY
-        });
+    if (pointers.size === 2) {
 
-if (pointers.size === 2) {
+        const pts = [...pointers.values()];
 
-    const pts = [...pointers.values()];
+        pinchStartDistance = distance(pts[0], pts[1]);
+        pinchStartScale = scale.value;
 
-    pinchStartDistance = distance(pts[0], pts[1]);
-    pinchStartScale = scale.value;
+        dragging = false;
 
-    dragging = false;
-    return;
-
-}
-        
-        dragStartX = e.clientX - offset.x;
-        dragStartY = e.clientY - offset.y;
-
-        viewport.setPointerCapture(e.pointerId);
+        return;
 
     }
 
-    function onMove(e) {
+    dragging = true;
+    moved = false;
 
-        if (pointers.has(e.pointerId)) {
-           pointers.get(e.pointerId).x = e.clientX;
-           pointers.get(e.pointerId).y = e.clientY;
-        }
+    dragStartX = e.clientX - offset.x;
+    dragStartY = e.clientY - offset.y;
 
-if (pointers.size === 2) {
-
-    const pts = [...pointers.values()];
-    const d = distance(pts[0], pts[1]);
-
-    scale.value = pinchStartScale * (d / pinchStartDistance);
-    scale.value = Math.max(0.5, Math.min(scale.value, 3));
-
-    container.style.transform =
-       `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
-
-    return;
+    viewport.setPointerCapture(e.pointerId);
 
 }
-        
-        if (!dragging)
-            return;
 
-        if (
-            Math.abs(e.clientX - dragStartX - offset.x) > 5 ||
-            Math.abs(e.clientY - dragStartY - offset.y) > 5
-        ) {
+function onMove(e) {
 
-            moved = true;
+    if (pointers.has(e.pointerId)) {
 
-        }
+        pointers.get(e.pointerId).x = e.clientX;
+        pointers.get(e.pointerId).y = e.clientY;
 
-        offset.x = e.clientX - dragStartX;
-        offset.y = e.clientY - dragStartY;
+    }
+
+    if (pointers.size === 2) {
+
+        const pts = [...pointers.values()];
+
+        const centerX = (pts[0].x + pts[1].x) / 2;
+        const centerY = (pts[0].y + pts[1].y) / 2;
+
+        const worldX = (centerX - offset.x) / scale.value;
+        const worldY = (centerY - offset.y) / scale.value;
+
+        const d = distance(pts[0], pts[1]);
+
+        let newScale = pinchStartScale * (d / pinchStartDistance);
+
+        newScale = Math.max(0.5, Math.min(newScale, 3));
+
+        offset.x = centerX - worldX * newScale;
+        offset.y = centerY - worldY * newScale;
+
+        scale.value = newScale;
 
         container.style.transform =
-           `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
+            `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
+
+        return;
 
     }
+
+    if (!dragging)
+        return;
+
+    if (
+        Math.abs(e.clientX - dragStartX - offset.x) > 5 ||
+        Math.abs(e.clientY - dragStartY - offset.y) > 5
+    ) {
+
+        moved = true;
+
+    }
+
+    offset.x = e.clientX - dragStartX;
+    offset.y = e.clientY - dragStartY;
+
+    container.style.transform =
+        `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
+
+}
 
 function onUp(e) {
 
