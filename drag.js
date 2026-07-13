@@ -3,8 +3,7 @@ const drag = (function () {
    // console.log("drag.js VERSION 3");//КОНСОЛЬ
 
     let viewport;
-    let translateContainer;
-    let scaleContainer;
+    let container;
     let offset;
    
     let scale;
@@ -22,11 +21,10 @@ const drag = (function () {
 
     function init(cfg) {
 
-        viewport = cfg.viewport;
-        translateContainer = cfg.translateContainer;
-        scaleContainer = cfg.scaleContainer;
-        offset = cfg.offset;
-        scale = cfg.scale;
+    viewport = cfg.viewport;
+    container = cfg.container;
+    offset = cfg.offset;
+    scale = cfg.scale;
 
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
@@ -34,15 +32,12 @@ const drag = (function () {
 
     }
 
-    function updateTransform() {
+function updateTransform() {
 
-        translateContainer.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)`;
+    container.style.transform =
+        `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
 
-        scaleContainer.style.transform =
-            `scale(${scale.value})`;
-
-    }
+}
 
     function distance(p1, p2) {
 
