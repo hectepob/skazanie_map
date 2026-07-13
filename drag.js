@@ -10,6 +10,7 @@ const drag = (function () {
     let dragStartY = 0;
 
     let moved = false;
+    let pointers = new Map();
 
     function init(cfg) {
 
@@ -31,6 +32,11 @@ const drag = (function () {
         dragging = true;
         moved = false;
 
+        pointers.set(e.pointerId, {
+            x: e.clientX,
+            y: e.clientY
+        });
+        
         dragStartX = e.clientX - offset.x;
         dragStartY = e.clientY - offset.y;
 
@@ -40,6 +46,11 @@ const drag = (function () {
 
     function onMove(e) {
 
+        if (pointers.has(e.pointerId)) {
+           pointers.get(e.pointerId).x = e.clientX;
+           pointers.get(e.pointerId).y = e.clientY;
+        }
+        
         if (!dragging)
             return;
 
@@ -62,6 +73,8 @@ const drag = (function () {
 
 function onUp(e) {
 
+    pointers.delete(e.pointerId);
+    
     dragging = false;
 
     if (viewport.hasPointerCapture(e.pointerId))
