@@ -136,6 +136,7 @@ function attachTooltip(el, group) {
     });
 
 }
+    
 function attachClick(el, cell) {
 
     el.addEventListener("click", () => {
@@ -143,10 +144,9 @@ function attachClick(el, cell) {
         if (cfg.drag.moved())
             return;
 
+        cfg.tooltip.hide();
         cfg.highlightCells.clear();
-
         cfg.setSelectedCellId(cell.id);
-
         cfg.topPanel.selectCell(cell);
 
         draw();
