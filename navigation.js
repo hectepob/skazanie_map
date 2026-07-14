@@ -104,11 +104,11 @@ function changeFloor(step) {
 
     if (newFloor < getMinFloor() || newFloor > getMaxFloor())
         return;
+    
+    tooltip.hide();
 
     setCurrentFloor(newFloor); 
-
     setSelectedCellId(0);
-
     clearHighlight();
 
     topPanel.clearSelection();
