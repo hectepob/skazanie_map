@@ -69,6 +69,8 @@ navigation.init({
     data,
     byId,
 
+    tooltip,
+
     mapContainer,
     mapTranslate,
     mapViewport,
