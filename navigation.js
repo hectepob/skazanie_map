@@ -87,6 +87,9 @@ function centerOnCell(cell) {
         offset.y = y;
 
         applyView();
+        
+        setSelectedCellId(cell.id);
+        topPanel.selectCell(cell);
 
     }
 
