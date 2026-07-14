@@ -1,4 +1,4 @@
-console.log("navigation.js 5 ");
+console.log("navigation.js 1 ");
 
 const navigation = (function () {
 
@@ -119,7 +119,10 @@ function gotoCell(id, center = true) {
 
     topPanel.selectCell(cell);
 
-    centerOnCell(cell);
+    if (center)
+        centerOnCell(cell);
+    else
+        keepView(cell.id);
 
 }
 
