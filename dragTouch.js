@@ -103,6 +103,8 @@ if (pointers.size === 2) {
     let newScale = pinchStartScale * (d / pinchStartDistance);
     newScale = Math.max(0.5, Math.min(newScale, 3));
     scale.value = newScale;
+    offset.x = centerX - worldX * scale.value;
+    offset.y = centerY - worldY * scale.value;
     updateTransform();
     return;
 
