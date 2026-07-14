@@ -139,7 +139,7 @@ function attachTooltip(el, group) {
     
 function attachClick(el, cell) {
 
-    el.addEventListener("click", () => {
+    el.addEventListener("click", e => {
 
         if (cfg.drag.moved())
             return;
@@ -149,7 +149,13 @@ function attachClick(el, cell) {
         cfg.setSelectedCellId(cell.id);
         cfg.topPanel.selectCell(cell);
         cfg.tooltip.show([cell]);
-        cfg.tooltip.move(20, 20);
+
+        const rect = cfg.mapViewport.getBoundingClientRect();
+
+        cfg.tooltip.move(
+            e.clientX - rect.left + 10,
+            e.clientY - rect.top + 10
+        );
 
         draw();
 
