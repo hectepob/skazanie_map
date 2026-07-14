@@ -157,6 +157,15 @@ selectedCellId = 0;
 if (data.length)
     navigation.centerOnCell(data[0]);
 
+    mapViewport.addEventListener("click", e => {
+
+    if (e.target.closest(".cell:not(.empty)"))
+        return;
+
+    tooltip.hide();
+
+});
+
 });
 
 // -------------------------
