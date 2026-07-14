@@ -5,6 +5,7 @@ const drag = (function () {
     let offset;
    
     let scale;
+    let tooltip;
 
     let dragging = false;
     let moved = false;
@@ -23,6 +24,7 @@ const drag = (function () {
     container = cfg.container;
     offset = cfg.offset;
     scale = cfg.scale;
+    tooltip = cfg.tooltip;
 
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
