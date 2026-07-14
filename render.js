@@ -148,6 +148,8 @@ function attachClick(el, cell) {
         cfg.highlightCells.clear();
         cfg.setSelectedCellId(cell.id);
         cfg.topPanel.selectCell(cell);
+        cfg.tooltip.show([cell]);
+        cfg.tooltip.move(20, 20);
 
         draw();
 
