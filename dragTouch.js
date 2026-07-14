@@ -1,6 +1,6 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js 1 ");
+    console.log("dragTouch.js 2 ");
 
     let viewport;
     let container;
@@ -19,12 +19,15 @@ const dragTouch = (function () {
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
 
+    let tooltip;//добавили
+
     function init(cfg) {
 
         viewport = cfg.viewport;
         container = cfg.container;
         offset = cfg.offset;
         scale = cfg.scale;
+        tooltip = cfg.tooltip;
 
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
@@ -76,6 +79,7 @@ if (pointers.size === 2) {
     pointerId = e.pointerId;
 
     dragging = true;
+    tooltip.hide();
     moved = false;
 
     dragStartX = e.clientX - offset.x;
@@ -151,15 +155,10 @@ function onUp(e) {
 }
 
     return {
-
         init,
-
         moved() {
-
             return moved;
-
         }
-
     };
 
 })();
