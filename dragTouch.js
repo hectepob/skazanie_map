@@ -12,6 +12,7 @@ const dragTouch = (function () {
     let dragStartY = 0;
 
     let pointerId = null;
+    let pointers = new Map();
 
     function init(cfg) {
 
@@ -39,6 +40,11 @@ function onDown(e) {
     if (e.pointerType !== "touch")
         return;
 
+    pointers.set(e.pointerId, {
+    x: e.clientX,
+    y: e.clientY
+    });
+
     if (pointerId !== null)
         return;
 
@@ -55,6 +61,11 @@ function onDown(e) {
 }
 
 function onMove(e) {
+
+    if (pointers.has(e.pointerId)) {
+    pointers.get(e.pointerId).x = e.clientX;
+    pointers.get(e.pointerId).y = e.clientY;
+    }
 
     if (!dragging)
         return;
@@ -82,6 +93,8 @@ function onMove(e) {
 }
 
 function onUp(e) {
+
+    pointers.delete(e.pointerId);
 
     if (e.pointerId !== pointerId)
         return;
