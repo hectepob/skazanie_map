@@ -152,9 +152,12 @@ function attachClick(el, cell) {
 
         const rect = cfg.mapViewport.getBoundingClientRect();
 
+const r = el.getBoundingClientRect();
+const vr = cfg.mapViewport.getBoundingClientRect();
+
         cfg.tooltip.move(
-            e.clientX - rect.left + 10,
-            e.clientY - rect.top + 10
+            r.right - vr.left + 8,
+            r.top - vr.top
         );
 
         draw();
