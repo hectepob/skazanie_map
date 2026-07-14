@@ -1,6 +1,6 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js  ");
+    console.log("dragTouch.js 1 ");
 
     let viewport;
     let container;
