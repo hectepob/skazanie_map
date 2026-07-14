@@ -102,7 +102,12 @@ navigation.init({
 
 });
 
-dragDesktop.init({
+const drag =
+    navigator.maxTouchPoints > 0
+        ? dragTouch
+        : dragDesktop;
+
+    drag.init({
 
     viewport: mapViewport,
     container: mapContainer,
