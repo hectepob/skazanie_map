@@ -1,4 +1,4 @@
-console.log("navigation.js  ");
+console.log("navigation.js 5 ");
 
 const navigation = (function () {
 
@@ -68,7 +68,7 @@ function centerOnCell(cell) {
     offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
     offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
 
-    applyView();
+    view.apply();
 
 }
 
@@ -90,7 +90,7 @@ function centerOnCell(cell) {
        offset.x = x;
        offset.y = y;
 
-       applyView();
+       view.apply();
 
        topPanel.selectCell(cell);
 
