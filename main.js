@@ -1,4 +1,4 @@
-console.log("main.js 0 ");
+console.log("main.js 1 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -129,6 +129,29 @@ const drag =
     }
 
 });
+
+    view.init({
+
+    container: mapContainer,
+
+    offset: {
+
+        get x() { return offsetX; },
+        set x(v) { offsetX = v; },
+
+        get y() { return offsetY; },
+        set y(v) { offsetY = v; }
+
+    },
+
+    scale: {
+
+        get value() { return scale; },
+        set value(v) { scale = v; }
+
+    }
+
+     });
 
 renderMap.init({
 
