@@ -83,7 +83,7 @@ function drawStairs(el, cell) {
             if (!target)
                 return;
 
-            navigation.gotoCell(target.id, false);
+            navigation.keepView(target.id);
 
         };
 
