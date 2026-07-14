@@ -1,6 +1,6 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js 3 ");
+    console.log("dragTouch.js  ");
 
     let viewport;
     let container;
@@ -93,7 +93,10 @@ function onMove(e) {
     }
 
 if (pointers.size === 2) {
+
     const pts = [...pointers.values()];
+    const centerX = (pts[0].x + pts[1].x) / 2;
+    const centerY = (pts[0].y + pts[1].y) / 2;
     const d = distance(pts[0], pts[1]);
     const worldX = (centerX - offset.x) / scale.value;
     const worldY = (centerY - offset.y) / scale.value;
@@ -102,6 +105,7 @@ if (pointers.size === 2) {
     scale.value = newScale;
     updateTransform();
     return;
+
 }
 
     if (!dragging)
