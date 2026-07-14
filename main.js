@@ -1,4 +1,4 @@
-console.log("#3");//КОНСОЛЬ
+console.log("main.js 0 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
