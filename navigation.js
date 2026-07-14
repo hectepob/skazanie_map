@@ -25,6 +25,8 @@ const navigation = (function () {
 
     let clearHighlight;
 
+    let tooltip;
+
     function init(cfg) {
 
         data = cfg.data;
@@ -35,6 +37,8 @@ const navigation = (function () {
 
         render = cfg.render;
         topPanel = cfg.topPanel;
+
+        tooltip = cfg.tooltip;
 
         getCurrentFloor = cfg.getCurrentFloor;
         setCurrentFloor = cfg.setCurrentFloor;
@@ -78,6 +82,8 @@ function centerOnCell(cell) {
     }
 
 function gotoCell(id, center = true) {
+
+    tooltip.hide();
 
     setSelectedCellId(Number(id));
 
