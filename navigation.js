@@ -53,7 +53,12 @@ const navigation = (function () {
         clearHighlight = cfg.clearHighlight;
 
     }
-
+    
+function applyView() {
+    mapContainer.style.transform =
+        `translate(${offset.x}px, ${offset.y}px)`;
+}
+    
 function centerOnCell(cell) {
 
     setCurrentFloor(cell.floor);
@@ -66,8 +71,7 @@ function centerOnCell(cell) {
     offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
     offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
 
-    mapContainer.style.transform =
-        `translate(${offset.x}px, ${offset.y}px)`;
+    applyView();
 
 }
 
@@ -82,8 +86,7 @@ function centerOnCell(cell) {
         offset.x = x;
         offset.y = y;
 
-        mapContainer.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)`;
+        applyView();
 
     }
 
