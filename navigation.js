@@ -1,3 +1,5 @@
+console.log("navigation.js  ");
+
 const navigation = (function () {
 
     const CELL_SIZE = 40;
@@ -53,11 +55,6 @@ const navigation = (function () {
         clearHighlight = cfg.clearHighlight;
 
     }
-    
-function applyView() {
-    mapContainer.style.transform =
-        `translate(${offset.x}px, ${offset.y}px)`;
-}
     
 function centerOnCell(cell) {
 
