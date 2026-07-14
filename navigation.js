@@ -82,19 +82,20 @@ function centerOnCell(cell) {
         if (!cell)
             return;
 
-        const x = offset.x;
-        const y = offset.y;
+       const x = offset.x;
+       const y = offset.y;
 
-        setCurrentFloor(cell.floor);
-        render();
+       setCurrentFloor(cell.floor);
+       setSelectedCellId(cell.id);
 
-        offset.x = x;
-        offset.y = y;
+       render();
 
-        applyView();
-        
-        setSelectedCellId(cell.id);
-        topPanel.selectCell(cell);
+       offset.x = x;
+       offset.y = y;
+
+       applyView();
+
+       topPanel.selectCell(cell);
 
     }
 
