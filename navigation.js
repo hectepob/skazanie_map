@@ -62,6 +62,13 @@ function centerOnCell(cell) {
 
     render();
 
+    console.log(//КОНСОЛЬ 
+    "centerOnCell",
+    "scale =", scale,
+    "offset =", offset.x, offset.y,
+    "cell =", cell.id, cell.col, cell.row
+    );
+
     const x = (cell.col - 1) * CELL_SIZE;
     const y = (cell.row - 1) * CELL_SIZE;
 
