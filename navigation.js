@@ -75,7 +75,12 @@ function centerOnCell(cell) {
 
 }
 
-    function keepView(cell) {
+    function keepView(id) {
+
+        const cell = byId.get(id);
+
+        if (!cell)
+            return;
 
         const x = offset.x;
         const y = offset.y;
