@@ -140,7 +140,8 @@ return {
     init,
     gotoCell,
     changeFloor,
-    centerOnCell
+    centerOnCell,
+    keepView
 
 };
 
