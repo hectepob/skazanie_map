@@ -102,7 +102,7 @@ navigation.init({
 
 });
 
-drag.init({
+dragDesktop.init({
 
     viewport: mapViewport,
     container: mapContainer,
