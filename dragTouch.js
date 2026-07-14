@@ -1,6 +1,6 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js 1 ");
+    console.log("dragTouch.js 2 ");
 
     let viewport;
     let container;
@@ -90,8 +90,15 @@ function onMove(e) {
     pointers.get(e.pointerId).y = e.clientY;
     }
 
-    if (pointers.size === 2)
+if (pointers.size === 2) {
+    const pts = [...pointers.values()];
+    const d = distance(pts[0], pts[1]);
+    let newScale = pinchStartScale * (d / pinchStartDistance);
+    newScale = Math.max(0.5, Math.min(newScale, 3));
+    scale.value = newScale;
+    updateTransform();
     return;
+}
 
     if (!dragging)
         return;
