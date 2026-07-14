@@ -1,5 +1,7 @@
 const dragTouch = (function () {
 
+    console.log("dragTouch.js 1 ");
+
     let viewport;
     let container;
     let offset;
@@ -13,6 +15,9 @@ const dragTouch = (function () {
 
     let pointerId = null;
     let pointers = new Map();
+
+    let pinchStartDistance = 0;
+    let pinchStartScale = 1;
 
     function init(cfg) {
 
@@ -35,6 +40,15 @@ const dragTouch = (function () {
 
     }
 
+    function distance(p1, p2) {
+
+    return Math.hypot(
+        p2.x - p1.x,
+        p2.y - p1.y
+    );
+
+    }
+
 function onDown(e) {
 
     if (e.pointerType !== "touch")
@@ -45,13 +59,14 @@ function onDown(e) {
     y: e.clientY
     });
 
-    if (pointers.size === 2) {
-
+if (pointers.size === 2) {
+    const pts = [...pointers.values()];
+    pinchStartDistance = distance(pts[0], pts[1]);
+    pinchStartScale = scale.value;
     dragging = false;
     moved = true;
     return;
-
-    }
+}
 
     if (pointerId !== null)
         return;
