@@ -73,20 +73,19 @@ function centerOnCell(cell) {
 
     function keepView(cell) {
 
-    setCurrentFloor(cell.floor);
+        const x = offset.x;
+        const y = offset.y;
 
-    render();
+        setCurrentFloor(cell.floor);
+        render();
 
-    const x = (cell.col - 1) * CELL_SIZE;
-    const y = (cell.row - 1) * CELL_SIZE;
+        offset.x = x;
+        offset.y = y;
 
-    offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
-    offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
+        mapContainer.style.transform =
+            `translate(${offset.x}px, ${offset.y}px)`;
 
-    mapContainer.style.transform =
-        `translate(${offset.x}px, ${offset.y}px)`;
-
-}
+    }
 
     function findCellOnFloor(base, floor) {
 
