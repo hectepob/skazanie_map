@@ -104,15 +104,14 @@ drag.init({
 
     viewport: mapViewport,
     container: mapContainer,
+    tooltip,
 
     offset: {
-
         get x() { return offsetX; },
         set x(v) { offsetX = v; },
 
         get y() { return offsetY; },
         set y(v) { offsetY = v; }
-
     },
 
     scale: {
