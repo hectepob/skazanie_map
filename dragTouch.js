@@ -45,6 +45,14 @@ function onDown(e) {
     y: e.clientY
     });
 
+    if (pointers.size === 2) {
+
+    dragging = false;
+    moved = true;
+    return;
+
+    }
+
     if (pointerId !== null)
         return;
 
@@ -66,6 +74,9 @@ function onMove(e) {
     pointers.get(e.pointerId).x = e.clientX;
     pointers.get(e.pointerId).y = e.clientY;
     }
+
+    if (pointers.size === 2)
+    return;
 
     if (!dragging)
         return;
