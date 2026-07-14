@@ -111,6 +111,7 @@ const drag =
 
     viewport: mapViewport,
     container: mapContainer,
+    tooltip,
 
     offset: {
         get x() { return offsetX; },
