@@ -1,4 +1,4 @@
-console.log("view.js 15-07 2015 ");//КОНСОЛЬ
+console.log("view.js 15-07 2130 ");//КОНСОЛЬ
 
 const view = (function () {
 
@@ -14,7 +14,13 @@ const view = (function () {
 
     function apply() {
 
-console.trace("VIEW APPLY");
+console.log(
+    "VIEW",
+    "offset =", offset.x, offset.y,
+    "scale =", scale.value,
+    "transform =",
+    `scale(${scale.value}) translate(${offset.x}px, ${offset.y}px)`
+);
 
 container.style.transform =
     `scale(${scale.value})
