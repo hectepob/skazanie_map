@@ -17,8 +17,8 @@ const view = (function () {
 console.trace("VIEW APPLY");
 
 container.style.transform =
-    `translate(${offset.x}px, ${offset.y}px)
-     scale(${scale.value})`;
+    `scale(${scale.value})
+     translate(${offset.x}px, ${offset.y}px)`;
 
     }
 
