@@ -98,7 +98,14 @@ navigation.init({
         get y() { return offsetY; },
         set y(v) { offsetY = v; }
 
-    }
+    },
+
+    scale: {
+
+    get value() { return scale; },
+    set value(v) { scale = v; }
+
+}
 
 });
 
