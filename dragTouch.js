@@ -1,6 +1,6 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js 2 ");
+    console.log("dragTouch.js 15-07 10:40 ");
 
     let viewport;
     let container;
@@ -19,7 +19,7 @@ const dragTouch = (function () {
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
 
-    let tooltip;//добавили
+    let tooltip;
 
     function init(cfg) {
 
@@ -37,10 +37,7 @@ const dragTouch = (function () {
     }
 
     function updateTransform() {
-
-        container.style.transform =
-            `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
-
+        view.apply()
     }
 
     function distance(p1, p2) {
