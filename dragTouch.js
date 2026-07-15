@@ -1,24 +1,19 @@
 const dragTouch = (function () {
 
-    console.log("dragTouch.js 15-07 10:40 ");
+    console.log("dragTouch.js 15-07 10:40 ");//КОНСОЛЬ
 
     let viewport;
     let container;
     let offset;
     let scale;
-
     let dragging = false;
     let moved = false;
-
     let dragStartX = 0;
     let dragStartY = 0;
-
     let pointerId = null;
     let pointers = new Map();
-
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
-
     let tooltip;
 
     function init(cfg) {
@@ -41,12 +36,10 @@ const dragTouch = (function () {
     }
 
     function distance(p1, p2) {
-
     return Math.hypot(
         p2.x - p1.x,
         p2.y - p1.y
     );
-
     }
 
 function onDown(e) {
@@ -74,14 +67,11 @@ if (pointers.size === 2) {
         return;
 
     pointerId = e.pointerId;
-
     dragging = true;
     tooltip.hide();
     moved = false;
-
     dragStartX = e.clientX - offset.x;
     dragStartY = e.clientY - offset.y;
-
     viewport.setPointerCapture(e.pointerId);
 
 }
@@ -124,14 +114,11 @@ if (pointers.size === 2) {
         Math.abs(newX - offset.x) > 5 ||
         Math.abs(newY - offset.y) > 5
     ) {
-
         moved = true;
-
     }
 
     offset.x = newX;
     offset.y = newY;
-
     updateTransform();
 
 }
