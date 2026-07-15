@@ -1,4 +1,4 @@
-console.log("view.js 1607 0010 ");//КОНСОЛЬ
+console.log("view.js 1607 0020 ");//КОНСОЛЬ
 
 const view = (function () {
 
@@ -19,7 +19,7 @@ console.log(
     "offset =", offset.x, offset.y,
     "scale =", scale.value,
     "transform =",
-    `scale(${scale.value}) translate(${offset.x}px, ${offset.y}px)`
+    `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`
 );
 
 container.style.transform =
