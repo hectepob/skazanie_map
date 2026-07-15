@@ -25,10 +25,7 @@ const dragDesktop = (function () {
     }
 
     function updateTransform() {
-
-        container.style.transform =
-            `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
-
+        view.apply()
     }
 
     function onDown(e) {
