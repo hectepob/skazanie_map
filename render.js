@@ -1,4 +1,4 @@
-console.log("render 1607 0035");
+console.log("render 1607 0045");
 const renderMap = (function () {
 
     let cfg;
@@ -174,6 +174,18 @@ function drawCell(group, row, col) {
     el.className = "cell";
     el.style.gridColumn = col;
     el.style.gridRow = row;
+
+    if (group && group.root.id === 1) {
+    requestAnimationFrame(() => {
+        console.log(
+            "GRID",
+            "left =", el.offsetLeft,
+            "top =", el.offsetTop,
+            "col =", col,
+            "row =", row
+        );
+    });
+    }
 
     if (!group) {
 
