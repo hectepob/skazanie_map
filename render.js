@@ -1,3 +1,4 @@
+console.log("render 1607 0035");
 const renderMap = (function () {
 
     let cfg;
@@ -241,6 +242,19 @@ function draw() {
     cfg.topPanel.setFloor(
         cfg.getCurrentFloor()
     );
+
+    const el = cfg.mapContainer.querySelector(".cell.selected");
+
+if (el) {
+    const rect = el.getBoundingClientRect();
+    const vp = cfg.mapViewport.getBoundingClientRect();
+
+    console.log(
+        "REAL",
+        rect.left - vp.left + rect.width / 2,
+        rect.top - vp.top + rect.height / 2
+    );
+}
 
 }
 
