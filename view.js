@@ -1,4 +1,4 @@
-console.log("view.js v1");
+console.log("view.js 15-07 1328");
 
 const view = (function () {
 
