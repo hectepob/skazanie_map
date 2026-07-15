@@ -66,8 +66,8 @@ function centerOnCell(cell) {
     const x = (cell.col - 1) * CELL_SIZE;
     const y = (cell.row - 1) * CELL_SIZE;
 
-    offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
-    offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
+    offset.x = (mapViewport.clientWidth / 2) / scale.value - x - HALF_CELL;
+    offset.y = (mapViewport.clientHeight / 2) / scale.value - y - HALF_CELL;
 
     console.log(//КОНСОЛЬ 
     "CENTER",
