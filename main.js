@@ -171,7 +171,7 @@ renderMap.init({
 
     topPanel: topPanelModule,
     tooltip,
-    drag: dragDesktop,
+    drag: drag,
 
     highlightCells,
 
