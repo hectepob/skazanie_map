@@ -16,6 +16,12 @@ const view = (function () {
 
     function apply() {
 
+        console.log(
+    "VIEW",
+    "offset =", offset.x, offset.y,
+    "scale =", scale.value
+        );
+
         container.style.transform =
             `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
 
