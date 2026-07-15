@@ -1,4 +1,4 @@
-console.log("view.js 15-07 1328");
+console.log("view.js 15-07 1328");//КОНСОЛЬ
 
 const view = (function () {
 
@@ -7,11 +7,9 @@ const view = (function () {
     let scale;
 
     function init(cfg) {
-
         container = cfg.container;
         offset = cfg.offset;
         scale = cfg.scale;
-
     }
 
     function apply() {
@@ -29,10 +27,7 @@ container.style.transform =
     }
 
     return {
-
         init,
         apply
-
     };
-
 })();
