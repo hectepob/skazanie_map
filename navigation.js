@@ -1,4 +1,4 @@
-console.log("navigation.js 15.07-8:39 ");
+console.log("navigation.js 15.07-11:00 ");
 
 const navigation = (function () {
 
@@ -63,18 +63,17 @@ function centerOnCell(cell) {
 
     render();
 
-    console.log(//КОНСОЛЬ 
-    "centerOnCell",
-    "scale =", scale.value,
-    "offset =", offset.x, offset.y,
-    "cell =", cell.id
-);
-
     const x = (cell.col - 1) * CELL_SIZE;
     const y = (cell.row - 1) * CELL_SIZE;
 
     offset.x = mapViewport.clientWidth / 2 - x - HALF_CELL;
     offset.y = mapViewport.clientHeight / 2 - y - HALF_CELL;
+
+    console.log(//КОНСОЛЬ 
+    "CENTER",
+    "target offset =", offset.x, offset.y,
+    "scale =", scale.value
+    );
 
     view.apply();
 
