@@ -1,6 +1,5 @@
+console.log("dragTouch.js 1507 1535 ");//КОНСОЛЬ
 const dragTouch = (function () {
-
-    console.log("dragTouch.js 15-07 10:40 ");//КОНСОЛЬ
 
     let viewport;
     let container;
@@ -14,6 +13,10 @@ const dragTouch = (function () {
     let pointers = new Map();
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
+    let pinchCenterX = 0;
+    let pinchCenterY = 0;
+    let worldCenterX = 0;
+    let worldCenterY = 0;
     let tooltip;
 
     function init(cfg) {
@@ -54,15 +57,17 @@ function onDown(e) {
 
 if (pointers.size === 2) {
     const pts = [...pointers.values()];
-    const centerX = (pts[0].x + pts[1].x) / 2;
-    const centerY = (pts[0].y + pts[1].y) / 2;
+    pinchCenterX = (pts[0].x + pts[1].x) / 2;
+    pinchCenterY = (pts[0].y + pts[1].y) / 2;
     pinchStartDistance = distance(pts[0], pts[1]);
     pinchStartScale = scale.value;
+    worldCenterX = (pinchCenterX - offset.x) / scale.value;
+    worldCenterY = (pinchCenterY - offset.y) / scale.value;
     dragging = false;
     moved = true;
     return;
 }
-
+    
     if (pointerId !== null)
         return;
 
