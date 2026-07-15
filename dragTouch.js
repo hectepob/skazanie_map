@@ -97,8 +97,8 @@ if (pointers.size === 2) {
     newScale = Math.max(0.5, Math.min(newScale, 3));
     scale.value = newScale;
     // Используем центр, запомненный в начале жеста
-    offset.x = pinchCenterX - worldCenterX * scale.value;
-    offset.y = pinchCenterY - worldCenterY * scale.value;
+    offset.x = pinchCenterX / scale.value - worldCenterX;
+    offset.y = pinchCenterY / scale.value - worldCenterY;
     updateTransform();
     return;
 }
