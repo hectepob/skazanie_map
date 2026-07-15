@@ -1,4 +1,4 @@
-console.log("navigation.js 15.07-8:11 ");
+console.log("navigation.js 15.07-8:39 ");
 
 const navigation = (function () {
 
