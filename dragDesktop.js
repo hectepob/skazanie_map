@@ -39,8 +39,8 @@ const dragDesktop = (function () {
         dragging = true;
         moved = false;
 
-        dragStartX = e.clientX - offset.x;
-        dragStartY = e.clientY - offset.y;
+        dragStartX = e.clientX / scale.value - offset.x;
+        dragStartY = e.clientY / scale.value - offset.y;
 
         viewport.setPointerCapture(e.pointerId);
 
@@ -51,8 +51,8 @@ const dragDesktop = (function () {
         if (!dragging)
             return;
 
-        const newX = e.clientX - dragStartX;
-        const newY = e.clientY - dragStartY;
+        const newX = e.clientX / scale.value - dragStartX;
+        const newY = e.clientY / scale.value - dragStartY;
 
         if (
             Math.abs(newX - offset.x) > 5 ||
