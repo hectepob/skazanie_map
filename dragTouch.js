@@ -1,4 +1,4 @@
-console.log("dragTouch.js 1507 1540 ");//КОНСОЛЬ
+console.log("dragTouch.js 1507 1600 ");//КОНСОЛЬ
 const dragTouch = (function () {
 
     let viewport;
@@ -57,8 +57,9 @@ function onDown(e) {
 
 if (pointers.size === 2) {
     const pts = [...pointers.values()];
-    pinchCenterX = (pts[0].x + pts[1].x) / 2;
-    pinchCenterY = (pts[0].y + pts[1].y) / 2;
+    const rect = viewport.getBoundingClientRect();
+    pinchCenterX = (pts[0].x + pts[1].x) / 2 - rect.left;
+    pinchCenterY = (pts[0].y + pts[1].y) / 2 - rect.top;
     pinchStartDistance = distance(pts[0], pts[1]);
     pinchStartScale = scale.value;
     worldCenterX = (pinchCenterX - offset.x) / scale.value;
@@ -90,12 +91,15 @@ function onMove(e) {
 
 if (pointers.size === 2) {
     const pts = [...pointers.values()];
-    const centerX = (pts[0].x + pts[1].x) / 2;
-    const centerY = (pts[0].y + pts[1].y) / 2;
+    const rect = viewport.getBoundingClientRect();
+    const centerX = (pts[0].x + pts[1].x) / 2 - rect.left;
+    const centerY = (pts[0].y + pts[1].y) / 2 - rect.top;
     const d = distance(pts[0], pts[1]);
+    
     let newScale = pinchStartScale * (d / pinchStartDistance);
     newScale = Math.max(0.5, Math.min(newScale, 3));
     scale.value = newScale;
+    
     // Сохраняем одну и ту же мировую точку под пальцами
     offset.x = centerX - worldCenterX * scale.value;
     offset.y = centerY - worldCenterY * scale.value;
