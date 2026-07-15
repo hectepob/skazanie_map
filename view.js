@@ -21,8 +21,8 @@ const view = (function () {
         );
 
 container.style.transform =
-    `scale(${scale.value})
-     translate(${offset.x}px, ${offset.y}px)`;
+    `translate(${offset.x}px, ${offset.y}px)
+     scale(${scale.value})`;
 
     }
 
