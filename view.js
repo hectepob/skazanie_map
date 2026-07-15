@@ -23,8 +23,9 @@ console.log(
 );
 
 container.style.transform =
-    `scale(${scale.value})
-     translate(${offset.x}px, ${offset.y}px)`;
+    container.style.transform =
+    `translate(${offset.x}px, ${offset.y}px)
+     scale(${scale.value})`;
 
     }
 
