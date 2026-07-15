@@ -1,4 +1,4 @@
-console.log("navigation.js 1 ");
+console.log("navigation.js 15.07-8:11 ");
 
 const navigation = (function () {
 
@@ -24,6 +24,7 @@ const navigation = (function () {
     let getMaxFloor;
 
     let offset;
+    let scale;
 
     let clearHighlight;
 
@@ -39,7 +40,7 @@ const navigation = (function () {
 
         render = cfg.render;
         topPanel = cfg.topPanel;
-
+        scale = cfg.scale;
         tooltip = cfg.tooltip;
 
         getCurrentFloor = cfg.getCurrentFloor;
@@ -64,10 +65,10 @@ function centerOnCell(cell) {
 
     console.log(//КОНСОЛЬ 
     "centerOnCell",
-    "scale =", scale,
+    "scale =", scale.value,
     "offset =", offset.x, offset.y,
-    "cell =", cell.id, cell.col, cell.row
-    );
+    "cell =", cell.id
+);
 
     const x = (cell.col - 1) * CELL_SIZE;
     const y = (cell.row - 1) * CELL_SIZE;
