@@ -1,4 +1,4 @@
-console.log("dragTouch.js 1507 2320 ");//КОНСОЛЬ
+console.log("dragTouch.js 1507 2330 ");//КОНСОЛЬ
 const dragTouch = (function () {
 
     let viewport;
@@ -37,15 +37,6 @@ const dragTouch = (function () {
     function updateTransform() {
         view.apply()
     }
-
-const screenX = (worldCenterX + offset.x) * scale.value;
-const screenY = (worldCenterY + offset.y) * scale.value;
-
-console.log(
-    "CHECK",
-    "finger =", pinchCenterX.toFixed(1), pinchCenterY.toFixed(1),
-    "screen =", screenX.toFixed(1), screenY.toFixed(1)
-);
 
     function distance(p1, p2) {
     return Math.hypot(
@@ -121,6 +112,16 @@ if (pointers.size === 2) {
     offset.x = pinchCenterX / scale.value - worldCenterX;
     offset.y = pinchCenterY / scale.value - worldCenterY;
     updateTransform();
+
+const screenX = (worldCenterX + offset.x) * scale.value;
+const screenY = (worldCenterY + offset.y) * scale.value;
+
+console.log(
+    "CHECK",
+    "finger =", pinchCenterX.toFixed(1), pinchCenterY.toFixed(1),
+    "screen =", screenX.toFixed(1), screenY.toFixed(1)
+);
+    
     return;
 }
 
