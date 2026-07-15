@@ -65,6 +65,7 @@ if (pointers.size === 2) {
     worldCenterX = (pinchCenterX - offset.x) / scale.value;
     worldCenterY = (pinchCenterY - offset.y) / scale.value;
     dragging = false;
+    pointerId = null;
     moved = true;
     return;
 }
@@ -128,7 +129,7 @@ function onUp(e) {
 
     pointers.delete(e.pointerId);
 
-    if (e.pointerId !== pointerId)
+    if (pointerId !== null && e.pointerId !== pointerId)
         return;
 
     dragging = false;
