@@ -83,7 +83,7 @@ function centerOnCell(cell) {
             r.left - vr.left,
             r.top - vr.top
         );
-    }
+    };
 
 offset.x = (mapViewport.clientWidth / 2) / scale.value - x - HALF_CELL;
 offset.y = (mapViewport.clientHeight / 2) / scale.value - y - HALF_CELL;
@@ -102,8 +102,9 @@ requestAnimationFrame(() => {
         mapViewport.getBoundingClientRect().top + mapViewport.clientHeight / 2
     );
 
-});
+  });
 
+});
     function keepView(id) {
 
         const cell = byId.get(id);
