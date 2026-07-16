@@ -66,43 +66,10 @@ function centerOnCell(cell) {
     const x = (cell.col - 1) * CELL_SIZE;
     const y = (cell.row - 1) * CELL_SIZE;
 
-    console.log(
-        "EXPECTED",
-        x,
-        y
-    );
-
-    const el = mapContainer.querySelector(".cell.selected");
-
-    if (el) {
-        const r = el.getBoundingClientRect();
-        const vr = mapViewport.getBoundingClientRect();
-
-        console.log(
-            "REAL CELL",
-            r.left - vr.left,
-            r.top - vr.top
-        );
-    };
-
 offset.x = (mapViewport.clientWidth / 2) / scale.value - x - HALF_CELL;
 offset.y = (mapViewport.clientHeight / 2) / scale.value - y - HALF_CELL;
 
 view.apply();
-
-requestAnimationFrame(() => {
-
-    const grid = mapContainer.getBoundingClientRect();
-
-    console.log(
-        "GRID",
-        "left =", grid.left,
-        "top =", grid.top,
-        "expected =", mapViewport.getBoundingClientRect().left + mapViewport.clientWidth / 2,
-        mapViewport.getBoundingClientRect().top + mapViewport.clientHeight / 2
-    );
-
-});
 
 }
     
@@ -176,8 +143,7 @@ function changeFloor(step) {
     topPanel.clearSelection();
 
     render();
-    console.log("render done");//КОНСОЛЬ 
-
+    
 }
 
 return {
