@@ -16,6 +16,9 @@ const view = (function () {
         container.style.transform =
             `translate(${offset.x}px, ${offset.y}px)
              scale(${scale.value})`;
+
+        const m = getComputedStyle(container).transform;
+        console.log("MATRIX =", m);
     }
 
     return {
