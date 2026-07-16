@@ -1,4 +1,4 @@
-console.log("navigation.js 1607 2140 ");
+console.log("navigation.js 1607 2150 ");
 
 const navigation = (function () {
 
@@ -71,31 +71,24 @@ offset.y = mapViewport.clientHeight / 2 - (y + HALF_CELL) * scale.value;
     
 view.apply();
 
-    requestAnimationFrame(() => {
+requestAnimationFrame(() => {
 
-    const cellEl = mapContainer.querySelector(".cell.selected");
     const vr = mapViewport.getBoundingClientRect();
+    const cell = mapContainer.querySelector(".cell.selected");
 
-    if (!cellEl) return;
+    if (!cell) return;
 
-    const r = cellEl.getBoundingClientRect();
+    const r = cell.getBoundingClientRect();
 
     console.log(
-        "CENTER CHECK",
-        "viewport center =",
-        (vr.left + vr.width / 2).toFixed(1),
-        (vr.top + vr.height / 2).toFixed(1),
-
-        "cell center =",
-        (r.left + r.width / 2).toFixed(1),
-        (r.top + r.height / 2).toFixed(1),
-
+        "CENTER FINAL",
+        "viewport center =", vr.left + vr.width / 2,
+        vr.top + vr.height / 2,
+        "cell center =", r.left + r.width / 2,
+        r.top + r.height / 2,
         "delta =",
-        ((r.left + r.width / 2) - (vr.left + vr.width / 2)).toFixed(1),
-        ((r.top + r.height / 2) - (vr.top + vr.height / 2)).toFixed(1),
-
-        "scale =",
-        scale.value
+        (r.left + r.width / 2) - (vr.left + vr.width / 2),
+        (r.top + r.height / 2) - (vr.top + vr.height / 2)
     );
 
 });
