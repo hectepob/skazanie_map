@@ -2,33 +2,24 @@ console.log("main.js 1 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
-const mapTranslate = document.getElementById("mapTranslate");
 
 let data = [];
 let areaData = [];
-
 let byId;
 let gridMap;
 let areaMap;
-
 let minFloor;
 let maxFloor;
-
 let currentFloor = 0;
 let currentArea = "";
 let currentSubarea = "";
-
 let selectedCellId = 0;
-
 const highlightCells = new Set();
-
 let offsetX = 0;
 let offsetY = 0;
 let scale = 1;
 
-// -------------------------
 // LOAD
-// -------------------------
 
 Promise.all([
     fetch("./map.json").then(r => r.json()),
@@ -68,43 +59,28 @@ navigation.init({
 
     data,
     byId,
-
     tooltip,
-
     mapContainer,
-    mapTranslate,
     mapViewport,
-
     topPanel: topPanelModule,
-
     render: () => renderMap.draw(),
-
     clearHighlight: () => highlight.clear(),
-
     getCurrentFloor: () => currentFloor,
     setCurrentFloor: v => currentFloor = v,
-
     getSelectedCellId: () => selectedCellId,
     setSelectedCellId: v => selectedCellId = v,
-
     getMinFloor: () => minFloor,
     getMaxFloor: () => maxFloor,
-
     offset: {
-
         get x() { return offsetX; },
         set x(v) { offsetX = v; },
 
         get y() { return offsetY; },
         set y(v) { offsetY = v; }
-
     },
-
     scale: {
-
     get value() { return scale; },
     set value(v) { scale = v; }
-
 }
 
 });
@@ -206,9 +182,7 @@ if (data.length)
 
 });
 
-// -------------------------
 // HELPERS
-// -------------------------
 
 function toId(v) {
 
