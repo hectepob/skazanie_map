@@ -1,4 +1,4 @@
-console.log("dragTouch.js 1607 1210 ");//КОНСОЛЬ
+console.log("dragTouch.js 1607 1940 ");//КОНСОЛЬ
 const dragTouch = (function () {
 
     let viewport;
@@ -93,14 +93,19 @@ function onMove(e) {
 if (pointers.size === 2) {
     const pts = [...pointers.values()];
     const d = distance(pts[0], pts[1]);
-    //let newScale = pinchStartScale * (d / pinchStartDistance); //ОТКЛЮЧАЕМ НА ПРОВЕРКУ
-    //newScale = Math.max(0.5, Math.min(newScale, 3));
-    //scale.value = newScale;
+    let newScale = pinchStartScale * (d / pinchStartDistance);
+    newScale = Math.max(0.5, Math.min(newScale, 3));
+    scale.value = newScale;
 
     // Используем центр, запомненный в начале жеста
     //offset.x = pinchCenterX / scale.value - worldCenterX; //ОТКЛЮЧАЕМ НА ПРОВЕРКУ
     //offset.y = pinchCenterY / scale.value - worldCenterY;
-    //updateTransform();
+    updateTransform();
+
+console.log(
+    "SCALE ONLY",
+    "scale =", scale.value
+);
 
     console.log(
     "PINCH ONLY",
