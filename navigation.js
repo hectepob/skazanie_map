@@ -1,4 +1,4 @@
-console.log("navigation.js 1607 0005 ");
+console.log("navigation.js 1607 0715 ");
 
 const navigation = (function () {
 
@@ -85,18 +85,24 @@ function centerOnCell(cell) {
         );
     }
 
-    offset.x = (mapViewport.clientWidth / 2) / scale.value - x - HALF_CELL;
-    offset.y = (mapViewport.clientHeight / 2) / scale.value - y - HALF_CELL;
+offset.x = (mapViewport.clientWidth / 2) / scale.value - x - HALF_CELL;
+offset.y = (mapViewport.clientHeight / 2) / scale.value - y - HALF_CELL;
+
+view.apply();
+
+requestAnimationFrame(() => {
+
+    const grid = mapContainer.getBoundingClientRect();
 
     console.log(
-        "CENTER",
-        "target offset =", offset.x, offset.y,
-        "scale =", scale.value
+        "GRID",
+        "left =", grid.left,
+        "top =", grid.top,
+        "expected =", mapViewport.getBoundingClientRect().left + mapViewport.clientWidth / 2,
+        mapViewport.getBoundingClientRect().top + mapViewport.clientHeight / 2
     );
 
-    view.apply();
-
-}
+});
 
     function keepView(id) {
 
