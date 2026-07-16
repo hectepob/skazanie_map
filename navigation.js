@@ -1,4 +1,4 @@
-console.log("navigation.js 1607 0725 ");
+console.log("navigation.js 1607 0740 ");
 
 const navigation = (function () {
 
@@ -102,9 +102,10 @@ requestAnimationFrame(() => {
         mapViewport.getBoundingClientRect().top + mapViewport.clientHeight / 2
     );
 
-  });
-
 });
+
+}
+    
     function keepView(id) {
 
         const cell = byId.get(id);
