@@ -1,4 +1,4 @@
-console.log("render 1607 0045");
+console.log("render 1607 0645");
 const renderMap = (function () {
 
     let cfg;
@@ -175,7 +175,7 @@ function drawCell(group, row, col) {
     el.style.gridColumn = col;
     el.style.gridRow = row;
 
-    if (group && group.root.id === 1) {
+    if (group && group.root.id === 1111) {
     requestAnimationFrame(() => {
         console.log(
             "GRID",
