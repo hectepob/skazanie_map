@@ -1,4 +1,4 @@
-console.log("dragTouch.js 1507 2330 ");//КОНСОЛЬ
+console.log("dragTouch.js 1607 0750 ");//КОНСОЛЬ
 const dragTouch = (function () {
 
     let viewport;
