@@ -1,38 +1,26 @@
-/* =========================
-   БАЗА
-========================= */
-
+/*БАЗА */
 body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
-/* =========================
-   LAYOUT (верх + лево + центр)
-========================= */
-
+/*LAYOUT (верх + лево + центр) */
 #mainLayout {
     display: grid;
     grid-template-columns: 220px 1fr;
-    grid-template-rows: 40px 1fr;
-    height: 100vh;
+    grid-template-rows: 1fr;
+    height: calc(100vh - 40px);
 }
 
-/* =========================
-   TOP PANEL
-========================= */
-
+/*TOP PANEL */
 #topPanel {
     grid-column: 1 / 3;
     grid-row: 1;
-
     background: #ddd;
-
     display: flex;
     align-items: center;
     gap: 10px;
-
     padding: 5px;
 }
 
@@ -43,16 +31,11 @@ body {
     gap: 6px;
 }
 
-/* =========================
-   LEFT PANEL
-========================= */
-
+/* LEFT PANEL*/
 #leftPanel {
     grid-column: 1;
     grid-row: 2;
-
     background: #f3f3f3;
-
     padding: 10px;
     overflow-y: auto;
 }
@@ -75,19 +58,13 @@ body {
     cursor: pointer;
 }
 
-/* =========================
-   MAP VIEWPORT
-========================= */
-
+/*MAP VIEWPORT */
 #mapViewport {
     grid-column: 2;
     grid-row: 2;
-
     position: relative;
     overflow: hidden;
-
     background: #fff;
-
     user-select: none;
     touch-action: none;
 }
@@ -96,36 +73,26 @@ body {
 #map {
     display: grid;
     gap: 0;
-
     position: absolute;
     top: 0;
     left: 0;
-
     width: max-content;
     height: max-content;
-
     transform-origin: 0 0;
     will-change: transform;
 }
 
-/* =========================
-   CELL
-========================= */
-
+/* CELL */
 .cell {
     width: 40px;
     height: 40px;
-
     box-sizing: border-box;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #fff;
     border: 2px solid #000;
     color: var(--cell-color, #000);
-
     position: relative;
     overflow: hidden;
 }
@@ -161,10 +128,7 @@ body {
     text-align: center;
 }
 
-/* =========================
-   STAIRS
-========================= */
-
+/* STAIRS */
 .stairs {
     position: absolute;
     font-size: 10px;
@@ -183,10 +147,7 @@ body {
     top: 2px;
 }
 
-/* =========================
-   ПРОХОДЫ (обычные)
-========================= */
-
+/* ПРОХОДЫ (обычные) */
 .cell.open-north {
     border-top-color: rgba(0, 0, 0, 0.15);
     border-top-width: 1px;
@@ -207,10 +168,7 @@ body {
     border-right-width: 1px;
 }
 
-/* =========================
-   ДВЕРИ (ключевые проходы)
-========================= */
-
+/* ДВЕРИ (ключевые проходы)*/
 .cell.door-north {
     border-top-color: rgba(200, 50, 50, 0.7);
     border-top-width: 1px;
@@ -231,26 +189,17 @@ body {
     border-right-width: 1px;
 }
 
-/* =========================
-   TOOLTIP
-========================= */
-
+/* TOOLTIP */
 #tooltip {
     position: absolute;
     display: none;
-
     background: rgba(20, 20, 20, 0.95);
     color: #fff;
-
     padding: 8px;
     border-radius: 6px;
-
     font-size: 13px;
-
     pointer-events: none;
-
     white-space: nowrap;
-
     z-index: 1000;
 }
 
@@ -265,54 +214,34 @@ body {
     border-top: 1px solid #777;
     margin: 6px 0;
 }
-/* =========================
-   RED BORDER ON INPUT FIELD
-========================= */
+/* RED BORDER ON INPUT FIELD */
 .inputError{
     border:2px solid #d00000 !important;
 }
 
-/* =========================
-   HIGHLIGHT
-========================= */
-
+/* HIGHLIGHT */
 .cell.highlight::before {
-
     content: "";
-
     position: absolute;
-
     inset: 2px;
-
     pointer-events: none;
-
     background: rgba(0,0,0,0.16);
-
     z-index: 0;
-
 }
 
 /* Для темных зон */
 .cell.highlight.lighten::before {
-
     background: rgba(255,255,255,0.22);
-
 }
 
 /* Номер клетки поверх подсветки */
-
 .cell.highlight .cellId {
-
     font-weight: bold;
     position: relative;
     z-index: 2;
-
 }
 
 /* Лестницы поверх подсветки */
-
 .cell.highlight .stairs {
-
     z-index: 2;
-
 }
