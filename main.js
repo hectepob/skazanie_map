@@ -12,6 +12,7 @@ let areaMap;
 let minFloor;
 let maxFloor;
 let currentFloor = 0;
+let currentMap = 1;
 let currentArea = "";
 let currentSubarea = "";
 let selectedCellId = 0;
@@ -70,6 +71,8 @@ navigation.init({
     clearHighlight: () => highlight.clear(),
     getCurrentFloor: () => currentFloor,
     setCurrentFloor: v => currentFloor = v,
+    getCurrentMap: () => currentMap,
+    setCurrentMap: v => currentMap = v,
     getSelectedCellId: () => selectedCellId,
     setSelectedCellId: v => selectedCellId = v,
     getMinFloor: () => minFloor,
