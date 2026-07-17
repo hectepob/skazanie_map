@@ -236,9 +236,12 @@ function draw() {
         for (let col = 1; col <= maxCol; col++) {
 
             const key = `${cfg.getCurrentFloor()}:${row}:${col}`;
-            const group = cfg.gridMap.get(key);
-            const el = drawCell(group, row, col);
+            let group = cfg.gridMap.get(key);
 
+            if (group && group.root.id_map !== cfg.getCurrentMap()) {
+                group = null;
+            }
+            const el = drawCell(group, row, col);
             cfg.mapContainer.appendChild(el);
 
         }
