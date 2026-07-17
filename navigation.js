@@ -1,4 +1,4 @@
-console.log("navigation.js 1607 2150 ");
+console.log("navigation.js 1707 0720 ");
 
 const navigation = (function () {
 
@@ -72,6 +72,15 @@ offset.y = mapViewport.clientHeight / 2 - (y + HALF_CELL) * scale.value;
 view.apply();
 
 requestAnimationFrame(() => {
+
+    const vp = mapViewport.getBoundingClientRect();
+const map = mapContainer.getBoundingClientRect();
+
+console.log(
+    "RECTS",
+    "viewport =", vp.left, vp.top, vp.width, vp.height,
+    "map =", map.left, map.top
+);
 
     const vr = mapViewport.getBoundingClientRect();
     const cell = mapContainer.querySelector(".cell.selected");
