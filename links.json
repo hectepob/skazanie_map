@@ -1,3 +1,15 @@
 [
-{"id_portal":322,"targets":[400,410,420,430,440,450,460,470,480,490]}
+{"id_portal":322,"targets":[400,410,420,430,440,450,460,470,480,490]},
+{"id_portal":400,"targets":[322]},
+{"id_portal":410,"targets":[322]},
+{"id_portal":420,"targets":[322]},
+{"id_portal":430,"targets":[322]},
+{"id_portal":440,"targets":[322]},
+{"id_portal":450,"targets":[322]},
+{"id_portal":460,"targets":[322]},
+{"id_portal":470,"targets":[322]},
+{"id_portal":480,"targets":[322]},
+{"id_portal":490,"targets":[322]},
+{"id_portal":1500,"targets":[1501]},
+{"id_portal":1501,"targets":[1500]}
 ]
