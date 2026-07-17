@@ -159,11 +159,11 @@ renderMap.init({
 
     toId,
 
+    getCurrentMap: () => currentMap,
     getCurrentFloor: () => currentFloor,
     getCurrentArea: () => currentArea,
     getCurrentSubarea: () => currentSubarea,
     getSelectedCellId: () => selectedCellId,
-
     setSelectedCellId: v => selectedCellId = v
 
 });
