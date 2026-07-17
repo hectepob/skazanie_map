@@ -210,38 +210,28 @@ attachClick(el, cell);
 function draw() {
 
     cfg.mapContainer.innerHTML = "";
-
     let maxCol = 0;
     let maxRow = 0;
-
     cfg.gridMap.forEach(group => {
-
         const cell = group.root;
-
         if (cell.id_map !== cfg.getCurrentMap()) return;
         if (cell.floor !== cfg.getCurrentFloor()) return;
         if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
         if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
         if (cell.col > maxCol) maxCol = cell.col;
         if (cell.row > maxRow) maxRow = cell.row;
-
     });
 
     cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
-    for (let row = 1; row <= maxRow; row++) {
 
+    for (let row = 1; row <= maxRow; row++) {
         for (let col = 1; col <= maxCol; col++) {
             const key = `${cfg.getCurrentMap()}:${cfg.getCurrentFloor()}:${row}:${col}`;
             const group = cfg.gridMap.get(key);
-            let group = cfg.gridMap.get(key);
-        }
-        
             const el = drawCell(group, row, col);
             cfg.mapContainer.appendChild(el);
-
         }
-
     }
 
     cfg.topPanel.setFloor(
@@ -250,24 +240,24 @@ function draw() {
 
     const el = cfg.mapContainer.querySelector(".cell.selected");
 
-if (el) {
-    const rect = el.getBoundingClientRect();
-    const vp = cfg.mapViewport.getBoundingClientRect();
+    if (el) {
 
-    console.log(
-        "REAL",
-        rect.left - vp.left + rect.width / 2,
-        rect.top - vp.top + rect.height / 2
-    );
-}
+        const rect = el.getBoundingClientRect();
+        const vp = cfg.mapViewport.getBoundingClientRect();
+
+        console.log(
+            "REAL",
+            rect.left - vp.left + rect.width / 2,
+            rect.top - vp.top + rect.height / 2
+        );
+
+    }
 
 }
 
     return {
-
         init,
         draw
-
     };
 
 })();
