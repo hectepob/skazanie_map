@@ -1,4 +1,4 @@
-console.log("main.js 1 ");
+console.log("main.js 1707 0740 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -171,7 +171,24 @@ selectedCellId = 0;
 if (data.length)
     navigation.centerOnCell(data[0]);
 
-    mapViewport.addEventListener("click", e => {
+const layout = document.getElementById("mainLayout");
+const top = document.getElementById("topPanel");
+const left = document.getElementById("leftPanel");
+const vp = document.getElementById("mapViewport");
+
+requestAnimationFrame(() => {
+
+    console.log(
+        "RECTS",
+        "\nlayout =", layout.getBoundingClientRect(),
+        "\ntop    =", top.getBoundingClientRect(),
+        "\nleft   =", left.getBoundingClientRect(),
+        "\nvp     =", vp.getBoundingClientRect()
+    );
+
+});
+
+mapViewport.addEventListener("click", e => {
 
     if (e.target.closest(".cell:not(.empty)"))
         return;
