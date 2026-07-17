@@ -174,25 +174,10 @@ leftPanel.init(data);
 
 selectedCellId = 0;
 
-if (data.length)
-    navigation.centerOnCell(data[0]);
+const firstCell = data.find(c => c.id_map === 1);
 
-const layout = document.getElementById("mainLayout");
-const top = document.getElementById("topPanel");
-const left = document.getElementById("leftPanel");
-const vp = document.getElementById("mapViewport");
-
-requestAnimationFrame(() => {
-
-    console.log(
-        "RECTS",
-        "\nlayout =", layout.getBoundingClientRect(),
-        "\ntop    =", top.getBoundingClientRect(),
-        "\nleft   =", left.getBoundingClientRect(),
-        "\nvp     =", vp.getBoundingClientRect()
-    );
-
-});
+if (firstCell)
+    navigation.centerOnCell(firstCell);
 
 mapViewport.addEventListener("click", e => {
 
