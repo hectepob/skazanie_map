@@ -7,54 +7,42 @@ const navigation = (function () {
     
     let data;
     let byId;
-
     let mapContainer;
     let mapViewport;
-
     let render;
     let topPanel;
-
     let getCurrentFloor;
     let setCurrentFloor;
-
+    let getCurrentMap;
+    let setCurrentMap;
     let getSelectedCellId;
     let setSelectedCellId;
-
     let getMinFloor;
     let getMaxFloor;
-
     let offset;
     let scale;
-
     let clearHighlight;
-
     let tooltip;
 
     function init(cfg) {
-
         data = cfg.data;
         byId = cfg.byId;
-
         mapContainer = cfg.mapContainer;
         mapViewport = cfg.mapViewport;
-
         render = cfg.render;
         topPanel = cfg.topPanel;
         scale = cfg.scale;
         tooltip = cfg.tooltip;
-
         getCurrentFloor = cfg.getCurrentFloor;
         setCurrentFloor = cfg.setCurrentFloor;
-
+        getCurrentMap = cfg.getCurrentMap;
+        setCurrentMap = cfg.setCurrentMap;
         getSelectedCellId = cfg.getSelectedCellId;
         setSelectedCellId = cfg.setSelectedCellId;
-
         getMinFloor = cfg.getMinFloor;
         getMaxFloor = cfg.getMaxFloor;
-
         offset = cfg.offset;
         clearHighlight = cfg.clearHighlight;
-
     }
     
 function centerOnCell(cell) {
