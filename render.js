@@ -197,15 +197,10 @@ function drawCell(group, row, col) {
     const cell = group.root;
 
 applyCellStyle(el, group);
-
 drawPassages(el, cell);
-
 drawStairs(el, cell);
-
 drawCellId(el, group);
-
 attachTooltip(el, group);
-
 attachClick(el, cell);
 
     return el;
@@ -223,6 +218,7 @@ function draw() {
 
         const cell = group.root;
 
+        if (cell.id_map !== cfg.getCurrentMap()) return;
         if (cell.floor !== cfg.getCurrentFloor()) return;
         if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
         if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
@@ -240,9 +236,7 @@ function draw() {
         for (let col = 1; col <= maxCol; col++) {
 
             const key = `${cfg.getCurrentFloor()}:${row}:${col}`;
-
             const group = cfg.gridMap.get(key);
-
             const el = drawCell(group, row, col);
 
             cfg.mapContainer.appendChild(el);
