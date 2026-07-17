@@ -222,25 +222,21 @@ function draw() {
         if (cell.floor !== cfg.getCurrentFloor()) return;
         if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
         if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
-
         if (cell.col > maxCol) maxCol = cell.col;
         if (cell.row > maxRow) maxRow = cell.row;
 
     });
 
-    cfg.mapContainer.style.gridTemplateColumns =
-        `repeat(${maxCol}, 40px)`;
+    cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
     for (let row = 1; row <= maxRow; row++) {
 
         for (let col = 1; col <= maxCol; col++) {
-
-            const key = `${cfg.getCurrentFloor()}:${row}:${col}`;
+            const key = `${cfg.getCurrentMap()}:${cfg.getCurrentFloor()}:${row}:${col}`;
+            const group = cfg.gridMap.get(key);
             let group = cfg.gridMap.get(key);
-
-            if (group && group.root.id_map !== cfg.getCurrentMap()) {
-                group = null;
-            }
+        }
+        
             const el = drawCell(group, row, col);
             cfg.mapContainer.appendChild(el);
 
