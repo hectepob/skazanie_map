@@ -47,6 +47,7 @@ const navigation = (function () {
     
 function centerOnCell(cell) {
 
+    setCurrentMap(cell.id_map);
     setCurrentFloor(cell.floor);
 
     render();
@@ -99,11 +100,12 @@ console.log(
         if (!cell)
             return;
 
-       const x = offset.x;
-       const y = offset.y;
+        const x = offset.x;
+        const y = offset.y;
 
-       setCurrentFloor(cell.floor);
-       setSelectedCellId(cell.id);
+        setCurrentMap(cell.id_map);
+        setCurrentFloor(cell.floor);
+        setSelectedCellId(cell.id);
 
        render();
 
