@@ -5,6 +5,7 @@ const mapViewport = document.getElementById("mapViewport");
 
 let data = [];
 let areaData = [];
+let linkData = [];
 let byId;
 let gridMap;
 let areaMap;
@@ -23,13 +24,15 @@ let scale = 1;
 
 Promise.all([
     fetch("./map.json").then(r => r.json()),
-    fetch("./areas.json").then(r => r.json())
+    fetch("./areas.json").then(r => r.json()),
+    fetch("./links.json").then(r => r.json())
 ])
 
-.then(([mapJson, areasJson]) => {
+.then(([mapJson, areasJson, linksJson]) => {
 
-data = mapJson || [];
-areaData = areasJson || [];
+    data = mapJson || [];
+    areaData = areasJson || [];
+    linkData = linksJson || [];
 
 const built = dataBuilder.build(data, areaData);
 
