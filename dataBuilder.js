@@ -1,4 +1,5 @@
-console.log("dataBuilder.js 1807 1720 ");
+console.log("dataBuilder.js 1807 1745");
+
 const dataBuilder = (function () {
 
     function build(mapData, areaData) {
@@ -7,96 +8,136 @@ const dataBuilder = (function () {
         const gridMap = new Map();
         const areaMap = new Map();
 
-        let minFloor = 0;
-        let maxFloor = 0;
+        let minFloor = Infinity;
+        let maxFloor = -Infinity;
 
-        if (mapData.length) {
-            minFloor = Math.min(...mapData.map(c => c.floor));
-            maxFloor = Math.max(...mapData.map(c => c.floor));
-        }
+        // ---------- AREA COLORS ----------
 
-        // AREA COLORS
         areaData.forEach(a => {
 
             if (!areaMap.has(a.area)) {
+
                 areaMap.set(a.area, {
                     bg_color: a.bg_color,
                     font_color: a.font_color
                 });
+
             }
+
         });
 
-        // MAP DATA
+        // ---------- byId ----------
 
         mapData.forEach(cell => {
+
             cell.parent_id = Number(cell.parent_id || 0);
+
             byId.set(cell.id, cell);
+
         });
 
-        // BUILD GRID
+        // ---------- GRID ----------
 
         mapData.forEach(cell => {
 
             let root = cell;
 
             while (root.parent_id !== 0) {
+
                 root = byId.get(root.parent_id);
+
                 if (!root)
                     break;
+
             }
 
             if (!root)
                 return;
-            
- // создаём карту для данного map_id
 
-if (!gridMap.has(root.id_map)) {
-    gridMap.set(root.id_map, new Map());
-}
+            if (!gridMap.has(root.id_map)) {
 
-const mapGrid = gridMap.get(root.id_map);
-const key = `${root.floor}:${root.row}:${root.col}`;
+                gridMap.set(root.id_map, new Map());
 
-if (!mapGrid.has(key)) {
-    mapGrid.set(key, {
-        root,
-        cells: []
-    });
-}
+            }
 
-mapGrid.get(key).cells.push(cell);
+            const mapGrid = gridMap.get(root.id_map);
 
-        // GROUPS
+            const key = `${root.floor}:${root.row}:${root.col}`;
 
-gridMap.forEach((mapGrid, mapId) => {
-    mapGrid.forEach(group => {
-        group.cells.sort((a, b) => a.id - b.id);
-        group.displayId = group.cells
-            .map(c => c.id)
-            .join("<br>");
-    });
-});
+            if (!mapGrid.has(key)) {
 
-console.log("GRIDMAP TEST");
-gridMap.forEach((mapGrid, mapId) => {
-    console.log(
-        "map_id =", mapId,
-        "groups =", mapGrid.size
-    );
-});
+                mapGrid.set(key, {
+
+                    root,
+                    cells: []
+
+                });
+
+            }
+
+            mapGrid.get(key).cells.push(cell);
+
+            if (root.floor < minFloor)
+                minFloor = root.floor;
+
+            if (root.floor > maxFloor)
+                maxFloor = root.floor;
+
+        });
+
+        // ---------- GROUPS ----------
+
+        gridMap.forEach(mapGrid => {
+
+            mapGrid.forEach(group => {
+
+                group.cells.sort((a, b) => a.id - b.id);
+
+                group.displayId =
+                    group.cells
+                        .map(c => c.id)
+                        .join("<br>");
+
+            });
+
+        });
+
+        // ---------- LOG ----------
+
+        console.log("GRIDMAP");
+
+        gridMap.forEach((mapGrid, mapId) => {
+
+            console.log(
+                "map_id =", mapId,
+                "groups =", mapGrid.size
+            );
+
+        });
+
+        if (minFloor === Infinity)
+            minFloor = 0;
+
+        if (maxFloor === -Infinity)
+            maxFloor = 0;
 
         return {
+
             byId,
             gridMap,
             areaMap,
+
             minFloor,
             maxFloor
+
         };
 
     }
 
     return {
+
         build
+
     };
 
 })();
