@@ -1,4 +1,4 @@
-console.log("dataBuilder.js 1807 2255");
+console.log("dataBuilder.js 1807 2305");
 
 const dataBuilder = (function () {
 
@@ -127,16 +127,7 @@ if (!mapGrid.has(key)) {
         if (maxFloor === -Infinity)
             maxFloor = 0;
 
-return {
-    byId,
-    gridMap,
-    groupsByMap,
-    areaMap,
-    minFloor,
-    maxFloor
-};
-
-console.log("GROUP LIST");
+        console.log("GROUP LIST");
 
 groupsByMap.forEach((arr, id) => {
     console.log(
@@ -146,6 +137,15 @@ groupsByMap.forEach((arr, id) => {
         arr.length
     );
 });
+        
+return {
+    byId,
+    gridMap,
+    groupsByMap,
+    areaMap,
+    minFloor,
+    maxFloor
+};
         
     }
 
