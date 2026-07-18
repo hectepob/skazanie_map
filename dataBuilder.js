@@ -1,4 +1,4 @@
-console.log("dataBuilder.js 1807 1745");
+console.log("dataBuilder.js 1807 2255");
 
 const dataBuilder = (function () {
 
@@ -6,6 +6,7 @@ const dataBuilder = (function () {
 
         const byId = new Map();
         const gridMap = new Map();
+        const groupsByMap = new Map();
         const areaMap = new Map();
 
         let minFloor = Infinity;
@@ -64,16 +65,21 @@ const dataBuilder = (function () {
 
             const key = `${root.floor}:${root.row}:${root.col}`;
 
-            if (!mapGrid.has(key)) {
+if (!mapGrid.has(key)) {
 
-                mapGrid.set(key, {
+    const group = {
+        root,
+        cells: []
+    };
 
-                    root,
-                    cells: []
+    mapGrid.set(key, group);
 
-                });
+    if (!groupsByMap.has(root.id_map)) {
+        groupsByMap.set(root.id_map, []);
+    }
 
-            }
+    groupsByMap.get(root.id_map).push(group);
+}
 
             mapGrid.get(key).cells.push(cell);
 
@@ -121,17 +127,26 @@ const dataBuilder = (function () {
         if (maxFloor === -Infinity)
             maxFloor = 0;
 
-        return {
+return {
+    byId,
+    gridMap,
+    groupsByMap,
+    areaMap,
+    minFloor,
+    maxFloor
+};
 
-            byId,
-            gridMap,
-            areaMap,
+console.log("GROUP LIST");
 
-            minFloor,
-            maxFloor
-
-        };
-
+groupsByMap.forEach((arr, id) => {
+    console.log(
+        "map",
+        id,
+        "groups array =",
+        arr.length
+    );
+});
+        
     }
 
     return {
