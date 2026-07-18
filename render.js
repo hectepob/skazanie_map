@@ -1,4 +1,4 @@
-console.log("render 1607 0645");
+console.log("render 1807 1755");
 const renderMap = (function () {
 
     let cfg;
@@ -212,23 +212,29 @@ function draw() {
     cfg.mapContainer.innerHTML = "";
     let maxCol = 0;
     let maxRow = 0;
-    cfg.gridMap.forEach(group => {
+    const currentGrid = cfg.gridMap.get(cfg.getCurrentMap());
+
+    if (!currentGrid)
+        return;
+
+    currentGrid.forEach(group => {
+
         const cell = group.root;
-        if (cell.id_map !== cfg.getCurrentMap()) return;
-        if (cell.floor !== cfg.getCurrentFloor()) return;
-        if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
-        if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
-        if (cell.col > maxCol) maxCol = cell.col;
-        if (cell.row > maxRow) maxRow = cell.row;
-    });
+
+    if (cell.floor !== cfg.getCurrentFloor()) return;
+    if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
+    if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
+    if (cell.col > maxCol) maxCol = cell.col;
+    if (cell.row > maxRow) maxRow = cell.row;
+
+});
 
     cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
-
     for (let row = 1; row <= maxRow; row++) {
         for (let col = 1; col <= maxCol; col++) {
-            const key = `${cfg.getCurrentMap()}:${cfg.getCurrentFloor()}:${row}:${col}`;
-            const group = cfg.gridMap.get(key);
+            const key = `${cfg.getCurrentFloor()}:${row}:${col}`;
+            const group = currentGrid.get(key);
             const el = drawCell(group, row, col);
             cfg.mapContainer.appendChild(el);
         }
