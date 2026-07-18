@@ -172,8 +172,9 @@ function drawCell(group) {
     const el = document.createElement("div");
 
     el.className = "cell";
-    el.style.gridColumn = group.root.col;
-    el.style.gridRow = group.root.row;
+    el.style.position = "absolute";
+    el.style.left = ((col - 1) * 40) + "px";
+    el.style.top  = ((row - 1) * 40) + "px";
 
     if (group && group.root.id === 1111) {
     requestAnimationFrame(() => {
@@ -230,7 +231,10 @@ function draw() {
 });
 
     cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
-
+    cfg.mapContainer.style.position = "absolute";
+    cfg.mapContainer.style.width  = (maxCol * 40) + "px";
+    cfg.mapContainer.style.height = (maxRow * 40) + "px";
+    
 currentGrid.forEach(group => {
 
     const cell = group.root;
