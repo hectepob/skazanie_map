@@ -1,4 +1,4 @@
-console.log("navigation.js 1707 0720 ");
+console.log("navigation.js 1807 1800 ");
 
 const navigation = (function () {
 
@@ -46,9 +46,16 @@ const navigation = (function () {
     }
     
 function centerOnCell(cell) {
-
-    setCurrentMap(cell.id_map);
+    
     setCurrentFloor(cell.floor);
+    setCurrentMap(cell.id_map);
+
+    console.log(
+    "CENTER TO",
+    "id =", cell.id,
+    "map_id =", cell.id_map,
+    "floor =", cell.floor
+    );
 
     render();
 
