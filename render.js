@@ -1,4 +1,4 @@
-console.log("render 1807 2315");
+console.log("render 1807 2335");
 const renderMap = (function () {
 
     let cfg;
