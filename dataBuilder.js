@@ -1,3 +1,4 @@
+console.log("dataBuilder.js 1807 1720 ");
 const dataBuilder = (function () {
 
     function build(mapData, areaData) {
@@ -46,28 +47,43 @@ const dataBuilder = (function () {
 
             if (!root)
                 return;
+            
+ // создаём карту для данного map_id
 
-            const key = `${root.id_map}:${root.floor}:${root.row}:${root.col}`;
+if (!gridMap.has(root.id_map)) {
+    gridMap.set(root.id_map, new Map());
+}
 
-            if (!gridMap.has(key)) {
-                gridMap.set(key, {
-                    root: root,
-                    cells: []
-                });
-            }
+const mapGrid = gridMap.get(root.id_map);
+const key = `${root.floor}:${root.row}:${root.col}`;
 
-            gridMap.get(key).cells.push(cell);
+if (!mapGrid.has(key)) {
+    mapGrid.set(key, {
+        root,
+        cells: []
+    });
+}
 
-        });
+mapGrid.get(key).cells.push(cell);
 
         // GROUPS
 
-        gridMap.forEach(group => {
-            group.cells.sort((a, b) => a.id - b.id);
-            group.displayId = group.cells
-                .map(c => c.id)
-                .join("<br>");
-        });
+gridMap.forEach((mapGrid, mapId) => {
+    mapGrid.forEach(group => {
+        group.cells.sort((a, b) => a.id - b.id);
+        group.displayId = group.cells
+            .map(c => c.id)
+            .join("<br>");
+    });
+});
+
+console.log("GRIDMAP TEST");
+gridMap.forEach((mapGrid, mapId) => {
+    console.log(
+        "map_id =", mapId,
+        "groups =", mapGrid.size
+    );
+});
 
         return {
             byId,
