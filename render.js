@@ -167,7 +167,7 @@ const vr = cfg.mapViewport.getBoundingClientRect();
 
 }
     
-function drawCell(group) {
+function drawCell(group, row, col) {
 
     const el = document.createElement("div");
 
@@ -175,18 +175,6 @@ function drawCell(group) {
     el.style.position = "absolute";
     el.style.left = ((col - 1) * 40) + "px";
     el.style.top  = ((row - 1) * 40) + "px";
-
-    if (group && group.root.id === 1111) {
-    requestAnimationFrame(() => {
-        console.log(
-            "GRID",
-            "left =", el.offsetLeft,
-            "top =", el.offsetTop,
-            "col =", group.root.col,
-            "row =", group.root.row
-        );
-    });
-    }
 
     if (!group) {
 
