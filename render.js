@@ -167,13 +167,13 @@ const vr = cfg.mapViewport.getBoundingClientRect();
 
 }
     
-function drawCell(group, row, col) {
+function drawCell(group) {
 
     const el = document.createElement("div");
 
     el.className = "cell";
-    el.style.gridColumn = col;
-    el.style.gridRow = row;
+    el.style.gridColumn = group.root.col;
+    el.style.gridRow = group.root.row;
 
     if (group && group.root.id === 1111) {
     requestAnimationFrame(() => {
@@ -181,8 +181,8 @@ function drawCell(group, row, col) {
             "GRID",
             "left =", el.offsetLeft,
             "top =", el.offsetTop,
-            "col =", col,
-            "row =", row
+            "col =", group.root.col,
+            "row =", group.root.row
         );
     });
     }
@@ -231,14 +231,19 @@ function draw() {
 
     cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
 
-    for (let row = 1; row <= maxRow; row++) {
-        for (let col = 1; col <= maxCol; col++) {
-            const key = `${cfg.getCurrentFloor()}:${row}:${col}`;
-            const group = currentGrid.get(key);
-            const el = drawCell(group, row, col);
-            cfg.mapContainer.appendChild(el);
-        }
-    }
+currentGrid.forEach(group => {
+
+    const cell = group.root;
+
+    if (cell.floor !== cfg.getCurrentFloor()) return;
+    if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
+    if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
+
+    const el = drawCell(group);
+
+    cfg.mapContainer.appendChild(el);
+
+});
 
     cfg.topPanel.setFloor(
         cfg.getCurrentFloor()
