@@ -1,4 +1,4 @@
-console.log("render 1807 2335");
+console.log("render 1807 2350");
 const renderMap = (function () {
 
     let cfg;
@@ -167,23 +167,24 @@ const vr = cfg.mapViewport.getBoundingClientRect();
 
 }
     
-function drawCell(group, row, col) {
+function drawCell(group) {
 
     const el = document.createElement("div");
 
     el.className = "cell";
     el.style.position = "absolute";
-    el.style.left = ((col - 1) * 40) + "px";
-    el.style.top  = ((row - 1) * 40) + "px";
 
-    if (!group) {
+if (!group) {
 
-        el.classList.add("empty");
-        return el;
+    el.classList.add("empty");
+    return el;
 
-    }
+}
 
-    const cell = group.root;
+const cell = group.root;
+
+el.style.left = ((cell.col - 1) * 40) + "px";
+el.style.top  = ((cell.row - 1) * 40) + "px";
 
 applyCellStyle(el, group);
 drawPassages(el, cell);
