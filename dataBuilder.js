@@ -142,6 +142,7 @@ return {
     byId,
     gridMap,
     groupsByMap,
+    floorsByMap,
     areaMap,
     minFloor,
     maxFloor
