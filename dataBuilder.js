@@ -8,7 +8,7 @@ const dataBuilder = (function () {
         const gridMap = new Map();
         const groupsByMap = new Map();
         const areaMap = new Map();
-
+        const floorsByMap = new Map();
         let minFloor = Infinity;
         let maxFloor = -Infinity;
 
