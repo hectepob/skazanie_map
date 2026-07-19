@@ -75,10 +75,10 @@ navigation.init({
     setCurrentFloor: v => currentFloor = v,
     getCurrentMap: () => currentMap,
     setCurrentMap: v => currentMap = v,
-    getSelectedCellId: () => selectedCellId,
+    getSelectedCellId: () =как> selectedCellId,
     setSelectedCellId: v => selectedCellId = v,
-    getMinFloor: () => minFloor,
-    getMaxFloor: () => maxFloor,
+    getMinFloor: () => floorsByMap.get(currentMap).min,
+    getMaxFloor: () => floorsByMap.get(currentMap).max,
     offset: {
         get x() { return offsetX; },
         set x(v) { offsetX = v; },
