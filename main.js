@@ -49,18 +49,17 @@ floorsByMap = built.floorsByMap;
     }
 
 highlight.init({
-
     byId,
     highlightCells,
-
     render: () => renderMap.draw()
+});
 
-    portalMenu.init({
+portalMenu.init({
     byId,
     links: linkData
-    });
-
 });
+
+console.log("PORTALS", linkData.length);
 
 navigation.init({
 
