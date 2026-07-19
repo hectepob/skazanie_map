@@ -1,4 +1,4 @@
-console.log("main.js 1907 1015 ");
+console.log("main.js 1907 1050 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -9,8 +9,6 @@ let linkData = [];
 let byId;
 let gridMap;
 let areaMap;
-let minFloor;
-let maxFloor;
 let floorsByMap;
 let currentFloor = 0;
 let currentMap = 1;
@@ -42,8 +40,6 @@ byId = built.byId;
 gridMap = built.gridMap;
 areaMap = built.areaMap;
 
-minFloor = built.minFloor;
-maxFloor = built.maxFloor;
 floorsByMap = built.floorsByMap;
 
     if (data.length) {
