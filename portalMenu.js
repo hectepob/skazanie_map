@@ -1,4 +1,4 @@
-console.log("portalMenu.js 2007 0010");
+console.log("portalMenu.js 2007 0050");
 
 const portalMenu = (function () {
 
@@ -65,7 +65,7 @@ function init(cfg) {
         menu.style.left = x + "px";
         menu.style.top = y + "px";
 
-        document.body.appendChild(menu);
+        document.getElementById("mapViewport").appendChild(menu);
 
 setTimeout(() => {
     document.addEventListener("click", hide, { once: true });
