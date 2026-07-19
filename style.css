@@ -157,6 +157,27 @@ body {
     z-index: 5;
 }
 
+#portalMenu {
+    position: absolute;
+    display: none;
+    min-width: 220px;
+    background: #222;
+    color: white;
+    border: 1px solid #888;
+    border-radius: 6px;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+#portalMenu .portalItem {
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+#portalMenu .portalItem:hover {
+    background: #555;
+}
+
 /* ПРОХОДЫ (обычные) */
 .cell.open-north {
     border-top-color: rgba(0, 0, 0, 0.15);
