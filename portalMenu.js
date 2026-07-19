@@ -1,33 +1,39 @@
-console.log("portalMenu.js 1907 1915");
+console.log("portalMenu.js 1907 1935");
 
 const portalMenu = (function () {
 
     let byId;
-    let links = [];
+    let portalMap;
 
     function init(cfg) {
 
         byId = cfg.byId;
-        links = cfg.links;
+        portalMap = new Map();
+
+        cfg.links.forEach(link => {
+
+            portalMap.set(link.id_portal, link.targets);
+
+        });
 
     }
 
-    function getTargets(portalId) {
+    function hasPortal(id) {
 
-        const rec = links.find(x => x.id_portal === portalId);
+        return portalMap.has(id);
 
-        if (!rec)
-            return [];
+    }
 
-        return rec.targets
-            .map(id => byId.get(id))
-            .filter(Boolean);
+    function getTargets(id) {
+
+        return portalMap.get(id) || [];
 
     }
 
     return {
 
         init,
+        hasPortal,
         getTargets
 
     };
