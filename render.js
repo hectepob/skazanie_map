@@ -1,4 +1,4 @@
-console.log("render 1907 2000");
+console.log("render 2007 0040");
 const renderMap = (function () {
 
     let cfg;
@@ -104,17 +104,15 @@ function drawPortal(el, cell) {
     span.className = "portal";
     span.textContent = "◉";
 
-    span.onclick = e => {
-
-        e.stopPropagation();
-
-        console.log(
-            "PORTAL",
-            cell.id,
-            portalMenu.getTargets(cell.id)
-        );
-
-    };
+span.onclick = e => {
+    e.stopPropagation();
+    const vr = cfg.mapViewport.getBoundingClientRect();
+    portalMenu.show(
+        cell.id,
+        e.clientX - vr.left,
+        e.clientY - vr.top
+    );
+};
 
     el.appendChild(span);
 
