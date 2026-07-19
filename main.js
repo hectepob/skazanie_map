@@ -55,6 +55,11 @@ highlight.init({
 
     render: () => renderMap.draw()
 
+    portalMenu.init({
+    byId,
+    links: linkData
+    });
+
 });
 
 navigation.init({
@@ -141,47 +146,33 @@ const drag =
      });
 
 renderMap.init({
-
     mapContainer,
     mapViewport,
-
     gridMap,
     areaMap,
     byId,
-
     topPanel: topPanelModule,
     tooltip,
     drag: drag,
-
     highlightCells,
-
     toId,
-
     getCurrentMap: () => currentMap,
     getCurrentFloor: () => currentFloor,
     getCurrentArea: () => currentArea,
     getCurrentSubarea: () => currentSubarea,
     getSelectedCellId: () => selectedCellId,
     setSelectedCellId: v => selectedCellId = v
-
 });
 
-topPanelModule.init(areaData, data);
-    
+topPanelModule.init(areaData, data);    
 leftPanel.init(data);
-
 selectedCellId = 0;
-
 const firstCell = data.find(c => c.id_map === 1);
-
 if (firstCell)
     navigation.centerOnCell(firstCell);
-
 mapViewport.addEventListener("click", e => {
-
     if (e.target.closest(".cell:not(.empty)"))
         return;
-
     tooltip.hide();
 
 });
@@ -189,14 +180,9 @@ mapViewport.addEventListener("click", e => {
 });
 
 // HELPERS
-
 function toId(v) {
-
     if (v === "" || v === null || v === undefined)
         return null;
-
     const n = Number(v);
-
     return isNaN(n) ? null : n;
-
 }
