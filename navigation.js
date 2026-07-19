@@ -50,13 +50,6 @@ function centerOnCell(cell) {
     setCurrentFloor(cell.floor);
     setCurrentMap(cell.id_map);
 
-    console.log(
-    "CENTER TO",
-    "id =", cell.id,
-    "map_id =", cell.id_map,
-    "floor =", cell.floor
-    );
-
     render();
 
     const x = (cell.col - 1) * CELL_SIZE;
@@ -72,29 +65,12 @@ requestAnimationFrame(() => {
     const vp = mapViewport.getBoundingClientRect();
 const map = mapContainer.getBoundingClientRect();
 
-console.log(
-    "RECTS",
-    "viewport =", vp.left, vp.top, vp.width, vp.height,
-    "map =", map.left, map.top
-);
-
     const vr = mapViewport.getBoundingClientRect();
     const cell = mapContainer.querySelector(".cell.selected");
 
     if (!cell) return;
 
     const r = cell.getBoundingClientRect();
-
-    console.log(
-        "CENTER FINAL",
-        "viewport center =", vr.left + vr.width / 2,
-        vr.top + vr.height / 2,
-        "cell center =", r.left + r.width / 2,
-        r.top + r.height / 2,
-        "delta =",
-        (r.left + r.width / 2) - (vr.left + vr.width / 2),
-        (r.top + r.height / 2) - (vr.top + vr.height / 2)
-    );
 
 });
 
