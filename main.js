@@ -1,4 +1,4 @@
-console.log("main.js 1907 1010 ");
+console.log("main.js 1907 1015 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -75,7 +75,7 @@ navigation.init({
     setCurrentFloor: v => currentFloor = v,
     getCurrentMap: () => currentMap,
     setCurrentMap: v => currentMap = v,
-    getSelectedCellId: () =как> selectedCellId,
+    getSelectedCellId: () => selectedCellId,
     setSelectedCellId: v => selectedCellId = v,
     getMinFloor: () => floorsByMap.get(currentMap).min,
     getMaxFloor: () => floorsByMap.get(currentMap).max,
