@@ -81,13 +81,24 @@ if (!mapGrid.has(key)) {
     groupsByMap.get(root.id_map).push(group);
 }
 
-            mapGrid.get(key).cells.push(cell);
+    mapGrid.get(key).cells.push(cell);
 
-            if (root.floor < minFloor)
-                minFloor = root.floor;
+if (!floorsByMap.has(root.id_map)) {
 
-            if (root.floor > maxFloor)
-                maxFloor = root.floor;
+    floorsByMap.set(root.id_map, {
+        min: root.floor,
+        max: root.floor
+    });
+
+}
+
+const floorInfo = floorsByMap.get(root.id_map);
+
+if (root.floor < floorInfo.min)
+    floorInfo.min = root.floor;
+
+if (root.floor > floorInfo.max)
+    floorInfo.max = root.floor;
 
         });
 
