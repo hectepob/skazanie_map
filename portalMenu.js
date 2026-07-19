@@ -4,13 +4,11 @@ const portalMenu = (function () {
 
     let byId;
     let links;
-    let menu;
 
-    function init(cfg) {
-        byId = cfg.byId;
-        links = cfg.links;
-        menu = document.getElementById("portalMenu");
-    }
+function init(cfg) {
+    byId = cfg.byId;
+    links = cfg.links;
+}
 
     function hasPortal(id) {
         return links.some(x => x.id_portal === id);
@@ -69,6 +67,10 @@ const portalMenu = (function () {
 
         document.body.appendChild(menu);
 
+setTimeout(() => {
+    document.addEventListener("click", hide, { once: true });
+}, 0);
+        
     }
 
     function hide() {
