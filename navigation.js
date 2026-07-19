@@ -1,4 +1,4 @@
-console.log("navigation.js 1907 1055 ");
+console.log("navigation.js 1907 1845 ");
 
 const navigation = (function () {
 
@@ -69,6 +69,8 @@ view.apply();
         if (!cell)
             return;
 
+        tooltip.hide();
+
         const x = offset.x;
         const y = offset.y;
 
@@ -85,6 +87,18 @@ view.apply();
 
        topPanel.selectCell(cell);
 
+       tooltip.show([cell]);
+
+       const el = mapContainer.querySelector(".cell.selected");
+
+       if (el) {
+            const r = el.getBoundingClientRect();
+            const vr = mapViewport.getBoundingClientRect();
+            tooltip.move(
+                r.right - vr.left + 8,
+                r.top - vr.top
+            );
+        }
     }
 
 function gotoCell(id, center = true) {
