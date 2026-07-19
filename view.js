@@ -1,4 +1,4 @@
-console.log("view.js 1607 0020 ");//КОНСОЛЬ
+console.log("view.js 1907 1830 ");
 
 const view = (function () {
 
@@ -14,15 +14,12 @@ const view = (function () {
 
     function apply() {
         container.style.transform =
-            `translate(${offset.x}px, ${offset.y}px)
-             scale(${scale.value})`;
-
-        const m = getComputedStyle(container).transform;
-        console.log("MATRIX =", m);
+            `translate(${offset.x}px, ${offset.y}px) scale(${scale.value})`;
     }
 
     return {
         init,
         apply
     };
+
 })();
