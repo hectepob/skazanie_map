@@ -11,6 +11,7 @@ let gridMap;
 let areaMap;
 let minFloor;
 let maxFloor;
+let floorsByMap;
 let currentFloor = 0;
 let currentMap = 1;
 let currentArea = "";
@@ -43,6 +44,7 @@ areaMap = built.areaMap;
 
 minFloor = built.minFloor;
 maxFloor = built.maxFloor;
+floorsByMap = built.floorsByMap;
 
     if (data.length) {
 
