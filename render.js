@@ -1,4 +1,4 @@
-console.log("render 1807 2350");
+console.log("render 1907 2000");
 const renderMap = (function () {
 
     let cfg;
@@ -92,7 +92,33 @@ function drawStairs(el, cell) {
 
     });
 
-}    
+}
+
+function drawPortal(el, cell) {
+
+    if (!portalMenu.hasPortal(cell.id))
+        return;
+
+    const span = document.createElement("span");
+
+    span.className = "portal";
+    span.textContent = "◉";
+
+    span.onclick = e => {
+
+        e.stopPropagation();
+
+        console.log(
+            "PORTAL",
+            cell.id,
+            portalMenu.getTargets(cell.id)
+        );
+
+    };
+
+    el.appendChild(span);
+
+ }
 
 function drawCellId(el, group) {
 
@@ -187,6 +213,7 @@ el.style.top  = ((cell.row - 1) * 40) + "px";
 applyCellStyle(el, group);
 drawPassages(el, cell);
 drawStairs(el, cell);
+drawPortal(el, cell);
 drawCellId(el, group);
 attachTooltip(el, group);
 attachClick(el, cell);
