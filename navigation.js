@@ -1,4 +1,4 @@
-console.log("navigation.js 1807 1800 ");
+console.log("navigation.js 1907 1055 ");
 
 const navigation = (function () {
 
@@ -60,20 +60,6 @@ offset.y = mapViewport.clientHeight / 2 - (y + HALF_CELL) * scale.value;
     
 view.apply();
 
-requestAnimationFrame(() => {
-
-    const vp = mapViewport.getBoundingClientRect();
-const map = mapContainer.getBoundingClientRect();
-
-    const vr = mapViewport.getBoundingClientRect();
-    const cell = mapContainer.querySelector(".cell.selected");
-
-    if (!cell) return;
-
-    const r = cell.getBoundingClientRect();
-
-});
-
 }
     
     function keepView(id) {
@@ -98,16 +84,6 @@ const map = mapContainer.getBoundingClientRect();
        view.apply();
 
        topPanel.selectCell(cell);
-
-    }
-
-    function findCellOnFloor(base, floor) {
-
-    return data.find(cell =>
-        cell.col === base.col &&
-        cell.row === base.row &&
-        cell.floor === floor
-    );
 
     }
 
