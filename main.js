@@ -1,4 +1,4 @@
-console.log("main.js 1707 0740 ");
+console.log("main.js 1907 1010 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
