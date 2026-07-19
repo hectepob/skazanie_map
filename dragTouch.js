@@ -108,25 +108,6 @@ updateTransform();
 const screenX = worldCenterX * scale.value + offset.x;
 const screenY = worldCenterY * scale.value + offset.y;
 
-console.log(
-    "CHECK NEW",
-    "finger =", pinchCenterX.toFixed(1), pinchCenterY.toFixed(1),
-    "screen =", screenX.toFixed(1), screenY.toFixed(1)
-);
-
-console.log(
-    "SCALE ONLY",
-    "scale =", scale.value
-);
-
-    console.log(
-    "PINCH ONLY",
-    "center =", pinchCenterX, pinchCenterY,
-    "dist =", d,
-    "ratio =", d / pinchStartDistance,
-    "scale =", scale.value
-);
-
     return;
 }
 
