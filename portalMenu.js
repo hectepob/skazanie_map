@@ -1,13 +1,15 @@
-console.log("portalMenu.js 1907 2030");
+console.log("portalMenu.js 2007 0010");
 
 const portalMenu = (function () {
 
     let byId;
     let links;
+    let menu;
 
     function init(cfg) {
         byId = cfg.byId;
         links = cfg.links;
+        menu = document.getElementById("portalMenu");
     }
 
     function hasPortal(id) {
