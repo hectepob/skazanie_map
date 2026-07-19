@@ -159,7 +159,6 @@ body {
 
 #portalMenu {
     position: absolute;
-    display: none;
     min-width: 220px;
     background: #222;
     color: white;
