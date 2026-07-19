@@ -151,15 +151,13 @@ function attachClick(el, cell) {
         cfg.topPanel.selectCell(cell);
         cfg.tooltip.show([cell]);
 
-        const rect = cfg.mapViewport.getBoundingClientRect();
-
 const r = el.getBoundingClientRect();
 const vr = cfg.mapViewport.getBoundingClientRect();
 
-        cfg.tooltip.move(
-            r.right - vr.left + 8,
-            r.top - vr.top
-        );
+cfg.tooltip.move(
+    r.right - vr.left + 8,
+    r.top - vr.top
+);
 
         draw();
 
@@ -219,10 +217,9 @@ function draw() {
 
 });
 
-    cfg.mapContainer.style.gridTemplateColumns = `repeat(${maxCol}, 40px)`;
-    cfg.mapContainer.style.position = "absolute";
-    cfg.mapContainer.style.width  = (maxCol * 40) + "px";
-    cfg.mapContainer.style.height = (maxRow * 40) + "px";
+cfg.mapContainer.style.position = "absolute";
+cfg.mapContainer.style.width  = (maxCol * 40) + "px";
+cfg.mapContainer.style.height = (maxRow * 40) + "px";
     
 currentGrid.forEach(group => {
 
@@ -241,21 +238,6 @@ currentGrid.forEach(group => {
     cfg.topPanel.setFloor(
         cfg.getCurrentFloor()
     );
-
-    const el = cfg.mapContainer.querySelector(".cell.selected");
-
-    if (el) {
-
-        const rect = el.getBoundingClientRect();
-        const vp = cfg.mapViewport.getBoundingClientRect();
-
-        console.log(
-            "REAL",
-            rect.left - vp.left + rect.width / 2,
-            rect.top - vp.top + rect.height / 2
-        );
-
-    }
 
 }
 
