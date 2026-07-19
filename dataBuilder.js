@@ -1,4 +1,4 @@
-console.log("dataBuilder.js 1807 2305");
+console.log("dataBuilder.js 1907 1045 ");
 
 const dataBuilder = (function () {
 
@@ -9,8 +9,6 @@ const dataBuilder = (function () {
         const groupsByMap = new Map();
         const areaMap = new Map();
         const floorsByMap = new Map();
-        let minFloor = Infinity;
-        let maxFloor = -Infinity;
 
         // ---------- AREA COLORS ----------
 
@@ -65,40 +63,41 @@ const dataBuilder = (function () {
 
             const key = `${root.floor}:${root.row}:${root.col}`;
 
-if (!mapGrid.has(key)) {
+            if (!mapGrid.has(key)) {
 
-    const group = {
-        root,
-        cells: []
-    };
+                const group = {
+                    root,
+                    cells: []
+                };
 
-    mapGrid.set(key, group);
+                mapGrid.set(key, group);
 
-    if (!groupsByMap.has(root.id_map)) {
-        groupsByMap.set(root.id_map, []);
-    }
+                if (!groupsByMap.has(root.id_map)) {
+                    groupsByMap.set(root.id_map, []);
+                }
 
-    groupsByMap.get(root.id_map).push(group);
-}
+                groupsByMap.get(root.id_map).push(group);
 
-    mapGrid.get(key).cells.push(cell);
+            }
 
-if (!floorsByMap.has(root.id_map)) {
+            mapGrid.get(key).cells.push(cell);
 
-    floorsByMap.set(root.id_map, {
-        min: root.floor,
-        max: root.floor
-    });
+            if (!floorsByMap.has(root.id_map)) {
 
-}
+                floorsByMap.set(root.id_map, {
+                    min: root.floor,
+                    max: root.floor
+                });
 
-const floorInfo = floorsByMap.get(root.id_map);
+            }
 
-if (root.floor < floorInfo.min)
-    floorInfo.min = root.floor;
+            const floorInfo = floorsByMap.get(root.id_map);
 
-if (root.floor > floorInfo.max)
-    floorInfo.max = root.floor;
+            if (root.floor < floorInfo.min)
+                floorInfo.min = root.floor;
+
+            if (root.floor > floorInfo.max)
+                floorInfo.max = root.floor;
 
         });
 
@@ -110,55 +109,24 @@ if (root.floor > floorInfo.max)
 
                 group.cells.sort((a, b) => a.id - b.id);
 
-                group.displayId =
-                    group.cells
-                        .map(c => c.id)
-                        .join("<br>");
+                group.displayId = group.cells
+                    .map(c => c.id)
+                    .join("<br>");
 
             });
 
         });
 
-        // ---------- LOG ----------
+        return {
 
-        console.log("GRIDMAP");
+            byId,
+            gridMap,
+            groupsByMap,
+            floorsByMap,
+            areaMap
 
-        gridMap.forEach((mapGrid, mapId) => {
+        };
 
-            console.log(
-                "map_id =", mapId,
-                "groups =", mapGrid.size
-            );
-
-        });
-
-        if (minFloor === Infinity)
-            minFloor = 0;
-
-        if (maxFloor === -Infinity)
-            maxFloor = 0;
-
-        console.log("GROUP LIST");
-
-groupsByMap.forEach((arr, id) => {
-    console.log(
-        "map",
-        id,
-        "groups array =",
-        arr.length
-    );
-});
-        
-return {
-    byId,
-    gridMap,
-    groupsByMap,
-    floorsByMap,
-    areaMap,
-    minFloor,
-    maxFloor
-};
-        
     }
 
     return {
