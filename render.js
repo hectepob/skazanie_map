@@ -76,6 +76,8 @@ function drawStairs(el, cell) {
         span.textContent = stair.symbol;
 
         span.onclick = e => {
+            
+console.log("STAIRS CLICK", stair.id); //КОНСОЛЬ
 
             e.stopPropagation();
 
@@ -161,6 +163,7 @@ function attachTooltip(el, group) {
 function attachClick(el, cell) {
 
     el.addEventListener("click", e => {
+console.log("CELL CLICK", cell.id); //КОНСОЛЬ
 
         if (cfg.drag.moved())
             return;
