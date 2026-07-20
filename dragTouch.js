@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2007 2330 ");
+console.log("dragTouch.js 2007 2340 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -139,7 +139,7 @@ function onUp(e) {
     dragging = false;
     pointerId = null;
     if (!moved) {
-         //portalMenu.hide();
+         portalMenu.hide();
     }
 
     if (viewport.hasPointerCapture(e.pointerId))
