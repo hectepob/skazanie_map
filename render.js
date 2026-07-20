@@ -72,9 +72,8 @@ function drawPortal(el, cell) {
 
 span.onclick = e => {
     e.stopPropagation();
-    const vr = cfg.mapViewport.getBoundingClientRect();
     cfg.tooltip.hide();
-    portalMenu.show(cell);
+    portalMenu.show(cell, span);
 };
 
     el.appendChild(span);
