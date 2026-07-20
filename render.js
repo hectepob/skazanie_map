@@ -14,7 +14,7 @@ function applyCellStyle(el, group) {
         el.classList.add("highlight");
     if (group.cells.some(c => c.id === cfg.getSelectedCellId()))
         el.classList.add("selected");
-    const areaStyle = cfg.areaMap.get(`${cell.id_area}:${cell.id_subarea}`);
+    const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
     if (areaStyle) {
         if (areaStyle.bg_color)
             el.style.backgroundColor = areaStyle.bg_color;
