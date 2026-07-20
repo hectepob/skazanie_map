@@ -9,6 +9,10 @@ const portalMenu = (function () {
 
     function init(cfg) {
 
+        console.log("portalMenu.init()");
+        console.log(cfg);
+        console.log(cfg.map);
+        
         byId = cfg.byId;
         links = cfg.links;
         map = cfg.map;
@@ -17,6 +21,9 @@ const portalMenu = (function () {
         menu.className = "portalMenu";
         menu.style.display = "none";
         map.appendChild(menu);
+        
+        console.log("MENU CREATED", menu);
+        console.log(document.getElementById("portalMenu"));
 
     }
 
