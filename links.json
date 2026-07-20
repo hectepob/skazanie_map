@@ -12,8 +12,9 @@
 {"id_portal":490,"targets":[322]},
 {"id_portal":1500,"targets":[1501]},
 {"id_portal":1501,"targets":[1500]},
-{"id_portal":1829,"targets":[1901,1905]},
-{"id_portal":1871,"targets":[1901,1905]},
-{"id_portal":1901,"targets":[1829,1871,1910,5000]},
-{"id_portal":1905,"targets":[1829,1871,1910,5000]}
+{"id_portal":1829,"targets":[1903,1907]},
+{"id_portal":1871,"targets":[1903,1907]},
+{"id_portal":1903,"targets":[1829,1871,1910,5000]},
+{"id_portal":1907,"targets":[1829,1871,1910,5000]},
+{"id_portal":1910,"targets":[1903,1907]}
 ]
