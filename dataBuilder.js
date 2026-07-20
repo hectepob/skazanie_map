@@ -12,18 +12,15 @@ const dataBuilder = (function () {
 
         // ---------- AREA COLORS ----------
 
-        areaData.forEach(a => {
-
-            if (!areaMap.has(a.area)) {
-
-                areaMap.set(a.area, {
-                    bg_color: a.bg_color,
-                    font_color: a.font_color
-                });
-
-            }
-
-        });
+areaData.forEach(a => {
+    areaMap.set(
+        `${a.id_area}:${a.id_subarea}`,
+        {
+            bg_color: a.bg_color,
+            font_color: a.font_color
+        }
+    );
+});
 
         // ---------- byId ----------
 
