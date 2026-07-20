@@ -41,7 +41,7 @@ function onDown(e) {
     moved = false;
     dragStartX = e.clientX / scale.value - offset.x;
     dragStartY = e.clientY / scale.value - offset.y;
-    viewport.setPointerCapture(e.pointerId);
+    //viewport.setPointerCapture(e.pointerId);
 }
 
 function onMove(e) {
@@ -65,7 +65,7 @@ function onUp(e) {
         return;
     dragging = false;
     if (viewport.hasPointerCapture(e.pointerId))
-        viewport.releasePointerCapture(e.pointerId);
+        //viewport.releasePointerCapture(e.pointerId);
     // после завершения drag снова разрешаем обычный клик
     setTimeout(() => {
         moved = false;
