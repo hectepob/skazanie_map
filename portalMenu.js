@@ -1,17 +1,32 @@
-console.log("portalMenu.js 2007 0050");
+console.log("portalMenu.js 2007 0630 ");
 
 const portalMenu = (function () {
 
     let byId;
     let links;
+    let map;
+    let menu;
 
-function init(cfg) {
-    byId = cfg.byId;
-    links = cfg.links;
-}
+    function init(cfg) {
+
+        byId = cfg.byId;
+        links = cfg.links;
+        map = cfg.map;
+
+        menu = document.createElement("div");
+        menu.id = "portalMenu";
+        menu.className = "portalMenu";
+
+        menu.style.display = "none";
+
+        map.appendChild(menu);
+
+    }
 
     function hasPortal(id) {
+
         return links.some(x => x.id_portal === id);
+
     }
 
     function getTargets(id) {
@@ -22,33 +37,32 @@ function init(cfg) {
 
     }
 
-    function show(idPortal, x, y) {
+    function show(cell) {
 
         hide();
 
-        const targets = getTargets(idPortal);
+        const targets = getTargets(cell.id);
 
         if (!targets.length)
             return;
 
-        const menu = document.createElement("div");
-
-        menu.id = "portalMenu";
-        menu.className = "portalMenu";
+        menu.innerHTML = "";
 
         targets.forEach(id => {
 
-            const cell = byId.get(id);
+            const target = byId.get(id);
 
-            if (!cell)
+            if (!target)
                 return;
 
             const item = document.createElement("div");
 
             item.className = "portalItem";
-            item.textContent = `${cell.area} — ${cell.subarea}`;
 
-            item.onclick = function (e) {
+            item.textContent =
+                `${target.area} — ${target.subarea}`;
+
+            item.onclick = e => {
 
                 e.stopPropagation();
 
@@ -62,32 +76,32 @@ function init(cfg) {
 
         });
 
-        menu.style.left = x + "px";
-        menu.style.top = y + "px";
+        menu.style.left =
+            ((cell.col - 1) * 40 + 26) + "px";
 
-        document.getElementById("mapViewport").appendChild(menu);
+        menu.style.top =
+            ((cell.row - 1) * 40 + 4) + "px";
 
-setTimeout(() => {
-    document.addEventListener("click", hide, { once: true });
-}, 0);
-        
+        menu.style.display = "block";
+
     }
 
     function hide() {
 
-        const old = document.getElementById("portalMenu");
+        menu.style.display = "none";
 
-        if (old)
-            old.remove();
+        menu.innerHTML = "";
 
     }
 
     return {
+
         init,
         hasPortal,
         getTargets,
         show,
         hide
+
     };
 
 })();
