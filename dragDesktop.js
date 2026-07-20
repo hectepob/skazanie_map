@@ -1,4 +1,4 @@
-console.log("dragDesktop.js 2007 1155");
+console.log("dragDesktop.js 2007 1200");
 
     const dragDesktop = (function () {
 
@@ -30,51 +30,47 @@ console.log("dragDesktop.js 2007 1155");
         view.apply()
     }
 
-    function onDown(e) {
-        if (e.pointerType !== "mouse")
-            return;
-        if (e.button !== 0)
-            return;
-        dragging = true;
+function onDown(e) {
+    if (e.pointerType !== "mouse")
+        return;
+    if (e.button !== 0)
+        return;
+    dragging = true;
+
+    // каждый новый клик начинается как "не drag"
+    moved = false;
+    dragStartX = e.clientX / scale.value - offset.x;
+    dragStartY = e.clientY / scale.value - offset.y;
+    viewport.setPointerCapture(e.pointerId);
+}
+
+function onMove(e) {
+    if (!dragging)
+        return;
+    const newX = e.clientX / scale.value - dragStartX;
+    const newY = e.clientY / scale.value - dragStartY;
+    if (!moved) {
+        const dx = newX - offset.x;
+        const dy = newY - offset.y;
+        if (Math.hypot(dx, dy) > 5)
+            moved = true;
+    }
+    offset.x = newX;
+    offset.y = newY;
+    updateTransform();
+}
+
+function onUp(e) {
+    if (!dragging)
+        return;
+    dragging = false;
+    if (viewport.hasPointerCapture(e.pointerId))
+        viewport.releasePointerCapture(e.pointerId);
+    // после завершения drag снова разрешаем обычный клик
+    setTimeout(() => {
         moved = false;
-        dragStartX = e.clientX;
-        dragStartY = e.clientY;
-        startOffsetX = offset.x;
-        startOffsetY = offset.y;
-        viewport.setPointerCapture(e.pointerId);
-    }
-
-    function onMove(e) {
-        if (!dragging)
-            return;
-        const dx = e.clientX - dragStartX;
-        const dy = e.clientY - dragStartY;
-        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-            moved = true;
-        }
-        offset.x = startOffsetX + dx;
-        offset.y = startOffsetY + dy;
-        if (
-            Math.abs(newX - offset.x) > 5 ||
-            Math.abs(newY - offset.y) > 5
-        ) {
-            moved = true;
-        }
-        offset.x = newX;
-        offset.y = newY;
-        updateTransform();
-    }
-
-        function onUp(e) {
-            if (!dragging)
-                return;
-            dragging = false;
-            if (viewport.hasPointerCapture(e.pointerId))
-                viewport.releasePointerCapture(e.pointerId);
-            setTimeout(() => {
-                moved = false;
-            }, 0);
-        }
+    }, 0);
+}
 
     return {
         init,
