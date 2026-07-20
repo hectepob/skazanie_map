@@ -58,6 +58,7 @@ function onMove(e) {
     offset.x = newX;
     offset.y = newY;
     updateTransform();
+    portalMenu.hide();
 }
 
 function onUp(e) {
