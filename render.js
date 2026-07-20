@@ -1,4 +1,4 @@
-console.log("render 2007 1010");
+console.log("render 2007 1030");
 const renderMap = (function () {
 
     let cfg;
@@ -186,7 +186,7 @@ cfg.tooltip.move(
         draw();
 
     });
-
+console.log("ATTACHED", cell.id);//КОНСОЛЬ
 }
     
 function drawCell(group) {
@@ -217,6 +217,8 @@ attachTooltip(el, group);
 attachClick(el, cell);
 
     return el;
+
+console.log("DRAW CELL", cell.id); //КОНСОЛЬ
 
 }    
     
