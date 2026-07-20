@@ -1,4 +1,4 @@
-console.log("render 2007 1240");
+console.log("render 2007 1310");
 const renderMap = (function () {
 
     let cfg;
@@ -159,6 +159,7 @@ if (!group) {
 }
 
 const cell = group.root;
+el.dataset.id = cell.id;
 
 el.style.left = ((cell.col - 1) * 40) + "px";
 el.style.top  = ((cell.row - 1) * 40) + "px";
@@ -182,16 +183,15 @@ attachClick(el, cell);
     const currentGrid = cfg.gridMap.get(cfg.getCurrentMap());
     if (!currentGrid)
         return;
-    const group = currentGrid.find(g =>
-        g.root.id === cfg.getSelectedCellId()
-    );
+    let group = null;
+    currentGrid.forEach(g => {
+        if (g.root.id === cfg.getSelectedCellId())
+            group = g;
+    });
     if (!group)
         return;
-    const left = ((group.root.col - 1) * 40) + "px";
-    const top  = ((group.root.row - 1) * 40) + "px";
-    const el = [...cfg.mapContainer.children].find(x =>
-        x.style.left === left &&
-        x.style.top === top
+    const el = cfg.mapContainer.querySelector(
+        `.cell[data-id="${cfg.getSelectedCellId()}"]`
     );
     if (el)
         el.classList.add("selected");
