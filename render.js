@@ -123,6 +123,7 @@ function attachClick(el, cell) {
         if (cfg.drag.moved())
             return;
 
+portalMenu.hide();
 cfg.tooltip.hide();
 cfg.highlightCells.clear();
 cfg.setSelectedCellId(cell.id);
