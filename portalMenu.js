@@ -39,7 +39,7 @@ const portalMenu = (function () {
         return rec ? rec.targets : [];
     }
 
-    function show(cell) {
+    function show(cell, anchor) {
         console.log("SHOW", instanceId, cell.id);
         hide();
         const targets = getTargets(cell.id);
@@ -60,9 +60,11 @@ const portalMenu = (function () {
             };
             menu.appendChild(item);
         });
-        menu.style.left = ((cell.col - 1) * 40 + 26) + "px";
-        menu.style.top = ((cell.row - 1) * 40 + 4) + "px";
-        menu.style.display = "block";
+            const mapRect = map.getBoundingClientRect();
+            const anchorRect = anchor.getBoundingClientRect();
+            menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
+            menu.style.top = (anchorRect.top - mapRect.top) + "px";
+            menu.style.display = "block";
     }
 
     function hide() {
