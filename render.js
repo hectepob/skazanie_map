@@ -169,11 +169,22 @@ console.log("MOVED =", cfg.drag.moved()); //КОНСОЛЬ
         if (cfg.drag.moved())
             return;
 
-        cfg.tooltip.hide();
-        cfg.highlightCells.clear();
-        cfg.setSelectedCellId(cell.id);
-        cfg.topPanel.selectCell(cell);
-        cfg.tooltip.show([cell]);
+console.log("1");
+cfg.tooltip.hide();
+
+console.log("2");
+cfg.highlightCells.clear();
+
+console.log("3");
+cfg.setSelectedCellId(cell.id);
+
+console.log("4");
+cfg.topPanel.selectCell(cell);
+
+console.log("5");
+cfg.tooltip.show([cell]);
+
+console.log("6");
 
 const r = el.getBoundingClientRect();
 const vr = cfg.mapViewport.getBoundingClientRect();
@@ -183,7 +194,9 @@ cfg.tooltip.move(
     r.top - vr.top
 );
 
-        draw();
+    draw();
+
+console.log("7");
 
     });
 console.log("ATTACHED", cell.id);//КОНСОЛЬ
