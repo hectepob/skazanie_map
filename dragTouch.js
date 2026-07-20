@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2007 2240 ");
+console.log("dragTouch.js 2007 2330 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -102,7 +102,7 @@ offset.x = pinchCenterX - worldCenterX * scale.value;
 offset.y = pinchCenterY - worldCenterY * scale.value;
 
 updateTransform();
-//portalMenu.hide();
+portalMenu.hide();
 
     return;
 }
