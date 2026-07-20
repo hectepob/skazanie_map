@@ -2,19 +2,12 @@ console.log("portalMenu.js 2007 1320 ");
 
 const portalMenu = (function () {
 
-    const instanceId = Math.random().toString(36).slice(2); //ПРОВЕРКА
-    console.log("PORTAL INSTANCE", instanceId); //ПРОВЕРКА
-
     let byId;
     let links;
     let map;
     let menu;
 
     function init(cfg) {
-
-        console.log("INIT", instanceId);
-        console.log(cfg);
-        console.log(cfg.map);
         
         byId = cfg.byId;
         links = cfg.links;
@@ -24,9 +17,6 @@ const portalMenu = (function () {
         menu.className = "portalMenu";
         menu.style.display = "none";
         map.appendChild(menu);
-        
-        console.log("MENU CREATED", menu);
-        console.log(document.getElementById("portalMenu"));
 
     }
 
@@ -40,7 +30,6 @@ const portalMenu = (function () {
     }
 
     function show(cell, anchor) {
-        console.log("SHOW", instanceId, cell.id);
         hide();
         const targets = getTargets(cell.id);
         if (!targets.length)
@@ -62,9 +51,26 @@ const portalMenu = (function () {
         });
             const mapRect = map.getBoundingClientRect();
             const anchorRect = anchor.getBoundingClientRect();
-            menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
-            menu.style.top = (anchorRect.top - mapRect.top) + "px";
             menu.style.display = "block";
+            const h = menu.offsetHeight;
+
+// координата значка внутри карты
+            const anchorY = anchorRect.top - mapRect.top + anchorRect.height / 2;
+
+// центрируем меню относительно значка
+            let top = anchorY - h / 2;
+
+// не даём уйти выше карты
+            top = Math.max(4, top);
+
+// не даём уйти ниже карты
+            top = Math.min(
+                top,
+                map.clientHeight - h - 4
+            );
+
+            menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
+            menu.style.top = top + "px";
     }
 
     function hide() {
