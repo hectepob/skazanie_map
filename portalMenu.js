@@ -1,4 +1,4 @@
-console.log("portalMenu.js 2007 1320 ");
+console.log("portalMenu.js 2007 2310 ");
 
 const portalMenu = (function () {
 
@@ -17,6 +17,21 @@ const portalMenu = (function () {
         menu.className = "portalMenu";
         menu.style.display = "none";
         map.appendChild(menu);
+
+        document.addEventListener("click", function (e) {
+        if (menu.style.display === "none")
+            return;
+
+        // если кликнули по самому меню — ничего не делаем
+        if (menu.contains(e.target))
+            return;
+
+        // если кликнули по значку портала — тоже ничего
+        if (e.target.closest(".portal"))
+            return;
+
+        hide();
+        });
 
     }
 
