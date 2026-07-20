@@ -101,6 +101,7 @@ offset.x = pinchCenterX - worldCenterX * scale.value;
 offset.y = pinchCenterY - worldCenterY * scale.value;
 
 updateTransform();
+portalMenu.hide();
 
     return;
 }
