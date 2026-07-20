@@ -148,33 +148,39 @@ body {
 }
 
 .portal {
-    position: absolute;
-    right: 2px;
-    bottom: 2px;
-    cursor: pointer;
-    font-size: 12px;
-    color: #00c8ff;
-    z-index: 5;
+    position:absolute;
+    right:2px;
+    bottom:2px;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#2bc7ff;
+    border:1px solid #005d88;
+    cursor:pointer;
+    z-index:20;
 }
 
-#portalMenu {
-    position: absolute;
-    min-width: 220px;
-    background: #222;
-    color: white;
-    border: 1px solid #888;
-    border-radius: 6px;
-    z-index: 2000;
-    overflow: hidden;
+.portalMenu {
+    position:absolute;
+    display:none;
+    min-width:220px;
+    background:#202020;
+    color:white;
+    border:2px solid #777;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,.45);
+    overflow:hidden;
+    z-index:50;
 }
 
-#portalMenu .portalItem {
-    padding: 6px 10px;
-    cursor: pointer;
+.portalItem {
+    padding:6px 10px;
+    white-space:nowrap;
+    cursor:pointer;
 }
 
-#portalMenu .portalItem:hover {
-    background: #555;
+.portalItem:hover {
+    background:#505050;
 }
 
 /* ПРОХОДЫ (обычные) */
