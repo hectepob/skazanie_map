@@ -1,57 +1,40 @@
-console.log("render 2007 1030");
+console.log("render 2007 1240");
 const renderMap = (function () {
 
     let cfg;
 
     function init(config) {
-
         cfg = config;
-
     }
 
 function applyCellStyle(el, group) {
 
     const cell = group.root;
-
     if (cfg.highlightCells.has(cell.id))
         el.classList.add("highlight");
-
     if (group.cells.some(c => c.id === cfg.getSelectedCellId()))
         el.classList.add("selected");
-
     const areaStyle = cfg.areaMap.get(cell.area);
-
     if (areaStyle) {
-
         if (areaStyle.bg_color)
             el.style.backgroundColor = areaStyle.bg_color;
-
         if (areaStyle.font_color)
             el.style.color = areaStyle.font_color;
-
     }
-
     if (cell.text_color)
         el.style.color = cell.text_color;
-
 }
 
 function drawPassages(el, cell) {
-
     ["north", "south", "west", "east"].forEach(dir => {
-
         if (cell[dir] === "true")
             el.classList.add(`open-${dir}`);
-
         if (cell[dir] === "door")
             el.classList.add(`door-${dir}`);
-
     });
-
 }
 
 function drawStairs(el, cell) {
-
     const stairs = [
         {
             id: cfg.toId(cell.stairs?.down),
@@ -64,45 +47,27 @@ function drawStairs(el, cell) {
             symbol: "▲"
         }
     ];
-
     stairs.forEach(stair => {
-
         if (stair.id === null)
             return;
-
         const span = document.createElement("span");
-
         span.className = stair.className;
         span.textContent = stair.symbol;
-
         span.onclick = e => {
-            
-console.log("STAIRS CLICK", stair.id); //КОНСОЛЬ
-
             e.stopPropagation();
-
             const target = cfg.byId.get(stair.id);
-
             if (!target)
                 return;
-
             navigation.keepView(target.id);
-
         };
-
         el.appendChild(span);
-
     });
-
 }
 
 function drawPortal(el, cell) {
-
     if (!portalMenu.hasPortal(cell.id))
         return;
-
     const span = document.createElement("span");
-
     span.className = "portal";
 
 span.onclick = e => {
@@ -113,24 +78,17 @@ span.onclick = e => {
 };
 
     el.appendChild(span);
-
  }
 
 function drawCellId(el, group) {
-
     const num = document.createElement("span");
-
     num.className = "cellId";
-
     if (group.cells.length === 2)
         num.classList.add("multi2");
     else if (group.cells.length >= 3)
         num.classList.add("multi3");
-
     num.innerHTML = group.displayId;
-
     el.appendChild(num);
-
 }
 
 function attachTooltip(el, group) {
@@ -163,28 +121,14 @@ function attachTooltip(el, group) {
 function attachClick(el, cell) {
 
     el.addEventListener("click", e => {
-console.log("CELL CLICK", cell.id); //КОНСОЛЬ
-console.log("MOVED =", cfg.drag.moved()); //КОНСОЛЬ
-
         if (cfg.drag.moved())
             return;
 
-console.log("1");
 cfg.tooltip.hide();
-
-console.log("2");
 cfg.highlightCells.clear();
-
-console.log("3");
 cfg.setSelectedCellId(cell.id);
-
-console.log("4");
 cfg.topPanel.selectCell(cell);
-
-console.log("5");
 cfg.tooltip.show([cell]);
-
-console.log("6");
 
 const r = el.getBoundingClientRect();
 const vr = cfg.mapViewport.getBoundingClientRect();
@@ -194,12 +138,10 @@ cfg.tooltip.move(
     r.top - vr.top
 );
 
-    draw();
-
-console.log("7");
+    refreshSelection();
 
     });
-console.log("ATTACHED", cell.id);//КОНСОЛЬ
+
 }
     
 function drawCell(group) {
@@ -231,9 +173,29 @@ attachClick(el, cell);
 
     return el;
 
-console.log("DRAW CELL", cell.id); //КОНСОЛЬ
+}
 
-}    
+    function refreshSelection() {
+    cfg.mapContainer
+        .querySelectorAll(".cell.selected")
+        .forEach(el => el.classList.remove("selected"));
+    const currentGrid = cfg.gridMap.get(cfg.getCurrentMap());
+    if (!currentGrid)
+        return;
+    const group = currentGrid.find(g =>
+        g.root.id === cfg.getSelectedCellId()
+    );
+    if (!group)
+        return;
+    const left = ((group.root.col - 1) * 40) + "px";
+    const top  = ((group.root.row - 1) * 40) + "px";
+    const el = [...cfg.mapContainer.children].find(x =>
+        x.style.left === left &&
+        x.style.top === top
+    );
+    if (el)
+        el.classList.add("selected");
+    }
     
 function draw() {
 
@@ -283,7 +245,8 @@ currentGrid.forEach(group => {
 
     return {
         init,
-        draw
+        draw,
+        refreshSelection
     };
 
 })();
