@@ -2,6 +2,9 @@ console.log("portalMenu.js 2007 1320 ");
 
 const portalMenu = (function () {
 
+    const instanceId = Math.random().toString(36).slice(2); //ПРОВЕРКА
+    console.log("PORTAL INSTANCE", instanceId); //ПРОВЕРКА
+
     let byId;
     let links;
     let map;
@@ -9,7 +12,7 @@ const portalMenu = (function () {
 
     function init(cfg) {
 
-        console.log("portalMenu.init()");
+        console.log("INIT", instanceId);
         console.log(cfg);
         console.log(cfg.map);
         
@@ -37,7 +40,7 @@ const portalMenu = (function () {
     }
 
     function show(cell) {
-        console.log("SHOW PORTAL MENU", cell.id);
+        console.log("SHOW", instanceId, cell.id);
         hide();
         const targets = getTargets(cell.id);
         if (!targets.length)
