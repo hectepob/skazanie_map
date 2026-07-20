@@ -57,7 +57,7 @@ highlight.init({
 portalMenu.init({
     byId,
     links: linkData,
-    map: mapContainer
+    map: mapViewport
 });
 
 console.log("PORTALS", linkData.length);
