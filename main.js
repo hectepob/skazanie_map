@@ -170,11 +170,12 @@ selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
 if (firstCell)
     navigation.centerOnCell(firstCell);
+
 mapViewport.addEventListener("click", e => {
+    portalMenu.hide();
     if (e.target.closest(".cell:not(.empty)"))
         return;
     tooltip.hide();
-
 });
 
 });
