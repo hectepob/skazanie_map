@@ -1,4 +1,4 @@
-console.log("main.js 1907 1050 ");
+console.log("main.js 2007 0635 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -56,7 +56,8 @@ highlight.init({
 
 portalMenu.init({
     byId,
-    links: linkData
+    links: linkData,
+    map: mapContainer
 });
 
 console.log("PORTALS", linkData.length);
