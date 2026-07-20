@@ -139,7 +139,7 @@ function onUp(e) {
     dragging = false;
     pointerId = null;
     if (!moved) {
-         //portalMenu.hide();
+         portalMenu.hide();
     }
 
     if (viewport.hasPointerCapture(e.pointerId))
