@@ -164,6 +164,7 @@ function attachClick(el, cell) {
 
     el.addEventListener("click", e => {
 console.log("CELL CLICK", cell.id); //КОНСОЛЬ
+console.log("MOVED =", cfg.drag.moved()); //КОНСОЛЬ
 
         if (cfg.drag.moved())
             return;
