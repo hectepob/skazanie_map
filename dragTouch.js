@@ -1,4 +1,4 @@
-console.log("dragTouch.js 1907 1050 ");
+console.log("dragTouch.js 2007 2240 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -76,6 +76,7 @@ if (pointers.size === 2) {
     pointerId = e.pointerId;
     dragging = true;
     tooltip.hide();
+    portalMenu.hide();
     moved = false;
     dragStartX = e.clientX - offset.x;
     dragStartY = e.clientY - offset.y;
@@ -137,6 +138,9 @@ function onUp(e) {
 
     dragging = false;
     pointerId = null;
+    if (!moved) {
+         portalMenu.hide();
+    }
 
     if (viewport.hasPointerCapture(e.pointerId))
         viewport.releasePointerCapture(e.pointerId);
