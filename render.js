@@ -102,7 +102,6 @@ function drawPortal(el, cell) {
     const span = document.createElement("span");
 
     span.className = "portal";
-    span.textContent = "◉";
 
 span.onclick = e => {
     e.stopPropagation();
