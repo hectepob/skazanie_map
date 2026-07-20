@@ -123,6 +123,9 @@ function attachClick(el, cell) {
         if (cfg.drag.moved())
             return;
 
+        // если был активен поиск зоны/подзоны — сбрасываем его
+cfg.topPanel.clearAreaSelection?.();
+
 portalMenu.hide();
 cfg.tooltip.hide();
 cfg.highlightCells.clear();
