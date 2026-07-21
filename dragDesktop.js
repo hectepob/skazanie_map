@@ -102,6 +102,7 @@ function onWheel(e) {
     offset.y =
         mouseY - worldY * newScale;
     updateTransform();
+    topPanelModule.setZoom(scale.value);
 }
 
     return {
