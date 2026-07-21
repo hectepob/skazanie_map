@@ -1,4 +1,4 @@
-console.log("topPanel.js 1907 1120 ");
+console.log("topPanel.js 2107 2315 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -192,6 +192,13 @@ function init(areas, map) {
         navigation.setZoom(value / 100);
 });
 
+    requestAnimationFrame(() => {
+    document.documentElement.style.setProperty(
+        "--topPanelHeight",
+        panel.offsetHeight + "px"
+    );
+});
+    
 }   
     
 function buildAreas() {
