@@ -73,7 +73,7 @@ function init(areas, map) {
     const zoomPlus = document.createElement("button");
     zoomPlus.textContent = "+";
     
-    const zoomInput = document.createElement("input");
+    zoomInput = document.createElement("input"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
     zoomInput.type = "text";
     zoomInput.value = "100";
     zoomInput.style.width = "45px";
