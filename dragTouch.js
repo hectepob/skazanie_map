@@ -102,7 +102,7 @@ offset.x = pinchCenterX - worldCenterX * scale.value;
 offset.y = pinchCenterY - worldCenterY * scale.value;
 
 updateTransform();
-//portalMenu.hide();
+portalMenu.hide();
 
     return;
 }
@@ -139,7 +139,7 @@ function onUp(e) {
     dragging = false;
     pointerId = null;
     if (!moved) {
-         portalMenu.hide();
+         //portalMenu.hide();
     }
 
     if (viewport.hasPointerCapture(e.pointerId))
