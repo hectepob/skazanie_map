@@ -113,7 +113,7 @@ function changeZoom(newScale) {
     const cx = rect.width / 2;
     const cy = rect.height / 2;
     const oldScale = scale.value;
-    newScale = Math.max(0.5, Math.min(3, newScale));
+    newScale = Math.max(0.5, Math.min(2, newScale));
     if (newScale === oldScale)
         return;
     const worldX = (cx - offset.x) / oldScale;
@@ -130,7 +130,7 @@ function setZoom(value) {
     const cx = rect.width / 2;
     const cy = rect.height / 2;
     const oldScale = scale.value;
-    let newScale = Math.max(0.5, Math.min(3, value));
+    let newScale = Math.max(0.5, Math.min(2, value));
     if (newScale === oldScale)
         return;
     const worldX = (cx - offset.x) / oldScale;
