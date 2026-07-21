@@ -80,29 +80,8 @@ function onWheel(e) {
     e.preventDefault();
     portalMenu.hide();
     tooltip.hide();
-    const oldScale = scale.value;
-    let newScale =
-        oldScale * (e.deltaY < 0 ? 1.1 : 0.9090909);
-    newScale = Math.max(
-        0.5,
-        Math.min(2, newScale)
-    );
-    if (newScale === oldScale)
-        return;
-    const rect = viewport.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const worldX =
-        (mouseX - offset.x) / oldScale;
-    const worldY =
-        (mouseY - offset.y) / oldScale;
-    scale.value = newScale;
-    offset.x =
-        mouseX - worldX * newScale;
-    offset.y =
-        mouseY - worldY * newScale;
-    updateTransform();
-    topPanelModule.setZoom(scale.value);
+    const delta = e.deltaY < 0 ? 0.25 : -0.25;
+    navigation.setZoom(scale.value + delta);
 }
 
     return {
