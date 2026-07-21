@@ -261,9 +261,6 @@ return {
     setZoom(value) {
         zoomInput.value = Math.round(value * 100);
     },
-    setZoom(value) {
-        zoomInput.value = Math.round(value * 100);
-    },
     onZoomPlus(fn) {
         zoomPlus.onclick = fn;
     },
@@ -277,7 +274,7 @@ return {
         };
     },
     clearSelection,
-    clearAreaSelection,
+    //clearAreaSelection,
     selectCell(cell) {
         if (!cell)
             return;
