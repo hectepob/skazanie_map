@@ -1,19 +1,15 @@
 console.log("topPanel.js 1907 1120 ");
 
 const topPanelModule = (function () {
-
 const panel = document.getElementById("topPanel");
 
 let areaSelect;
 let subareaSelect;
 let locationInput;
-
 let findButton;
-
 let floorUpButton;
 let floorDownButton;
 let floorLabel;
-
 let areaData = [];
 let mapData = [];
 
@@ -21,7 +17,6 @@ function init(areas, map) {
 
     areaData = areas;
     mapData = map;
-
     panel.innerHTML = "";
 
     // ---------- подписи ----------
@@ -50,7 +45,6 @@ function init(areas, map) {
             return;
 
         e.preventDefault();
-
         findButton.click();
 
     });
@@ -71,6 +65,29 @@ function init(areas, map) {
     floorLabel.style.display = "inline-block";
     floorLabel.style.textAlign = "center";
 
+    // ---------- масштаб ----------
+const zoomLabel = document.createElement("span");
+zoomLabel.textContent = "Масштаб:";
+
+const zoomPlus = document.createElement("button");
+zoomPlus.textContent = "+";
+
+const zoomInput = document.createElement("input");
+zoomInput.type = "text";
+zoomInput.value = "100";
+zoomInput.style.width = "45px";
+zoomInput.style.textAlign = "center";
+
+const zoomPercent = document.createElement("span");
+zoomPercent.textContent = "%";
+
+const zoomMinus = document.createElement("button");
+zoomMinus.textContent = "-";
+
+// ---------- этаж ----------
+const floorText = document.createElement("span");
+floorText.textContent = "Этаж:";
+
     // ---------- размещение ----------
     panel.appendChild(areaLabel);
     panel.appendChild(areaSelect);
@@ -83,11 +100,20 @@ function init(areas, map) {
 
     panel.appendChild(findButton);
 
-    panel.appendChild(document.createTextNode(" "));
+    panel.appendChild(document.createTextNode("   "));
 
+    panel.appendChild(floorText);
     panel.appendChild(floorUpButton);
     panel.appendChild(floorLabel);
     panel.appendChild(floorDownButton);
+
+    panel.appendChild(document.createTextNode("   "));
+
+    panel.appendChild(zoomLabel);
+    panel.appendChild(zoomPlus);
+    panel.appendChild(zoomInput);
+    panel.appendChild(zoomPercent);
+    panel.appendChild(zoomMinus);
 
     buildAreas();
     clearSelection();
