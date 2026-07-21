@@ -167,24 +167,34 @@ renderMap.init({
 topPanelModule.init(areaData, data);
 topPanelModule.setZoom(scale);
     
-topPanelModule.onZoomPlus(() => {
-    scale = Math.min(scale + 0.1, 3);
+function changeZoom(newScale) {
+    const rect = mapViewport.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    newScale = Math.max(0.5, Math.min(3, newScale));
+    if (newScale === scale)
+        return;
+    const worldX = (cx - offsetX) / scale;
+    const worldY = (cy - offsetY) / scale;
+    scale = newScale;
+    offsetX = cx - worldX * scale;
+    offsetY = cy - worldY * scale;
     view.apply();
     topPanelModule.setZoom(scale);
+}
+
+topPanelModule.onZoomPlus(() => {
+    changeZoom(scale + 0.25);
 });
 
 topPanelModule.onZoomMinus(() => {
-    scale = Math.max(scale - 0.1, 0.5);
-    view.apply();
-    topPanelModule.setZoom(scale);
+    changeZoom(scale - 0.25);
 });
 
 topPanelModule.onZoomEnter(percent => {
     if (isNaN(percent))
         return;
-    scale = Math.max(0.5, Math.min(percent / 100, 3));
-    view.apply();
-    topPanelModule.setZoom(scale);
+    changeZoom(percent / 100);
 });
     
 leftPanel.init(data);
