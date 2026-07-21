@@ -175,11 +175,11 @@ function init(areas, map) {
     };
 
     zoomPlus.onclick = function () {
-        navigation.changeZoom(1.1);
+        navigation.changeZoom(25);
     };
 
     zoomMinus.onclick = function () {
-        navigation.changeZoom(1 / 1.1);
+        navigation.changeZoom(-25);
     };
 
     zoomInput.addEventListener("keydown", function (e) {
