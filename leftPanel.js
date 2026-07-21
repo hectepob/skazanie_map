@@ -101,8 +101,6 @@ function createAccordion(title, key, list) {
     };
     panel.appendChild(wrapper);
 }
-        panel.appendChild(ul);
-}
 
     return {
         init: init
