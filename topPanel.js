@@ -174,12 +174,12 @@ function init(areas, map) {
         navigation.changeFloor(-1);
     };
 
-    zoomPlus.onclick = function () {
-        navigation.changeZoom(25);
+    zoomPlus.onclick = () => {
+        changeZoom(scale.value + 0.25);
     };
 
-    zoomMinus.onclick = function () {
-        navigation.changeZoom(-25);
+    zoomMinus.onclick = () => {
+        changeZoom(scale.value - 0.25);
     };
 
     zoomInput.addEventListener("keydown", function (e) {
