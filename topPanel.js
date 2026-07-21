@@ -29,6 +29,9 @@ function init(areas, map) {
     const locationLabel = document.createElement("span");
     locationLabel.textContent = "Номер локации:";
 
+    const floorText = document.createElement("span");
+    floorText.textContent = "Этаж:";
+
     // ---------- поля ----------
     areaSelect = document.createElement("select");
 
@@ -40,13 +43,10 @@ function init(areas, map) {
     locationInput.style.width = "80px";
 
     locationInput.addEventListener("keydown", function (e) {
-
         if (e.key !== "Enter")
             return;
-
         e.preventDefault();
         findButton.click();
-
     });
 
     // ---------- кнопки ----------
@@ -71,22 +71,15 @@ function init(areas, map) {
 
     const zoomPlus = document.createElement("button");
     zoomPlus.textContent = "+";
-
+    
     const zoomInput = document.createElement("input");
     zoomInput.type = "text";
     zoomInput.value = "100";
     zoomInput.style.width = "45px";
     zoomInput.style.textAlign = "center";
 
-    //const zoomPercent = document.createElement("span");
-    //zoomPercent.textContent = "%";
-
     const zoomMinus = document.createElement("button");
     zoomMinus.textContent = "-";
-
-// ---------- этаж ----------
-    const floorText = document.createElement("span");
-    floorText.textContent = "Этаж:";
 
 // ---------- разделители ----------
 
@@ -129,192 +122,144 @@ function init(areas, map) {
 
 // ---------- обработчики ----------
 
-areaSelect.onchange = function () {
+    areaSelect.onchange = function () {
+        buildSubareas(areaSelect.value);
+        locationInput.value = "";
+    };
 
-    buildSubareas(areaSelect.value);
+    subareaSelect.onchange = function () {
+        locationInput.value = "";
+    };
 
-    locationInput.value = "";
-
-};
-
-subareaSelect.onchange = function () {
-
-    locationInput.value = "";
-
-};
-
-findButton.onclick = function () {
-
-    locationInput.classList.remove("inputError");
-
-    // Поиск по ID
-    if (locationInput.value.trim() !== "") {
-
-        const id = Number(locationInput.value);
-
-        if (!byId.has(id)) {
-
-            locationInput.classList.add("inputError");
+    findButton.onclick = function () {
+        locationInput.classList.remove("inputError");
+        // Поиск по ID
+        if (locationInput.value.trim() !== "") {
+            const id = Number(locationInput.value);
+            if (!byId.has(id)) {
+                locationInput.classList.add("inputError");
+                return;
+            }
+            setHighlight(areaSelect.value, subareaSelect.value, id);
+            navigation.gotoCell(id);
             return;
-
         }
-
-        setHighlight(areaSelect.value, subareaSelect.value, id);
-
-        navigation.gotoCell(id);
-
-        return;
-
-    }
-
-    let rec;
-
-    if (subareaSelect.value === "") {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value &&
-            a.id_subarea === 1
-        );
-
-    }
-    else {
-
-        rec = areaData.find(a =>
-            a.area === areaSelect.value &&
-            a.subarea === subareaSelect.value
-        );
-
-    }
-
-    if (!rec)
-        return;
-
-    setHighlight(areaSelect.value, subareaSelect.value);
-
-    navigation.gotoCell(rec.central_cell);
-
-};
+        let rec;
+        if (subareaSelect.value === "") {
+            rec = areaData.find(a =>
+                a.area === areaSelect.value &&
+                a.id_subarea === 1
+            );
+        }
+        else {
+            rec = areaData.find(a =>
+                a.area === areaSelect.value &&
+                a.subarea === subareaSelect.value
+            );
+        }
+        if (!rec)
+            return;
+        setHighlight(areaSelect.value, subareaSelect.value);
+        navigation.gotoCell(rec.central_cell);
+    };
     
-floorUpButton.onclick = function () {
+    floorUpButton.onclick = function () {
+        navigation.changeFloor(1);
+    };
 
-    navigation.changeFloor(1);
+    floorDownButton.onclick = function () {
+        navigation.changeFloor(-1);
+    };
 
-};
+    zoomPlus.onclick = function () {
+        navigation.changeZoom(1.1);
+    };
 
-floorDownButton.onclick = function () {
+    zoomMinus.onclick = function () {
+        navigation.changeZoom(1 / 1.1);
+    };
 
-    navigation.changeFloor(-1);
-
-};
+    zoomInput.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter")
+            return;
+        e.preventDefault();
+        const value = Number(zoomInput.value);
+        if (isNaN(value))
+            return;
+        navigation.setZoom(value / 100);
+});
 
 }   
     
-    function buildAreas() {
-
+function buildAreas() {
     areaSelect.innerHTML = "";
-
     const areas = [];
-
     areaData.forEach(a => {
-
         if (!areas.find(x => x.id === a.id_area)) {
-
             areas.push({
                 id: a.id_area,
                 area: a.area
             });
-
         }
-
     });
-
     areas.sort((a, b) => a.id - b.id);
-
     areas.forEach(a => {
-
         const opt = document.createElement("option");
-
         opt.value = a.area;
         opt.textContent = a.area;
-
         areaSelect.appendChild(opt);
-
     });
-
     if (areas.length)
         buildSubareas(areas[0].area);
-
 }
 
 function buildSubareas(area) {
-
     subareaSelect.innerHTML = "";
-
     const empty = document.createElement("option");
-
     empty.value = "";
     empty.textContent = "Все области";
-
     subareaSelect.appendChild(empty);
-
     areaData
         .filter(x => x.area === area)
         .sort((a, b) => a.id_subarea - b.id_subarea)
         .forEach(x => {
-
             const opt = document.createElement("option");
-
             opt.value = x.subarea;
             opt.textContent = x.subarea;
-
             subareaSelect.appendChild(opt);
-
         });
-
 }
 
 function setHighlight(area, subarea, singleId = null) {
-
     if (singleId !== null) {
-
         highlight.clear();
         return;
-
     }
-
     const ids = [];
-
     mapData.forEach(cell => {
-
         if (cell.area !== area)
             return;
-
         if (subarea !== "" && cell.subarea !== subarea)
             return;
-
         ids.push(cell.id);
-
     });
-
     highlight.setCells(ids);
-
 }    
 
 function clearSelection() {
-
     areaSelect.selectedIndex = -1;
-
     subareaSelect.innerHTML = "";
-
     locationInput.value = "";
     locationInput.classList.remove("inputError");
-
 }
     
 return {
     init,
     setFloor(value) {
         floorLabel.textContent = value;
+    },
+    setZoom(value) {
+        zoomInput.value = Math.round(value * 100);
     },
     setZoom(value) {
         zoomInput.value = Math.round(value * 100);
