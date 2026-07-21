@@ -316,7 +316,23 @@ return {
     setFloor(value) {
         floorLabel.textContent = value;
     },
+    setZoom(value) {
+        zoomInput.value = Math.round(value * 100);
+    },
+    onZoomPlus(fn) {
+        zoomPlus.onclick = fn;
+    },
+    onZoomMinus(fn) {
+        zoomMinus.onclick = fn;
+    },
+    onZoomEnter(fn) {
+        zoomInput.onkeydown = e => {
+            if (e.key === "Enter")
+                fn(Number(zoomInput.value));
+        };
+    },
     clearSelection,
+    clearAreaSelection,
     selectCell(cell) {
         if (!cell)
             return;
