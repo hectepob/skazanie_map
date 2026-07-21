@@ -10,6 +10,7 @@ let findButton;
 let floorUpButton;
 let floorDownButton;
 let floorLabel;
+let zoomInput;
 let areaData = [];
 let mapData = [];
 
