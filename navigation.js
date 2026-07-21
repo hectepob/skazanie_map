@@ -108,12 +108,12 @@ function changeFloor(step) {
     render();
 }
 
-function changeZoom(multiplier) {
+function changeZoom(delta) {
     const rect = mapViewport.getBoundingClientRect();
     const cx = rect.width / 2;
     const cy = rect.height / 2;
     const oldScale = scale.value;
-    let newScale = oldScale * multiplier;
+    let newScale = oldScale + delta / 100;
     newScale = Math.max(0.5, Math.min(3, newScale));
     if (newScale === oldScale)
         return;
