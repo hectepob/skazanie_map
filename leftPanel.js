@@ -84,14 +84,18 @@ function createAccordion(title, key, list) {
         body.appendChild(row);
     });
     header.onclick = function () {
+        const alreadyOpen = body.style.display === "block";
         Object.keys(sections).forEach(k => {
             sections[k].body.style.display = "none";
             sections[k].header.textContent =
                 "▶ " + sections[k].title;
         });
-        body.style.display = "block";
-        header.textContent = "▼ " + title;
+        if (!alreadyOpen) {
+            body.style.display = "block";
+            header.textContent = "▼ " + title;
+        }
     };
+    
     wrapper.appendChild(header);
     wrapper.appendChild(body);
     sections[key] = {
