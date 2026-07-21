@@ -164,7 +164,29 @@ renderMap.init({
     setSelectedCellId: v => selectedCellId = v
 });
 
-topPanelModule.init(areaData, data);    
+topPanelModule.init(areaData, data);
+topPanelModule.setZoom(scale);
+    
+topPanelModule.onZoomPlus(() => {
+    scale = Math.min(scale + 0.1, 3);
+    view.apply();
+    topPanelModule.setZoom(scale);
+});
+
+topPanelModule.onZoomMinus(() => {
+    scale = Math.max(scale - 0.1, 0.5);
+    view.apply();
+    topPanelModule.setZoom(scale);
+});
+
+topPanelModule.onZoomEnter(percent => {
+    if (isNaN(percent))
+        return;
+    scale = Math.max(0.5, Math.min(percent / 100, 3));
+    view.apply();
+    topPanelModule.setZoom(scale);
+});
+    
 leftPanel.init(data);
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
