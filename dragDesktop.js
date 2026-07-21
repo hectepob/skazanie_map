@@ -82,10 +82,10 @@ function onWheel(e) {
     tooltip.hide();
     const oldScale = scale.value;
     let newScale =
-        oldScale * (e.deltaY < 0 ? 1.1 : 0.9);
+        oldScale * (e.deltaY < 0 ? 1.1 : 0.9090909);
     newScale = Math.max(
         0.5,
-        Math.min(3, newScale)
+        Math.min(2, newScale)
     );
     if (newScale === oldScale)
         return;
