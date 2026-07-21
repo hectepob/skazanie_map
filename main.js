@@ -172,7 +172,13 @@ if (firstCell)
     navigation.centerOnCell(firstCell);
 
 mapViewport.addEventListener("click", e => {
-    portalMenu.hide();
+    // если кликнули не по меню и не по порталу — закрываем меню
+    if (
+        !e.target.closest(".portalMenu") &&
+        !e.target.closest(".portal")
+    ) {
+        portalMenu.hide();
+    }
     if (e.target.closest(".cell:not(.empty)"))
         return;
     tooltip.hide();
