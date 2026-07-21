@@ -126,6 +126,7 @@ portalMenu.hide();
     offset.x = newX;
     offset.y = newY;
     updateTransform();
+    topPanelModule.setZoom(scale.value);//СЮДА ИЛИ ВЫШЕ - ПОЗЖЕ ГЛЯНУТЬ
 
 }
 
