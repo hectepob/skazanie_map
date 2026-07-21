@@ -127,7 +127,6 @@ function attachClick(el, cell) {
         // если был активен поиск зоны/подзоны — сбрасываем его
         cfg.topPanel.clearAreaSelection?.();
 
-        portalMenu.hide();
         cfg.tooltip.hide();
 
         // сбрасываем подсветку поиска
