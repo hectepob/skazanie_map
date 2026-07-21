@@ -108,22 +108,22 @@ function changeFloor(step) {
     render();
 }
 
-function changeZoom(newScale) {
-    const rect = mapViewport.getBoundingClientRect();
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const oldScale = scale.value;
-    newScale = Math.max(0.5, Math.min(2, newScale));
-    if (newScale === oldScale)
-        return;
-    const worldX = (cx - offset.x) / oldScale;
-    const worldY = (cy - offset.y) / oldScale;
-    scale.value = newScale;
-    offset.x = cx - worldX * newScale;
-    offset.y = cy - worldY * newScale;
-    view.apply();
-    topPanelModule.setZoom(scale.value);
-}
+//function changeZoom(newScale) {
+//    const rect = mapViewport.getBoundingClientRect();
+//    const cx = rect.width / 2;
+//    const cy = rect.height / 2;
+//    const oldScale = scale.value;
+//    newScale = Math.max(0.5, Math.min(2, newScale));
+//    if (newScale === oldScale)
+//        return;
+//    const worldX = (cx - offset.x) / oldScale;
+//    const worldY = (cy - offset.y) / oldScale;
+//    scale.value = newScale;
+//    offset.x = cx - worldX * newScale;
+//    offset.y = cy - worldY * newScale;
+//    view.apply();
+//    topPanelModule.setZoom(scale.value);
+//}
 
 function setZoom(value) {
     const rect = mapViewport.getBoundingClientRect();
@@ -148,7 +148,6 @@ return {
     changeFloor,
     centerOnCell,
     keepView,
-    changeZoom,
     setZoom
 };
 
