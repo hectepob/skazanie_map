@@ -32,8 +32,8 @@ function init(areas, map) {
     const locationLabel = document.createElement("span");
     locationLabel.textContent = "Номер локации:";
 
-    const floorText = document.createElement("span");
-    floorText.textContent = "Этаж:";
+    //const floorText = document.createElement("span");
+    //floorText.textContent = "Этаж:";
 
     // ---------- поля ----------
     areaSelect = document.createElement("select");
