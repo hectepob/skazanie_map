@@ -78,8 +78,8 @@ function init(areas, map) {
     zoomInput.style.width = "45px";
     zoomInput.style.textAlign = "center";
 
-    const zoomPercent = document.createElement("span");
-    zoomPercent.textContent = "%";
+    //const zoomPercent = document.createElement("span");
+    //zoomPercent.textContent = "%";
 
     const zoomMinus = document.createElement("button");
     zoomMinus.textContent = "-";
@@ -116,12 +116,12 @@ function init(areas, map) {
     panel.appendChild(floorLabel);
     panel.appendChild(floorDownButton);
 
-    panel.appendChild(sep1);
+    panel.appendChild(sep2);
 
     panel.appendChild(zoomLabel);
     panel.appendChild(zoomPlus);
     panel.appendChild(zoomInput);
-    panel.appendChild(zoomPercent);
+    //panel.appendChild(zoomPercent);
     panel.appendChild(zoomMinus);
 
     buildAreas();
