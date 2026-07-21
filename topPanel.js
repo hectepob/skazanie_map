@@ -1,4 +1,4 @@
-console.log("topPanel.js 2107 2315 ");
+console.log("topPanel.js 2107 2330 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -107,18 +107,26 @@ function init(areas, map) {
 
     panel.appendChild(sep1);
 
-    panel.appendChild(floorText);
-    panel.appendChild(floorUpButton);
-    panel.appendChild(floorLabel);
-    panel.appendChild(floorDownButton);
+   /* panel.appendChild(floorText);*/
+    const floorBlock = document.createElement("div");
+    floorBlock.className = "floorBlock";
+    const floorText = document.createElement("span");
+    floorText.textContent = "Этаж:";
+    floorBlock.appendChild(floorText);
+    floorBlock.appendChild(floorUpButton);
+    floorBlock.appendChild(floorLabel);
+    floorBlock.appendChild(floorDownButton);
+    panel.appendChild(floorBlock);
 
     panel.appendChild(sep2);
 
-    panel.appendChild(zoomLabel);
-    panel.appendChild(zoomPlus);
-    panel.appendChild(zoomInput);
-    //panel.appendChild(zoomPercent);
-    panel.appendChild(zoomMinus);
+    const zoomBlock = document.createElement("div");
+    zoomBlock.className = "zoomBlock";
+    zoomBlock.appendChild(zoomLabel);
+    zoomBlock.appendChild(zoomPlus);
+    zoomBlock.appendChild(zoomInput);
+    zoomBlock.appendChild(zoomMinus);
+    panel.appendChild(zoomBlock);
 
     buildAreas();
     clearSelection();
