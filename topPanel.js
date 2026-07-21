@@ -66,48 +66,57 @@ function init(areas, map) {
     floorLabel.style.textAlign = "center";
 
     // ---------- масштаб ----------
-const zoomLabel = document.createElement("span");
-zoomLabel.textContent = "Масштаб:";
+    const zoomLabel = document.createElement("span");
+    zoomLabel.textContent = "Масштаб:";
 
-const zoomPlus = document.createElement("button");
-zoomPlus.textContent = "+";
+    const zoomPlus = document.createElement("button");
+    zoomPlus.textContent = "+";
 
-const zoomInput = document.createElement("input");
-zoomInput.type = "text";
-zoomInput.value = "100";
-zoomInput.style.width = "45px";
-zoomInput.style.textAlign = "center";
+    const zoomInput = document.createElement("input");
+    zoomInput.type = "text";
+    zoomInput.value = "100";
+    zoomInput.style.width = "45px";
+    zoomInput.style.textAlign = "center";
 
-const zoomPercent = document.createElement("span");
-zoomPercent.textContent = "%";
+    const zoomPercent = document.createElement("span");
+    zoomPercent.textContent = "%";
 
-const zoomMinus = document.createElement("button");
-zoomMinus.textContent = "-";
+    const zoomMinus = document.createElement("button");
+    zoomMinus.textContent = "-";
 
 // ---------- этаж ----------
-const floorText = document.createElement("span");
-floorText.textContent = "Этаж:";
+    const floorText = document.createElement("span");
+    floorText.textContent = "Этаж:";
+
+// ---------- разделители ----------
+
+    const sep1 = document.createElement("span");
+    sep1.textContent = "|";
+    sep1.style.margin = "0 8px";
+    sep1.style.color = "#666";
+
+    const sep2 = document.createElement("span");
+    sep2.textContent = "|";
+    sep2.style.margin = "0 8px";
+    sep2.style.color = "#666";
 
     // ---------- размещение ----------
     panel.appendChild(areaLabel);
     panel.appendChild(areaSelect);
-
     panel.appendChild(subareaLabel);
     panel.appendChild(subareaSelect);
-
     panel.appendChild(locationLabel);
     panel.appendChild(locationInput);
-
     panel.appendChild(findButton);
 
-    panel.appendChild(document.createTextNode("   "));
+    panel.appendChild(sep1);
 
     panel.appendChild(floorText);
     panel.appendChild(floorUpButton);
     panel.appendChild(floorLabel);
     panel.appendChild(floorDownButton);
 
-    panel.appendChild(document.createTextNode("   "));
+    panel.appendChild(sep1);
 
     panel.appendChild(zoomLabel);
     panel.appendChild(zoomPlus);
