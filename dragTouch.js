@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2107 0640 ");
+console.log("dragTouch.js 2107 0650 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -76,7 +76,7 @@ if (pointers.size === 2) {
     pointerId = e.pointerId;
     dragging = true;
     tooltip.hide();
-    //portalMenu.hide();
+    portalMenu.hide();
     moved = false;
     dragStartX = e.clientX - offset.x;
     dragStartY = e.clientY - offset.y;
@@ -102,7 +102,7 @@ offset.x = pinchCenterX - worldCenterX * scale.value;
 offset.y = pinchCenterY - worldCenterY * scale.value;
 
 updateTransform();
-portalMenu.hide();
+//portalMenu.hide();
 
     return;
 }
