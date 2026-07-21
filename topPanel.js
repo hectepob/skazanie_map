@@ -10,6 +10,8 @@ let findButton;
 let floorUpButton;
 let floorDownButton;
 let floorLabel;
+let zoomPlus;
+let zoomMinus;
 let zoomInput;
 let areaData = [];
 let mapData = [];
@@ -70,7 +72,7 @@ function init(areas, map) {
     const zoomLabel = document.createElement("span");
     zoomLabel.textContent = "Масштаб:";
 
-    const zoomPlus = document.createElement("button");
+    zoomPlus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
     zoomPlus.textContent = "+";
     
     zoomInput = document.createElement("input"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
@@ -79,7 +81,7 @@ function init(areas, map) {
     zoomInput.style.width = "45px";
     zoomInput.style.textAlign = "center";
 
-    const zoomMinus = document.createElement("button");
+    zoomMinus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
     zoomMinus.textContent = "-";
 
 // ---------- разделители ----------
