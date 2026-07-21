@@ -23,6 +23,9 @@ console.log("dragDesktop.js 2007 1200");
         viewport.addEventListener("pointerdown", onDown);
         window.addEventListener("pointermove", onMove);
         window.addEventListener("pointerup", onUp);
+        viewport.addEventListener("wheel", onWheel, {
+            passive: false
+        });
 
     }
 
@@ -71,6 +74,34 @@ function onUp(e) {
     setTimeout(() => {
         moved = false;
     }, 0);
+}
+
+function onWheel(e) {
+    e.preventDefault();
+    portalMenu.hide();
+    tooltip.hide();
+    const oldScale = scale.value;
+    let newScale =
+        oldScale * (e.deltaY < 0 ? 1.1 : 0.9);
+    newScale = Math.max(
+        0.5,
+        Math.min(3, newScale)
+    );
+    if (newScale === oldScale)
+        return;
+    const rect = viewport.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const worldX =
+        (mouseX - offset.x) / oldScale;
+    const worldY =
+        (mouseY - offset.y) / oldScale;
+    scale.value = newScale;
+    offset.x =
+        mouseX - worldX * newScale;
+    offset.y =
+        mouseY - worldY * newScale;
+    updateTransform();
 }
 
     return {
