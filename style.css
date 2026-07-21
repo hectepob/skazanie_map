@@ -80,6 +80,8 @@ body {
     height: max-content;
     transform-origin: 0 0;
     will-change: transform;
+    image-rendering: pixelated;
+    transform-style: preserve-3d;
 }
 
 /* CELL */
@@ -95,6 +97,8 @@ body {
     color: var(--cell-color, #000);
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .cell.empty {
