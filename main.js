@@ -168,11 +168,11 @@ topPanelModule.init(areaData, data);
 topPanelModule.setZoom(scale);
     
 topPanelModule.onZoomPlus(() => {
-    navigation.changeZoom(scale + 0.25);
+    navigation.setZoom(scale + 0.25);
 });
 
 topPanelModule.onZoomMinus(() => {
-    navigation.changeZoom(scale - 0.25);
+    navigation.setZoom(scale - 0.25);
 });
 
 topPanelModule.onZoomEnter(percent => {
