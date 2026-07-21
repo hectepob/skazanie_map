@@ -7,21 +7,20 @@ body {
 
 /*LAYOUT (верх + лево + центр) */
 #mainLayout {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    grid-template-rows: 1fr;
-    height: calc(100vh - 40px);
+    display:grid;
+    grid-template-columns:220px 1fr;
+    height: calc(100vh - var(--topPanelHeight, 40px));
 }
 
 /*TOP PANEL */
 #topPanel {
-    background:#ddd;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:5px;
-    height:40px;
-    box-sizing:border-box;
+    background: #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .floorBlock {
