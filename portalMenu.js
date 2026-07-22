@@ -1,4 +1,4 @@
-console.log("portalMenu.js 2007 2310 ");
+console.log("portalMenu.js 2107 0650 ");
 
 const portalMenu = (function () {
 
@@ -17,6 +17,16 @@ const portalMenu = (function () {
         menu.className = "portalMenu";
         menu.style.display = "none";
         map.appendChild(menu);
+
+        menu.addEventListener("click", function (e) {
+            const item = e.target.closest(".portalItem");
+            if (!item)
+                 return;
+        e.stopPropagation();
+        const id = Number(item.dataset.targetId);
+        hide();
+        navigation.gotoCell(id);
+        });
 
         document.addEventListener("click", function (e) {
         if (menu.style.display === "none")
@@ -57,35 +67,31 @@ const portalMenu = (function () {
             const item = document.createElement("div");
             item.className = "portalItem";
             item.textContent = `${target.area} — ${target.subarea}`;
-            item.onclick = e => {
-                e.stopPropagation();
-                hide();
-                navigation.gotoCell(id);
-            };
+            item.dataset.targetId = id;
             menu.appendChild(item);
         });
-            const mapRect = map.getBoundingClientRect();
-            const anchorRect = anchor.getBoundingClientRect();
-            menu.style.display = "block";
-            const h = menu.offsetHeight;
+        const mapRect = map.getBoundingClientRect();
+        const anchorRect = anchor.getBoundingClientRect();
+        menu.style.display = "block";
+        const h = menu.offsetHeight;
 
 // координата значка внутри карты
-            const anchorY = anchorRect.top - mapRect.top + anchorRect.height / 2;
+        const anchorY = anchorRect.top - mapRect.top + anchorRect.height / 2;
 
 // центрируем меню относительно значка
-            let top = anchorY - h / 2;
+        let top = anchorY - h / 2;
 
 // не даём уйти выше карты
-            top = Math.max(4, top);
+        top = Math.max(4, top);
 
 // не даём уйти ниже карты
-            top = Math.min(
-                top,
-                map.clientHeight - h - 4
-            );
+        top = Math.min(
+            top,
+            map.clientHeight - h - 4
+        );
 
-            menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
-            menu.style.top = top + "px";
+        menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
+        menu.style.top = top + "px";
     }
 
     function hide() {
