@@ -3,7 +3,6 @@ console.log("dataBuilder.js 1907 1045 ");
 const dataBuilder = (function () {
 
     function build(mapData, areaData) {
-
         const byId = new Map();
         const gridMap = new Map();
         const groupsByMap = new Map();
@@ -23,111 +22,74 @@ areaData.forEach(a => {
         // ---------- byId ----------
 
         mapData.forEach(cell => {
-
             cell.parent_id = Number(cell.parent_id || 0);
-
             byId.set(cell.id, cell);
-
         });
 
         // ---------- GRID ----------
 
         mapData.forEach(cell => {
-
             let root = cell;
-
             while (root.parent_id !== 0) {
-
                 root = byId.get(root.parent_id);
-
                 if (!root)
                     break;
-
             }
-
             if (!root)
                 return;
-
             if (!gridMap.has(root.id_map)) {
-
                 gridMap.set(root.id_map, new Map());
-
             }
-
             const mapGrid = gridMap.get(root.id_map);
-
             const key = `${root.floor}:${root.row}:${root.col}`;
-
             if (!mapGrid.has(key)) {
-
                 const group = {
                     root,
                     cells: []
                 };
-
                 mapGrid.set(key, group);
-
                 if (!groupsByMap.has(root.id_map)) {
                     groupsByMap.set(root.id_map, []);
                 }
-
                 groupsByMap.get(root.id_map).push(group);
-
             }
-
             mapGrid.get(key).cells.push(cell);
-
             if (!floorsByMap.has(root.id_map)) {
-
                 floorsByMap.set(root.id_map, {
                     min: root.floor,
                     max: root.floor
                 });
-
             }
-
             const floorInfo = floorsByMap.get(root.id_map);
-
             if (root.floor < floorInfo.min)
                 floorInfo.min = root.floor;
-
             if (root.floor > floorInfo.max)
                 floorInfo.max = root.floor;
-
         });
 
         // ---------- GROUPS ----------
 
         gridMap.forEach(mapGrid => {
-
             mapGrid.forEach(group => {
-
                 group.cells.sort((a, b) => a.id - b.id);
-
                 group.displayId = group.cells
                     .map(c => c.id)
                     .join("<br>");
-
             });
-
         });
 
         return {
-
             byId,
             gridMap,
             groupsByMap,
             floorsByMap,
             areaMap
-
         };
 
     }
 
     return {
-
         build
-
     };
 
 })();
