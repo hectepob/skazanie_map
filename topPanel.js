@@ -7,10 +7,12 @@ let areaSelect;
 let subareaSelect;
 let locationInput;
 let findButton;
+let floorBlock;
 let floorUpButton;
 let floorDownButton;
 let floorLabel;
 let zoomPlus;
+let zoomBlock;
 let zoomMinus;
 let zoomInput;
 let areaData = [];
@@ -97,11 +99,6 @@ function init(areas, map) {
     sep1.style.margin = "0 8px";
     sep1.style.color = "#666";
 
-    const sep2 = document.createElement("span");
-    sep2.textContent = "|";
-    sep2.style.margin = "0 8px";
-    sep2.style.color = "#666";
-
     // ---------- размещение ----------
 // ---------- первая строка ----------
 topRow.appendChild(areaLabel);
@@ -114,7 +111,7 @@ topRow.appendChild(findButton);
 
 // ---------- вторая строка ----------
 bottomRow.appendChild(floorBlock);
-bottomRow.appendChild(sep2);
+bottomRow.appendChild(sep1);
 bottomRow.appendChild(zoomBlock);
 
     buildAreas();
