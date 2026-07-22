@@ -21,7 +21,13 @@ function init(areas, map) {
     areaData = areas;
     mapData = map;
     panel.innerHTML = "";
-
+    const topRow = document.createElement("div");
+    topRow.className = "topRow";
+    const bottomRow = document.createElement("div");
+    bottomRow.className = "bottomRow";
+    panel.appendChild(topRow);
+    panel.appendChild(bottomRow);
+    
     // ---------- подписи ----------
     const areaLabel = document.createElement("span");
     areaLabel.textContent = "Регион:";
@@ -97,36 +103,19 @@ function init(areas, map) {
     sep2.style.color = "#666";
 
     // ---------- размещение ----------
-    panel.appendChild(areaLabel);
-    panel.appendChild(areaSelect);
-    panel.appendChild(subareaLabel);
-    panel.appendChild(subareaSelect);
-    panel.appendChild(locationLabel);
-    panel.appendChild(locationInput);
-    panel.appendChild(findButton);
+// ---------- первая строка ----------
+topRow.appendChild(areaLabel);
+topRow.appendChild(areaSelect);
+topRow.appendChild(subareaLabel);
+topRow.appendChild(subareaSelect);
+topRow.appendChild(locationLabel);
+topRow.appendChild(locationInput);
+topRow.appendChild(findButton);
 
-    panel.appendChild(sep1);
-
-   /* panel.appendChild(floorText);*/
-    const floorBlock = document.createElement("div");
-    floorBlock.className = "floorBlock";
-    const floorText = document.createElement("span");
-    floorText.textContent = "Этаж:";
-    floorBlock.appendChild(floorText);
-    floorBlock.appendChild(floorUpButton);
-    floorBlock.appendChild(floorLabel);
-    floorBlock.appendChild(floorDownButton);
-    panel.appendChild(floorBlock);
-
-    panel.appendChild(sep2);
-
-    const zoomBlock = document.createElement("div");
-    zoomBlock.className = "zoomBlock";
-    zoomBlock.appendChild(zoomLabel);
-    zoomBlock.appendChild(zoomPlus);
-    zoomBlock.appendChild(zoomInput);
-    zoomBlock.appendChild(zoomMinus);
-    panel.appendChild(zoomBlock);
+// ---------- вторая строка ----------
+bottomRow.appendChild(floorBlock);
+bottomRow.appendChild(sep2);
+bottomRow.appendChild(zoomBlock);
 
     buildAreas();
     clearSelection();
