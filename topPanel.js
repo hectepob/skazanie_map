@@ -1,4 +1,4 @@
-console.log("topPanel.js 2107 2330 ");
+console.log("topPanel.js 2207 0615 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
