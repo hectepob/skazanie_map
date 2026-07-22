@@ -1,4 +1,4 @@
-console.log("render 2107 1710");
+console.log("render 2107 1715");
 const renderMap = (function () {
 
     let cfg;
@@ -120,6 +120,7 @@ function attachClick(el, cell, group) {
 
     el.addEventListener("click", e => {
         console.log("CELL CLICK", cell.id);
+        console.log(e.timeStamp);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
