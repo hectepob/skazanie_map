@@ -1,4 +1,4 @@
-console.log("topPanel.js 2207 0615 ");
+console.log("topPanel.js 2207 0645 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -76,21 +76,34 @@ function init(areas, map) {
     floorLabel.style.display = "inline-block";
     floorLabel.style.textAlign = "center";
 
+    floorBlock = document.createElement("div");
+    floorBlock.className = "floorBlock";
+    const floorText = document.createElement("span");
+    floorText.textContent = "Этаж:";
+    floorBlock.appendChild(floorText);
+    floorBlock.appendChild(floorUpButton);
+    floorBlock.appendChild(floorLabel);
+    floorBlock.appendChild(floorDownButton);
+
     // ---------- масштаб ----------
     const zoomLabel = document.createElement("span");
     zoomLabel.textContent = "Масштаб:";
-
     zoomPlus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
-    zoomPlus.textContent = "+";
-    
+    zoomPlus.textContent = "+";    
     zoomInput = document.createElement("input"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
     zoomInput.type = "text";
     zoomInput.value = "100";
     zoomInput.style.width = "45px";
     zoomInput.style.textAlign = "center";
-
     zoomMinus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
     zoomMinus.textContent = "-";
+
+    zoomBlock = document.createElement("div");
+    zoomBlock.className = "zoomBlock";
+    zoomBlock.appendChild(zoomLabel);
+    zoomBlock.appendChild(zoomPlus);
+    zoomBlock.appendChild(zoomInput);
+    zoomBlock.appendChild(zoomMinus);
 
 // ---------- разделители ----------
 
