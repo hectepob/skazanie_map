@@ -311,18 +311,45 @@ body {
 }
 
 /* МОБИЛЬНАЯ ВЕРХНЯЯ ПАНЕЛЬ */
-
 @media (max-width:900px){
-.topRow{
-    flex-wrap:wrap;
-}
-    
-.bottomRow{
-    flex-wrap:wrap;
-}
 
-.floorBlock{
-    margin-left:0;
-}
+    #topPanel{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:4px;
+        height:auto;
+    }
+
+    .topRow,
+    .bottomRow{
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        gap:6px;
+        width:100%;
+    }
+
+    .topRow{
+        justify-content:flex-start;
+    }
+
+    .bottomRow{
+        justify-content:flex-start;
+    }
+
+    .floorBlock{
+        margin-left:0;
+    }
+
+    .zoomBlock{
+        display:flex;
+        align-items:center;
+        gap:6px;
+    }
+
+    #leftPanel{
+        padding-top:6px;
+    }
 
 }
