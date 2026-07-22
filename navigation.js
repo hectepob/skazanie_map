@@ -1,4 +1,4 @@
-console.log("navigation.js 2207 1735 ");
+console.log("navigation.js 2207 1750 ");
 
 const navigation = (function () {
 
