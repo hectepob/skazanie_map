@@ -112,17 +112,6 @@ function init(areas, map) {
     sep1.style.margin = "0 8px";
     sep1.style.color = "#666";
 
-    function updateSeparators() {
-        if (window.innerWidth <= 900) {
-            sep1.style.display = "none";
-        } else {
-            sep1.style.display = "";
-        }
-    }
-
-    window.addEventListener("resize", updateSeparators);
-    updateSeparators();
-
     // ---------- размещение ----------
 // ---------- первая строка ----------
 topRow.appendChild(areaLabel);
