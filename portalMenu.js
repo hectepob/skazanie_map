@@ -1,4 +1,4 @@
-console.log("portalMenu.js 2107 0650 ");
+console.log("portalMenu.js 2107 1045 ");
 
 const portalMenu = (function () {
 
@@ -19,13 +19,15 @@ const portalMenu = (function () {
         map.appendChild(menu);
 
         menu.addEventListener("click", function (e) {
+            console.log("menu click", e.target);
             const item = e.target.closest(".portalItem");
             if (!item)
                  return;
-        e.stopPropagation();
-        const id = Number(item.dataset.targetId);
-        hide();
-        navigation.gotoCell(id);
+            console.log("portal id =", item.dataset.targetId);
+            e.stopPropagation();
+            const id = Number(item.dataset.targetId);
+            hide();
+            navigation.gotoCell(id);
         });
 
         document.addEventListener("click", function (e) {
