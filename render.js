@@ -1,4 +1,4 @@
-console.log("render 2107 1720");
+console.log("render 2107 1735");
 const renderMap = (function () {
 
     let cfg;
@@ -119,8 +119,7 @@ function attachTooltip(el, group) {
 function attachClick(el, cell, group) {
 
     el.addEventListener("click", e => {
-        console.log("CELL CLICK", cell.id);
-        console.log(e.timeStamp);
+        console.log("CELL CLICK", cell.id, e.timeStamp);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
@@ -139,6 +138,7 @@ function attachClick(el, cell, group) {
             r.right - vr.left + 8,
             r.top - vr.top
         );
+        console.log("TOOLTIP SHOW");
     });
 
 }
