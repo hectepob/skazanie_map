@@ -1,4 +1,4 @@
-console.log("render 2107 1250");
+console.log("render 2107 1710");
 const renderMap = (function () {
 
     let cfg;
@@ -119,19 +119,15 @@ function attachTooltip(el, group) {
 function attachClick(el, cell, group) {
 
     el.addEventListener("click", e => {
+        console.log("CELL CLICK", cell.id);
         if (cfg.drag.moved())
             return;
-
-        // если был активен поиск зоны/подзоны — сбрасываем его
         cfg.topPanel.clearAreaSelection?.();
         cfg.tooltip.hide();
-
-        // сбрасываем подсветку поиска
         highlight.clear();
-
-        // выбираем клетку
         cfg.setSelectedCellId(cell.id);
         cfg.topPanel.selectCell(cell);
+        refreshSelection();
         const r = el.getBoundingClientRect();
         const vr = cfg.mapViewport.getBoundingClientRect();
         if (navigator.maxTouchPoints > 0)
@@ -142,9 +138,6 @@ function attachClick(el, cell, group) {
             r.right - vr.left + 8,
             r.top - vr.top
         );
-
-        // восстанавливаем только выделение выбранной клетки
-        refreshSelection();
     });
 
 }
