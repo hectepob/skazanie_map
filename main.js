@@ -60,8 +60,6 @@ portalMenu.init({
     map: mapViewport
 });
 
-console.log("PORTALS", linkData.length);
-
 navigation.init({
 
     data,
@@ -90,7 +88,7 @@ navigation.init({
     scale: {
     get value() { return scale; },
     set value(v) { scale = v; }
-}
+    }
 
 });
 
