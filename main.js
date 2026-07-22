@@ -1,4 +1,4 @@
-console.log("main.js 2007 0635 ");
+console.log("main.js 2107 0655 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -123,24 +123,17 @@ const drag =
 });
 
     view.init({
-
     container: mapContainer,
-
     offset: {
-
         get x() { return offsetX; },
         set x(v) { offsetX = v; },
-
         get y() { return offsetY; },
         set y(v) { offsetY = v; }
-
     },
 
     scale: {
-
         get value() { return scale; },
         set value(v) { scale = v; }
-
     }
 
      });
@@ -188,13 +181,11 @@ if (firstCell)
     navigation.centerOnCell(firstCell);
 
 mapViewport.addEventListener("click", e => {
-    // если кликнули не по меню и не по порталу — закрываем меню
-    if (
-        !e.target.closest(".portalMenu") &&
-        !e.target.closest(".portal")
-    ) {
-        portalMenu.hide();
-    }
+    if (e.target.closest(".portalMenu"))
+        return;
+    if (e.target.closest(".portal"))
+        return;
+    portalMenu.hide();
     if (e.target.closest(".cell:not(.empty)"))
         return;
     tooltip.hide();
