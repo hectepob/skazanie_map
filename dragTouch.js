@@ -94,7 +94,7 @@ function onMove(e) {
         const pts = [...pointers.values()];
         const d = distance(pts[0], pts[1]);
         let newScale = pinchStartScale * (d / pinchStartDistance);
-        newScale = Math.max(0.5, Math.min(newScale, 2));
+        newScale = Math.max(0.5, Math.min(newScale, 3));
         scale.value = newScale;
         offset.x = pinchCenterX - worldCenterX * scale.value;
         offset.y = pinchCenterY - worldCenterY * scale.value;
