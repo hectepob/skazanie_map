@@ -163,6 +163,7 @@ function drawCell(group) {
     attachTooltip(el, group);
     attachClick(el, cell, group);
     return el;
+    console.count("drawCell");
 }
 
     function refreshSelection() {
