@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2107 1200 ");
+console.log("dragTouch.js 2107 1215 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -76,7 +76,6 @@ if (pointers.size === 2) {
     pointerId = e.pointerId;
     dragging = true;
     tooltip.hide();
-    //portalMenu.hide();
     moved = false;
     dragStartX = e.clientX - offset.x;
     dragStartY = e.clientY - offset.y;
@@ -132,22 +131,29 @@ function onMove(e) {
 function onUp(e) {
 
     pointers.delete(e.pointerId);
-
     if (pointerId !== null && e.pointerId !== pointerId)
         return;
-
     dragging = false;
     pointerId = null;
-
     if (viewport.hasPointerCapture(e.pointerId))
         viewport.releasePointerCapture(e.pointerId);
 
+    // если это был обычный тап, а не перетаскивание
+    if (!moved) {
+        const target = document.elementFromPoint(
+            e.clientX,
+            e.clientY
+        );
+        if (target) {
+            target.click();
+        }
+    }
     if (pointers.size < 2) {
     pinchCenterX = 0;
     pinchCenterY = 0;
     worldCenterX = 0;
     worldCenterY = 0;
-}
+    }
 
 }
 
