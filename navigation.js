@@ -59,6 +59,7 @@ function centerOnCell(cell) {
     function keepView(id) {
         console.log("KEEPVIEW", id);
         const cell = byId.get(id);
+        console.log("TARGET CELL", cell);
         if (!cell)
             return;
         tooltip.hide();
