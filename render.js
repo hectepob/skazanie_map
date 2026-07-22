@@ -1,4 +1,4 @@
-console.log("render 2107 1235");
+console.log("render 2107 1250");
 const renderMap = (function () {
 
     let cfg;
@@ -114,46 +114,34 @@ function attachTooltip(el, group) {
         cfg.tooltip.hide();
     });
 
-    // Телефон
-    el.addEventListener("pointerdown", e => {
-        if (e.pointerType !== "touch")
-            return;
-        cfg.tooltip.show(group.cells);
-        const r = el.getBoundingClientRect();
-        const vr = cfg.mapViewport.getBoundingClientRect();
-        cfg.tooltip.move(
-            r.right - vr.left + 8,
-            r.top - vr.top
-        );
-    });
-
 }
     
-function attachClick(el, cell) {
+function attachClick(el, cell, group) {
 
     el.addEventListener("click", e => {
         if (cfg.drag.moved())
             return;
-        
+
         // если был активен поиск зоны/подзоны — сбрасываем его
         cfg.topPanel.clearAreaSelection?.();
         cfg.tooltip.hide();
-        
+
         // сбрасываем подсветку поиска
         highlight.clear();
-       
+
         // выбираем клетку
         cfg.setSelectedCellId(cell.id);
         cfg.topPanel.selectCell(cell);
-        if (navigator.maxTouchPoints === 0) {
+        const r = el.getBoundingClientRect();
+        const vr = cfg.mapViewport.getBoundingClientRect();
+        if (navigator.maxTouchPoints > 0)
+            cfg.tooltip.show(group.cells);
+        else
             cfg.tooltip.show([cell]);
-            const r = el.getBoundingClientRect();
-            const vr = cfg.mapViewport.getBoundingClientRect();
-            cfg.tooltip.move(
-                r.right - vr.left + 8,
-                r.top - vr.top
-            );
-        }
+        cfg.tooltip.move(
+            r.right - vr.left + 8,
+            r.top - vr.top
+        );
 
         // восстанавливаем только выделение выбранной клетки
         refreshSelection();
@@ -162,35 +150,25 @@ function attachClick(el, cell) {
 }
     
 function drawCell(group) {
-
     const el = document.createElement("div");
-
     el.className = "cell";
     el.style.position = "absolute";
-
-if (!group) {
-
-    el.classList.add("empty");
+    if (!group) {
+        el.classList.add("empty");
+        return el;
+    }
+    const cell = group.root;
+    el.dataset.id = cell.id;
+    el.style.left = ((cell.col - 1) * 40) + "px";
+    el.style.top = ((cell.row - 1) * 40) + "px";
+    applyCellStyle(el, group);
+    drawPassages(el, cell);
+    drawStairs(el, cell);
+    drawPortal(el, cell);
+    drawCellId(el, group);
+    attachTooltip(el, group);
+    attachClick(el, cell, group);
     return el;
-
-}
-
-const cell = group.root;
-el.dataset.id = cell.id;
-
-el.style.left = ((cell.col - 1) * 40) + "px";
-el.style.top  = ((cell.row - 1) * 40) + "px";
-
-applyCellStyle(el, group);
-drawPassages(el, cell);
-drawStairs(el, cell);
-drawPortal(el, cell);
-drawCellId(el, group);
-attachTooltip(el, group);
-attachClick(el, cell);
-
-    return el;
-
 }
 
     function refreshSelection() {
