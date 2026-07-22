@@ -1,4 +1,4 @@
-console.log("navigation.js 1907 1845 ");
+console.log("navigation.js 2207 1735 ");
 
 const navigation = (function () {
 
@@ -57,6 +57,7 @@ function centerOnCell(cell) {
 }
     
     function keepView(id) {
+        console.log("KEEPVIEW", id);
         const cell = byId.get(id);
         if (!cell)
             return;
@@ -72,6 +73,7 @@ function centerOnCell(cell) {
        view.apply();
        topPanel.selectCell(cell);
        tooltip.show([cell]);
+        console.log("SEARCH SELECTED");
        const el = mapContainer.querySelector(".cell.selected");
        if (el) {
             const r = el.getBoundingClientRect();
