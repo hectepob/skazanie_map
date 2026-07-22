@@ -1,4 +1,4 @@
-console.log("render 2007 2300");
+console.log("render 2107 1235");
 const renderMap = (function () {
 
     let cfg;
@@ -91,28 +91,40 @@ function drawCellId(el, group) {
 }
 
 function attachTooltip(el, group) {
-
+    // ПК
     el.addEventListener("mouseenter", () => {
-
+        if (navigator.maxTouchPoints > 0)
+            return;
         cfg.tooltip.show(group.cells);
-
     });
 
     el.addEventListener("mousemove", e => {
-
+        if (navigator.maxTouchPoints > 0)
+            return;
         const rect = cfg.mapViewport.getBoundingClientRect();
-
         cfg.tooltip.move(
             e.clientX - rect.left + 10,
             e.clientY - rect.top + 10
         );
-
     });
 
     el.addEventListener("mouseleave", () => {
-
+        if (navigator.maxTouchPoints > 0)
+            return;
         cfg.tooltip.hide();
+    });
 
+    // Телефон
+    el.addEventListener("pointerdown", e => {
+        if (e.pointerType !== "touch")
+            return;
+        cfg.tooltip.show(group.cells);
+        const r = el.getBoundingClientRect();
+        const vr = cfg.mapViewport.getBoundingClientRect();
+        cfg.tooltip.move(
+            r.right - vr.left + 8,
+            r.top - vr.top
+        );
     });
 
 }
@@ -120,35 +132,31 @@ function attachTooltip(el, group) {
 function attachClick(el, cell) {
 
     el.addEventListener("click", e => {
-
         if (cfg.drag.moved())
             return;
-
+        
         // если был активен поиск зоны/подзоны — сбрасываем его
         cfg.topPanel.clearAreaSelection?.();
-
         cfg.tooltip.hide();
-
+        
         // сбрасываем подсветку поиска
         highlight.clear();
-
+       
         // выбираем клетку
         cfg.setSelectedCellId(cell.id);
-
         cfg.topPanel.selectCell(cell);
-        cfg.tooltip.show([cell]);
-
-        const r = el.getBoundingClientRect();
-        const vr = cfg.mapViewport.getBoundingClientRect();
-
-        cfg.tooltip.move(
-            r.right - vr.left + 8,
-            r.top - vr.top
-        );
+        if (navigator.maxTouchPoints === 0) {
+            cfg.tooltip.show([cell]);
+            const r = el.getBoundingClientRect();
+            const vr = cfg.mapViewport.getBoundingClientRect();
+            cfg.tooltip.move(
+                r.right - vr.left + 8,
+                r.top - vr.top
+            );
+        }
 
         // восстанавливаем только выделение выбранной клетки
         refreshSelection();
-
     });
 
 }
