@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2107 1145 ");
+console.log("dragTouch.js 2107 1200 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -87,48 +87,46 @@ if (pointers.size === 2) {
 function onMove(e) {
 
     if (pointers.has(e.pointerId)) {
-    pointers.get(e.pointerId).x = e.clientX;
-    pointers.get(e.pointerId).y = e.clientY;
+        pointers.get(e.pointerId).x = e.clientX;
+        pointers.get(e.pointerId).y = e.clientY;
     }
 
-if (pointers.size === 2) {
-    const pts = [...pointers.values()];
-    const d = distance(pts[0], pts[1]);
-    let newScale = pinchStartScale * (d / pinchStartDistance);
-    newScale = Math.max(0.5, Math.min(newScale, 2));
-    scale.value = newScale;
-
-offset.x = pinchCenterX - worldCenterX * scale.value;
-offset.y = pinchCenterY - worldCenterY * scale.value;
-
-updateTransform();
-topPanelModule.setZoom(scale.value);
-portalMenu.hide();
-
-    return;
-}
+    if (pointers.size === 2) {
+        const pts = [...pointers.values()];
+        const d = distance(pts[0], pts[1]);
+        let newScale = pinchStartScale * (d / pinchStartDistance);
+        newScale = Math.max(0.5, Math.min(newScale, 2));
+        scale.value = newScale;
+        offset.x = pinchCenterX - worldCenterX * scale.value;
+        offset.y = pinchCenterY - worldCenterY * scale.value;
+        updateTransform();
+        topPanelModule.setZoom(scale.value);
+        portalMenu.hide();
+        return;
+    }
 
     if (!dragging)
         return;
-
     if (e.pointerId !== pointerId)
         return;
-
     const newX = e.clientX - dragStartX;
     const newY = e.clientY - dragStartY;
-
-    if (
-        Math.abs(newX - offset.x) > 5 ||
-        Math.abs(newY - offset.y) > 5
-    ) {
-        moved = true;
+    if (!moved) {
+        if (
+            Math.abs(newX - offset.x) > 5 ||
+            Math.abs(newY - offset.y) > 5
+        ) {
+            moved = true;
+        // пользователь действительно начал двигать карту
+            portalMenu.hide();
+            tooltip.hide();
+        }
     }
 
     offset.x = newX;
     offset.y = newY;
     updateTransform();
-    topPanelModule.setZoom(scale.value);//СЮДА ИЛИ ВЫШЕ - ПОЗЖЕ ГЛЯНУТЬ
-
+    topPanelModule.setZoom(scale.value);
 }
 
 function onUp(e) {
