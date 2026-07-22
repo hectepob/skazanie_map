@@ -16,9 +16,9 @@ body {
 #topPanel {
     background: #ddd;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
     padding: 5px;
     box-sizing: border-box;
 }
@@ -27,16 +27,13 @@ body {
 .bottomRow {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
     width: 100%;
 }
 
-.bottomRow {
-    justify-content: flex-start;
-}
-
-.floorBlock {
-    margin-left: auto;
+.floorBlock,
+.zoomBlock {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -311,30 +308,16 @@ body {
 }
 
 /* МОБИЛЬНАЯ ВЕРХНЯЯ ПАНЕЛЬ */
-@media (max-width:900px){
-
-    #topPanel{
-        display:flex;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:6px;
-    }
+@media (max-width:900px) {
 
     .topRow,
-    .bottomRow{
-        display:flex;
-        flex-wrap:wrap;
-        align-items:center;
-        gap:8px;
-        width:100%;
+    .bottomRow {
+        gap: 8px;
     }
 
-    .floorBlock{
-        margin-left:0;
-    }
-
-    .zoomBlock{
-        margin-left:0;
+    /* скрываем разделитель между этажом и масштабом */
+    .bottomRow > span {
+        display: none;
     }
 
 }
