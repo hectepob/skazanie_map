@@ -67,18 +67,16 @@ console.log("STAIRS CLICK", stair.id);
 }
 
 function drawPortal(el, cell) {
-console.log("PORTAL CLICK", cell.id);
     if (!portalMenu.hasPortal(cell.id))
         return;
     const span = document.createElement("span");
     span.className = "portal";
-
-span.onclick = e => {
-    e.stopPropagation();
-    cfg.tooltip.hide();
-    portalMenu.show(cell, span);
-};
-
+    span.onclick = e => {
+console.log("PORTAL CLICK", cell.id);
+        e.stopPropagation();
+        cfg.tooltip.hide();
+        portalMenu.show(cell, span);
+    };
     el.appendChild(span);
  }
 
@@ -120,8 +118,8 @@ function attachTooltip(el, group) {
 }
     
 function attachClick(el, cell, group) {
-console.log("CELL CLICK", cell.id);
     el.addEventListener("click", e => {
+console.log("CELL CLICK", cell.id);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
