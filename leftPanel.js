@@ -1,4 +1,4 @@
-console.log("leftPanel.js 2307 2220 ");
+console.log("leftPanel.js 2307 2300 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
@@ -9,12 +9,12 @@ const leftPanel = (function () {
     let currentInfoBlock = null;
     let cfg;
 
-function init(cfg) {
+function init(config) {
+    cfg = config;
+    const data = cfg.data;
     const highlight = cfg.highlight;
     const renderMap = cfg.renderMap;
     const navigation = cfg.navigation;
-    cfg = config;
-    const data = cfg.data;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
@@ -158,37 +158,43 @@ header.onclick = function () {
     panel.appendChild(wrapper);
 }
 
-function findSelectedItem() {
-    if (!selectedItem)
-        return;
-    const cells = [];
-    mapData.forEach(cell => {
+//function findSelectedItem() {
+//    if (!selectedItem)
+//        return;
+//    const cells = [];
+//    mapData.forEach(cell => {
+//        (cell.objects || []).forEach(obj => {
+//            if (obj.id === selectedItem.id)
+//                cells.push(cell);
+//        });
+//    });
+//    if (!cells.length)
+//        return;
+//    highlight.clear();
+//    cells.forEach(c => highlight.add(c.id));
+//    renderMap.refreshSelection();
+//    if (followCheckbox.checked) {
+//        cells.sort((a, b) => a.id - b.id);
+//        navigation.gotoCell(cells[0].id);
+//    }
+//}
+
+function showInfo(item) {
+    if (currentInfoBlock)
+        currentInfoBlock.remove();
+    let count = 0;
+    cfg.data.forEach(cell => {
         (cell.objects || []).forEach(obj => {
-            if (obj.id === selectedItem.id)
-                cells.push(cell);
+            if (obj.id === item.id)
+                count++;
         });
     });
-    if (!cells.length)
-        return;
-    highlight.clear();
-    cells.forEach(c => highlight.add(c.id));
-    renderMap.refreshSelection();
-    if (followCheckbox.checked) {
-        cells.sort((a, b) => a.id - b.id);
-        navigation.gotoCell(cells[0].id);
-    }
+    const info = document.createElement("div");
+    info.className = "accordionInfo";
+    info.innerHTML = `<div>Найдено: ${count}</div>`;
+    item.node.after(info);
+    currentInfoBlock = info;
 }
-
-    function showInfo(item) {
-        if (currentInfoBlock)
-            currentInfoBlock.remove();
-        const found = data.objects(item.id);
-        const info = document.createElement("div");
-        info.className = "accordionInfo";
-        info.innerHTML = `<div>Найдено: ${found.length}</div>`;
-        item.node.after(info);
-        currentInfoBlock = info;
-    }
     
     return {
         init: init
