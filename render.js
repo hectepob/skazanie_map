@@ -119,7 +119,6 @@ function attachTooltip(el, group) {
 function attachClick(el, cell, group) {
 
     el.addEventListener("click", e => {
-        console.log("CELL CLICK", cell.id, e.timeStamp);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
@@ -138,7 +137,6 @@ function attachClick(el, cell, group) {
             r.right - vr.left + 8,
             r.top - vr.top
         );
-        console.log("TOOLTIP SHOW");
     });
 
 }
