@@ -5,12 +5,16 @@ const leftPanel = (function () {
     let selectedItem = null;
     let followCheckbox;
     let calcCheckbox;
+    let currentInfoBlock = null;
+    let cfg;
 
 function init(cfg) {
     const data = cfg.data;
     const highlight = cfg.highlight;
     const renderMap = cfg.renderMap;
     const navigation = cfg.navigation;
+    cfg = config;
+    const data = cfg.data;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
@@ -87,6 +91,7 @@ function createAccordion(title, key, list) {
         const row = document.createElement("div");
         row.className = "accordionItem";
         row.textContent = item.name;
+        item.node = row;
         
     row.onclick = function () {
         document
@@ -94,6 +99,7 @@ function createAccordion(title, key, list) {
             .forEach(x => x.classList.remove("selected"));
         row.classList.add("selected");
         selectedItem = item;
+        showInfo(item);
         const ids = [];
         data.forEach(cell => {
             (cell.objects || []).forEach(obj => {
@@ -108,8 +114,6 @@ function createAccordion(title, key, list) {
             navigation.gotoCell(targetId);
         }
     };
-
-
 
         rows.push({
             node: row,
@@ -175,6 +179,17 @@ function findSelectedItem() {
     }
 }
 
+    function showInfo(item) {
+        if (currentInfoBlock)
+            currentInfoBlock.remove();
+        const found = data.objects(item.id);
+        const info = document.createElement("div");
+        info.className = "accordionInfo";
+        info.innerHTML = `<div>Найдено: ${found.length}</div>`;
+        item.node.after(info);
+        currentInfoBlock = info;
+    }
+    
     return {
         init: init
     };
