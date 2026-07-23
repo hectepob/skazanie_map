@@ -1,4 +1,4 @@
-console.log("render 2107 1735");
+console.log("render 2307 0715");
 const renderMap = (function () {
 
     let cfg;
@@ -53,7 +53,7 @@ function drawStairs(el, cell) {
         const span = document.createElement("span");
         span.className = stair.className;
         span.textContent = stair.symbol;
-        span.onclick = e => {
+        span.addEventListener("stairsTap", e => {
             e.stopPropagation();
             const target = cfg.byId.get(stair.id);
             if (!target)
@@ -70,7 +70,7 @@ function drawPortal(el, cell) {
     const span = document.createElement("span");
     span.className = "portal";
 
-span.onclick = e => {
+span.addEventListener("portalTap", e => {
     e.stopPropagation();
     cfg.tooltip.hide();
     portalMenu.show(cell, span);
@@ -118,7 +118,7 @@ function attachTooltip(el, group) {
     
 function attachClick(el, cell, group) {
 
-    el.addEventListener("click", e => {
+    el.addEventListener("cellTap", e => {
         console.log("CELL CLICK", cell.id, e.timeStamp);
         if (cfg.drag.moved())
             return;
