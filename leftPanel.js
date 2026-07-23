@@ -6,7 +6,8 @@ const leftPanel = (function () {
     let followCheckbox;
     let calcCheckbox;
 
-function init(data) {
+function init(cfg) {
+    const data = cfg.data;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
@@ -73,9 +74,9 @@ function createAccordion(title, key, list) {
     
     // ---------- поиск ----------
     const search = document.createElement("input");
-    search.type = "text";
-    search.placeholder = "Поиск...";
+    search.type = "search";
     search.className = "accordionSearch";
+    search.placeholder = "Поиск...";
     body.appendChild(search);
     
     const rows = [];
@@ -108,18 +109,21 @@ function createAccordion(title, key, list) {
         });
     });
     
-    header.onclick = function () {
-        const alreadyOpen = body.style.display === "block";
-        Object.keys(sections).forEach(k => {
-            sections[k].body.style.display = "none";
-            sections[k].header.textContent =
-                "▶ " + sections[k].title;
-        });
-        if (!alreadyOpen) {
-            body.style.display = "block";
-            header.textContent = "▼ " + title;
-        }
-    };
+header.onclick = function () {
+    const alreadyOpen = body.style.display === "block";
+    Object.keys(sections).forEach(k => {
+        sections[k].body.style.display = "none";
+        sections[k].header.textContent =
+            "▶ " + sections[k].title;
+    });
+    if (alreadyOpen) {
+        search.value = "";
+        rows.forEach(r => r.node.style.display = "");
+    } else {
+        body.style.display = "block";
+        header.textContent = "▼ " + title;
+    }
+};
     
     wrapper.appendChild(header);
     wrapper.appendChild(body);
