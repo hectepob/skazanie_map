@@ -65,6 +65,14 @@ body {
     cursor: pointer;
 }
 
+.accordionSearch{
+    width:100%;
+    box-sizing:border-box;
+    margin:6px 0;
+    padding:4px 6px;
+    font-size:13px;
+}
+
 /*MAP VIEWPORT */
 #mapViewport {
     grid-column: 2;
