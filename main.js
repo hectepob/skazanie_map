@@ -172,7 +172,13 @@ topPanelModule.onZoomEnter(percent => {
     navigation.setZoom(percent / 100);
 });
     
-leftPanel.init(data);
+leftPanel.init({
+    data: mapData,
+    highlight,
+    navigation,
+    renderMap
+});
+    
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
 if (firstCell)
