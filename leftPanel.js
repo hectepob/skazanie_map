@@ -102,7 +102,10 @@ function createAccordion(title, key, list) {
         });
         highlight.setCells(ids);
         renderMap.draw();
-        // findSelectedItem();
+        if (followCheckbox.checked && ids.length > 0) {
+            const targetId = Math.min(...ids);
+            navigation.gotoCell(targetId);
+        }
     };
 
 
