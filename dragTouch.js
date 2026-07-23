@@ -1,4 +1,4 @@
-console.log("dragTouch.js 2107 1215 ");
+console.log("dragTouch.js 2307 0650 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -138,16 +138,53 @@ function onUp(e) {
     if (viewport.hasPointerCapture(e.pointerId))
         viewport.releasePointerCapture(e.pointerId);
 
-    // если это был обычный тап, а не перетаскивание
-    if (!moved) {
-        const target = document.elementFromPoint(
-            e.clientX,
-            e.clientY
+if (!moved) {
+    const target = document.elementFromPoint(
+        e.clientX,
+        e.clientY
+    );
+    if (!target)
+        return;
+
+    // 1. Портал
+    const portal = target.closest(".portal");
+    if (portal) {
+        portal.dispatchEvent(
+            new PointerEvent("portalTap", {
+                bubbles: true
+            })
         );
-        if (target) {
-            target.click();
-        }
+        return;
     }
+
+    // 2. Лестница
+    const stairs = target.closest(".stairs");
+    if (stairs) {
+        stairs.dispatchEvent(
+            new PointerEvent("stairsTap", {
+                bubbles: true
+            })
+        );
+        return;
+    }
+
+    // 3. Клетка
+    const cell = target.closest(".cell");
+
+    if (cell) {
+        cell.dispatchEvent(
+            new PointerEvent("cellTap", {
+                bubbles: true
+            })
+        );
+        return;
+    }
+
+    // 4. Пустое место
+    tooltip.hide();
+    portalMenu.hide();
+
+}
     if (pointers.size < 2) {
     pinchCenterX = 0;
     pinchCenterY = 0;
