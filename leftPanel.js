@@ -89,6 +89,7 @@ function createAccordion(title, key, list) {
                 .forEach(x => x.classList.remove("selected"));
             row.classList.add("selected");
             selectedItem = item;
+            findSelectedItem();
         };
         rows.push({
             node: row,
@@ -128,6 +129,27 @@ function createAccordion(title, key, list) {
         body
     };
     panel.appendChild(wrapper);
+}
+
+function findSelectedItem() {
+    if (!selectedItem)
+        return;
+    const cells = [];
+    mapData.forEach(cell => {
+        (cell.objects || []).forEach(obj => {
+            if (obj.id === selectedItem.id)
+                cells.push(cell);
+        });
+    });
+    if (!cells.length)
+        return;
+    highlight.clear();
+    cells.forEach(c => highlight.add(c.id));
+    renderMap.refreshSelection();
+    if (followCheckbox.checked) {
+        cells.sort((a, b) => a.id - b.id);
+        navigation.gotoCell(cells[0].id);
+    }
 }
 
     return {
