@@ -173,7 +173,7 @@ topPanelModule.onZoomEnter(percent => {
 });
     
 leftPanel.init({
-    data: mapData,
+    data: Data,
     highlight,
     navigation,
     renderMap
