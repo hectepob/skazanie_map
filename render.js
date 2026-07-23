@@ -55,7 +55,6 @@ function drawStairs(el, cell) {
         span.className = stair.className;
         span.textContent = stair.symbol;
         span.onclick = e => {
-console.log("STAIRS CLICK", stair.id);
             e.stopPropagation();
             const target = cfg.byId.get(stair.id);
             if (!target)
@@ -72,7 +71,6 @@ function drawPortal(el, cell) {
     const span = document.createElement("span");
     span.className = "portal";
     span.onclick = e => {
-console.log("PORTAL CLICK", cell.id);
         e.stopPropagation();
         cfg.tooltip.hide();
         portalMenu.show(cell, span);
