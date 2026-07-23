@@ -53,7 +53,7 @@ function drawStairs(el, cell) {
         const span = document.createElement("span");
         span.className = stair.className;
         span.textContent = stair.symbol;
-        span.addEventListener("stairsTap", e => {
+        span.onclick = e => {
             e.stopPropagation();
             const target = cfg.byId.get(stair.id);
             if (!target)
@@ -70,7 +70,7 @@ function drawPortal(el, cell) {
     const span = document.createElement("span");
     span.className = "portal";
 
-span.addEventListener("portalTap", e => {
+span.onclick = e => {
     e.stopPropagation();
     cfg.tooltip.hide();
     portalMenu.show(cell, span);
@@ -118,7 +118,7 @@ function attachTooltip(el, group) {
     
 function attachClick(el, cell, group) {
 
-    el.addEventListener("cellTap", e => {
+    el.addEventListener("click", e => {
         console.log("CELL CLICK", cell.id, e.timeStamp);
         if (cfg.drag.moved())
             return;
