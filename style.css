@@ -329,3 +329,30 @@ body {
     }
 
 }
+
+/* настройка курсора */
+.cell{
+    cursor:pointer;
+}
+
+.stairs{
+    cursor:pointer;
+}
+
+.portal{
+    cursor:pointer;
+}
+
+.accordionHeader{
+    cursor:pointer;
+}
+
+.accordionItem{
+    cursor:pointer;
+}
+
+button,
+select,
+input[type="checkbox"]{
+    cursor:pointer;
+}
