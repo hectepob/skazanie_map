@@ -57,9 +57,7 @@ function centerOnCell(cell) {
 }
     
     function keepView(id) {
-        console.log("KEEPVIEW", id);
         const cell = byId.get(id);
-        console.log("TARGET CELL", cell);
         if (!cell)
             return;
         tooltip.hide();
@@ -74,7 +72,6 @@ function centerOnCell(cell) {
        view.apply();
        topPanel.selectCell(cell);
        tooltip.show([cell]);
-        console.log("SEARCH SELECTED");
        const el = mapContainer.querySelector(".cell.selected");
        if (el) {
             const r = el.getBoundingClientRect();
