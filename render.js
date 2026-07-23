@@ -117,7 +117,6 @@ function attachTooltip(el, group) {
     
 function attachClick(el, cell, group) {
     el.addEventListener("click", e => {
-        console.log("CELL CLICK", cell.id);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
@@ -166,7 +165,6 @@ function drawCell(group) {
     attachTooltip(el, group);
     attachClick(el, cell, group);
     return el;
-    console.count("drawCell");
 }
 
     function refreshSelection() {
