@@ -19,11 +19,9 @@ const portalMenu = (function () {
         map.appendChild(menu);
 
         menu.addEventListener("click", function (e) {
-            console.log("menu click", e.target);
             const item = e.target.closest(".portalItem");
             if (!item)
                  return;
-            console.log("portal id =", item.dataset.targetId);
             e.stopPropagation();
             const id = Number(item.dataset.targetId);
             hide();
