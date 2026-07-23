@@ -103,7 +103,6 @@ function changeFloor(step) {
     tooltip.hide();
     setCurrentFloor(newFloor); 
     setSelectedCellId(0);
-    clearHighlight();
     topPanel.clearSelection();
     render();
 }
