@@ -10,6 +10,7 @@ function init(cfg) {
     const data = cfg.data;
     const highlight = cfg.highlight;
     const renderMap = cfg.renderMap;
+    const navigation = cfg.navigation;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
