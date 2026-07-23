@@ -46,7 +46,7 @@ const dragTouch = (function () {
     }
 
 function onDown(e) {
-
+console.log("DOWN", e.pointerId, pointers.size);
     if (e.pointerType !== "touch")
         return;
 
@@ -115,6 +115,7 @@ function onMove(e) {
             Math.abs(newY - offset.y) > 5
         ) {
             moved = true;
+console.log("DRAG START");
         // пользователь действительно начал двигать карту
             portalMenu.hide();
             tooltip.hide();
@@ -128,6 +129,7 @@ function onMove(e) {
 }
 
 function onUp(e) {
+console.log("UP", e.pointerId, "moved =", moved);
     pointers.delete(e.pointerId);
     if (pointerId !== null && e.pointerId !== pointerId)
         return;
