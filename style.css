@@ -331,9 +331,6 @@ body {
 }
 
 /* настройка курсора */
-.cell{
-    cursor:pointer;
-}
 
 .stairs{
     cursor:pointer;
