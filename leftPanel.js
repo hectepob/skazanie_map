@@ -8,6 +8,8 @@ const leftPanel = (function () {
 
 function init(cfg) {
     const data = cfg.data;
+    const highlight = cfg.highlight;
+    const renderMap = cfg.renderMap;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
@@ -84,14 +86,27 @@ function createAccordion(title, key, list) {
         const row = document.createElement("div");
         row.className = "accordionItem";
         row.textContent = item.name;
-        row.onclick = function () {
-            document
-                .querySelectorAll(".accordionItem.selected")
-                .forEach(x => x.classList.remove("selected"));
-            row.classList.add("selected");
-            selectedItem = item;
-            findSelectedItem();
-        };
+        
+    row.onclick = function () {
+        document
+            .querySelectorAll(".accordionItem.selected")
+            .forEach(x => x.classList.remove("selected"));
+        row.classList.add("selected");
+        selectedItem = item;
+        const ids = [];
+        data.forEach(cell => {
+            (cell.objects || []).forEach(obj => {
+                if (obj.id === item.id)
+                    ids.push(cell.id);
+            });
+        });
+        highlight.setCells(ids);
+        renderMap.draw();
+        // findSelectedItem();
+    };
+
+
+
         rows.push({
             node: row,
             text: item.name.toLowerCase()
