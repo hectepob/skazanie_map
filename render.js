@@ -129,16 +129,21 @@ function attachClick(el, cell, group) {
         cfg.topPanel.selectCell(cell);
         refreshSelection();
         requestAnimationFrame(() => {
-            const r = el.getBoundingClientRect();
-            const vr = cfg.mapViewport.getBoundingClientRect();
-            if (navigator.maxTouchPoints > 0)
-                cfg.tooltip.show(group.cells);
-            else
-                cfg.tooltip.show([cell]);
-            cfg.tooltip.move(
-                r.right - vr.left + 8,
-                r.top - vr.top
+            const currentEl = cfg.mapContainer.querySelector(
+            `.cell[data-id="${cell.id}"]`
             );
+        if (!currentEl)
+            return;
+        const r = currentEl.getBoundingClientRect();
+        const vr = cfg.mapViewport.getBoundingClientRect();
+        if (navigator.maxTouchPoints > 0)
+            cfg.tooltip.show(group.cells);
+        else
+            cfg.tooltip.show([cell]);
+        cfg.tooltip.move(
+            r.right - vr.left + 8,
+            r.top - vr.top
+        );   
         });
     });
 }
