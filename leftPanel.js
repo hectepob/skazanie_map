@@ -1,4 +1,4 @@
-consol.log ("leftPanel.js 2307 2220 ");
+consol.log("leftPanel.js 2307 2220 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
