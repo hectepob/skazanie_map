@@ -35,6 +35,7 @@ function drawPassages(el, cell) {
 }
 
 function drawStairs(el, cell) {
+
     const stairs = [
         {
             id: cfg.toId(cell.stairs?.down),
@@ -54,6 +55,7 @@ function drawStairs(el, cell) {
         span.className = stair.className;
         span.textContent = stair.symbol;
         span.onclick = e => {
+console.log("STAIRS CLICK", stair.id);
             e.stopPropagation();
             const target = cfg.byId.get(stair.id);
             if (!target)
@@ -65,6 +67,7 @@ function drawStairs(el, cell) {
 }
 
 function drawPortal(el, cell) {
+console.log("PORTAL CLICK", cell.id);
     if (!portalMenu.hasPortal(cell.id))
         return;
     const span = document.createElement("span");
@@ -117,7 +120,7 @@ function attachTooltip(el, group) {
 }
     
 function attachClick(el, cell, group) {
-
+console.log("CELL CLICK", cell.id);
     el.addEventListener("click", e => {
         if (cfg.drag.moved())
             return;
