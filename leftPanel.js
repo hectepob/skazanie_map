@@ -70,6 +70,15 @@ function createAccordion(title, key, list) {
     const body = document.createElement("div");
     body.className = "accordionBody";
     body.style.display = "none";
+    
+    // ---------- поиск ----------
+    const search = document.createElement("input");
+    search.type = "text";
+    search.placeholder = "Поиск...";
+    search.className = "accordionSearch";
+    body.appendChild(search);
+    
+    const rows = [];
     list.forEach(item => {
         const row = document.createElement("div");
         row.className = "accordionItem";
@@ -81,8 +90,23 @@ function createAccordion(title, key, list) {
             row.classList.add("selected");
             selectedItem = item;
         };
+        rows.push({
+            node: row,
+            text: item.name.toLowerCase()
+        });
         body.appendChild(row);
     });
+
+    search.addEventListener("input", function () {
+        const value = search.value.trim().toLowerCase();
+        rows.forEach(r => {
+            if (value === "" || r.text.includes(value))
+                r.node.style.display = "";
+            else
+                r.node.style.display = "none";
+        });
+    });
+    
     header.onclick = function () {
         const alreadyOpen = body.style.display === "block";
         Object.keys(sections).forEach(k => {
