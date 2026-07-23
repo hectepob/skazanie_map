@@ -1,4 +1,4 @@
-console.log("render 2307 0715");
+console.log("render 2307 1245");
 const renderMap = (function () {
 
     let cfg;
@@ -119,7 +119,7 @@ function attachTooltip(el, group) {
     
 function attachClick(el, cell, group) {
     el.addEventListener("click", e => {
-console.log("CELL CLICK", cell.id);
+        console.log("CELL CLICK", cell.id);
         if (cfg.drag.moved())
             return;
         cfg.topPanel.clearAreaSelection?.();
@@ -128,18 +128,19 @@ console.log("CELL CLICK", cell.id);
         cfg.setSelectedCellId(cell.id);
         cfg.topPanel.selectCell(cell);
         refreshSelection();
-        const r = el.getBoundingClientRect();
-        const vr = cfg.mapViewport.getBoundingClientRect();
-        if (navigator.maxTouchPoints > 0)
-            cfg.tooltip.show(group.cells);
-        else
-            cfg.tooltip.show([cell]);
-        cfg.tooltip.move(
-            r.right - vr.left + 8,
-            r.top - vr.top
-        );
+        requestAnimationFrame(() => {
+            const r = el.getBoundingClientRect();
+            const vr = cfg.mapViewport.getBoundingClientRect();
+            if (navigator.maxTouchPoints > 0)
+                cfg.tooltip.show(group.cells);
+            else
+                cfg.tooltip.show([cell]);
+            cfg.tooltip.move(
+                r.right - vr.left + 8,
+                r.top - vr.top
+            );
+        });
     });
-
 }
     
 function drawCell(group) {
