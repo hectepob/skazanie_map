@@ -366,3 +366,18 @@ select,
 input[type="checkbox"]{
     cursor:pointer;
 }
+
+.tpDesktopRow1{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:4px 8px;
+}
+
+.tpDesktopRow2{
+    display:flex;
+    align-items:center;
+    padding:2px 10px 6px 10px;
+    font-size:18px;
+    font-weight:bold;
+}
