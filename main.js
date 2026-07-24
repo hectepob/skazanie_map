@@ -156,6 +156,7 @@ renderMap.init({
 });
 
 topPanelModule.init(areaData, data);
+topPanelDesktop.init();
 topPanelModule.setZoom(scale);
     
 topPanelModule.onZoomPlus(() => {
