@@ -115,12 +115,6 @@ row.onclick = function () {
     row.classList.add("selected");
     selectedItem = item;
     foundCells = findCellsByObject(item);
-
-console.log(
-    "FOUND",
-    item.name,
-    foundCells.map(c => c.id)
-);
     
     currentFoundIndex = 0;
     const ids = foundCells.map(c => c.id);
