@@ -67,7 +67,7 @@ navigation.init({
     tooltip,
     mapContainer,
     mapViewport,
-    topPanel: topPanel,
+    topPanel: topPanelModule,
     render: () => renderMap.draw(),
     clearHighlight: () => highlight.clear(),
     getCurrentFloor: () => currentFloor,
@@ -155,36 +155,30 @@ renderMap.init({
     setSelectedCellId: v => selectedCellId = v
 });
 
-    // какой модуль верхней панели использовать
-    const topPanel =
-        navigator.maxTouchPoints > 0
-            ? topPanelModule
-            : topPanelDesktop;
-
-    topPanel.init(areaData, data);
-    topPanel.setZoom(scale);
-
-    topPanel.onZoomPlus(() => {
-        navigation.setZoom(scale + 0.25);
-    });
-
-    topPanel.onZoomMinus(() => {
-        navigation.setZoom(scale - 0.25);
-    });
-
-    topPanel.onZoomEnter(percent => {
-        if (isNaN(percent))
-            return;
-        navigation.setZoom(percent / 100);
-    });
+topPanelModule.init(areaData, data);
+topPanelModule.setZoom(scale);
     
+topPanelModule.onZoomPlus(() => {
+    navigation.setZoom(scale + 0.25);
+});
+
+topPanelModule.onZoomMinus(() => {
+    navigation.setZoom(scale - 0.25);
+});
+
+topPanelModule.onZoomEnter(percent => {
+    if (isNaN(percent))
+        return;
+    navigation.setZoom(percent / 100);
+});
+
 leftPanel.init({
     data: data,
     highlight,
     navigation,
     renderMap
 });
-    
+
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
 if (firstCell)
