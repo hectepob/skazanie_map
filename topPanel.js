@@ -206,25 +206,6 @@ bottomRow.appendChild(zoomBlock);
     );
 });
 
-    if (
-        window.matchMedia("(pointer:fine)").matches &&
-        typeof topPanelDesktop !== "undefined"
-        ) {
-                topPanelDesktop.init({
-                    panel,
-                    topRow,
-                    bottomRow,
-                    areaLabel,
-                    areaSelect,
-                    subareaLabel,
-                    subareaSelect,
-                    locationLabel,
-                    locationInput,
-                    findButton,
-                    floorBlock,
-                    zoomBlock
-                });
-        }
 }   
     
 function buildAreas() {
@@ -317,15 +298,6 @@ return {
         buildSubareas(cell.area);
         subareaSelect.value = cell.subarea;
         locationInput.value = cell.id;
-        if (
-            window.matchMedia("(pointer:fine)").matches &&
-            typeof topPanelDesktop !== "undefined"
-        ) {
-            topPanelDesktop.setCaption(
-                cell.area,
-                cell.subarea
-                );
-        }
     }
 };
 
