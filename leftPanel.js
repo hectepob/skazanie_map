@@ -134,18 +134,21 @@ function createAccordion(title, key, list) {
     
 header.onclick = function () {
     const alreadyOpen = body.style.display === "block";
+
     Object.keys(sections).forEach(k => {
         sections[k].body.style.display = "none";
         sections[k].header.textContent =
             "▶ " + sections[k].title;
     });
-    if (alreadyOpen) {
-    search.value = "";
-    rows.forEach(r => r.node.style.display = "");
 
-    if (currentInfoBlock) {
-        currentInfoBlock.remove();
-        currentInfoBlock = null;
+    if (alreadyOpen) {
+        search.value = "";
+        rows.forEach(r => r.node.style.display = "");
+
+        if (currentInfoBlock) {
+            currentInfoBlock.remove();
+            currentInfoBlock = null;
+        }
     } else {
         body.style.display = "block";
         header.textContent = "▼ " + title;
