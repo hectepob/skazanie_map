@@ -16,5 +16,6 @@
 {"id_portal":1871,"targets":[1903,1907]},
 {"id_portal":1903,"targets":[1829,1871,1910,5000]},
 {"id_portal":1907,"targets":[1829,1871,1910,5000]},
-{"id_portal":1910,"targets":[1903,1907]}
+{"id_portal":1910,"targets":[1903,1907]},
+{"id_portal":3233,"targets":[3300]}
 ]
