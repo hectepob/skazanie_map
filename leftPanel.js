@@ -140,8 +140,12 @@ header.onclick = function () {
             "▶ " + sections[k].title;
     });
     if (alreadyOpen) {
-        search.value = "";
-        rows.forEach(r => r.node.style.display = "");
+    search.value = "";
+    rows.forEach(r => r.node.style.display = "");
+
+    if (currentInfoBlock) {
+        currentInfoBlock.remove();
+        currentInfoBlock = null;
     } else {
         body.style.display = "block";
         header.textContent = "▼ " + title;
@@ -180,20 +184,38 @@ header.onclick = function () {
 //}
 
 function showInfo(item) {
+
     if (currentInfoBlock)
         currentInfoBlock.remove();
-    let count = 0;
+
+    const cells = [];
+
     cfg.data.forEach(cell => {
         (cell.objects || []).forEach(obj => {
             if (obj.id === item.id)
-                count++;
+                cells.push(cell);
         });
     });
+
+    if (cells.length === 0)
+        return;
+
     const info = document.createElement("div");
     info.className = "accordionInfo";
-    info.innerHTML = `<div>Найдено: ${count}</div>`;
+
+    if (followCheckbox.checked) {
+        info.innerHTML =
+            `<button class="infoPrev">◀</button>` +
+            `<span>1 / ${cells.length}</span>` +
+            `<button class="infoNext">▶</button>`;
+    } else {
+        info.innerHTML =
+            `Найдено: ${cells.length}`;
+    }
+
     item.node.after(info);
     currentInfoBlock = info;
+
 }
     
     return {
