@@ -205,7 +205,26 @@ bottomRow.appendChild(zoomBlock);
         panel.offsetHeight + "px"
     );
 });
-    
+
+    if (
+        window.matchMedia("(pointer:fine)").matches &&
+        typeof topPanelDesktop !== "undefined"
+        ) {
+                topPanelDesktop.init({
+                    panel,
+                    topRow,
+                    bottomRow,
+                    areaLabel,
+                    areaSelect,
+                    subareaLabel,
+                    subareaSelect,
+                    locationLabel,
+                    locationInput,
+                    findButton,
+                    floorBlock,
+                    zoomBlock
+                });
+        }
 }   
     
 function buildAreas() {
