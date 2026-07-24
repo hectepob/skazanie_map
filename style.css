@@ -92,11 +92,9 @@ body {
     position: relative;
     overflow: hidden;
     background:
-    radial-gradient(
-        circle at center,
-        #3b3328 0%,
-        #191512 100%
-    );
+    radial-gradient(circle,
+        #e4d3a8,
+        #b89b63);
     user-select: none;
     touch-action: none;
 }
