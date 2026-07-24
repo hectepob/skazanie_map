@@ -310,7 +310,6 @@ return {
         };
     },
     clearSelection,
-    //clearAreaSelection,
     selectCell(cell) {
         if (!cell)
             return;
@@ -318,6 +317,15 @@ return {
         buildSubareas(cell.area);
         subareaSelect.value = cell.subarea;
         locationInput.value = cell.id;
+        if (
+            window.matchMedia("(pointer:fine)").matches &&
+            typeof topPanelDesktop !== "undefined"
+        ) {
+            topPanelDesktop.setCaption(
+                cell.area,
+                cell.subarea
+                );
+        }
     }
 };
 
