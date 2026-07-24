@@ -1,9 +1,14 @@
 const topPanelDesktop = (function () {
 
-    let cfg;
+    function init() {
 
-    function init(config) {
-        cfg = config;
+        if (navigator.maxTouchPoints > 0)
+            return;
+
+        const panel = document.getElementById("topPanel");
+
+        // сюда потом будем перестраивать панель
+
     }
 
     return {
