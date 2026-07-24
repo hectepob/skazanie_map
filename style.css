@@ -65,29 +65,26 @@ body {
     cursor: pointer;
 }
 
-.accordionSearch{
-    width:100%;
-    box-sizing:border-box;
-    margin:6px 0;
-    padding:4px 6px;
-    font-size:13px;
+.accordionInfo {
+    text-align: center;
+    padding: 4px;
+    font-size: 14px;
 }
 
-.accordionInfo{
-    margin:6px 0 8px 18px;
-    font-size:16px;
-    color:#444;
-    display:flex;
-    align-items:center;
-    gap:14px;
+.accordionInfo button {
+    width: 32px;
+    height: 26px;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
 }
 
-.accordionInfo button{
-    width:34px;
-    height:28px;
-    font-size:18px;
-    cursor:pointer;
+.findCounter {
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
 }
+
 
 /*MAP VIEWPORT */
 #mapViewport {
