@@ -1,24 +1,46 @@
+console.log("topPanelDesktop.js  2407 1700 ");
 const topPanelDesktop = (function () {
+function init(cfg) {
 
-function init() {
-    if (navigator.maxTouchPoints > 0)
-        return;
-    const panel = document.getElementById("topPanel");
+    cfg.topRow.innerHTML = "";
+    cfg.bottomRow.innerHTML = "";
 
-    // сохраняем всё, что уже построил topPanel.js
-    const oldChildren = [...panel.children];
-    panel.innerHTML = "";
-    const row1 = document.createElement("div");
-    row1.className = "tpDesktopRow1";
-    const row2 = document.createElement("div");
-    row2.className = "tpDesktopRow2";
-    panel.appendChild(row1);
-    panel.appendChild(row2);
-    oldChildren.forEach(el => row1.appendChild(el));
+    // ---------- первая строка ----------
+    cfg.topRow.className = "tpDesktopRow1";
+    cfg.topRow.appendChild(cfg.areaLabel);
+    cfg.topRow.appendChild(cfg.areaSelect);
+    cfg.topRow.appendChild(cfg.subareaLabel);
+    cfg.topRow.appendChild(cfg.subareaSelect);
+    cfg.topRow.appendChild(document.createElement("span"))
+        .textContent = "    ";
+    cfg.topRow.appendChild(cfg.locationLabel);
+    cfg.topRow.appendChild(cfg.locationInput);
+    cfg.topRow.appendChild(cfg.findButton);
+    cfg.topRow.appendChild(document.createElement("span"))
+        .textContent = "    ";
+    cfg.topRow.appendChild(cfg.floorBlock);
+    cfg.topRow.appendChild(document.createElement("span"))
+        .textContent = "    ";
+    cfg.topRow.appendChild(cfg.zoomBlock);
+
+    // ---------- вторая строка ----------
+    cfg.bottomRow.className = "tpDesktopRow2";
+    const caption = document.createElement("div");
+    caption.id = "desktopAreaCaption";
+    caption.textContent = "";
+    cfg.bottomRow.appendChild(caption);
 }
 
-    return {
-        init
-    };
+function setCaption(area, subarea) {
+    const el = document.getElementById("desktopAreaCaption");
+    if (!el)
+        return;
+    el.textContent = area + " — " + subarea;
+}
+
+return {
+    init,
+    setCaption
+};
 
 })();
