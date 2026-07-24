@@ -8,6 +8,8 @@ const leftPanel = (function () {
     let calcCheckbox;
     let currentInfoBlock = null;
     let cfg;
+    let foundCells = [];
+    let currentFoundIndex = 0;
 
 function init(config) {
     cfg = config;
@@ -69,6 +71,28 @@ function getUnique(data, type) {
         }));
 }
 
+    function findCellsByObject(item) {
+
+    const result = [];
+
+    cfg.data.forEach(cell => {
+
+        (cell.objects || []).forEach(obj => {
+
+            if (obj.id === item.id) {
+                result.push(cell);
+            }
+
+        });
+
+    });
+
+    result.sort((a, b) => a.id - b.id);
+
+    return result;
+
+    }
+
 function createAccordion(title, key, list) {
     const wrapper = document.createElement("div");
     wrapper.className = "accordion";
@@ -93,27 +117,36 @@ function createAccordion(title, key, list) {
         row.textContent = item.name;
         item.node = row;
         
-    row.onclick = function () {
-        document
-            .querySelectorAll(".accordionItem.selected")
-            .forEach(x => x.classList.remove("selected"));
-        row.classList.add("selected");
-        selectedItem = item;
-        showInfo(item);
-        const ids = [];
-        data.forEach(cell => {
-            (cell.objects || []).forEach(obj => {
-                if (obj.id === item.id)
-                    ids.push(cell.id);
-            });
-        });
-        highlight.setCells(ids);
-        renderMap.draw();
-        if (followCheckbox.checked && ids.length > 0) {
-            const targetId = Math.min(...ids);
-            navigation.gotoCell(targetId);
-        }
-    };
+row.onclick = function () {
+
+    document
+        .querySelectorAll(".accordionItem.selected")
+        .forEach(x => x.classList.remove("selected"));
+
+    row.classList.add("selected");
+
+    selectedItem = item;
+
+    foundCells = findCellsByObject(item);
+    currentFoundIndex = 0;
+
+    const ids = foundCells.map(c => c.id);
+
+    highlight.setCells(ids);
+
+    renderMap.draw();
+
+    showInfo(item);
+
+    if (followCheckbox.checked && foundCells.length > 0) {
+
+        navigation.gotoCell(
+            foundCells[0].id
+        );
+
+    }
+
+};
 
         rows.push({
             node: row,
@@ -191,35 +224,91 @@ function showInfo(item) {
     if (currentInfoBlock)
         currentInfoBlock.remove();
 
-    const cells = [];
-
-    cfg.data.forEach(cell => {
-        (cell.objects || []).forEach(obj => {
-            if (obj.id === item.id)
-                cells.push(cell);
-        });
-    });
-
-    if (cells.length === 0)
-        return;
 
     const info = document.createElement("div");
     info.className = "accordionInfo";
 
-    if (followCheckbox.checked) {
+
+    if (!followCheckbox.checked) {
+
         info.innerHTML =
-            `<button class="infoPrev">◀</button>` +
-            `<span>1 / ${cells.length}</span>` +
-            `<button class="infoNext">▶</button>`;
-    } else {
-        info.innerHTML =
-            `Найдено: ${cells.length}`;
+            `<div>Найдено: ${foundCells.length}</div>`;
+
+    }
+    else {
+
+        info.innerHTML = `
+            <button class="findPrev">◀</button>
+            <span class="findCounter">
+                ${currentFoundIndex + 1} / ${foundCells.length}
+            </span>
+            <button class="findNext">▶</button>
+        `;
+
+
+        info.querySelector(".findPrev")
+            .onclick = function () {
+
+                if (foundCells.length === 0)
+                    return;
+
+                currentFoundIndex--;
+
+                if (currentFoundIndex < 0)
+                    currentFoundIndex = foundCells.length - 1;
+
+                navigation.gotoCell(
+                    foundCells[currentFoundIndex].id
+                );
+
+                updateInfoCounter();
+
+            };
+
+
+        info.querySelector(".findNext")
+            .onclick = function () {
+
+                if (foundCells.length === 0)
+                    return;
+
+                currentFoundIndex++;
+
+                if (currentFoundIndex >= foundCells.length)
+                    currentFoundIndex = 0;
+
+                navigation.gotoCell(
+                    foundCells[currentFoundIndex].id
+                );
+
+                updateInfoCounter();
+
+            };
+
     }
 
+
     item.node.after(info);
+
     currentInfoBlock = info;
 
 }
+
+    function updateInfoCounter() {
+
+    if (!currentInfoBlock)
+        return;
+
+    const counter =
+        currentInfoBlock.querySelector(".findCounter");
+
+    if (!counter)
+        return;
+
+    counter.textContent =
+        `${currentFoundIndex + 1} / ${foundCells.length}`;
+
+    }
     
     return {
         init: init
