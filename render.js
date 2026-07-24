@@ -133,10 +133,7 @@ function attachClick(el, cell, group) {
             return;
         const r = currentEl.getBoundingClientRect();
         const vr = cfg.mapViewport.getBoundingClientRect();
-        if (navigator.maxTouchPoints > 0)
-            cfg.tooltip.show(group.cells);
-        else
-            cfg.tooltip.show([cell]);
+        cfg.tooltip.show(group.cells);
         cfg.tooltip.move(
             r.right - vr.left + 8,
             r.top - vr.top
@@ -194,44 +191,34 @@ function draw() {
     let maxCol = 0;
     let maxRow = 0;
     const currentGrid = cfg.gridMap.get(cfg.getCurrentMap());
-
     if (!currentGrid)
         return;
-
+    
     currentGrid.forEach(group => {
-
         const cell = group.root;
-
     if (cell.floor !== cfg.getCurrentFloor()) return;
     if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
     if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
     if (cell.col > maxCol) maxCol = cell.col;
     if (cell.row > maxRow) maxRow = cell.row;
-
-});
-
-cfg.mapContainer.style.position = "absolute";
-cfg.mapContainer.style.width  = (maxCol * 40) + "px";
-cfg.mapContainer.style.height = (maxRow * 40) + "px";
+    });
     
-currentGrid.forEach(group => {
-
-    const cell = group.root;
-
-    if (cell.floor !== cfg.getCurrentFloor()) return;
-    if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
-    if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
-
-    const el = drawCell(group);
-
-    cfg.mapContainer.appendChild(el);
-
-});
+    cfg.mapContainer.style.position = "absolute";
+    cfg.mapContainer.style.width  = (maxCol * 40) + "px";
+    cfg.mapContainer.style.height = (maxRow * 40) + "px";
+    
+    currentGrid.forEach(group => {
+        const cell = group.root;
+        if (cell.floor !== cfg.getCurrentFloor()) return;
+        if (cfg.getCurrentArea() && cell.area !== cfg.getCurrentArea()) return;
+        if (cfg.getCurrentSubarea() && cell.subarea !== cfg.getCurrentSubarea()) return;
+        const el = drawCell(group);
+        cfg.mapContainer.appendChild(el);
+    });
 
     cfg.topPanel.setFloor(
         cfg.getCurrentFloor()
     );
-
 }
 
     return {
