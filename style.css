@@ -91,7 +91,10 @@ body {
     grid-column: 2;
     position: relative;
     overflow: hidden;
-    background:#fff;
+    background:
+    radial-gradient(circle,
+        #e4d3a8,
+        #b89b63);
     user-select: none;
     touch-action: none;
 }
