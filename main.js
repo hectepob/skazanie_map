@@ -176,7 +176,8 @@ leftPanel.init({
     data: data,
     highlight,
     navigation,
-    renderMap
+    renderMap,
+    monsterCalculator
 });
 
 monsterCalculator.init();
