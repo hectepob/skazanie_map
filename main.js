@@ -54,6 +54,8 @@ highlight.init({
     render: () => renderMap.draw()
 });
 
+monsterCalculator.init();
+
 portalMenu.init({
     byId,
     links: linkData,
