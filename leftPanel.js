@@ -17,6 +17,7 @@ function init(config) {
     const highlight = cfg.highlight;
     const renderMap = cfg.renderMap;
     const navigation = cfg.navigation;
+    const monsterCalculator = cfg.monsterCalculator;
     panel.innerHTML = "";
     sections = {};
     const options = document.createElement("div");
