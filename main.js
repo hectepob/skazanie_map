@@ -1,4 +1,4 @@
-console.log("main.js 2507 2235 ");
+console.log("main.js 2507 2245 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -53,8 +53,6 @@ highlight.init({
     highlightCells,
     render: () => renderMap.draw()
 });
-
-monsterCalculator.init();
 
 portalMenu.init({
     byId,
@@ -180,6 +178,8 @@ leftPanel.init({
     navigation,
     renderMap
 });
+
+monsterCalculator.init();
 
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
