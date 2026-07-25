@@ -522,32 +522,43 @@ input[type="checkbox"]{
 
 /* стиль для Калькулятора монстров*/
 
-.monsterCalculator {
+#monsterCalculator {
     position: fixed;
-    top: 100px;
-    right: 30px;
+    right: 20px;
+    top: 120px;
     width: 260px;
     background:
-        rgba(240,225,190,0.95);
-    border: 2px solid #6b4b20;
-    border-radius: 8px;
-    padding: 12px;
+        linear-gradient(
+            135deg,
+            #ead9ad,
+            #c4a66d
+        );
+    border: 2px solid #6b4f2a;
     box-shadow:
-        0 5px 15px rgba(0,0,0,0.5);
+        0 5px 20px rgba(0,0,0,0.5);
+    border-radius: 8px;
     z-index:5000;
-    font-size:14px;
+    color:#24180d;
 }
 
-.monsterHeader {
-    font-size:18px;
+.monsterCalcHeader {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px;
     font-weight:bold;
-    margin-bottom:10px;
+    background:
+        rgba(90,60,20,0.25);
 }
 
-.monsterCalculator input {
-    width:60px;
+.monsterCalcClose {
+    cursor:pointer;
 }
 
-.monsterCalculator button {
-    margin-top:10px;
+.monsterCalcBody {
+    padding:10px;
+}
+
+.monsterCalcBody div {
+    margin:5px 0;
 }
