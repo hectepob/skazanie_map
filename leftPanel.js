@@ -115,6 +115,10 @@ row.onclick = function () {
     row.classList.add("selected");
     selectedItem = item;
     foundCells = findCellsByObject(item);
+
+    if (calcCheckbox.checked && item.type === "monster") {
+        monsterCalculator.open(item);
+    }
     
     currentFoundIndex = 0;
     const ids = foundCells.map(c => c.id);
