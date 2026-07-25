@@ -408,3 +408,11 @@ input[type="checkbox"]{
     font-size:18px;
     font-weight:bold;
 }
+
+#topPanel {
+    background: red !important;
+}
+
+#leftPanel {
+    background: blue !important;
+}
