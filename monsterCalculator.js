@@ -1,114 +1,141 @@
-console.log("monsterCalculator.js 2507 2050 ");
+console.log("monsterCalculator.js 2507 2215 ");
 
 const monsterCalculator = (function () {
+
+    let panel;
     let currentMonster = null;
-    let windowEl;
-    let levelInput;
+
 
     function init() {
-        windowEl = document.createElement("div");
-        windowEl.className = "monsterCalculator";
-        windowEl.style.display = "none";
-        document.body.appendChild(windowEl);
+
+        panel = document.createElement("div");
+        panel.id = "monsterCalculator";
+
+        panel.style.display = "none";
+
+        panel.innerHTML = `
+            <div class="monsterCalcHeader">
+                <span>Калькулятор монстра</span>
+                <button class="monsterCalcClose">✖</button>
+            </div>
+
+            <div class="monsterCalcBody">
+
+                <h3 class="monsterName"></h3>
+
+                <label>
+                    Уровень:
+                    <input class="monsterLevel" type="number" value="1" min="1">
+                </label>
+
+                <hr>
+
+                <div>
+                    Здоровье:
+                    <span class="monsterHp">-</span>
+                </div>
+
+                <div>
+                    Урон:
+                    <span class="monsterDamage">-</span>
+                </div>
+
+                <div>
+                    Атака:
+                    <span class="monsterAttack">-</span>
+                </div>
+
+                <div>
+                    Защита:
+                    <span class="monsterDefense">-</span>
+                </div>
+
+                <div>
+                    Броня:
+                    <span class="monsterArmor">-</span>
+                </div>
+
+            </div>
+        `;
+
+
+        document.body.appendChild(panel);
+
+
+        panel
+            .querySelector(".monsterCalcClose")
+            .onclick = hide;
+
+
+        panel
+            .querySelector(".monsterLevel")
+            .oninput = update;
+
+
     }
+
 
     function open(monster) {
+
         currentMonster = monster;
-        if (!windowEl)
-            init();
-        windowEl.innerHTML = `
-            <div class="monsterHeader">
-                ${monster.name}
-            </div>
-            <div>
-                Уровень:
-                <input 
-                    class="monsterLevel"
-                    type="number"
-                    value="1"
-                    min="1"
-                >
-            </div>
-            <hr>
-            <div>
-                Здоровье:
-                <span class="hp"></span>
-            </div>
-            <div>
-                Урон:
-                <span class="damage"></span>
-            </div>
-            <div>
-                Атака:
-                <span class="attack"></span>
-            </div>
-            <div>
-                Защита:
-                <span class="defense"></span>
-            </div>
-            <div>
-                Броня:
-                <span class="armor"></span>
-            </div>
-            <button class="closeMonster">
-                Закрыть
-            </button>
-        `;
-      
-        levelInput = windowEl.querySelector(".monsterLevel");
-        levelInput.oninput = update;
-        windowEl.querySelector(".closeMonster")
-            .onclick = close;
-        windowEl.style.display = "block";
+
+        panel.querySelector(".monsterName").textContent =
+            monster.name;
+
+
+        panel.querySelector(".monsterLevel").value =
+            monster.level || 1;
+
+
         update();
+
+
+        panel.style.display = "block";
+
     }
 
+
     function update() {
+
         if (!currentMonster)
             return;
-        const lvl = Number(levelInput.value) || 1;
 
 
         /*
-            ВРЕМЕННЫЕ ФОРМУЛЫ
-
-            Пока просто заглушки.
-            Потом заменим на JSON.
+            Пока заглушки.
+            Здесь позже будут формулы из json.
         */
 
-        const hp =
-            lvl * 10;
-        const damage =
-            lvl * 2;
-        const attack =
-            lvl;
-        const defense =
-            lvl;
-        const armor =
-            lvl / 2;
+        panel.querySelector(".monsterHp").textContent =
+            "-";
 
-        windowEl.querySelector(".hp")
-            .textContent = hp;
-        windowEl.querySelector(".damage")
-            .textContent = damage;
-        windowEl.querySelector(".attack")
-            .textContent = attack;
-        windowEl.querySelector(".defense")
-            .textContent = defense;
-        windowEl.querySelector(".armor")
-            .textContent = armor;
+        panel.querySelector(".monsterDamage").textContent =
+            "-";
+
+        panel.querySelector(".monsterAttack").textContent =
+            "-";
+
+        panel.querySelector(".monsterDefense").textContent =
+            "-";
+
+        panel.querySelector(".monsterArmor").textContent =
+            "-";
+
     }
 
-    function close() {
-        if (windowEl)
-            windowEl.style.display = "none";
-        currentMonster = null;
+
+    function hide() {
+
+        panel.style.display = "none";
+
     }
+
 
     return {
         init,
         open,
-        close
+        hide
     };
+
 
 })();
