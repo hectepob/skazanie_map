@@ -409,10 +409,41 @@ input[type="checkbox"]{
     font-weight:bold;
 }
 
-#topPanel {
-    background: red !important;
+/* ОБЩИЙ ПЕРГАМЕНТНЫЙ ФОН ДЛЯ ИНТЕРФЕЙСА */
+
+#topPanel,
+#leftPanel {
+    background:
+        radial-gradient(
+            circle at center,
+            #ead9ad 0%,
+            #c4a66d 100%
+        );
 }
 
+/* легкая текстура поверх панелей */
+
+#topPanel::before,
+#leftPanel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(120,90,40,0.03) 0px,
+            rgba(120,90,40,0.03) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    pointer-events: none;
+}
+
+/* чтобы псевдоэлемент работал правильно */
+
+#topPanel,
 #leftPanel {
-    background: blue !important;
+    position: relative;
 }
