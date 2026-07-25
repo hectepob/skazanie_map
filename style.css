@@ -3,20 +3,20 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-
     background:
         radial-gradient(
             circle at center,
             #ead9ad 0%,
             #c4a66d 100%
-    );
+        );
+    position: relative;
+    min-height:100vh;
 }
 
 body::before {
     content:"";
     position:fixed;
     inset:0;
-
     background:
         repeating-linear-gradient(
             45deg,
@@ -25,9 +25,8 @@ body::before {
             transparent 1px,
             transparent 4px
         );
-
     pointer-events:none;
-    z-index:0;
+    z-index:-1;
 }
 
 /*LAYOUT (верх + лево + центр) */
