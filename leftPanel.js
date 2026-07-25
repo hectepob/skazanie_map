@@ -1,4 +1,4 @@
-console.log("leftPanel.js 2507 2320 ");
+console.log("leftPanel.js 2507 2330 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
@@ -127,7 +127,7 @@ row.onclick = function () {
     renderMap.draw();
     showInfo(item);
     if (calcCheckbox.checked && key === "monster") {
-        monsterCalculator.show(item);
+        monsterCalculator.open(item);
     }
     if (followCheckbox.checked && foundCells.length > 0) {
         navigation.gotoCell(
