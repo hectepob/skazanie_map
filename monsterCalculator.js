@@ -1,4 +1,4 @@
-console.log("monsterCalculator.js 2507 2215 ");
+console.log("monsterCalculator.js 2507 2335 ");
 
 const monsterCalculator = (function () {
     let panel;
@@ -59,6 +59,7 @@ const monsterCalculator = (function () {
             .querySelector(".monsterLevel")
             .oninput = update;
     }
+    
     function open(monster) {
         currentMonster = monster;
         panel.querySelector(".monsterName").textContent =
@@ -67,7 +68,13 @@ const monsterCalculator = (function () {
             monster.level || 1;
         update();
         panel.style.display = "block";
+        const left = document.getElementById("leftPanel");
+        const rect = left.getBoundingClientRect();
+        panel.style.left = (rect.right + 10) + "px";
+        panel.style.top = rect.top + "px";
+        panel.style.right = "auto";
     }
+    
     function update() {
         if (!currentMonster)
             return;
