@@ -3,6 +3,31 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ead9ad 0%,
+            #c4a66d 100%
+    );
+}
+
+body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(120,90,40,0.03) 0px,
+            rgba(120,90,40,0.03) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    pointer-events:none;
+    z-index:0;
 }
 
 /*LAYOUT (верх + лево + центр) */
@@ -92,9 +117,7 @@ body {
     position: relative;
     overflow: hidden;
     background:
-    radial-gradient(circle,
-        #e4d3a8,
-        #b89b63);
+    transparent;
     user-select: none;
     touch-action: none;
 }
