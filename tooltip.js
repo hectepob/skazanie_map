@@ -110,7 +110,10 @@ if (index < cells.length - 1) {
     html.push(`<hr class="tooltip-divider">`);
 }
         });
-        return html.join("");
+        if (monsterMode)
+            return html.join("");
+        else
+            return html.join("<br>");
     }
 
     return {
