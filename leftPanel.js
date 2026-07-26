@@ -34,6 +34,14 @@ function init(config) {
     calcLabel.appendChild(calcCheckbox);
     calcLabel.append(" Открыть калькулятор монстров");
     options.appendChild(calcLabel);
+    
+    calcCheckbox.onchange = function () {
+        tooltip.setMonsterMode(this.checked);
+        if (!this.checked) {
+            monsterCalculator.hide();
+        }
+    };
+    
     panel.appendChild(options);
     panel.appendChild(document.createElement("hr"));
     createAccordion(
