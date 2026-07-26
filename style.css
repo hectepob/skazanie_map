@@ -349,25 +349,20 @@ body::before {
 
 .monsterTooltipTitle{
     margin-bottom:0;
+    font-weight:bold;
 }
 
 .monsterTooltipTable{
     border-collapse:collapse;
     width:100%;
-    table-layout: fixed;
     margin-top:0;
     margin-bottom:0;
+    white-space:nowrap;
 }
 
 .monsterTooltipTable td{
     padding:1px 3px;
     vertical-align:top;
-}
-
-.monsterTooltipTable{
-    white-space:nowrap;
-    width:78px;
-    font-weight:bold;
 }
 
 .statName{
