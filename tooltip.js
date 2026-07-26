@@ -70,19 +70,19 @@ switch (obj.type) {
                 <table class="monsterTooltipTable">
                     <tr>
                         <td class="statName">Урон:</td>
-                        <td colspan="3">-</td>
+                        <td colspan="3">ххх-ххх - ххх-ххх</td>
                     </tr>
                     <tr>
                         <td class="statName">Здоровье:</td>
-                        <td>-</td>
+                        <td>ххх</td>
                         <td class="statName">Броня:</td>
-                        <td>-</td>
+                        <td>ххх</td>
                     </tr>
                     <tr>
                         <td class="statName">Атака:</td>
-                        <td>-</td>
+                        <td>ххх</td>
                         <td class="statName">Защита:</td>
-                        <td>-</td>
+                        <td>ххх</td>
                     </tr>
                  </table>
                  `);
