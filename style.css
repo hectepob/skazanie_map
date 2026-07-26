@@ -330,7 +330,7 @@ body::before {
 .tooltip-location {
     display: inline;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 24px;
 }
 
 .tooltip-divider {
@@ -340,20 +340,23 @@ body::before {
 }
 
 .monsterTooltip{
-    margin-bottom:10px;
+    margin:0 0 6px 0;
+    padding:0;
 }
 
 .monsterTooltipTitle{
-    margin-bottom:4px;
+    margin-bottom:0;
 }
 
 .monsterTooltipTable{
     border-collapse:collapse;
     width:100%;
+    margin-top:0;
+    margin-bottom:0;
 }
 
 .monsterTooltipTable td{
-    padding:1px 4px;
+    padding:0 4px;
     vertical-align:top;
 }
 
