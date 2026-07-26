@@ -1,5 +1,14 @@
+console.log("tooltip.js 2607 1250 ");
+
 const tooltip = (function () {
 
+    const icons = {
+        monster: "⚔",
+        building: "🏠",
+        npc: "👤",
+        item: "📦",
+        comment: "📝"
+    };
     const el = document.getElementById("tooltip");
     let monsterMode = false;
     function setMonsterMode(value) {
@@ -7,9 +16,10 @@ const tooltip = (function () {
     }
     const order = {
         monster: 1,
-        npc: 2,
-        item: 3,
-        comment: 4
+        building: 2,
+        npc: 3,
+        item: 4,
+        comment: 5
     };
 
     function show(cells) {
@@ -39,31 +49,42 @@ const tooltip = (function () {
                 html.push(`<b class="tooltip-location">${cell.id}</b>`);
             }
             objects.forEach(obj => {
-                let text = obj.name;
-                switch (obj.type) {
-                    case "monster":
-                        if (!monsterMode) {
-                            if (obj.level)
-                                text += ` (${obj.level})`;
-                            if (obj.group)
-                                text += " +";
-                            html.push(`<b>${text}</b>`);
-                        } else {
-                                html.push(`<b>${obj.name}</b>`);
-                                html.push(`Уровень: ${obj.level || "-"}`);
-                                html.push(`HP: -`);
-                                html.push(`Damage: -`);
-                                html.push(`Attack: -`);
-                                html.push(`Defense: -`);
-                                html.push(`Armor: -`);
-                        }
-                    break;
-                    case "comment":
-                        html.push(`<i>${text}</i>`);
-                        break;
-                    default:
-                        html.push(text);
-                }
+                //let text = obj.name;
+switch (obj.type) {
+    case "monster":
+        if (!monsterMode) {
+            let line = `${icons.monster} ${obj.name}`;
+            if (obj.level)
+                line += ` (${obj.level})`;
+            if (obj.group)
+                line += " +";
+            html.push(`<b>${line}</b>`);
+        } else {
+            html.push(`<b>${icons.monster} ${obj.name}</b>`);
+            html.push(`Уровень: ${obj.level || "-"}`);
+            html.push(`HP: -`);
+            html.push(`Damage: -`);
+            html.push(`Attack: -`);
+            html.push(`Defense: -`);
+            html.push(`Armor: -`);
+        }
+        break;
+    case "building":
+        html.push(`${icons.building} ${obj.name}`);
+        break;
+    case "npc":
+        html.push(`${icons.npc} ${obj.name}`);
+        break;
+    case "item":
+        html.push(`${icons.item} ${obj.name}`);
+        break;
+    case "comment":
+        html.push(`<i>${icons.comment} ${obj.name}</i>`);
+        break;
+    default:
+        html.push(obj.name);
+
+}
             });
             if (index < cells.length - 1) {
                 html.push(`<hr class="tooltip-divider">`);
