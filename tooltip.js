@@ -86,7 +86,7 @@ switch (obj.type) {
                     </tr>
                  </table>
                  `);
-    html.push(`</div>`);
+    html.push(`</div><div class="monsterSpacer"></div>`);
         }
         break;
     case "building":
@@ -106,11 +106,11 @@ switch (obj.type) {
 
 }
             });
-            if (index < cells.length - 1) {
-                html.push(`<hr class="tooltip-divider">`);
-            }
+if (index < cells.length - 1) {
+    html.push(`<hr class="tooltip-divider">`);
+}
         });
-        return html.join("<br>");
+        return html.join("");
     }
 
     return {
