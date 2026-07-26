@@ -338,6 +338,31 @@ body::before {
     border-top: 1px solid #777;
     margin: 6px 0;
 }
+
+.monsterTooltip{
+    margin-bottom:10px;
+}
+
+.monsterTooltipTitle{
+    margin-bottom:4px;
+}
+
+.monsterTooltipTable{
+    border-collapse:collapse;
+    width:100%;
+}
+
+.monsterTooltipTable td{
+    padding:1px 4px;
+    vertical-align:top;
+}
+
+.monsterTooltipTable .statName{
+    white-space:nowrap;
+    width:78px;
+    font-weight:bold;
+}
+
 /* RED BORDER ON INPUT FIELD */
 .inputError{
     border:2px solid #d00000 !important;
