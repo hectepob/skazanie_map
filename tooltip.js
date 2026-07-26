@@ -86,7 +86,7 @@ switch (obj.type) {
                     </tr>
                  </table>
                  `);
-    html.push(`</div><div class="monsterSpacer"></div>`);
+    html.push(`</div>`);
         }
         break;
     case "building":
