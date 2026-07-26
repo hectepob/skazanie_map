@@ -360,14 +360,31 @@ body::before {
 }
 
 .monsterTooltipTable td{
-    padding:0 4px;
+    padding:1px 3px;
     vertical-align:top;
 }
 
-.monsterTooltipTable .statName{
+.monsterTooltipTable{
     white-space:nowrap;
     width:78px;
     font-weight:bold;
+}
+
+.statName{
+    width:72px;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.value{
+    width:68px;
+    text-align:left;
+    white-space:nowrap;
+}
+
+.damageValue{
+    text-align:left;
+    white-space:nowrap;
 }
 
 /* RED BORDER ON INPUT FIELD */
