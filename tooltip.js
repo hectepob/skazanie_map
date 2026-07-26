@@ -49,7 +49,6 @@ const tooltip = (function () {
                 html.push(`<b class="tooltip-location">${cell.id}</b>`);
             }
             objects.forEach(obj => {
-                //let text = obj.name;
 switch (obj.type) {
     case "monster":
         if (!monsterMode) {
