@@ -317,8 +317,11 @@ body::before {
     border-radius: 6px;
     font-size: 13px;
     pointer-events: none;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
     z-index: 1000;
+    max-width: 360px;
+    width: max-content;
 }
 
 @media (pointer: coarse) {
@@ -351,6 +354,7 @@ body::before {
 .monsterTooltipTable{
     border-collapse:collapse;
     width:100%;
+    table-layout: fixed;
     margin-top:0;
     margin-bottom:0;
 }
