@@ -60,13 +60,34 @@ switch (obj.type) {
                 line += " +";
             html.push(`<b>${line}</b>`);
         } else {
-            html.push(`<b>${icons.monster} ${obj.name}</b>`);
-            html.push(`Уровень: ${obj.level || "-"}`);
-            html.push(`HP: -`);
-            html.push(`Damage: -`);
-            html.push(`Attack: -`);
-            html.push(`Defense: -`);
-            html.push(`Armor: -`);
+                let title = `${icons.monster} ${obj.name}`;
+                if (obj.level)
+                    title += ` (${obj.level})`;
+                if (obj.group)
+                    title += " +";
+                html.push(`<div class="monsterTooltip">`);
+                html.push(`<div class="monsterTooltipTitle"><b>${title}</b></div>`);
+                html.push(`
+                <table class="monsterTooltipTable">
+                    <tr>
+                        <td class="statName">Урон:</td>
+                        <td colspan="3">-</td>
+                    </tr>
+                    <tr>
+                        <td class="statName">Здоровье:</td>
+                        <td>-</td>
+                        <td class="statName">Броня:</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="statName">Атака:</td>
+                        <td>-</td>
+                        <td class="statName">Защита:</td>
+                        <td>-</td>
+                    </tr>
+                 </table>
+                 `);
+    html.push(`</div>`);
         }
         break;
     case "building":
