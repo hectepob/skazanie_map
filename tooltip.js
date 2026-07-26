@@ -89,20 +89,24 @@ switch (obj.type) {
     html.push(`</div>`);
         }
         break;
-    case "building":
-        html.push(`${icons.building} ${obj.name}`);
-        break;
-    case "npc":
-        html.push(`${icons.npc} ${obj.name}`);
-        break;
-    case "item":
-        html.push(`${icons.item} ${obj.name}`);
-        break;
-    case "comment":
-        html.push(`<i>${icons.comment} ${obj.name}</i>`);
-        break;
-    default:
-        html.push(obj.name);
+case "building":
+    html.push(`<div>${icons.building} ${obj.name}</div>`);
+    break;
+
+case "npc":
+    html.push(`<div>${icons.npc} ${obj.name}</div>`);
+    break;
+
+case "item":
+    html.push(`<div>${icons.item} ${obj.name}</div>`);
+    break;
+
+case "comment":
+    html.push(`<div><i>${icons.comment} ${obj.name}</i></div>`);
+    break;
+
+default:
+    html.push(`<div>${obj.name}</div>`);
 
 }
             });
