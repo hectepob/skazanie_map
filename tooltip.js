@@ -1,11 +1,11 @@
 const tooltip = (function () {
 
     const el = document.getElementById("tooltip");
+    let monsterMode = false;
+    function setMonsterMode(value) {
+        monsterMode = value;
+    }
     const order = {
-        let monsterMode = false;
-            function setMonsterMode(value) {
-                monsterMode = value;
-            }
         monster: 1,
         npc: 2,
         item: 3,
