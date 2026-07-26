@@ -321,6 +321,12 @@ body::before {
     z-index: 1000;
 }
 
+@media (pointer: coarse) {
+    #tooltip {
+        font-size: 24px;
+        line-height: 1.35;
+    }
+}
 .tooltip-location {
     display: inline;
     font-weight: bold;
