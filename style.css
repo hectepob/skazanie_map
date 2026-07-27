@@ -493,17 +493,20 @@ body::before {
     cursor: pointer;
     color: #2b2114;
     cursor:pointer;
+    font-size: 14px;
 }
 
 .accordionItem:hover {
     background:
         rgba(120,90,40,0.18);
+    font-size: 14px;
 }
 
 .accordionItem.selected {
     background:
         rgba(180,140,70,0.35);
     font-weight:bold;
+    font-size: 14px;
 }
 
 button,
