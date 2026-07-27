@@ -333,6 +333,7 @@ body::before {
         font-size: 24px;
     }
 }
+
 .tooltip-location {
     display: inline;
     font-weight: bold;
