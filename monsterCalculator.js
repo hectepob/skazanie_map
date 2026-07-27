@@ -3,7 +3,9 @@ console.log("monsterCalculator.js 2507 2335 ");
 const monsterCalculator = (function () {
     let panel;
     let currentMonster = null;
-    function init() {
+    let monsterStats = new Map();
+    
+    function init(json) {
         panel = document.createElement("div");
         panel.id = "monsterCalculator";
         panel.style.display = "none";
@@ -58,7 +60,31 @@ const monsterCalculator = (function () {
         panel
             .querySelector(".monsterLevel")
             .oninput = update;
+        json.forEach(m => {
+            monsterStats.set(m.object_id, m);
+        });
     }
+
+function stat(base, pl, lvl) {
+    return Math.round(base + pl * (lvl - 1));
+}
+
+function calcStat(base, pl, lvlString) {
+    if (!lvlString)
+        return "-";
+    lvlString = String(lvlString).trim();
+    if (lvlString.includes("-")) {
+        const parts = lvlString.split("-");
+        const minLvl = Number(parts[0]);
+        const maxLvl = Number(parts[1]);
+        return (
+            stat(base, pl, minLvl) +
+            "-" +
+            stat(base, pl, maxLvl)
+        );
+    }
+    return stat(base, pl, Number(lvlString));
+}
     
     function open(monster) {
         currentMonster = monster;
@@ -75,21 +101,29 @@ const monsterCalculator = (function () {
         panel.style.right = "auto";
     }
     
-    function update() {
-        if (!currentMonster)
-            return;
-        /* Пока заглушки. Здесь позже будут формулы из json.  */
-        panel.querySelector(".monsterHp").textContent =
-            "-";
-        panel.querySelector(".monsterDamage").textContent =
-            "-";
-        panel.querySelector(".monsterAttack").textContent =
-            "-";
-        panel.querySelector(".monsterDefense").textContent =
-            "-";
-        panel.querySelector(".monsterArmor").textContent =
-            "-";
-    }
+function update() {
+    if (!currentMonster)
+        return;
+    const lvl = Number(
+        panel.querySelector(".monsterLevel").value
+    );
+    const s = monsterStats.get(currentMonster.id);
+    if (!s)
+        return;
+    panel.querySelector(".monsterHp").textContent =
+        stat(s.hp_base,s.hp_pl,lvl);
+    panel.querySelector(".monsterDamage").textContent =
+        stat(s.minD_base,s.minD_pl,lvl) +
+        " - " +
+        stat(s.maxD_base,s.maxD_pl,lvl);
+    panel.querySelector(".monsterAttack").textContent =
+        stat(s.at_base,s.at_pl,lvl);
+    panel.querySelector(".monsterDefense").textContent =
+        stat(s.dod_base,s.dod_pl,lvl);
+    panel.querySelector(".monsterArmor").textContent =
+        stat(s.arm_base,s.arm_pl,lvl);
+}
+    
     function hide() {
         panel.style.display = "none";
     }
