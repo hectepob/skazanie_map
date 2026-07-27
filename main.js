@@ -179,7 +179,8 @@ leftPanel.init({
     monsterCalculator
 });
 
-monsterCalculator.init();
+//monsterCalculator.init();
+monsterCalculator.init(monsterStatsJson);
 
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
