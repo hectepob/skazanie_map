@@ -329,11 +329,14 @@ body::before {
         font-size: 24px;
         line-height: 1.35;
     }
+    .tooltip-location {
+        font-size: 24px;
+    }
 }
 .tooltip-location {
     display: inline;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .tooltip-divider {
@@ -349,7 +352,7 @@ body::before {
 
 .monsterTooltipTitle{
     margin-bottom:0;
-    font-weight:bold;
+    /*font-weight:bold;*/
 }
 
 .monsterTooltipTable{
@@ -368,7 +371,7 @@ body::before {
 .statName{
     width:72px;
     white-space:nowrap;
-    font-weight:bold;
+    /*font-weight:bold;*/
 }
 
 .value{
