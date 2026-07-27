@@ -620,7 +620,3 @@ input[type="checkbox"]{
 .monsterCalcBody div {
     margin:5px 0;
 }
-
-.cell:hover #tooltip {
-    display: block !important;
-}
