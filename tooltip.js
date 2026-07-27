@@ -57,41 +57,31 @@ switch (obj.type) {
             if (obj.group)
                 line += " +";        
         if (!monsterMode) {
-//            let line = `${icons.monster} ${obj.name}`;
-//           if (obj.level)
-//                line += ` (${obj.level})`;
-//            if (obj.group)
-//               line += " +";        
             html.push(`${line}`);
         } else {
-//            let title = `${icons.monster} ${obj.name}`;
-//            if (obj.level)
-//                title += ` (${obj.level})`;
-//            if (obj.group)
-//                title += " +";        
-                html.push(`<div class="monsterTooltip">`);
-                html.push(`<div class="monsterTooltipTitle">${line}</div>`);
-                html.push(`
-                <table class="monsterTooltipTable">
-                    <tr>
-                        <td class="statName">Урон:</td>
-                        <td colspan="3" class="damageValue">ххх-ххх - ххх-ххх</td>
-                    </tr>
-                    <tr>
-                        <td class="statName">Здоровье:</td>
-                        <td class="value">ххх</td>
-                        <td class="statName">Броня:</td>
-                        <td class="value">ххх</td>
-                    </tr>
-                    <tr>
-                        <td class="statName">Атака:</td>
-                        <td class="value">ххх</td>
-                        <td class="statName">Защита:</td>
-                        <td class="value">ххх</td>
-                    </tr>
-                 </table>
-                 `);
-    html.push(`</div>`);
+            html.push(`<div class="monsterTooltip">`);
+            html.push(`<div class="monsterTooltipTitle">${line}</div>`);
+            html.push(`
+            <table class="monsterTooltipTable">
+                <tr>
+                    <td class="statName">Урон:</td>
+                    <td colspan="3" class="damageValue">ххх-ххх - ххх-ххх</td>
+                </tr>
+                <tr>
+                    <td class="statName">Здоровье:</td>
+                    <td class="value">ххх</td>
+                    <td class="statName">Броня:</td>
+                    <td class="value">ххх</td>
+                </tr>
+                <tr>
+                    <td class="statName">Атака:</td>
+                    <td class="value">ххх</td>
+                    <td class="statName">Защита:</td>
+                    <td class="value">ххх</td>
+                </tr>
+            </table>
+            `);
+            html.push(`</div>`);
         }
         break;
 case "building":
@@ -119,10 +109,10 @@ if (index < cells.length - 1) {
     html.push(`<hr class="tooltip-divider">`);
 }
         });
-        if (monsterMode)
+        //if (monsterMode)
             return html.join("");
-        else
-            return html.join("<br>");
+        //else
+            //return html.join("<br>");
     }
 
     return {
