@@ -311,7 +311,7 @@ body::before {
 /* TOOLTIP */
 #tooltip {
     position: absolute;
-    /*display: none;*/
+    display: none;
     background: rgba(20, 20, 20, 0.95);
     color: #fff;
     padding: 8px;
