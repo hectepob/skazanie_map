@@ -1,4 +1,4 @@
-console.log("main.js 2507 2245 ");
+console.log("main.js 2707 2255 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -180,7 +180,7 @@ leftPanel.init({
 });
 
 //monsterCalculator.init();
-monsterCalculator.init(monsterStatsJson);
+//monsterCalculator.init(monsterStatsJson);
 
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
