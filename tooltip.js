@@ -66,9 +66,9 @@ switch (obj.type) {
         } else {
             let title = `${icons.monster} ${obj.name}`;
             if (obj.level)
-                line += ` (${obj.level})`;
+                title += ` (${obj.level})`;
             if (obj.group)
-                line += " +";        
+                title += " +";        
                 html.push(`<div class="monsterTooltip">`);
                 html.push(`<div class="monsterTooltipTitle">${title}</div>`);
                 html.push(`
