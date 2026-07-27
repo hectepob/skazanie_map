@@ -2,8 +2,8 @@
 body {
     margin: 0;
     overflow: hidden;
-    /*font-family: Arial, sans-serif;*/
-    font-family: "Times New Roman", "Times", "serif";
+    font-family: Arial, sans-serif;
+    /*font-family: "Times New Roman", "Times", "serif";*/
     background:
         linear-gradient(
             135deg,
@@ -311,7 +311,7 @@ body::before {
 /* TOOLTIP */
 #tooltip {
     position: absolute;
-    display: none;
+    /*display: none;*/
     background: rgba(20, 20, 20, 0.95);
     color: #fff;
     padding: 8px;
