@@ -1,4 +1,4 @@
-console.log("tooltip.js 2707 1250 ");
+console.log("tooltip.js 2707 2120 ");
 
 const tooltip = (function () {
 
@@ -45,75 +45,131 @@ function format(cells) {
         objects.sort((a, b) =>
             (order[a.type] || 99) - (order[b.type] || 99)
         );
+        // номер клетки для объединённых ячеек
         if (cells.length > 1) {
-            html.push(`<b class="tooltip-location">${cell.id}</b>`);
+            html.push(
+                `<div class="tooltip-location">${cell.id}</div>`
+            );
         }
         objects.forEach(obj => {
             switch (obj.type) {
                 case "monster":
-                    let line = `${icons.monster} ${obj.name}`;
+                    let monsterTitle = `${icons.monster} ${obj.name}`;
                     if (obj.level)
-                        line += ` (${obj.level})`;
+                        monsterTitle += ` (${obj.level})`;
                     if (obj.group)
-                        line += " +";        
+                        monsterTitle += " +";
+                    // обычный режим
                     if (!monsterMode) {
-                        html.push(`${line}`);
-                    } else {
-                        html.push(`<div class="monsterTooltip">`);
-                        html.push(`<div class="monsterTooltipTitle">${line}</div>`);
+                        html.push(
+                            `<div class="itemsTooltip"><b>${monsterTitle}</b></div>`
+                        );
+                    }
+                    // калькулятор
+                    else {
                         html.push(`
-                            <table class="monsterTooltipTable">
-                            <tr>
-                            <td class="statName">Урон:</td>
-                            <td colspan="3" class="damageValue">ххх-ххх - ххх-ххх</td>
-                            </tr>
-                            <tr>
-                            <td class="statName">Здоровье:</td>
-                            <td class="value">ххх</td>
-                            <td class="statName">Броня:</td>
-                            <td class="value">ххх</td>
-                            </tr>
-                            <tr>
-                            <td class="statName">Атака:</td>
-                            <td class="value">ххх</td>
-                            <td class="statName">Защита:</td>
-                            <td class="value">ххх</td>
-                            </tr>
-                            </table>
+                            <div class="monsterTooltip">
+                                <div class="monsterTooltipTitle">
+                                    <b>${monsterTitle}</b>
+                                </div>
+                                <table class="monsterTooltipTable">
+                                    <tr>
+                                        <td class="statName">
+                                            Урон:
+                                        </td>
+                                        <td colspan="3" class="damageValue">
+                                            ххх-ххх - ххх-ххх
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="statName">
+                                            Здоровье:
+                                        </td>
+                                         <td class="value">
+                                            ххх
+                                        </td>
+                                        <td class="statName">
+                                            Броня:
+                                        </td>
+                                        <td class="value">
+                                            ххх
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="statName">
+                                            Атака:
+                                        </td>
+
+                                        <td class="value">
+                                            ххх
+                                        </td>
+                                        <td class="statName">
+                                            Защита:
+                                        </td>
+                                        <td class="value">
+                                            ххх
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         `);
-                        html.push(`</div>`);
+                        // небольшой отступ только после таблицы
+                        html.push(
+                            `<div class="monsterSpacer"></div>`
+                        );
                     }
                 break;
-                    
-            case "building":
-                html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
+                
+                case "building":
+                    html.push(
+                        `<div class="itemsTooltip">
+                            ${icons.building} ${obj.name}
+                        </div>`
+                    );
+                break;
+                
+                case "npc":
+                    html.push(
+                        `<div class="itemsTooltip">
+                            ${icons.npc} ${obj.name}
+                        </div>`
+                    );
                 break;
 
-            case "npc":
-                html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
+                case "item":
+                    html.push(
+                        `<div class="itemsTooltip">
+                            ${icons.item} ${obj.name}
+                        </div>`
+                    );
                 break;
 
-            case "item":
-                html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
+                case "comment":
+                    html.push(
+                        `<div class="itemsTooltip">
+                            <i>${icons.comment} ${obj.name}</i>
+                        </div>`
+                    );
                 break;
 
-            case "comment":
-                html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
-                break;
-
-            default:
-                html.push(`<div class="itemsTooltip">${obj.name}</div>`);
+                default:
+                    html.push(
+                        `<div class="itemsTooltip">
+                            ${obj.name}
+                        </div>`
+                    );
 
             }
         });
+
+        // разделитель только между объединенными клетками
         if (index < cells.length - 1) {
-            html.push(`<hr class="tooltip-divider">`);
+            html.push(
+                `<hr class="tooltip-divider">`
+            );
         }
     });
-    if (monsterMode)
-        return html.join("");
-    else
-        return html.join("<br>");
+    return html.join("");
 }
 
     return {
