@@ -1,4 +1,4 @@
-console.log("tooltip.js 2607 1250 ");
+console.log("tooltip.js 2707 1250 ");
 
 const tooltip = (function () {
 
