@@ -320,7 +320,7 @@ body::before {
     white-space: normal;
     word-break: break-word;
     z-index: 1000;
-    max-width: 300px;
+    max-width: 200px;
     width: max-content;
 }
 
@@ -348,8 +348,6 @@ body::before {
 .monsterTooltip{
     margin:0 0 6px 0;
     padding:0;
-    max-width: 300px;
-    width: max-content;
 }
 
 .monsterTooltipTitle{
