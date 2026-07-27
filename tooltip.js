@@ -100,6 +100,8 @@ case "comment":
     html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
     break;
 
+return html.join("");
+
 default:
     html.push(`<div class="itemsTooltip">${obj.name}</div>`);
 
@@ -110,7 +112,7 @@ if (index < cells.length - 1) {
 }
         });
         //if (monsterMode)
-            return html.join("");
+            //return html.join("");
         //else
             //return html.join("<br>");
     }
