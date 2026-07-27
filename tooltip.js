@@ -3,7 +3,7 @@ console.log("tooltip.js 2607 1250 ");
 const tooltip = (function () {
 
     const icons = {
-        monster: "⚔",
+        monster: "⚔️",
         building: "🏠",
         npc: "👤",
         item: "📦",
@@ -51,18 +51,18 @@ const tooltip = (function () {
             objects.forEach(obj => {
 switch (obj.type) {
     case "monster":
-            //let line = `${icons.monster} ${obj.name}`;
-            //if (obj.level)
-            //    line += ` (${obj.level})`;
-            //if (obj.group)
-            //    line += " +";        
+            let line = `${icons.monster} ${obj.name}`;
+            if (obj.level)
+                line += ` (${obj.level})`;
+            if (obj.group)
+                line += " +";        
         if (!monsterMode) {
             let line = `${icons.monster} ${obj.name}`;
             if (obj.level)
                 line += ` (${obj.level})`;
             if (obj.group)
                 line += " +";        
-            html.push(`<b>${line}</b>`);
+            html.push(`${line}`);
         } else {
             let title = `${icons.monster} ${obj.name}`;
             if (obj.level)
@@ -95,23 +95,23 @@ switch (obj.type) {
         }
         break;
 case "building":
-    html.push(`<div>${icons.building} ${obj.name}</div>`);
+    html.push(`<div class="monsterTooltip">${icons.building} ${obj.name}</div>`);
     break;
 
 case "npc":
-    html.push(`<div>${icons.npc} ${obj.name}</div>`);
+    html.push(`<div class="monsterTooltip">${icons.npc} ${obj.name}</div>`);
     break;
 
 case "item":
-    html.push(`<div>${icons.item} ${obj.name}</div>`);
+    html.push(`<div class="monsterTooltip">${icons.item} ${obj.name}</div>`);
     break;
 
 case "comment":
-    html.push(`<div><i>${icons.comment} ${obj.name}</i></div>`);
+    html.push(`<div class="monsterTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
     break;
 
 default:
-    html.push(`<div>${obj.name}</div>`);
+    html.push(`<div class="monsterTooltip">${obj.name}</div>`);
 
 }
             });
