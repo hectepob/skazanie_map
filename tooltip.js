@@ -51,11 +51,11 @@ const tooltip = (function () {
             objects.forEach(obj => {
 switch (obj.type) {
     case "monster":
-            let line = `${icons.monster} ${obj.name}`;
-            if (obj.level)
-                line += ` (${obj.level})`;
-            if (obj.group)
-                line += " +";        
+            //let line = `${icons.monster} ${obj.name}`;
+            //if (obj.level)
+            //    line += ` (${obj.level})`;
+            //if (obj.group)
+            //    line += " +";        
         if (!monsterMode) {
             let line = `${icons.monster} ${obj.name}`;
             if (obj.level)
@@ -70,7 +70,7 @@ switch (obj.type) {
             if (obj.group)
                 line += " +";        
                 html.push(`<div class="monsterTooltip">`);
-                html.push(`<div class="monsterTooltipTitle"><b>${title}</b></div>`);
+                html.push(`<div class="monsterTooltipTitle">${title}</div>`);
                 html.push(`
                 <table class="monsterTooltipTable">
                     <tr>
