@@ -425,7 +425,6 @@ body::before {
 
 /* МОБИЛЬНАЯ ВЕРХНЯЯ ПАНЕЛЬ */
 @media (max-width:900px) {
-
     .topRow,
     .bottomRow {
         gap: 8px;
@@ -435,7 +434,6 @@ body::before {
     .bottomRow > span {
         display: none;
     }
-
 }
 
 /* настройка курсора */
@@ -596,8 +594,7 @@ input[type="checkbox"]{
             #c4a66d
         );
     border: 2px solid #6b4f2a;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     border-radius: 8px;
     z-index:5000;
     color:#24180d;
@@ -609,8 +606,7 @@ input[type="checkbox"]{
     align-items:center;
     padding:8px;
     font-weight:bold;
-    background:
-        rgba(90,60,20,0.25);
+    background: rgba(90,60,20,0.25);
 }
 
 .monsterCalcClose {
@@ -623,4 +619,8 @@ input[type="checkbox"]{
 
 .monsterCalcBody div {
     margin:5px 0;
+}
+
+.cell:hover #tooltip {
+    display: block !important;
 }
