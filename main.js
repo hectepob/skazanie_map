@@ -21,13 +21,11 @@ let offsetY = 0;
 let scale = 1;
 
 // LOAD
-
 Promise.all([
     fetch("./map.json").then(r => r.json()),
     fetch("./areas.json").then(r => r.json()),
     fetch("./links.json").then(r => r.json()),
     fetch("./monsterStats.json").then(r => r.json())
-
 ])
 
 .then(([mapJson, areasJson, linksJson, monsterStatsJson]) => {
@@ -46,9 +44,7 @@ areaMap = built.areaMap;
 floorsByMap = built.floorsByMap;
 
     if (data.length) {
-
         currentFloor = data[0].floor;
-
     }
 
 highlight.init({
