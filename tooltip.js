@@ -95,23 +95,23 @@ switch (obj.type) {
         }
         break;
 case "building":
-    html.push(`<div class="monsterTooltip">${icons.building} ${obj.name}</div>`);
+    html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
     break;
 
 case "npc":
-    html.push(`<div class="monsterTooltip">${icons.npc} ${obj.name}</div>`);
+    html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
     break;
 
 case "item":
-    html.push(`<div class="monsterTooltip">${icons.item} ${obj.name}</div>`);
+    html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
     break;
 
 case "comment":
-    html.push(`<div class="monsterTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
+    html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
     break;
 
 default:
-    html.push(`<div class="monsterTooltip">${obj.name}</div>`);
+    html.push(`<div class="itemsTooltip">${obj.name}</div>`);
 
 }
             });
