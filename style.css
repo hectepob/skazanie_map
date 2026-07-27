@@ -336,7 +336,7 @@ body::before {
 .tooltip-location {
     display: inline;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .tooltip-divider {
@@ -352,7 +352,7 @@ body::before {
 
 .monsterTooltipTitle{
     margin-bottom:0;
-    /*font-weight:bold;*/
+    font-weight:bold;
 }
 
 .monsterTooltipTable{
