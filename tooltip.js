@@ -57,8 +57,18 @@ switch (obj.type) {
             if (obj.group)
                 line += " +";        
         if (!monsterMode) {
+            let line = `${icons.monster} ${obj.name}`;
+            if (obj.level)
+                line += ` (${obj.level})`;
+            if (obj.group)
+                line += " +";        
             html.push(`<b>${line}</b>`);
         } else {
+            let title = `${icons.monster} ${obj.name}`;
+            if (obj.level)
+                line += ` (${obj.level})`;
+            if (obj.group)
+                line += " +";        
                 html.push(`<div class="monsterTooltip">`);
                 html.push(`<div class="monsterTooltipTitle"><b>${title}</b></div>`);
                 html.push(`
