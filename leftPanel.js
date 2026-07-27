@@ -59,6 +59,11 @@ function init(config) {
         "item",
         getUnique(data, "item")
     );
+    createAccordion(
+        "Здания",
+        "building",
+        getUnique(data, "building")
+    );
 }
 
 function getUnique(data, type) {
@@ -193,27 +198,6 @@ header.onclick = function () {
     };
     panel.appendChild(wrapper);
 }
-
-//function findSelectedItem() {
-//    if (!selectedItem)
-//        return;
-//    const cells = [];
-//    mapData.forEach(cell => {
-//        (cell.objects || []).forEach(obj => {
-//            if (obj.id === selectedItem.id)
-//                cells.push(cell);
-//        });
-//    });
-//    if (!cells.length)
-//        return;
-//    highlight.clear();
-//    cells.forEach(c => highlight.add(c.id));
-//    renderMap.refreshSelection();
-//    if (followCheckbox.checked) {
-//        cells.sort((a, b) => a.id - b.id);
-//        navigation.gotoCell(cells[0].id);
-//    }
-//}
 
 function showInfo(item) {
     if (currentInfoBlock)
