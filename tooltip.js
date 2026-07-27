@@ -36,84 +36,85 @@ const tooltip = (function () {
         el.style.display = "none";
     }
 
-    function format(cells) {
-        let html = [];
-        cells.forEach((cell, index) => {
-            const objects = (cell.objects || []).slice();
-            if (objects.length === 0)
-                return;
-            objects.sort((a, b) =>
-                (order[a.type] || 99) - (order[b.type] || 99)
-            );
-            if (cells.length > 1) {
-                html.push(`<b class="tooltip-location">${cell.id}</b>`);
-            }
-            objects.forEach(obj => {
-switch (obj.type) {
-    case "monster":
-            let line = `${icons.monster} ${obj.name}`;
-            if (obj.level)
-                line += ` (${obj.level})`;
-            if (obj.group)
-                line += " +";        
-        if (!monsterMode) {
-            html.push(`${line}`);
-        } else {
-            html.push(`<div class="monsterTooltip">`);
-            html.push(`<div class="monsterTooltipTitle">${line}</div>`);
-            html.push(`
-            <table class="monsterTooltipTable">
-                <tr>
-                    <td class="statName">Урон:</td>
-                    <td colspan="3" class="damageValue">ххх-ххх - ххх-ххх</td>
-                </tr>
-                <tr>
-                    <td class="statName">Здоровье:</td>
-                    <td class="value">ххх</td>
-                    <td class="statName">Броня:</td>
-                    <td class="value">ххх</td>
-                </tr>
-                <tr>
-                    <td class="statName">Атака:</td>
-                    <td class="value">ххх</td>
-                    <td class="statName">Защита:</td>
-                    <td class="value">ххх</td>
-                </tr>
-            </table>
-            `);
-            html.push(`</div>`);
+function format(cells) {
+    let html = [];
+    cells.forEach((cell, index) => {
+        const objects = (cell.objects || []).slice();
+        if (objects.length === 0)
+            return;
+        objects.sort((a, b) =>
+            (order[a.type] || 99) - (order[b.type] || 99)
+        );
+        if (cells.length > 1) {
+            html.push(`<b class="tooltip-location">${cell.id}</b>`);
         }
-        break;
-case "building":
-    html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
-    break;
+        objects.forEach(obj => {
+            switch (obj.type) {
+                case "monster":
+                    let line = `${icons.monster} ${obj.name}`;
+                    if (obj.level)
+                        line += ` (${obj.level})`;
+                    if (obj.group)
+                        line += " +";        
+                    if (!monsterMode) {
+                        html.push(`${line}`);
+                    } else {
+                        html.push(`<div class="monsterTooltip">`);
+                        html.push(`<div class="monsterTooltipTitle">${line}</div>`);
+                        html.push(`
+                            <table class="monsterTooltipTable">
+                            <tr>
+                            <td class="statName">Урон:</td>
+                            <td colspan="3" class="damageValue">ххх-ххх - ххх-ххх</td>
+                            </tr>
+                            <tr>
+                            <td class="statName">Здоровье:</td>
+                            <td class="value">ххх</td>
+                            <td class="statName">Броня:</td>
+                            <td class="value">ххх</td>
+                            </tr>
+                            <tr>
+                            <td class="statName">Атака:</td>
+                            <td class="value">ххх</td>
+                            <td class="statName">Защита:</td>
+                            <td class="value">ххх</td>
+                            </tr>
+                            </table>
+                        `);
+                        html.push(`</div>`);
+                    }
+                break;
+                    
+            case "building":
+                html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
+                break;
 
-case "npc":
-    html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
-    break;
+            case "npc":
+                html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
+                break;
 
-case "item":
-    html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
-    break;
+            case "item":
+                html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
+                break;
 
-case "comment":
-    html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
-    break;
+            case "comment":
+                html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
+                break;
 
-default:
-    html.push(`<div class="itemsTooltip">${obj.name}</div>`);
+            default:
+                html.push(`<div class="itemsTooltip">${obj.name}</div>`);
 
-}
-            });
-if (index < cells.length - 1) {
-    html.push(`<hr class="tooltip-divider">`);
-}
+            }
         });
-        //if (monsterMode)
-            //return html.join("");
-        //else
-            //return html.join("<br>");
-    }
+        if (index < cells.length - 1) {
+            html.push(`<hr class="tooltip-divider">`);
+        }
+    });
+    if (monsterMode)
+        return html.join("");
+    else
+        return html.join("<br>");
+}
 
     return {
         show,
