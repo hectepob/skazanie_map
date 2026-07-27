@@ -25,14 +25,17 @@ let scale = 1;
 Promise.all([
     fetch("./map.json").then(r => r.json()),
     fetch("./areas.json").then(r => r.json()),
-    fetch("./links.json").then(r => r.json())
+    fetch("./links.json").then(r => r.json()),
+    fetch("./monsterStats.json").then(r => r.json())
+
 ])
 
-.then(([mapJson, areasJson, linksJson]) => {
+.then(([mapJson, areasJson, linksJson, monsterStatsJson]) => {
 
     data = mapJson || [];
     areaData = areasJson || [];
     linkData = linksJson || [];
+    monsterCalculator.init(monsterStatsJson);
 
 const built = dataBuilder.build(data, areaData);
 
