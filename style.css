@@ -325,16 +325,6 @@ body::before {
     width: max-content;
 }
 
-@media (pointer: coarse) {
-    #tooltip {
-        font-size: 24px;
-        line-height: 1.35;
-    }
-    .tooltip-location {
-        font-size: 24px;
-    }
-}
-
 .tooltip-location {
     display: inline;
     font-weight: bold;
@@ -391,6 +381,17 @@ body::before {
 .damageValue{
     text-align:left;
     white-space:nowrap;
+}
+
+@media (pointer: coarse) {
+    #tooltip {
+        font-size: 24px;
+        line-height: 1.35;
+        max-width: 300px;
+    }
+    .tooltip-location {
+        font-size: 24px;
+    }
 }
 
 /* RED BORDER ON INPUT FIELD */
