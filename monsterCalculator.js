@@ -14,43 +14,33 @@ const monsterCalculator = (function () {
                 <span>Калькулятор монстра</span>
                 <button class="monsterCalcClose">✖</button>
             </div>
-
             <div class="monsterCalcBody">
-
                 <h3 class="monsterName"></h3>
-
                 <label>
                     Уровень:
                     <input class="monsterLevel" type="number" value="1" min="1">
                 </label>
-
                 <hr>
-
                 <div>
                     Здоровье:
                     <span class="monsterHp">-</span>
                 </div>
-
                 <div>
                     Урон:
                     <span class="monsterDamage">-</span>
                 </div>
-
                 <div>
                     Атака:
                     <span class="monsterAttack">-</span>
                 </div>
-
                 <div>
                     Защита:
                     <span class="monsterDefense">-</span>
                 </div>
-
                 <div>
                     Броня:
                     <span class="monsterArmor">-</span>
                 </div>
-
             </div>
         `;
         document.body.appendChild(panel);
@@ -84,6 +74,39 @@ function calcStat(base, pl, lvlString) {
         );
     }
     return stat(base, pl, Number(lvlString));
+}
+
+function calcDamage(stat, lvlString) {
+    if (!lvlString)
+        return "-";
+    lvlString = String(lvlString).trim();
+
+    // диапазон уровней
+    if (lvlString.includes("-")) {
+        const parts = lvlString.split("-");
+        const lvlMin = Number(parts[0]);
+        const lvlMax = Number(parts[1]);
+        const min1 = stat.minD_base + stat.minD_pl * (lvlMin - 1);
+        const max1 = stat.maxD_base + stat.maxD_pl * (lvlMin - 1);
+        const min2 = stat.minD_base + stat.minD_pl * (lvlMax - 1);
+        const max2 = stat.maxD_base + stat.maxD_pl * (lvlMax - 1);
+        return (
+            Math.round(min1) + "-" + Math.round(max1) +
+            " — " +
+            Math.round(min2) + "-" + Math.round(max2)
+        );
+    }
+
+    // один уровень
+    const lvl = Number(lvlString);
+    const min = stat.minD_base + stat.minD_pl * (lvl - 1);
+    const max = stat.maxD_base + stat.maxD_pl * (lvl - 1);
+    return (
+        Math.round(min) +
+        "-" +
+        Math.round(max)
+    );
+
 }
     
     function open(monster) {
@@ -127,9 +150,12 @@ function update() {
     function hide() {
         panel.style.display = "none";
     }
+    
     return {
         init,
         open,
-        hide
+        hide,
+    calcDamage
     };
+    
 })();
