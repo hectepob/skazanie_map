@@ -184,36 +184,41 @@ row.onclick = function () {
     
 header.onclick = function () {
     const alreadyOpen = body.style.display === "block";
-
     Object.keys(sections).forEach(k => {
-        sections[k].body.style.display = "none";
-        sections[k].header.textContent =
-            "▶ " + sections[k].title;
-    });
+        const s = sections[k];
+        s.body.style.display = "none";
+        s.header.textContent = "▶ " + s.title;
 
-    if (alreadyOpen) {
-        search.value = "";
-        rows.forEach(r => r.node.style.display = "");
-
-        if (currentInfoBlock) {
-            currentInfoBlock.remove();
-            currentInfoBlock = null;
+        // очищаем поиск
+        if (s.search) {
+            s.search.value = "";
         }
-    } else {
+        if (s.rows) {
+            s.rows.forEach(r => r.node.style.display = "");
+        }
+    });
+    if (currentInfoBlock) {
+        currentInfoBlock.remove();
+        currentInfoBlock = null;
+    }
+    if (!alreadyOpen) {
         body.style.display = "block";
         header.textContent = "▼ " + title;
     }
 };
-    
-    wrapper.appendChild(header);
-    wrapper.appendChild(body);
-    sections[key] = {
-        title,
-        header,
-        body
-    };
-    panel.appendChild(wrapper);
-}
+
+wrapper.appendChild(header);
+wrapper.appendChild(body);
+
+sections[key] = {
+    title,
+    header,
+    body,
+    search,
+    rows
+};
+
+panel.appendChild(wrapper);
 
 function showInfo(item) {
     if (currentInfoBlock)
