@@ -2,8 +2,8 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    /*font-family: "Times New Roman", "Times", "serif";*/
+    /*font-family: Arial, sans-serif;*/
+    font-family: "Times New Roman", "Times", "serif";
     background:
         linear-gradient(
             135deg,
@@ -236,7 +236,7 @@ body::before {
 #mapViewport {
     grid-column: 2;
     position: relative;
-    /*overflow: hidden; проверка*/
+    overflow: hidden;
     background:
     transparent;
     user-select: none;
