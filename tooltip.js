@@ -129,7 +129,7 @@ function format(cells) {
                                 <table class="monsterTooltipTable">
                                 <tr>
                                 <td class="statName">Урон:</td>
-                                <td colspan="3" class="damageValue">${stats ? stats.damage : "-"}</td>
+                                <td colspan="3" class="damageValue">${monsterCalculator.calcDamage(obj.id, obj.level)}</td>
                                 </tr>
                                 <tr>
                                 <td class="statName">Здоровье:</td>
