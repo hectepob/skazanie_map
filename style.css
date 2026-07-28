@@ -366,13 +366,13 @@ body::before {
 }
 
 .statName{
-    width:72px;
+    width:60px;
     white-space:nowrap;
     /*font-weight:bold;*/
 }
 
 .value{
-    width:68px;
+    width:80px;
     text-align:left;
     white-space:nowrap;
 }
