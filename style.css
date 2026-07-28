@@ -74,7 +74,8 @@ body::before {
 #leftPanel {
     grid-column:1;
     padding:10px;
-    overflow-y:auto;
+    /*overflow-y:auto;*/
+    overflow: visible; /* временно для теста */
     scrollbar-width:none;
     border-top-right-radius:8px;
     z-index: 1;
@@ -680,6 +681,7 @@ input[type="checkbox"]{
     left: 0;
     min-width: 220px;
     z-index: 2;
+    position: relative; /* убедитесь, что родитель позиционирован */
 }
 
 .areaSubmenu {
@@ -721,7 +723,3 @@ input[type="checkbox"]{
     transform: translateY(1px);
 }
 
-.areaSubmenu {
-    display: block !important; /* временно для проверки */
-    background: rgba(255,0,0,0.5); /* для визуального контроля */
-}
