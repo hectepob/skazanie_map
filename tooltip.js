@@ -133,15 +133,15 @@ function format(cells) {
                                 </tr>
                                 <tr>
                                 <td class="statName">Здоровье:</td>
-                                <td class="value">${stats ? stats.hp : "-"}</td>
+                                <td class="value">${monsterCalculator.calcStat(obj.id,"hp",obj.level)}</td>
                                 <td class="statName">Броня:</td>
-                                <td class="value">${stats ? stats.arm : "-"}</td>
+                                <td class="value"> ${monsterCalculator.calcStat(obj.id,"arm",obj.level)}</td>
                                 </tr>
                                 <tr>
                                 <td class="statName">Атака:</td>
-                                <td class="value">${stats ? stats.at : "-"}</td>
+                                <td class="value">${monsterCalculator.calcStat(obj.id,"at",obj.level)}</td>
                                 <td class="statName">Уворот:</td>
-                                <td class="value">${stats ? stats.dod : "-"}</td>
+                                <td class="value">${monsterCalculator.calcStat(obj.id,"dod",obj.level)}</td>
                                 </tr>
                                 </table>
                             </div>
