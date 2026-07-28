@@ -59,19 +59,15 @@ function stat(base, pl, lvl) {
     return Math.round(base + pl * (lvl - 1));
 }
 
-function calcStat(base, pl, lvlString) {
-    if (!lvlString)
-        return "-";
+function calcStat(objectId, statName, lvlString) {
+    const s = monsterStats.get(objectId);
+    if (!s || !lvlString) return "-";
     lvlString = String(lvlString).trim();
+    const base = s[statName + "_base"];
+    const pl = s[statName + "_pl"];
     if (lvlString.includes("-")) {
-        const parts = lvlString.split("-");
-        const minLvl = Number(parts[0]);
-        const maxLvl = Number(parts[1]);
-        return (
-            stat(base, pl, minLvl) +
-            "-" +
-            stat(base, pl, maxLvl)
-        );
+        const [minLvl, maxLvl] = lvlString.split("-").map(Number);
+        return stat(base, pl, minLvl) + " — " + stat(base, pl, maxLvl);
     }
     return stat(base, pl, Number(lvlString));
 }
@@ -114,10 +110,8 @@ function calcDamage(objectId, lvlString) {
     
     function open(monster) {
         currentMonster = monster;
-        panel.querySelector(".monsterName").textContent =
-            monster.name;
-        panel.querySelector(".monsterLevel").value =
-            monster.level || 1;
+        panel.querySelector(".monsterName").textContent = monster.name;
+        panel.querySelector(".monsterLevel").value = monster.level || 1;
         update();
         panel.style.display = "block";
         const left = document.getElementById("leftPanel");
@@ -136,19 +130,12 @@ function update() {
     const s = monsterStats.get(currentMonster.id);
     if (!s)
         return;
-    panel.querySelector(".monsterHp").textContent =
-        stat(s.hp_base,s.hp_pl,lvl);
-    panel.querySelector(".monsterDamage").textContent =
-        stat(s.minD_base,s.minD_pl,lvl) +
-        " - " +
-        stat(s.maxD_base,s.maxD_pl,lvl);
-    panel.querySelector(".monsterAttack").textContent =
-        stat(s.at_base,s.at_pl,lvl);
-    panel.querySelector(".monsterDefense").textContent =
-        stat(s.dod_base,s.dod_pl,lvl);
-    panel.querySelector(".monsterArmor").textContent =
-        stat(s.arm_base,s.arm_pl,lvl);
-}
+    panel.querySelector(".monsterHp").textContent = calcStat(currentMonster.id, "hp", lvl);
+    panel.querySelector(".monsterDamage").textContent = calcDamage(currentMonster.id, lvl);
+    panel.querySelector(".monsterAttack").textContent = calcStat(currentMonster.id, "at", lvl);
+    panel.querySelector(".monsterDefense").textContent = calcStat(currentMonster.id, "dod", lvl);
+    panel.querySelector(".monsterArmor").textContent = calcStat(currentMonster.id, "arm", lvl);
+    }
     
     function hide() {
         panel.style.display = "none";
@@ -158,7 +145,8 @@ function update() {
         init,
         open,
         hide,
-    calcDamage
+        calcDamage,
+        calcStat
     };
     
 })();
