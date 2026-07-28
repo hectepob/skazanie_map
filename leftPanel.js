@@ -51,13 +51,6 @@ function init(config) {
     options.appendChild(followCheckbox);
     options.appendChild(calcCheckbox);
     
-    calcCheckbox.onchange = function () {
-        tooltip.setMonsterMode(this.checked);
-        if (!this.checked) {
-            monsterCalculator.hide();
-        }
-    };
-    
     panel.appendChild(options);
     panel.appendChild(document.createElement("hr"));
     createAccordion(
@@ -155,9 +148,6 @@ row.onclick = function () {
     highlight.setCells(ids);
     renderMap.draw();
     showInfo(item);
-    if (calcCheckbox.active && key === "monster") {
-        monsterCalculator.open(item);
-    }
     if (followCheckbox.active && foundCells.length > 0) {
         navigation.gotoCell(
             foundCells[0].id
@@ -219,6 +209,8 @@ sections[key] = {
 };
 
 panel.appendChild(wrapper);
+
+}
 
 function showInfo(item) {
     if (currentInfoBlock)
