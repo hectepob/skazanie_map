@@ -119,101 +119,63 @@ function format(cells) {
                     }
                     // калькулятор
                     else {
+                        const stats = getMonsterStats(
+                            obj.id,
+                            obj.level
+                        );
                         html.push(`
                             <div class="monsterTooltip">
-                            const stats = getMonsterStats(
-                                obj.id,
-                                obj.level
-                            );
-                                <div class="monsterTooltipTitle">
-                                    <b>${monsterTitle}</b>
-                                </div>
-html.push(`
-<table class="monsterTooltipTable">
-<tr>
-<td class="statName">Урон:</td>
-<td colspan="3" class="damageValue">
-${stats ? stats.damage : "-"}
-</td>
-</tr>
-<tr>
-<td class="statName">Здоровье:</td>
-<td class="value">
-${stats ? stats.hp : "-"}
-</td>
-<td class="statName">Броня:</td>
-<td class="value">
-${stats ? stats.arm : "-"}
-</td>
-</tr>
-<tr>
-<td class="statName">Атака:</td>
-<td class="value">
-${stats ? stats.at : "-"}
-</td>
-<td class="statName">Уворот:</td>
-<td class="value">
-${stats ? stats.dod : "-"}
-</td>
-</tr>
-</table>
-`);
+                                <div class="monsterTooltipTitle"><b>${monsterTitle}</b></div>
+                                <table class="monsterTooltipTable">
+                                <tr>
+                                <td class="statName">Урон:</td>
+                                <td colspan="3" class="damageValue">${stats ? stats.damage : "-"}</td>
+                                </tr>
+                                <tr>
+                                <td class="statName">Здоровье:</td>
+                                <td class="value">${stats ? stats.hp : "-"}</td>
+                                <td class="statName">Броня:</td>
+                                <td class="value">${stats ? stats.arm : "-"}</td>
+                                </tr>
+                                <tr>
+                                <td class="statName">Атака:</td>
+                                <td class="value">${stats ? stats.at : "-"}</td>
+                                <td class="statName">Уворот:</td>
+                                <td class="value">${stats ? stats.dod : "-"}</td>
+                                </tr>
+                                </table>
                             </div>
                         `);
                         // небольшой отступ только после таблицы
-                        html.push(
-                            `<div class="monsterSpacer"></div>`
-                        );
+                        html.push(`<div class="monsterSpacer"></div>`);
                     }
                 break;
                 
                 case "building":
-                    html.push(
-                        `<div class="itemsTooltip">
-                            ${icons.building} ${obj.name}
-                        </div>`
-                    );
+                    html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
                 break;
                 
                 case "npc":
-                    html.push(
-                        `<div class="itemsTooltip">
-                            ${icons.npc} ${obj.name}
-                        </div>`
-                    );
+                    html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
                 break;
 
                 case "item":
-                    html.push(
-                        `<div class="itemsTooltip">
-                            ${icons.item} ${obj.name}
-                        </div>`
-                    );
+                    html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
                 break;
 
                 case "comment":
-                    html.push(
-                        `<div class="itemsTooltip">
-                            <i>${icons.comment} ${obj.name}</i>
-                        </div>`
-                    );
+                    html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
                 break;
 
                 default:
-                    html.push(
-                        `<div class="itemsTooltip">
-                            ${obj.name}
-                        </div>`
-                    );
+                    html.push(`<div class="itemsTooltip">${obj.name}</div>`);
 
             }
         });
 
         // разделитель только между объединенными клетками
         if (index < cells.length - 1) {
-            html.push(
-                `<hr class="tooltip-divider">`
-            );
+            html.push(`<hr class="tooltip-divider">`);
         }
     });
     return html.join("");
