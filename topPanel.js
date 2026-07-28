@@ -3,8 +3,6 @@ console.log("topPanel.js 2207 1006 ");
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
 
-let areaSelect;
-let subareaSelect;
 let locationInput;
 let findButton;
 let floorBlock;
@@ -31,28 +29,13 @@ function init(areas, map) {
     panel.appendChild(bottomRow);
     
     // ---------- подписи ----------
-    const areaLabel = document.createElement("span");
-    areaLabel.textContent = "Регион:";
-
-    const subareaLabel = document.createElement("span");
-    subareaLabel.textContent = "Область:";
-
     const locationLabel = document.createElement("span");
     locationLabel.textContent = "Номер локации:";
 
-    //const floorText = document.createElement("span");
-    //floorText.textContent = "Этаж:";
-
     // ---------- поля ----------
-    areaSelect = document.createElement("select");
-
-    subareaSelect = document.createElement("select");
-    subareaSelect.style.width = "260px";
-
     locationInput = document.createElement("input");
     locationInput.type = "text";
     locationInput.style.width = "80px";
-
     locationInput.addEventListener("keydown", function (e) {
         if (e.key !== "Enter")
             return;
@@ -61,6 +44,16 @@ function init(areas, map) {
     });
 
     // ---------- кнопки ----------
+    let areaMenuButton = document.createElement("button");
+    areaMenuButton.type = "button";
+    areaMenuButton.textContent = "Выбрать область на карте";
+    areaMenuButton.className = "areaMenuButton";
+
+    let areaMenu = document.createElement("div");
+    areaMenu.className = "areaMenu";
+    areaMenu.style.display = "none";
+    areaMenu.style.position = "absolute";
+
     findButton = document.createElement("button");
     findButton.textContent = "Найти";
 
@@ -88,14 +81,14 @@ function init(areas, map) {
     // ---------- масштаб ----------
     const zoomLabel = document.createElement("span");
     zoomLabel.textContent = "Масштаб:";
-    zoomPlus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
+    zoomPlus = document.createElement("button");
     zoomPlus.textContent = "+";    
-    zoomInput = document.createElement("input"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
+    zoomInput = document.createElement("input");
     zoomInput.type = "text";
     zoomInput.value = "100";
     zoomInput.style.width = "45px";
     zoomInput.style.textAlign = "center";
-    zoomMinus = document.createElement("button"); //УБРАЛ CONST В НАЧАЛЕ СТРОКИ
+    zoomMinus = document.createElement("button");
     zoomMinus.textContent = "-";
 
     zoomBlock = document.createElement("div");
@@ -114,64 +107,79 @@ function init(areas, map) {
 
     // ---------- размещение ----------
 // ---------- первая строка ----------
-topRow.appendChild(areaLabel);
-topRow.appendChild(areaSelect);
-topRow.appendChild(subareaLabel);
-topRow.appendChild(subareaSelect);
-topRow.appendChild(locationLabel);
-topRow.appendChild(locationInput);
-topRow.appendChild(findButton);
+    topRow.appendChild(areaMenuButton);
+    topRow.appendChild(areaMenu);
+    topRow.appendChild(locationLabel);
+    topRow.appendChild(locationInput);
+    topRow.appendChild(findButton);
 
 // ---------- вторая строка ----------
-bottomRow.appendChild(floorBlock);
-bottomRow.appendChild(sep1);
-bottomRow.appendChild(zoomBlock);
+    bottomRow.appendChild(floorBlock);
+    bottomRow.appendChild(sep1);
+    bottomRow.appendChild(zoomBlock);
 
-    buildAreas();
-    clearSelection();
+    buildAreaMenu(areaMenu);
 
 // ---------- обработчики ----------
 
-    areaSelect.onchange = function () {
-        buildSubareas(areaSelect.value);
-        locationInput.value = "";
+    areaMenuButton.onclick = function () {
+        areaMenu.style.display =
+            areaMenu.style.display === "block"
+                ? "none"
+                : "block";
     };
-
-    subareaSelect.onchange = function () {
-        locationInput.value = "";
-    };
-
-    findButton.onclick = function () {
-        locationInput.classList.remove("inputError");
-        // Поиск по ID
-        if (locationInput.value.trim() !== "") {
-            const id = Number(locationInput.value);
-            if (!byId.has(id)) {
-                locationInput.classList.add("inputError");
-                return;
-            }
-            setHighlight(areaSelect.value, subareaSelect.value, id);
-            navigation.gotoCell(id);
-            return;
+    
+function buildAreaMenu(areaMenu) {
+    areaMenu.innerHTML = "";
+    const regions = [];
+    areaData.forEach(a => {
+        let region = regions.find(r => r.name === a.area);
+        if (!region) {
+            region = {
+                name: a.area,
+                subareas: []
+            };
+            regions.push(region);
         }
-        let rec;
-        if (subareaSelect.value === "") {
-            rec = areaData.find(a =>
-                a.area === areaSelect.value &&
-                a.id_subarea === 1
-            );
-        }
-        else {
-            rec = areaData.find(a =>
-                a.area === areaSelect.value &&
-                a.subarea === subareaSelect.value
-            );
-        }
-        if (!rec)
-            return;
-        setHighlight(areaSelect.value, subareaSelect.value);
-        navigation.gotoCell(rec.central_cell);
-    };
+        region.subareas.push(a);
+    });
+    regions.sort((a,b)=>a.name.localeCompare(b.name,"ru"));
+    regions.forEach(region=>{
+        const regionRow=document.createElement("div");
+        regionRow.className="areaMenuRegion";
+        regionRow.textContent=region.name;
+        const submenu=document.createElement("div");
+        submenu.className="areaSubmenu";
+        region.subareas
+            .sort((a,b)=>a.id_subarea-b.id_subarea)
+            .forEach(sub=>{
+                const row=document.createElement("div");
+                row.className="areaSubmenuItem";
+                row.textContent=sub.subarea;
+                row.onclick=function(){
+                    areaMenu.style.display="none";
+                    cfg.highlight.clear();
+                    navigation.gotoCell(sub.central_cell);
+                };
+                submenu.appendChild(row);
+            });
+        regionRow.appendChild(submenu);
+        areaMenu.appendChild(regionRow);
+    });
+}
+  
+findButton.onclick = function () {
+    locationInput.classList.remove("inputError");
+    if (locationInput.value.trim() === "")
+        return;
+    const id = Number(locationInput.value);
+    if (!byId.has(id)) {
+        locationInput.classList.add("inputError");
+        return;
+    }
+    cfg.highlight.clear();
+    navigation.gotoCell(id);
+};
     
     floorUpButton.onclick = function () {
         navigation.changeFloor(1);
@@ -181,13 +189,8 @@ bottomRow.appendChild(zoomBlock);
         navigation.changeFloor(-1);
     };
 
-    zoomPlus.onclick = () => {
-        changeZoom(scale.value + 0.25);
-    };
-
-    zoomMinus.onclick = () => {
-        changeZoom(scale.value - 0.25);
-    };
+    zoomPlus.onclick = () => navigation.setZoom(scale.value + 0.25);
+    zoomMinus.onclick = () => navigation.setZoom(scale.value - 0.25);
 
     zoomInput.addEventListener("keydown", function (e) {
         if (e.key !== "Enter")
@@ -207,65 +210,8 @@ bottomRow.appendChild(zoomBlock);
 });
 
 }   
-    
-function buildAreas() {
-    areaSelect.innerHTML = "";
-    const areas = [];
-    areaData.forEach(a => {
-        if (!areas.find(x => x.id === a.id_area)) {
-            areas.push({
-                id: a.id_area,
-                area: a.area
-            });
-        }
-    });
-    areas.sort((a, b) => a.id - b.id);
-    areas.forEach(a => {
-        const opt = document.createElement("option");
-        opt.value = a.area;
-        opt.textContent = a.area;
-        areaSelect.appendChild(opt);
-    });
-    if (areas.length)
-        buildSubareas(areas[0].area);
-}
-
-function buildSubareas(area) {
-    subareaSelect.innerHTML = "";
-    const empty = document.createElement("option");
-    empty.value = "";
-    empty.textContent = "Все области";
-    subareaSelect.appendChild(empty);
-    areaData
-        .filter(x => x.area === area)
-        .sort((a, b) => a.id_subarea - b.id_subarea)
-        .forEach(x => {
-            const opt = document.createElement("option");
-            opt.value = x.subarea;
-            opt.textContent = x.subarea;
-            subareaSelect.appendChild(opt);
-        });
-}
-
-function setHighlight(area, subarea, singleId = null) {
-    if (singleId !== null) {
-        highlight.clear();
-        return;
-    }
-    const ids = [];
-    mapData.forEach(cell => {
-        if (cell.area !== area)
-            return;
-        if (subarea !== "" && cell.subarea !== subarea)
-            return;
-        ids.push(cell.id);
-    });
-    highlight.setCells(ids);
-}    
 
 function clearSelection() {
-    areaSelect.selectedIndex = -1;
-    subareaSelect.innerHTML = "";
     locationInput.value = "";
     locationInput.classList.remove("inputError");
 }
@@ -294,9 +240,6 @@ return {
     selectCell(cell) {
         if (!cell)
             return;
-        areaSelect.value = cell.area;
-        buildSubareas(cell.area);
-        subareaSelect.value = cell.subarea;
         locationInput.value = cell.id;
     }
 };
