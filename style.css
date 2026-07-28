@@ -79,6 +79,7 @@ body::before {
     background: rgba(234,217,173,0.75);
     padding: 10px;
     overflow-y: auto;
+    scrollbar-width:none;
 }
 
 /* списки фильтров */
@@ -99,6 +100,10 @@ body::before {
     cursor: pointer;
 }
 
+#leftPanel::-webkit-scrollbar{
+    display:none;
+}
+
 .accordionInfo {
     text-align: center;
     padding: 4px;
@@ -117,6 +122,86 @@ body::before {
     display: inline-block;
     min-width: 60px;
     text-align: center;
+}
+
+.accordionHeader {
+    background:
+        linear-gradient(
+            180deg,
+            #f0dfb5,
+            #c8aa6b
+        );
+    border: 1px solid #8b6b38;
+    border-radius: 6px;
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.35),
+        inset 0 1px rgba(255,255,255,0.4);
+    padding: 7px 10px;
+    margin: 6px 4px;
+    font-weight: bold;
+    color: #3a2a16;
+    cursor: pointer;
+    user-select: none;
+    cursor:pointer;
+}
+
+.accordionHeader:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #f8e8bd,
+            #d8b978
+        );
+}
+
+.accordionBody {
+    margin: 0 8px 8px 8px;
+
+    padding: 4px;
+    background:
+        rgba(255,255,255,0.25);
+    border-left: 1px solid rgba(120,90,40,0.35);
+    border-right: 1px solid rgba(120,90,40,0.35);
+}
+
+.accordionItem {
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #2b2114;
+    cursor:pointer;
+    font-size: 14px;
+}
+
+.accordionItem:hover {
+    background:
+        rgba(120,90,40,0.18);
+    font-size: 14px;
+}
+
+.accordionItem.selected {
+    background:
+        rgba(180,140,70,0.35);
+    font-weight:bold;
+    font-size: 14px;
+}
+
+.accordionSearch{
+    width:calc(100% - 12px);
+    margin:4px 6px 6px;
+    padding:4px 8px;
+    border:1px solid #6b4b20;
+    border-radius:5px;
+    background:#f3e4bf;
+    color:#2d2115;
+    font-size:14px;
+    box-sizing:border-box;
+}
+
+.accordionSearch:focus{
+    outline:none;
+    background:#fff5d8;
+    box-shadow:0 0 4px rgba(150,120,60,.4);
 }
 
 
@@ -446,68 +531,6 @@ body::before {
 
 .portal{
     cursor:pointer;
-}
-
-.accordionHeader {
-    background:
-        linear-gradient(
-            180deg,
-            #f0dfb5,
-            #c8aa6b
-        );
-    border: 1px solid #8b6b38;
-    border-radius: 6px;
-    box-shadow:
-        0 2px 4px rgba(0,0,0,0.35),
-        inset 0 1px rgba(255,255,255,0.4);
-    padding: 7px 10px;
-    margin: 6px 4px;
-    font-weight: bold;
-    color: #3a2a16;
-    cursor: pointer;
-    user-select: none;
-    cursor:pointer;
-}
-
-.accordionHeader:hover {
-    background:
-        linear-gradient(
-            180deg,
-            #f8e8bd,
-            #d8b978
-        );
-}
-
-.accordionBody {
-    margin: 0 8px 8px 8px;
-
-    padding: 4px;
-    background:
-        rgba(255,255,255,0.25);
-    border-left: 1px solid rgba(120,90,40,0.35);
-    border-right: 1px solid rgba(120,90,40,0.35);
-}
-
-.accordionItem {
-    padding: 5px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #2b2114;
-    cursor:pointer;
-    font-size: 14px;
-}
-
-.accordionItem:hover {
-    background:
-        rgba(120,90,40,0.18);
-    font-size: 14px;
-}
-
-.accordionItem.selected {
-    background:
-        rgba(180,140,70,0.35);
-    font-weight:bold;
-    font-size: 14px;
 }
 
 button,
