@@ -1,7 +1,7 @@
 /*БАЗА */
 body {
     margin: 0;
-    /*overflow: hidden; проверка*/
+    overflow: hidden;
     font-family: Arial, sans-serif;
     /*font-family: "Times New Roman", "Times", "serif";*/
     background:
