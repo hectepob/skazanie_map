@@ -145,7 +145,7 @@ function buildAreaMenu(areaMenu) {
         }
         region.subareas.push(a);
     });
-    regions.sort((a,b)=>a.name.localeCompare(b.name,"ru"));
+    regions.sort((a,b)=>a.id-b.id);
     regions.forEach(region=>{
         const regionRow=document.createElement("div");
         regionRow.className="areaMenuRegion";
