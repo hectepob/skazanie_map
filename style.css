@@ -690,6 +690,7 @@ input[type="checkbox"]{
     min-width: 230px;
     z-index: 3;
     display: none;
+    left: calc(100% + 10px); /* небольшой отступ */
 }
 
 .areaMenuRegion, .areaSubmenuItem {
