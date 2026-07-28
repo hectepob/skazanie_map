@@ -1,7 +1,7 @@
 /*БАЗА */
 body {
     margin: 0;
-    overflow: hidden;
+    /*overflow: hidden; проверка*/
     font-family: Arial, sans-serif;
     /*font-family: "Times New Roman", "Times", "serif";*/
     background:
@@ -74,8 +74,7 @@ body::before {
 #leftPanel {
     grid-column:1;
     padding:10px;
-    /*overflow-y:auto;*/
-    overflow: visible; /* временно для теста */
+    overflow-y:auto;
     scrollbar-width:none;
     border-top-right-radius:8px;
     z-index: 1;
@@ -237,7 +236,7 @@ body::before {
 #mapViewport {
     grid-column: 2;
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden; проверка*/
     background:
     transparent;
     user-select: none;
@@ -673,7 +672,7 @@ input[type="checkbox"]{
         inset 0 0 12px rgba(80,50,20,.25),
         3px 3px 12px rgba(0,0,0,.35);
     border-radius: 8px;
-    overflow: hidden;
+    /*overflow: hidden; проверка*/
 }
 
 .areaMenu {
@@ -681,8 +680,7 @@ input[type="checkbox"]{
     left: 0;
     min-width: 220px;
     z-index: 2;
-    position: relative; /* убедитесь, что родитель позиционирован */
-}
+    }
 
 .areaSubmenu {
     left: 100%;
@@ -690,8 +688,7 @@ input[type="checkbox"]{
     min-width: 230px;
     z-index: 3;
     display: none;
-    left: calc(100% + 10px); /* небольшой отступ */
-}
+    }
 
 .areaMenuRegion, .areaSubmenuItem {
     position: relative;
@@ -723,4 +720,3 @@ input[type="checkbox"]{
 .areaMenuButton:active {
     transform: translateY(1px);
 }
-
