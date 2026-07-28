@@ -133,9 +133,6 @@ function init(areas, map) {
     
 function buildAreaMenu(areaMenu) {
     areaMenu.innerHTML = "";
-    
-console.log(document.querySelector('.areaMenu'));//консоль
-
     const regions = [];
     areaData.forEach(a => {
         let region = regions.find(r => r.name === a.area);
@@ -147,18 +144,12 @@ console.log(document.querySelector('.areaMenu'));//консоль
             regions.push(region);
         }
         region.subareas.push(a);
-console.log(regions);// консоль
-
     });
     regions.sort((a,b)=>a.id-b.id);
     regions.forEach(region=>{
-console.log(document.querySelector('.areaSubmenu'));//консоль
-
         const regionRow=document.createElement("div");
         regionRow.className="areaMenuRegion";
         regionRow.textContent=region.name;
-console.log(region.subareas);//консоль
-
         const submenu=document.createElement("div");
         submenu.className="areaSubmenu";
         region.subareas
