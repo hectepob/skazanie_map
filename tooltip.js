@@ -11,9 +11,61 @@ const tooltip = (function () {
     };
     const el = document.getElementById("tooltip");
     let monsterMode = false;
+    
     function setMonsterMode(value) {
         monsterMode = value;
     }
+
+    let monsterStats = new Map();
+
+function setMonsterStats(json) {
+    monsterStats.clear();
+    json.forEach(m => {
+        monsterStats.set(m.object_id, m);
+    });
+}
+
+function calcStat(base, pl, lvl) {
+    return Math.round(
+        Number(base) + Number(pl) * (Number(lvl) - 1)
+    );
+}
+
+function getMonsterStats(id, level) {
+    const s = monsterStats.get(id);
+    if (!s)
+        return null;
+    let lvlMin = level;
+    let lvlMax = level;
+    if (String(level).includes("-")) {
+        const parts = String(level).split("-");
+        lvlMin = Number(parts[0]);
+        lvlMax = Number(parts[1]);
+    }
+
+
+    function range(base, pl) {
+        const a = calcStat(base, pl, lvlMin);
+        const b = calcStat(base, pl, lvlMax);
+        if (a === b)
+            return a;
+        return `${a} — ${b}`;
+    }
+
+    return {
+        hp: range(s.hp_base, s.hp_pl),
+        at: range(s.at_base, s.at_pl),
+        dod: range(s.dod_base, s.dod_pl),
+        arm: range(s.arm_base, s.arm_pl),
+        damage:
+            range(s.minD_base, s.minD_pl)
+            +
+            " - "
+            +
+            range(s.maxD_base, s.maxD_pl)
+    };
+}
+    
     const order = {
         monster: 1,
         building: 2,
@@ -69,48 +121,43 @@ function format(cells) {
                     else {
                         html.push(`
                             <div class="monsterTooltip">
+                            const stats = getMonsterStats(
+                                obj.id,
+                                obj.level
+                            );
                                 <div class="monsterTooltipTitle">
                                     <b>${monsterTitle}</b>
                                 </div>
-                                <table class="monsterTooltipTable">
-                                    <tr>
-                                        <td class="statName">
-                                            Урон:
-                                        </td>
-                                        <td colspan="3" class="damageValue">
-                                            ххх-ххх - ххх-ххх
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="statName">
-                                            Здоровье:
-                                        </td>
-                                         <td class="value">
-                                            ххх
-                                        </td>
-                                        <td class="statName">
-                                            Броня:
-                                        </td>
-                                        <td class="value">
-                                            ххх
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="statName">
-                                            Атака:
-                                        </td>
-
-                                        <td class="value">
-                                            ххх
-                                        </td>
-                                        <td class="statName">
-                                            Защита:
-                                        </td>
-                                        <td class="value">
-                                            ххх
-                                        </td>
-                                    </tr>
-                                </table>
+html.push(`
+<table class="monsterTooltipTable">
+<tr>
+<td class="statName">Урон:</td>
+<td colspan="3" class="damageValue">
+${stats ? stats.damage : "-"}
+</td>
+</tr>
+<tr>
+<td class="statName">Здоровье:</td>
+<td class="value">
+${stats ? stats.hp : "-"}
+</td>
+<td class="statName">Броня:</td>
+<td class="value">
+${stats ? stats.arm : "-"}
+</td>
+</tr>
+<tr>
+<td class="statName">Атака:</td>
+<td class="value">
+${stats ? stats.at : "-"}
+</td>
+<td class="statName">Уворот:</td>
+<td class="value">
+${stats ? stats.dod : "-"}
+</td>
+</tr>
+</table>
+`);
                             </div>
                         `);
                         // небольшой отступ только после таблицы
@@ -176,7 +223,8 @@ function format(cells) {
         show,
         move,
         hide,
-        setMonsterMode
+        setMonsterMode,
+        setMonsterStats
     };
 
 })();
