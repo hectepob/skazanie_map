@@ -34,6 +34,7 @@ Promise.all([
     areaData = areasJson || [];
     linkData = linksJson || [];
     monsterCalculator.init(monsterStatsJson);
+    tooltip.setMonsterStats(monsterStatsJson);
 
 const built = dataBuilder.build(data, areaData);
 
@@ -178,9 +179,6 @@ leftPanel.init({
     renderMap,
     monsterCalculator
 });
-
-//monsterCalculator.init();
-//monsterCalculator.init(monsterStatsJson);
 
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
