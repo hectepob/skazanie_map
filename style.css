@@ -321,7 +321,7 @@ body::before {
     white-space: normal;
     word-break: break-word;
     z-index: 1000;
-    max-width: 300px;
+    max-width: 310px;
     width: max-content;
 }
 
@@ -366,13 +366,13 @@ body::before {
 }
 
 .statName{
-    width:60px;
+    width:58px;
     white-space:nowrap;
     /*font-weight:bold;*/
 }
 
 .value{
-    width:80px;
+    width:90px;
     text-align:left;
     white-space:nowrap;
 }
