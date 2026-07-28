@@ -5,6 +5,8 @@ const panel = document.getElementById("topPanel");
 
 let locationInput;
 let findButton;
+let areaMenuButton;
+let areaMenu;
 let floorBlock;
 let floorUpButton;
 let floorDownButton;
@@ -44,12 +46,12 @@ function init(areas, map) {
     });
 
     // ---------- кнопки ----------
-    let areaMenuButton = document.createElement("button");
+    areaMenuButton = document.createElement("button");
     areaMenuButton.type = "button";
     areaMenuButton.textContent = "Выбрать область на карте";
     areaMenuButton.className = "areaMenuButton";
 
-    let areaMenu = document.createElement("div");
+    areaMenu = document.createElement("div");
     areaMenu.className = "areaMenu";
     areaMenu.style.display = "none";
     areaMenu.style.position = "absolute";
@@ -158,7 +160,7 @@ function buildAreaMenu(areaMenu) {
                 row.textContent=sub.subarea;
                 row.onclick=function(){
                     areaMenu.style.display="none";
-                    cfg.highlight.clear();
+                    highlight.clear();
                     navigation.gotoCell(sub.central_cell);
                 };
                 submenu.appendChild(row);
@@ -177,7 +179,7 @@ findButton.onclick = function () {
         locationInput.classList.add("inputError");
         return;
     }
-    cfg.highlight.clear();
+    highlight.clear();
     navigation.gotoCell(id);
 };
     
