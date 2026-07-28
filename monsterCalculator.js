@@ -1,4 +1,4 @@
-console.log("monsterCalculator.js 2707 1545 ");
+console.log("monsterCalculator.js 2807 0930 ");
 
 const monsterCalculator = (function () {
     let panel;
