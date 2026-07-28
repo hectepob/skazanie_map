@@ -1,3 +1,4 @@
+
 console.log("leftPanel.js 2507 2330 ");
 const leftPanel = (function () {
 
@@ -20,20 +21,35 @@ function init(config) {
     const monsterCalculator = cfg.monsterCalculator;
     panel.innerHTML = "";
     sections = {};
+    
     const options = document.createElement("div");
-    followCheckbox = document.createElement("input");
-    followCheckbox.type = "checkbox";
-    const followLabel = document.createElement("label");
-    followLabel.appendChild(followCheckbox);
-    followLabel.append(" Перейти к выбранному объекту");
-    options.appendChild(followLabel);
-    options.appendChild(document.createElement("br"));
-    calcCheckbox = document.createElement("input");
-    calcCheckbox.type = "checkbox";
-    const calcLabel = document.createElement("label");
-    calcLabel.appendChild(calcCheckbox);
-    calcLabel.append(" Открыть калькулятор монстров");
-    options.appendChild(calcLabel);
+    options.className = "leftPanelButtons";
+    
+    followCheckbox = document.createElement("button");
+    followCheckbox.type = "button";
+    followCheckbox.className = "toggleButton";
+    followCheckbox.textContent = "Перейти к выбранному объекту";
+    followCheckbox.active = false;
+    followCheckbox.onclick = function () {
+        this.active = !this.active;
+        this.classList.toggle("active", this.active);
+    };
+
+    calcCheckbox = document.createElement("button");
+    calcCheckbox.type = "button";
+    calcCheckbox.className = "toggleButton";
+    calcCheckbox.textContent = "Открыть калькулятор монстров";
+    calcCheckbox.active = false;
+    calcCheckbox.onclick = function () {
+        this.active = !this.active;
+        this.classList.toggle("active", this.active);
+        tooltip.setMonsterMode(this.active);
+        if (!this.active)
+            monsterCalculator.hide();
+};
+
+    options.appendChild(followCheckbox);
+    options.appendChild(calcCheckbox);
     
     calcCheckbox.onchange = function () {
         tooltip.setMonsterMode(this.checked);
@@ -130,7 +146,7 @@ row.onclick = function () {
     selectedItem = item;
     foundCells = findCellsByObject(item);
 
-    if (calcCheckbox.checked && item.type === "monster") {
+    if (calcCheckbox.active && item.type === "monster") {
         monsterCalculator.open(item);
     }
     
@@ -139,10 +155,10 @@ row.onclick = function () {
     highlight.setCells(ids);
     renderMap.draw();
     showInfo(item);
-    if (calcCheckbox.checked && key === "monster") {
+    if (calcCheckbox.active && key === "monster") {
         monsterCalculator.open(item);
     }
-    if (followCheckbox.checked && foundCells.length > 0) {
+    if (followCheckbox.active && foundCells.length > 0) {
         navigation.gotoCell(
             foundCells[0].id
         );
@@ -204,7 +220,7 @@ function showInfo(item) {
         currentInfoBlock.remove();
     const info = document.createElement("div");
     info.className = "accordionInfo";
-    if (!followCheckbox.checked) {
+    if (!followCheckbox.active) {
         info.innerHTML = `<div>Найдено: ${foundCells.length}</div>`;
     }
     else {
