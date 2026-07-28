@@ -433,7 +433,7 @@ body::before {
     white-space: normal;
     word-break: break-word;
     z-index: 1000;
-    max-width: 310px;
+    max-width: 320px;
     width: max-content;
 }
 
@@ -484,7 +484,7 @@ body::before {
 }
 
 .value{
-    width:90px;
+    width:100px;
     text-align:left;
     white-space:nowrap;
 }
@@ -498,7 +498,7 @@ body::before {
     #tooltip {
         font-size: 24px;
         line-height: 1.35;
-        max-width: 550px;
+        max-width: 600px;
     }
     .tooltip-location {
         font-size: 26px;
