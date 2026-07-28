@@ -76,7 +76,10 @@ function calcStat(base, pl, lvlString) {
     return stat(base, pl, Number(lvlString));
 }
 
-function calcDamage(stat, lvlString) {
+function calcDamage(objectId, lvlString) {
+    const stat = monsterStats.get(objectId);
+    if (!stat)
+        return "-";
     if (!lvlString)
         return "-";
     lvlString = String(lvlString).trim();
