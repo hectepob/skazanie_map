@@ -321,7 +321,7 @@ body::before {
     white-space: normal;
     word-break: break-word;
     z-index: 1000;
-    max-width: 200px;
+    max-width: 300px;
     width: max-content;
 }
 
