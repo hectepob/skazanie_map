@@ -1,4 +1,4 @@
-console.log("main.js 2707 2255 ");
+console.log("main.js 2907 1520 ");
 
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
@@ -142,6 +142,7 @@ renderMap.init({
     gridMap,
     areaMap,
     byId,
+    navigation,
     topPanel: topPanelModule,
     tooltip,
     drag: drag,
