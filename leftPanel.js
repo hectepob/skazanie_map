@@ -51,9 +51,6 @@ function init(config) {
     options.appendChild(calcCheckbox);
     panel.appendChild(options);
     
-    panel.appendChild(document.createElement("hr"));
-    //separator.className = "leftSeparator";
-    //panel.appendChild(separator);
     const separator = document.createElement('hr');
     separator.className = 'leftSeparator';
     panel.appendChild(separator);
