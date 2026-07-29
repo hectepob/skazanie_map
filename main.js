@@ -180,6 +180,13 @@ leftPanel.init({
     monsterCalculator
 });
 
+ document.addEventListener("click", e => {
+    if (!e.target.closest("#mapViewport")) {
+        tooltip.hide();
+        portalMenu.hide();
+    }
+ });
+    
 selectedCellId = 0;
 const firstCell = data.find(c => c.id_map === 1);
 if (firstCell)
