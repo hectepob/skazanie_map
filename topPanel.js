@@ -1,4 +1,4 @@
-console.log("topPanel.js 2907 1010 ");
+console.log("topPanel.js 2907 1300 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -121,6 +121,7 @@ function init(areas, map) {
     currentAreaLabel.className = "currentAreaLabel";
     currentAreaLabel.textContent = "";
     topRow.appendChild(currentAreaLabel);
+    console.log(currentAreaLabel);
 
 // ---------- вторая строка ----------
     bottomRow.appendChild(floorBlock);
