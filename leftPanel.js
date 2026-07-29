@@ -70,8 +70,8 @@ function init(config) {
         getUnique(data, "npc")
     );
     createAccordion(
-        "Предметы",
         accordionContainer,
+        "Предметы",
         "item",
         getUnique(data, "item")
     );
