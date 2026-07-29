@@ -1,4 +1,4 @@
-console.log("navigation.js 2207 1750 ");
+console.log("navigation.js 2907 1220 ");
 
 const navigation = (function () {
 
@@ -98,6 +98,7 @@ function gotoCell(id, center = true) {
         cell.area,
         cell.subarea
     );
+    console.log(cell.area, cell.subarea);
 }
 
 function changeFloor(step) {
