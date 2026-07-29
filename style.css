@@ -132,6 +132,14 @@ body::before {
     box-shadow: inset 0 2px 5px rgba(0,0,0,.35);
 }
 
+.leftSeparator {
+    width: 100%;
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid rgba(80,60,20,.45);
+    flex: 0 0 auto;
+}
+
 .accordionInfo {
     text-align: center;
     padding: 4px;
@@ -621,12 +629,6 @@ input[type="checkbox"]{
             transparent 4px
         );
     pointer-events: none;
-}
-
-/* чтобы псевдоэлемент работал правильно */
-#topPanel,
-#leftPanel {
-    position: relative;
 }
 
 #topPanel {
