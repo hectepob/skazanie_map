@@ -53,22 +53,30 @@ function init(config) {
     
     panel.appendChild(options);
     panel.appendChild(document.createElement("hr"));
+    const accordionContainer = document.createElement("div");
+    accordionContainer.className = "accordionContainer";
+    panel.appendChild(accordionContainer);
+    
     createAccordion(
+        accordionContainer,
         "Монстры",
         "monster",
         getUnique(data, "monster")
     );
     createAccordion(
+        accordionContainer,
         "NPC",
         "npc",
         getUnique(data, "npc")
     );
     createAccordion(
         "Предметы",
+        accordionContainer,
         "item",
         getUnique(data, "item")
     );
     createAccordion(
+        accordionContainer,
         "Здания",
         "building",
         getUnique(data, "building")
@@ -107,7 +115,7 @@ function findCellsByObject(item) {
     return result;
 }
 
-function createAccordion(title, key, list) {
+function createAccordion(container, title, key, list) {
     const wrapper = document.createElement("div");
     wrapper.className = "accordion";
     const header = document.createElement("div");
@@ -208,7 +216,7 @@ sections[key] = {
     rows
 };
 
-panel.appendChild(wrapper);
+container.appendChild(wrapper);
 
 }
 
