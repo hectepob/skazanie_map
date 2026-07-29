@@ -754,3 +754,69 @@ input[type="checkbox"]{
     text-align:center;
     text-shadow:0 1px 0 rgba(255,255,255,.45);
 }
+
+/* Общий стиль кнопок верхней панели */
+#topPanel button {
+    background: linear-gradient(
+        180deg,
+        #f0dfb5,
+        #c8aa6b
+    );
+    border: 1px solid #8b6b38;
+    border-radius: 6px;
+    color: #3a2a16;
+    font-weight: bold;
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.45);
+    cursor: pointer;
+    transition:
+        background .15s,
+        transform .08s,
+        filter .15s;
+}
+
+#topPanel button:hover {
+    background: linear-gradient(
+        180deg,
+        #f8e8bd,
+        #d8b978
+    );
+}
+
+#topPanel button:active {
+    transform: translateY(1px);
+    filter: brightness(.95);
+}
+
+#topPanel input[type="text"]{
+    background:#f3e4bf;
+    border:1px solid #8b6b38;
+    border-radius:6px;
+    color:#2d2115;
+    font-weight:bold;
+    text-align:center;
+    box-shadow:
+        inset 0 0 6px rgba(80,50,20,.18);
+    letter-spacing:1px;
+}
+
+#topPanel input[type="text"]:focus{
+    outline:none;
+    background:#fff5d8;
+    box-shadow:
+        inset 0 0 6px rgba(80,50,20,.18),
+        0 0 6px rgba(180,140,70,.45);
+}
+
+.floorBlock button,
+.zoomBlock button{
+    width:30px;
+    height:28px;
+    padding:0;
+    font-size:15px;
+}
+
+#topPanel button:nth-of-type(2){
+    min-width:70px;
+}
