@@ -30,6 +30,9 @@ function init(areas, map) {
     bottomRow.className = "bottomRow";
     panel.appendChild(topRow);
     panel.appendChild(bottomRow);
+    const centerBlock = document.createElement("div");
+    centerBlock.className = "topPanelCenter";
+    panel.appendChild(centerBlock);
     
     // ---------- подписи ----------
     const locationLabel = document.createElement("span");
@@ -119,8 +122,7 @@ function init(areas, map) {
     // подпись текущей зоны
     currentAreaLabel = document.createElement("div");
     currentAreaLabel.className = "currentAreaLabel";
-    currentAreaLabel.textContent = "";
-    topRow.appendChild(currentAreaLabel);
+    centerBlock.appendChild(currentAreaLabel);
     
 // ---------- вторая строка ----------
     bottomRow.appendChild(floorBlock);
