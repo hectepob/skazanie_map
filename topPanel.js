@@ -32,7 +32,7 @@ function init(areas, map) {
     
     // ---------- подписи ----------
     const locationLabel = document.createElement("span");
-    locationLabel.textContent = "Номер локации:";
+    locationLabel.textContent = "Локация:";
 
     // ---------- поля ----------
     locationInput = document.createElement("input");
