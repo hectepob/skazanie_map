@@ -87,8 +87,6 @@ function gotoCell(id, center = true) {
     tooltip.hide();
     setSelectedCellId(Number(id));
     const cell = byId.get(Number(id));
-console.log("TOP PANEL:", topPanel);
-console.log("SET AREA FUNC:", topPanel.setCurrentArea);
     if (!cell)
         return;
     topPanel.selectCell(cell);
