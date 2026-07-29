@@ -1,4 +1,4 @@
-console.log("navigation.js 2907 1220 ");
+console.log("navigation.js 2907 1440 ");
 
 const navigation = (function () {
 
@@ -87,6 +87,8 @@ function gotoCell(id, center = true) {
     tooltip.hide();
     setSelectedCellId(Number(id));
     const cell = byId.get(Number(id));
+console.log("TOP PANEL:", topPanel);
+console.log("SET AREA FUNC:", topPanel.setCurrentArea);
     if (!cell)
         return;
     topPanel.selectCell(cell);
@@ -98,7 +100,6 @@ function gotoCell(id, center = true) {
         cell.area,
         cell.subarea
     );
-    console.log(cell.area, cell.subarea);
 }
 
 function changeFloor(step) {
