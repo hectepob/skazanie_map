@@ -1,4 +1,4 @@
-console.log("topPanel.js 2207 1006 ");
+console.log("topPanel.js 2907 1010 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -135,9 +135,10 @@ function buildAreaMenu(areaMenu) {
     areaMenu.innerHTML = "";
     const regions = [];
     areaData.forEach(a => {
-        let region = regions.find(r => r.name === a.area);
+        let region = regions.find(r => r.id === a.id_area);
         if (!region) {
             region = {
+                id: a.id_area,
                 name: a.area,
                 subareas: []
             };
@@ -160,7 +161,14 @@ function buildAreaMenu(areaMenu) {
                 row.textContent=sub.subarea;
                 row.onclick=function(){
                     areaMenu.style.display="none";
-                    highlight.clear();
+                    const ids = mapData
+                        .filter(c =>
+                            c.area === region.name &&
+                            c.subarea === sub.subarea
+                        )
+                        .map(c => c.id);
+                    highlight.setCells(ids);
+                    renderMap.draw();
                     navigation.gotoCell(sub.central_cell);
                 };
                 submenu.appendChild(row);
