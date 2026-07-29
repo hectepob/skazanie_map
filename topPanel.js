@@ -1,4 +1,4 @@
-console.log("topPanel.js 2907 1300 ");
+console.log("topPanel.js 2907 1325 ");
 
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
@@ -235,13 +235,14 @@ function clearSelection() {
 }
 
 function setCurrentArea(area, subarea) {
+    console.log("setCurrentArea()", area, subarea);
     if (!currentAreaLabel)
         return;
     currentAreaLabel.textContent =
         area && subarea
             ? `${area} — ${subarea}`
             : "";
-    }
+}
     
 return {
     init,
