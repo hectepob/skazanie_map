@@ -722,6 +722,7 @@ input[type="checkbox"]{
     border: 1px solid #7a5b2a;
     background: linear-gradient(#ead9ad, #c9aa70);
     cursor: pointer;
+    min-width:70px;
 }
 
 .areaMenuButton:hover {
@@ -734,7 +735,7 @@ input[type="checkbox"]{
 
 .topPanelCenter{
     position:absolute;
-    left:450px;      /* после кнопки Найти */
+    left:500px;      /* после кнопки Найти */
     right:10px;
     top:0;
     bottom:0;
@@ -825,6 +826,15 @@ input[type="checkbox"]{
     line-height: 1;
 }
 
-#topPanel button:nth-of-type(2){
+.floorBlock button,
+.zoomBlock button{
+    width:30px;
+    height:28px;
+    min-width:30px;
+    max-width:30px;
+}
+
+.findButton{
+    padding:4px 14px;
     min-width:70px;
 }
