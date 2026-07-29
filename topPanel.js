@@ -15,6 +15,7 @@ let zoomPlus;
 let zoomBlock;
 let zoomMinus;
 let zoomInput;
+let currentAreaLabel;
 let areaData = [];
 let mapData = [];
 
@@ -114,6 +115,12 @@ function init(areas, map) {
     topRow.appendChild(locationLabel);
     topRow.appendChild(locationInput);
     topRow.appendChild(findButton);
+
+    // подпись текущей зоны
+    currentAreaLabel = document.createElement("div");
+    currentAreaLabel.className = "currentAreaLabel";
+    currentAreaLabel.textContent = "";
+    topRow.appendChild(currentAreaLabel);
 
 // ---------- вторая строка ----------
     bottomRow.appendChild(floorBlock);
@@ -225,6 +232,15 @@ function clearSelection() {
     locationInput.value = "";
     locationInput.classList.remove("inputError");
 }
+
+function setCurrentArea(area, subarea) {
+    if (!currentAreaLabel)
+        return;
+    currentAreaLabel.textContent =
+        area && subarea
+            ? `${area} — ${subarea}`
+            : "";
+    }
     
 return {
     init,
@@ -247,6 +263,7 @@ return {
         };
     },
     clearSelection,
+    setCurrentArea,
     selectCell(cell) {
         if (!cell)
             return;
