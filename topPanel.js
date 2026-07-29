@@ -121,8 +121,7 @@ function init(areas, map) {
     currentAreaLabel.className = "currentAreaLabel";
     currentAreaLabel.textContent = "";
     topRow.appendChild(currentAreaLabel);
-    console.log(currentAreaLabel);
-
+    
 // ---------- вторая строка ----------
     bottomRow.appendChild(floorBlock);
     bottomRow.appendChild(sep1);
@@ -235,7 +234,6 @@ function clearSelection() {
 }
 
 function setCurrentArea(area, subarea) {
-    console.log("setCurrentArea()", area, subarea);
     if (!currentAreaLabel)
         return;
     currentAreaLabel.textContent =
