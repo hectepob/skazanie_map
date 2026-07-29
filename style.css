@@ -732,16 +732,25 @@ input[type="checkbox"]{
     transform: translateY(1px);
 }
 
+.topPanelCenter{
+    position:absolute;
+    left:320px;      /* после кнопки Найти */
+    right:10px;
+    top:0;
+    bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+
 .currentAreaLabel{
-    flex:1;
-    margin-left:50px;
-    text-align:left;
     font-size:22px;
     font-weight:bold;
-    color:#3b2710;
-    text-shadow:
-        1px 1px 0 rgba(255,255,255,.4);
+    color:#3a2a16;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    text-align:center;
+    text-shadow:0 1px 0 rgba(255,255,255,.45);
 }
