@@ -61,6 +61,7 @@ function init(areas, map) {
     areaMenu.style.position = "absolute";
 
     findButton = document.createElement("button");
+    findButton.className = "findButton";
     findButton.textContent = "Найти";
 
     floorUpButton = document.createElement("button");
