@@ -672,7 +672,6 @@ input[type="checkbox"]{
         inset 0 0 12px rgba(80,50,20,.25),
         3px 3px 12px rgba(0,0,0,.35);
     border-radius: 8px;
-    /*overflow: hidden; проверка*/
 }
 
 .areaMenu {
@@ -719,4 +718,18 @@ input[type="checkbox"]{
 
 .areaMenuButton:active {
     transform: translateY(1px);
+}
+
+.currentAreaLabel{
+    flex:1;
+    margin-left:20px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    color:#3b2710;
+    text-shadow:
+        1px 1px 0 rgba(255,255,255,.4);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
