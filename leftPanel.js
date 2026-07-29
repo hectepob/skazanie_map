@@ -1,5 +1,4 @@
-
-console.log("leftPanel.js 2507 2330 ");
+console.log("leftPanel.js 2907 1635 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
@@ -50,9 +49,12 @@ function init(config) {
 
     options.appendChild(followCheckbox);
     options.appendChild(calcCheckbox);
-    
     panel.appendChild(options);
+    
     panel.appendChild(document.createElement("hr"));
+    separator.className = "leftSeparator";
+    panel.appendChild(separator);
+    
     const accordionContainer = document.createElement("div");
     accordionContainer.className = "accordionContainer";
     panel.appendChild(accordionContainer);
