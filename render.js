@@ -1,4 +1,4 @@
-console.log("render 2307 1245");
+console.log("render 2907 1515");
 const renderMap = (function () {
 
     let cfg;
@@ -122,9 +122,10 @@ function attachClick(el, cell, group) {
         cfg.topPanel.clearAreaSelection?.();
         cfg.tooltip.hide();
         highlight.clear();
-        cfg.setSelectedCellId(cell.id);
-        cfg.topPanel.selectCell(cell);
-        refreshSelection();
+        //cfg.setSelectedCellId(cell.id);
+        //cfg.topPanel.selectCell(cell);
+        //refreshSelection();
+        cfg.navigation.gotoCell(cell.id, false);
         requestAnimationFrame(() => {
             const currentEl = cfg.mapContainer.querySelector(
             `.cell[data-id="${cell.id}"]`
