@@ -71,6 +71,10 @@ function centerOnCell(cell) {
        offset.y = y;
        view.apply();
        topPanel.selectCell(cell);
+       topPanel.setCurrentArea(
+           cell.area,
+           cell.subarea
+       );
        tooltip.show([cell]);
        const el = mapContainer.querySelector(".cell.selected");
        if (el) {
