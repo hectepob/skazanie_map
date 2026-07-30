@@ -712,9 +712,9 @@ input[type="checkbox"]{
     background: rgba(255,255,255,.18);
 }
 
-.areaMenuRegion:hover > .areaSubmenu {
+/*.areaMenuRegion:hover > .areaSubmenu {
     display: block;
-}
+}*/
 
 .areaMenuButton {
     padding: 4px 12px;
