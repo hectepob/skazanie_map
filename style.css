@@ -702,7 +702,7 @@ input[type="checkbox"]{
     }
 
 .areaMenuRegion, .areaSubmenuItem {
-    position: relative;
+    /*position: relative;*/
     padding: 6px 10px;
     cursor: pointer;
     white-space: nowrap;
