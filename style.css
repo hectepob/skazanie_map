@@ -838,3 +838,55 @@ input[type="checkbox"]{
     padding:4px 14px;
     min-width:70px;
 }
+
+.helpButton{
+    width:34px;
+    min-width:34px;
+    height:30px;
+    padding:0;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#helpWindow{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:min(900px,90vw);
+    height:min(700px,85vh);
+    background:
+        linear-gradient(
+            135deg,
+            #e6d2a0,
+            #c9aa70
+        );
+    border:1px solid rgba(90,60,20,.45);
+    border-radius:10px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.55),
+        inset 0 0 12px rgba(80,50,20,.25);
+    display:none;
+    z-index:6000;
+}
+
+.helpHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 12px;
+    font-size:20px;
+    font-weight:bold;
+    border-bottom:1px solid rgba(90,60,20,.45);
+}
+
+.helpHeader button{
+    width:34px;
+    height:30px;
+}
+
+.helpBody{
+    padding:16px;
+    overflow:auto;
+    height:calc(100% - 48px);
+}
