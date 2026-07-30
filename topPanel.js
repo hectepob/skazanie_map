@@ -172,8 +172,17 @@ function buildAreaMenu(areaMenu) {
         const regionRow=document.createElement("div");
         regionRow.className="areaMenuRegion";
         regionRow.textContent=region.name;
+        
         const submenu=document.createElement("div");
         submenu.className="areaSubmenu";
+        regionRow.addEventListener("mouseenter", () => {
+            positionSubmenu(regionRow, submenu);
+        });
+
+        regionRow.addEventListener("click", () => {
+            positionSubmenu(regionRow, submenu);
+        });
+        
         regionRow.onmouseenter = function(){
             submenu.style.display = "block";
             submenu.style.top = "-1px";
@@ -208,6 +217,22 @@ regionRow.onmouseleave = function(){
         regionRow.appendChild(submenu);
         areaMenu.appendChild(regionRow);
     });
+}
+
+function positionSubmenu(regionRow, submenu) {
+    submenu.style.display = "block";
+    submenu.style.top = "0px";
+    const rowRect = regionRow.getBoundingClientRect();
+    const menuRect = submenu.getBoundingClientRect();
+    const viewportBottom = window.innerHeight - 8;
+
+    // насколько низ подменю выходит за экран
+    const overflow = menuRect.bottom - viewportBottom;
+    if (overflow > 0) {
+        submenu.style.top = (-overflow) + "px";
+    } else {
+        submenu.style.top = "0px";
+    }
 }
 
 function fitIntoViewport(menu){
