@@ -846,6 +846,7 @@ input[type="checkbox"]{
     padding:0;
     font-size:18px;
     font-weight:bold;
+    margin-left:auto;
 }
 
 #helpWindow{
