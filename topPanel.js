@@ -140,12 +140,17 @@ function init(areas, map) {
 
 // ---------- обработчики ----------
 
-    areaMenuButton.onclick = function () {
-        areaMenu.style.display =
-            areaMenu.style.display === "block"
-                ? "none"
-                : "block";
-    };
+areaMenuButton.onclick = function () {
+    if (areaMenu.style.display === "block") {
+        areaMenu.style.display = "none";
+        return;
+    }
+    areaMenu.style.display = "block";
+    areaMenu.style.top = "36px";
+    requestAnimationFrame(() => {
+        fitIntoViewport(areaMenu);
+    });
+};
     
 function buildAreaMenu(areaMenu) {
     areaMenu.innerHTML = "";
@@ -169,6 +174,17 @@ function buildAreaMenu(areaMenu) {
         regionRow.textContent=region.name;
         const submenu=document.createElement("div");
         submenu.className="areaSubmenu";
+        regionRow.onmouseenter = function(){
+            submenu.style.display = "block";
+            submenu.style.top = "-1px";
+            requestAnimationFrame(() => {
+                fitIntoViewport(submenu);
+            });
+        };
+
+regionRow.onmouseleave = function(){
+    submenu.style.display = "";
+};
         region.subareas
             .sort((a,b)=>a.id_subarea-b.id_subarea)
             .forEach(sub=>{
@@ -192,6 +208,17 @@ function buildAreaMenu(areaMenu) {
         regionRow.appendChild(submenu);
         areaMenu.appendChild(regionRow);
     });
+}
+
+function fitIntoViewport(menu){
+    const rect = menu.getBoundingClientRect();
+    let top = parseFloat(menu.style.top) || 0;
+    if (rect.bottom > window.innerHeight){
+        top -= (rect.bottom - window.innerHeight + 8);
+        menu.style.top = top + "px";
+    }
+    if (top < 0)
+        menu.style.top = "0px";
 }
   
 findButton.onclick = function () {
@@ -239,7 +266,7 @@ findButton.onclick = function () {
     );
 });
 
-}   
+}
 
 function clearSelection() {
     locationInput.value = "";
