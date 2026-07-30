@@ -733,9 +733,9 @@ input[type="checkbox"]{
     transform: translateY(1px);
 }
 
-.topPanelCenter{
+/*.topPanelCenter{
     position:absolute;
-    left:480px;      /* после кнопки Найти */
+    left:480px;      /* после кнопки Найти 
     right:10px;
     top:0;
     bottom:0;
@@ -743,7 +743,7 @@ input[type="checkbox"]{
     align-items:center;
     justify-content:center;
     pointer-events:none;
-}
+}*/
 
 .currentAreaLabel{
     display:flex;
@@ -762,7 +762,7 @@ input[type="checkbox"]{
 
 .currentSubarea{
     margin-top:2px;
-    font-size:15px;
+    font-size:18px;
     font-weight:normal;
     color:#4d3820;
 }
