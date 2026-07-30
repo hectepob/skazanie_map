@@ -64,6 +64,10 @@ function init(areas, map) {
     findButton.className = "findButton";
     findButton.textContent = "Найти";
 
+    const helpButton = document.createElement("button");
+    helpButton.textContent = "?";
+    helpButton.className = "helpButton";
+
     floorUpButton = document.createElement("button");
     floorUpButton.textContent = "▲";
 
@@ -124,6 +128,8 @@ function init(areas, map) {
     currentAreaLabel = document.createElement("div");
     currentAreaLabel.className = "currentAreaLabel";
     centerBlock.appendChild(currentAreaLabel);
+
+    topRow.appendChild(helpButton);
     
 // ---------- вторая строка ----------
     bottomRow.appendChild(floorBlock);
@@ -221,6 +227,10 @@ findButton.onclick = function () {
             return;
         navigation.setZoom(value / 100);
 });
+
+    helpButton.onclick = function () {
+        helpWindow.show();
+    };
 
     requestAnimationFrame(() => {
     document.documentElement.style.setProperty(
