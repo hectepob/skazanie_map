@@ -1,4 +1,4 @@
-console.log("leftPanel.js 2907 1635 ");
+console.log("leftPanel.js 3007 2000 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
@@ -8,6 +8,7 @@ const leftPanel = (function () {
     let calcCheckbox;
     let currentInfoBlock = null;
     let cfg;
+    let monsterCalculator;
     let foundCells = [];
     let currentFoundIndex = 0;
 
@@ -17,7 +18,7 @@ function init(config) {
     const highlight = cfg.highlight;
     const renderMap = cfg.renderMap;
     const navigation = cfg.navigation;
-    const monsterCalculator = cfg.monsterCalculator;
+    monsterCalculator = cfg.monsterCalculator;
     panel.innerHTML = "";
     sections = {};
     
@@ -100,7 +101,8 @@ function getUnique(data, type) {
         .sort((a, b) => a[1].localeCompare(b[1], "ru"))
         .map(x => ({
             id: x[0],
-            name: x[1]
+            name: x[1],
+            type: type
         }));
 }
 
