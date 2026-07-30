@@ -735,7 +735,7 @@ input[type="checkbox"]{
 
 .topPanelCenter{
     position:absolute;
-    left:100px;      /* после кнопки Найти*/
+    left:200px;      /* после кнопки Найти*/
     right:10px;
     top:0;
     bottom:0;
