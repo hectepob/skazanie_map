@@ -695,7 +695,7 @@ input[type="checkbox"]{
 
 .areaSubmenu {
     left: 100%;
-    top: -1px;
+    top: 0px;
     min-width: 230px;
     z-index: 3;
     display: none;
