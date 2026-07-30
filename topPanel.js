@@ -249,9 +249,10 @@ function clearSelection() {
 function setCurrentArea(area, subarea) {
     if (!currentAreaLabel)
         return;
-    currentAreaLabel.textContent =
+    currentAreaLabel.innerHTML =
         area && subarea
-            ? `${area} — ${subarea}`
+            ? `<div class="currentRegion">${area}</div>
+               <div class="currentSubarea">${subarea}</div>`
             : "";
 }
     
