@@ -24,6 +24,7 @@ const helpWindow = (function () {
     async function loadHelp() {
         const html = await fetch("help.html").then(r => r.text());
         body.innerHTML = html;
+    }
 
     function show() {
         root.style.display = "block";
