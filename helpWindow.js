@@ -13,6 +13,9 @@ const helpWindow = (function () {
                 <span>Справка</span>
                 <button id="helpClose">✕</button>
             </div>
+            <div class="helpBody" id="helpBody">
+                Загрузка...
+            </div>
         `;
 
         document.body.appendChild(root);
