@@ -1,6 +1,7 @@
 const helpWindow = (function () {
 
     let root;
+    let body;
 
     function init() {
         root = document.createElement("div");
@@ -13,14 +14,26 @@ const helpWindow = (function () {
                 <button id="helpClose">✕</button>
             </div>
 
-            <div class="helpBody">
-                Здесь позже будет текст справки.
+            <div class="helpBody" id="helpBody">
+                Загрузка...
             </div>
         `;
 
         document.body.appendChild(root);
 
+        body = document.getElementById("helpBody");
         document.getElementById("helpClose").onclick = hide;
+
+        loadHelp();
+    }
+
+    async function loadHelp() {
+        try {
+            const html = await fetch("help.html").then(r => r.text());
+            body.innerHTML = html;
+        } catch (e) {
+            body.innerHTML = "Не удалось загрузить справку.";
+        }
     }
 
     function show() {
