@@ -699,7 +699,7 @@ input[type="checkbox"]{
     top:0;
     min-width:230px;
     display:none;
-    max-height:calc(100vh - 20px);
+    max-height:calc(100vh - 8px);
     overflow-y:auto;
 }
 
