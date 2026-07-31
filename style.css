@@ -966,3 +966,16 @@ input[type="checkbox"]{
 .helpBody::-webkit-scrollbar-thumb:hover{
     background:#6f542c;
 }
+
+.helpPortal {
+    /*position:absolute;*/
+    right:2px;
+    bottom:2px;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#2bc7ff;
+    border:1px solid #005d88;
+    cursor:pointer;
+    z-index:20;
+}
