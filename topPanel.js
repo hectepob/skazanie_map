@@ -172,28 +172,29 @@ function buildAreaMenu(areaMenu) {
         const regionRow=document.createElement("div");
         regionRow.className="areaMenuRegion";
         regionRow.textContent=region.name;
-        
         const submenu=document.createElement("div");
         submenu.className="areaSubmenu";
         regionRow.addEventListener("mouseenter", () => {
-            positionSubmenu(regionRow, submenu);
-        });
-
-        regionRow.addEventListener("click", () => {
-            positionSubmenu(regionRow, submenu);
-        });
-        
-        regionRow.onmouseenter = function(){
             submenu.style.display = "block";
-            submenu.style.top = "-1px";
+            const rowRect = regionRow.getBoundingClientRect();
+            const menuRect = areaMenu.getBoundingClientRect();
+            let top = rowRect.top - menuRect.top;
+            submenu.style.top = top + "px";
             requestAnimationFrame(() => {
-                fitIntoViewport(submenu);
+                const rect = submenu.getBoundingClientRect();
+                if (rect.bottom > window.innerHeight) {
+                    top -= (rect.bottom - window.innerHeight + 6);
+                    submenu.style.top = top + "px";
+                }
+                if (submenu.getBoundingClientRect().top < 4) {
+                    submenu.style.top = "4px";
+                }
             });
-        };
+        });
 
-regionRow.onmouseleave = function(){
+regionRow.addEventListener("mouseleave", () => {
     submenu.style.display = "";
-};
+});        
         region.subareas
             .sort((a,b)=>a.id_subarea-b.id_subarea)
             .forEach(sub=>{
@@ -215,43 +216,7 @@ regionRow.onmouseleave = function(){
                 submenu.appendChild(row);
             });
         regionRow.appendChild(submenu);
-        regionRow.addEventListener("mouseenter", positionSubmenu);
-        regionRow.addEventListener("click", positionSubmenu);
-        function positionSubmenu() {
-            submenu.style.display = "block";
-            submenu.style.top = "0px";
-            requestAnimationFrame(() => {
-                const menuRect = submenu.getBoundingClientRect();
-                const overflow = menuRect.bottom - window.innerHeight;
-                if (overflow > 0) {
-                    submenu.style.top = (-overflow - 4) + "px";
-                }
-            });
-        }
         areaMenu.appendChild(regionRow);
-    });
-}
-
-function positionSubmenu() {
-    submenu.style.display = "block";
-    const rowRect = regionRow.getBoundingClientRect();
-    const menuRect = areaMenu.getBoundingClientRect();
-    // сначала ставим напротив выбранной строки
-    let top = rowRect.top - menuRect.top;
-    submenu.style.top = top + "px";
-    requestAnimationFrame(() => {
-        const subRect = submenu.getBoundingClientRect();
-
-        // если нижняя граница вышла за экран
-        if (subRect.bottom > window.innerHeight) {
-            top -= (subRect.bottom - window.innerHeight) + 4;
-            submenu.style.top = top + "px";
-        }
-
-        // если после этого ушли выше верхней границы
-        if (submenu.getBoundingClientRect().top < 4) {
-            submenu.style.top = "4px";
-        }
     });
 }
 
@@ -356,5 +321,4 @@ return {
         locationInput.value = cell.id;
     }
 };
-
 })();
