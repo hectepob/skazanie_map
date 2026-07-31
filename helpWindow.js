@@ -13,28 +13,17 @@ const helpWindow = (function () {
                 <span>Справка</span>
                 <button id="helpClose">✕</button>
             </div>
-
-            <div class="helpBody" id="helpBody">
-                Загрузка...
-            </div>
         `;
 
         document.body.appendChild(root);
-
         body = document.getElementById("helpBody");
         document.getElementById("helpClose").onclick = hide;
-
         loadHelp();
     }
 
     async function loadHelp() {
-        try {
-            const html = await fetch("help.html").then(r => r.text());
-            body.innerHTML = html;
-        } catch (e) {
-            body.innerHTML = "Не удалось загрузить справку.";
-        }
-    }
+        const html = await fetch("help.html").then(r => r.text());
+        body.innerHTML = html;
 
     function show() {
         root.style.display = "block";
