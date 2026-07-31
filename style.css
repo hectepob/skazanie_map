@@ -867,6 +867,7 @@ input[type="checkbox"]{
     height:min(700px,85vh);
     display:flex;
     flex-direction:column;
+    overflow:hidden;
     background:linear-gradient(135deg,#e6d2a0,#c9aa70);
     border:1px solid rgba(90,60,20,.45);
     border-radius:10px;
@@ -882,10 +883,9 @@ input[type="checkbox"]{
     justify-content:space-between;
     align-items:center;
     padding:10px 14px;
+    border-bottom:1px solid rgba(90,60,20,.35);
     font-size:18px;
     font-weight:bold;
-    color:#3a2a16;
-    border-bottom:1px solid rgba(90,60,20,.35);
 }
 
 .helpHeader button{
@@ -905,18 +905,11 @@ input[type="checkbox"]{
 
 .helpBody{
     flex:1 1 auto;
+    min-height:0;
     overflow-y:auto;
-    padding:18px 22px;
-    color:#2d2115;
-    font-size:15px;
-    line-height:1.6;
+    overflow-x:hidden;
+    padding:16px 20px;
 }
-
-/*.helpBody h1{
-    margin:0 0 18px;
-    font-size:26px;
-    color:#3a2a16;
-}*/
 
 .helpBody h2{
     margin:24px 0 8px;
@@ -930,11 +923,28 @@ input[type="checkbox"]{
     margin:0 0 12px;
 }
 
-.helpBody ul{
-    margin:8px 0 20px 22px;
-    padding:0;
+.helpBody table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 6px;     /* расстояние между строками */
 }
 
-.helpBody li{
-    margin:6px 0;
+.helpBody td{
+    vertical-align:top;
+    padding:3px 8px;          /* меньше высота строки */
+    line-height:1.15;         /* компактнее текст внутри */
+}
+
+.helpBody td:first-child{
+    width:240px;
+    font-weight:bold;
+    color:#3a2a16;
+}
+
+.helpBody tr{
+    background:rgba(255,255,255,.18);
+}
+
+.helpBody tr:hover{
+    background:rgba(255,255,255,.28);
 }
