@@ -232,20 +232,27 @@ regionRow.onmouseleave = function(){
     });
 }
 
-function positionSubmenu(regionRow, submenu) {
+function positionSubmenu() {
     submenu.style.display = "block";
-    submenu.style.top = "0px";
     const rowRect = regionRow.getBoundingClientRect();
-    const menuRect = submenu.getBoundingClientRect();
-    const viewportBottom = window.innerHeight - 8;
+    const menuRect = areaMenu.getBoundingClientRect();
+    // сначала ставим напротив выбранной строки
+    let top = rowRect.top - menuRect.top;
+    submenu.style.top = top + "px";
+    requestAnimationFrame(() => {
+        const subRect = submenu.getBoundingClientRect();
 
-    // насколько низ подменю выходит за экран
-    const overflow = menuRect.bottom - viewportBottom;
-    if (overflow > 0) {
-        submenu.style.top = (-overflow) + "px";
-    } else {
-        submenu.style.top = "0px";
-    }
+        // если нижняя граница вышла за экран
+        if (subRect.bottom > window.innerHeight) {
+            top -= (subRect.bottom - window.innerHeight) + 4;
+            submenu.style.top = top + "px";
+        }
+
+        // если после этого ушли выше верхней границы
+        if (submenu.getBoundingClientRect().top < 4) {
+            submenu.style.top = "4px";
+        }
+    });
 }
 
 function fitIntoViewport(menu){
