@@ -215,6 +215,19 @@ regionRow.onmouseleave = function(){
                 submenu.appendChild(row);
             });
         regionRow.appendChild(submenu);
+        regionRow.addEventListener("mouseenter", positionSubmenu);
+        regionRow.addEventListener("click", positionSubmenu);
+        function positionSubmenu() {
+            submenu.style.display = "block";
+            submenu.style.top = "0px";
+            requestAnimationFrame(() => {
+                const menuRect = submenu.getBoundingClientRect();
+                const overflow = menuRect.bottom - window.innerHeight;
+                if (overflow > 0) {
+                    submenu.style.top = (-overflow - 4) + "px";
+                }
+            });
+        }
         areaMenu.appendChild(regionRow);
     });
 }
