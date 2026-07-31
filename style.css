@@ -693,14 +693,15 @@ input[type="checkbox"]{
     z-index: 2;
     }
 
-.areaSubmenu {
-    position: fixed;
-    /*left: 100%;*/
-    /*top: 0px;*/
-    min-width: 230px;
-    z-index: 3;
-    display: none;
-    }
+.areaSubmenu{
+    position:absolute;
+    left:100%;
+    top:0;
+    min-width:230px;
+    display:none;
+    max-height:calc(100vh - 20px);
+    overflow-y:auto;
+}
 
 .areaMenuRegion, .areaSubmenuItem {
     /*position: relative;*/
