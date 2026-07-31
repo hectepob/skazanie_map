@@ -848,6 +848,7 @@ input[type="checkbox"]{
     min-width:70px;
 }
 
+/*ОКНО ПОМОЩИ*/
 .helpButton{
     width:34px;
     min-width:34px;
@@ -867,6 +868,7 @@ input[type="checkbox"]{
     height:min(700px,85vh);
     display:flex;
     flex-direction:column;
+    overflow:hidden;
     background:linear-gradient(135deg,#e6d2a0,#c9aa70);
     border:1px solid rgba(90,60,20,.45);
     border-radius:10px;
@@ -903,11 +905,11 @@ input[type="checkbox"]{
 }
 
 .helpBody{
-    flex:1 1 auto;
-    min-height:0;
+    flex:1;
     overflow-y:auto;
     overflow-x:hidden;
     padding:16px 20px;
+    box-sizing:border-box;
 }
 
 .helpBody h2{
