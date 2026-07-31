@@ -30,7 +30,7 @@ const helpWindow = (function () {
     }
 
     function show() {
-        root.style.display = "block";
+        root.style.display = "flex";
     }
 
     function hide() {
