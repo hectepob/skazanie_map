@@ -2,11 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Карта Сказания</title>
+    
+    <title>Сказание — интерактивная карта мира | Локации, монстры, NPC, предметы</title>
+
+<meta name="description" content="Интерактивная карта мира онлайн-игры «Сказание». Поиск по номеру клетки, регионам, подзонам, монстрам, NPC, предметам и зданиям. Навигация по этажам и калькулятор монстров.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сказание — интерактивная карта мира">
+<meta property="og:description" content="Интерактивная карта игры «Сказание»: поиск локаций, монстров, NPC, предметов и зданий.">
+<meta property="og:url" content="https://hectepob.github.io/skazanie_map/">
+<meta property="og:site_name" content="Сказание — интерактивная карта">
+<link rel="canonical" href="https://hectepob.github.io/skazanie_map/">
 
     <link rel="stylesheet" href="style.css">
 
-<meta name="yandex-verification" content="e92eb624acf106b7" />
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -24,6 +34,13 @@
 </head>
 
 <body>
+
+<h1 class="visually-hidden">
+Интерактивная карта мира игры «Сказание»
+</h1>
+<p class="visually-hidden">
+Интерактивная карта онлайн-игры «Сказание». Поиск по номеру клетки, регионам и подзонам, поиск монстров, NPC, предметов и зданий, переход между этажами и калькулятор характеристик монстров.
+</p>
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <div id="topPanel"></div>
@@ -45,10 +62,14 @@
     </div>
 
     <!-- JS -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>
-eruda.init();
-</script> -->
+if (location.search.includes("debug")) {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/eruda";
+    script.onload = () => eruda.init();
+    document.head.appendChild(script);
+}
+</script>
     
 <script src="topPanel.js"></script>
 <script src="leftPanel.js"></script>
