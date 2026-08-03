@@ -1,5 +1,3 @@
-console.log("dragDesktop.js 2007 1200");
-
     const dragDesktop = (function () {
 
     let viewport;
@@ -69,8 +67,6 @@ function onUp(e) {
         return;
     dragging = false;
     if (viewport.hasPointerCapture(e.pointerId))
-        //viewport.releasePointerCapture(e.pointerId);
-    // после завершения drag снова разрешаем обычный клик
     setTimeout(() => {
         moved = false;
     }, 0);
