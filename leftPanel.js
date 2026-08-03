@@ -1,4 +1,3 @@
-console.log("leftPanel.js 3007 2000 ");
 const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
