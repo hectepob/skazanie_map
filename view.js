@@ -1,5 +1,3 @@
-console.log("view.js 1907 1830 ");
-
 const view = (function () {
 
     let container;
