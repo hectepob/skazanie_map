@@ -1,5 +1,3 @@
-console.log("monsterCalculator.js 2807 0930 ");
-
 const monsterCalculator = (function () {
     let panel;
     let currentMonster = null;
