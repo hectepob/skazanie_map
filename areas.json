@@ -19,7 +19,7 @@
 {"id_area":2,"id_subarea":7,"area":"Мрачный лес","subarea":"Дом лесничего","bg_color":"#7FBF6A","font_color":"","central_cell":180},
 {"id_area":2,"id_subarea":8,"area":"Мрачный лес","subarea":"Мрачное подземелье","bg_color":"#7FBF6A","font_color":"","central_cell":163},
 {"id_area":2,"id_subarea":9,"area":"Мрачный лес","subarea":"Заброшенное кладбище","bg_color":"#7FBF6A","font_color":"","central_cell":3037},
-{"id_area":2,"id_subarea":10,"area":"Мрачный лес","subarea":"Замок вампиров","bg_color":"#7FBF6A","font_color":"","central_cell":1501},
+{"id_area":2,"id_subarea":10,"area":"Мрачный лес","subarea":"Замок вампиров","bg_color":"#8B2323","font_color":"#FFFFFF","central_cell":1501},
 {"id_area":3,"id_subarea":1,"area":"Поганая земля","subarea":"Поганая земля","bg_color":"#4080A8","font_color":"","central_cell":96},
 {"id_area":3,"id_subarea":2,"area":"Поганая земля","subarea":"Черная река","bg_color":"#4080A8","font_color":"","central_cell":223},
 {"id_area":3,"id_subarea":3,"area":"Поганая земля","subarea":"Избушка торговца","bg_color":"#4080A8","font_color":"","central_cell":185},
