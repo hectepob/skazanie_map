@@ -835,14 +835,6 @@ input[type="checkbox"]{
     line-height: 1;
 }
 
-.floorBlock button,
-.zoomBlock button{
-    width:30px;
-    height:28px;
-    min-width:30px;
-    max-width:30px;
-}
-
 .findButton{
     padding:4px 14px;
     min-width:70px;
