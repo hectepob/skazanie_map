@@ -1,5 +1,3 @@
-console.log("main.js 2907 1520 ");
-
 const mapContainer = document.getElementById("map");
 const mapViewport = document.getElementById("mapViewport");
 
@@ -36,174 +34,163 @@ Promise.all([
     monsterCalculator.init(monsterStatsJson);
     helpWindow.init();
     tooltip.setMonsterStats(monsterStatsJson);
-
-const built = dataBuilder.build(data, areaData);
-
-byId = built.byId;
-gridMap = built.gridMap;
-areaMap = built.areaMap;
-
-floorsByMap = built.floorsByMap;
+    const built = dataBuilder.build(data, areaData);
+    byId = built.byId;
+    gridMap = built.gridMap;
+    areaMap = built.areaMap;
+    floorsByMap = built.floorsByMap;
 
     if (data.length) {
         currentFloor = data[0].floor;
     }
 
-highlight.init({
-    byId,
-    highlightCells,
-    render: () => renderMap.draw()
-});
+    highlight.init({
+        byId,
+        highlightCells,
+        render: () => renderMap.draw()
+    });
 
-portalMenu.init({
-    byId,
-    links: linkData,
-    map: mapViewport
-});
+    portalMenu.init({
+        byId,
+        links: linkData,
+        map: mapViewport
+    });
 
-navigation.init({
+    navigation.init({
+        data,
+        byId,
+        tooltip,
+        mapContainer,
+        mapViewport,
+        topPanel: topPanelModule,
+        render: () => renderMap.draw(),
+        clearHighlight: () => highlight.clear(),
+        getCurrentFloor: () => currentFloor,
+        setCurrentFloor: v => currentFloor = v,
+        getCurrentMap: () => currentMap,
+        setCurrentMap: v => currentMap = v,
+        getSelectedCellId: () => selectedCellId,
+        setSelectedCellId: v => selectedCellId = v,
+        getMinFloor: () => floorsByMap.get(currentMap).min,
+        getMaxFloor: () => floorsByMap.get(currentMap).max,
+        offset: {
+            get x() { return offsetX; },
+            set x(v) { offsetX = v; },
 
-    data,
-    byId,
-    tooltip,
-    mapContainer,
-    mapViewport,
-    topPanel: topPanelModule,
-    render: () => renderMap.draw(),
-    clearHighlight: () => highlight.clear(),
-    getCurrentFloor: () => currentFloor,
-    setCurrentFloor: v => currentFloor = v,
-    getCurrentMap: () => currentMap,
-    setCurrentMap: v => currentMap = v,
-    getSelectedCellId: () => selectedCellId,
-    setSelectedCellId: v => selectedCellId = v,
-    getMinFloor: () => floorsByMap.get(currentMap).min,
-    getMaxFloor: () => floorsByMap.get(currentMap).max,
-    offset: {
-        get x() { return offsetX; },
-        set x(v) { offsetX = v; },
+            get y() { return offsetY; },
+            set y(v) { offsetY = v; }
+        },
+        scale: {
+        get value() { return scale; },
+        set value(v) { scale = v; }
+        }
 
-        get y() { return offsetY; },
-        set y(v) { offsetY = v; }
-    },
-    scale: {
-    get value() { return scale; },
-    set value(v) { scale = v; }
-    }
+    });
 
-});
-
-const drag =
-    navigator.maxTouchPoints > 0
-        ? dragTouch
-        : dragDesktop;
+    const drag =
+        navigator.maxTouchPoints > 0
+            ? dragTouch
+            : dragDesktop;
 
     drag.init({
+        viewport: mapViewport,
+        container: mapContainer,
+        tooltip,
+        offset: {
+            get x() { return offsetX; },
+            set x(v) { offsetX = v; },
 
-    viewport: mapViewport,
-    container: mapContainer,
-    tooltip,
+            get y() { return offsetY; },
+            set y(v) { offsetY = v; }
+        },
 
-    offset: {
-        get x() { return offsetX; },
-        set x(v) { offsetX = v; },
-
-        get y() { return offsetY; },
-        set y(v) { offsetY = v; }
-    },
-
-    scale: {
-
-        get value() { return scale; },
-        set value(v) { scale = v; }
-
-    }
-
-});
+        scale: {
+            get value() { return scale; },
+            set value(v) { scale = v; }
+        }
+    });
 
     view.init({
-    container: mapContainer,
-    offset: {
-        get x() { return offsetX; },
-        set x(v) { offsetX = v; },
-        get y() { return offsetY; },
-        set y(v) { offsetY = v; }
-    },
-
-    scale: {
-        get value() { return scale; },
-        set value(v) { scale = v; }
-    }
-
+        container: mapContainer,
+        offset: {
+            get x() { return offsetX; },
+            set x(v) { offsetX = v; },
+            get y() { return offsetY; },
+            set y(v) { offsetY = v; }
+        },
+        scale: {
+            get value() { return scale; },
+            set value(v) { scale = v; }
+        }
      });
 
-renderMap.init({
-    mapContainer,
-    mapViewport,
-    gridMap,
-    areaMap,
-    byId,
-    navigation,
-    topPanel: topPanelModule,
-    tooltip,
-    drag: drag,
-    highlightCells,
-    toId,
-    getCurrentMap: () => currentMap,
-    getCurrentFloor: () => currentFloor,
-    getCurrentArea: () => currentArea,
-    getCurrentSubarea: () => currentSubarea,
-    getSelectedCellId: () => selectedCellId,
-    setSelectedCellId: v => selectedCellId = v
-});
+    renderMap.init({
+        mapContainer,
+        mapViewport,
+        gridMap,
+        areaMap,
+        byId,
+        navigation,
+        topPanel: topPanelModule,
+        tooltip,
+        drag: drag,
+        highlightCells,
+        toId,
+        getCurrentMap: () => currentMap,
+        getCurrentFloor: () => currentFloor,
+        getCurrentArea: () => currentArea,
+        getCurrentSubarea: () => currentSubarea,
+        getSelectedCellId: () => selectedCellId,
+        setSelectedCellId: v => selectedCellId = v
+    });
 
-topPanelModule.init(areaData, data);
-topPanelModule.setZoom(scale);
+    topPanelModule.init(areaData, data);
+    topPanelModule.setZoom(scale);
     
-topPanelModule.onZoomPlus(() => {
-    navigation.setZoom(scale + 0.25);
-});
+    topPanelModule.onZoomPlus(() => {
+        navigation.setZoom(scale + 0.25);
+    });   
+    
+    topPanelModule.onZoomMinus(() => {
+        navigation.setZoom(scale - 0.25);
+    });
 
-topPanelModule.onZoomMinus(() => {
-    navigation.setZoom(scale - 0.25);
-});
+    topPanelModule.onZoomEnter(percent => {
+        if (isNaN(percent))
+            return;
+        navigation.setZoom(percent / 100);
+    });
 
-topPanelModule.onZoomEnter(percent => {
-    if (isNaN(percent))
-        return;
-    navigation.setZoom(percent / 100);
-});
+    leftPanel.init({
+        data: data,
+        highlight,
+        navigation,
+        renderMap,
+        monsterCalculator
+    });
 
-leftPanel.init({
-    data: data,
-    highlight,
-    navigation,
-    renderMap,
-    monsterCalculator
-});
+    document.addEventListener("click", e => {
+        if (!e.target.closest("#mapViewport")) {
+            tooltip.hide();
+            portalMenu.hide();
+        }
+    });
+    
+    selectedCellId = 0;
+    const firstCell = data.find(c => c.id_map === 1);
+    if (firstCell)
+        navigation.centerOnCell(firstCell);
 
- document.addEventListener("click", e => {
-    if (!e.target.closest("#mapViewport")) {
-        tooltip.hide();
+    mapViewport.addEventListener("click", e => {
+        if (e.target.closest(".portalMenu"))
+            return;
+        if (e.target.closest(".portal"))
+            return;
         portalMenu.hide();
-    }
- });
-    
-selectedCellId = 0;
-const firstCell = data.find(c => c.id_map === 1);
-if (firstCell)
-    navigation.centerOnCell(firstCell);
-
-mapViewport.addEventListener("click", e => {
-    if (e.target.closest(".portalMenu"))
-        return;
-    if (e.target.closest(".portal"))
-        return;
-    portalMenu.hide();
-    if (e.target.closest(".cell:not(.empty)"))
-        return;
-    tooltip.hide();
-});
+        if (e.target.closest(".cell:not(.empty)"))
+            return;
+        tooltip.hide();
+    });
 
 });
 
