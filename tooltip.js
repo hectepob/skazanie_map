@@ -1,5 +1,3 @@
-console.log("tooltip.js 2707 2120 ");
-
 const tooltip = (function () {
 
     const icons = {
@@ -11,60 +9,56 @@ const tooltip = (function () {
     };
     const el = document.getElementById("tooltip");
     let monsterMode = false;
-    
-    function setMonsterMode(value) {
-        monsterMode = value;
-    }
-
+        function setMonsterMode(value) {
+            monsterMode = value;
+        }
     let monsterStats = new Map();
 
-function setMonsterStats(json) {
-    monsterStats.clear();
-    json.forEach(m => {
-        monsterStats.set(m.object_id, m);
-    });
-}
-
-function calcStat(base, pl, lvl) {
-    return Math.round(
-        Number(base) + Number(pl) * (Number(lvl) - 1)
-    );
-}
-
-function getMonsterStats(id, level) {
-    const s = monsterStats.get(id);
-    if (!s)
-        return null;
-    let lvlMin = level;
-    let lvlMax = level;
-    if (String(level).includes("-")) {
-        const parts = String(level).split("-");
-        lvlMin = Number(parts[0]);
-        lvlMax = Number(parts[1]);
+    function setMonsterStats(json) {
+        monsterStats.clear();
+        json.forEach(m => {
+            monsterStats.set(m.object_id, m);
+        });
     }
 
-
-    function range(base, pl) {
-        const a = calcStat(base, pl, lvlMin);
-        const b = calcStat(base, pl, lvlMax);
-        if (a === b)
-            return a;
-        return `${a} — ${b}`;
+    function calcStat(base, pl, lvl) {
+        return Math.round(
+            Number(base) + Number(pl) * (Number(lvl) - 1)
+        );
     }
 
-    return {
-        hp: range(s.hp_base, s.hp_pl),
-        at: range(s.at_base, s.at_pl),
-        dod: range(s.dod_base, s.dod_pl),
-        arm: range(s.arm_base, s.arm_pl),
-        damage:
-            range(s.minD_base, s.minD_pl)
-            +
-            " - "
-            +
-            range(s.maxD_base, s.maxD_pl)
-    };
-}
+    function getMonsterStats(id, level) {
+        const s = monsterStats.get(id);
+        if (!s)
+            return null;
+        let lvlMin = level;
+        let lvlMax = level;
+        if (String(level).includes("-")) {
+            const parts = String(level).split("-");
+            lvlMin = Number(parts[0]);
+            lvlMax = Number(parts[1]);
+        }
+        function range(base, pl) {
+            const a = calcStat(base, pl, lvlMin);
+            const b = calcStat(base, pl, lvlMax);
+            if (a === b)
+                return a;
+            return `${a} — ${b}`;
+        }
+
+        return {
+            hp: range(s.hp_base, s.hp_pl),
+            at: range(s.at_base, s.at_pl),
+            dod: range(s.dod_base, s.dod_pl),
+            arm: range(s.arm_base, s.arm_pl),
+            damage:
+                range(s.minD_base, s.minD_pl)
+                +
+                " - "
+                +
+                range(s.maxD_base, s.maxD_pl)
+        };
+    }
     
     const order = {
         monster: 1,
@@ -88,43 +82,40 @@ function getMonsterStats(id, level) {
         el.style.display = "none";
     }
 
-function format(cells) {
-    let html = [];
-    cells.forEach((cell, index) => {
-        const objects = (cell.objects || []).slice();
-        if (objects.length === 0)
-            return;
-        objects.sort((a, b) =>
-            (order[a.type] || 99) - (order[b.type] || 99)
-        );
-        // номер клетки для объединённых ячеек
-        if (cells.length > 1) {
-            html.push(
-                `<div class="tooltip-location">${cell.id}</div>`
+    function format(cells) {
+        let html = [];
+        cells.forEach((cell, index) => {
+            const objects = (cell.objects || []).slice();
+            if (objects.length === 0)
+                return;
+            objects.sort((a, b) =>
+                (order[a.type] || 99) - (order[b.type] || 99)
             );
-        }
-        objects.forEach(obj => {
-            switch (obj.type) {
-                case "monster":
-                    let monsterTitle = `${icons.monster} ${obj.name}`;
-                    if (obj.level)
-                        monsterTitle += ` (${obj.level})`;
-                    if (obj.group)
-                        monsterTitle += " +";
-                    // обычный режим
-                    if (!monsterMode) {
-                        html.push(
-                            `<div class="itemsTooltip"><b>${monsterTitle}</b></div>`
-                        );
-                    }
-                    // калькулятор
-                    else {
-                        const stats = getMonsterStats(
-                            obj.id,
-                            obj.level
-                        );
-                        html.push(`
-                            <div class="monsterTooltip">
+            if (cells.length > 1) {
+                html.push(
+                    `<div class="tooltip-location">${cell.id}</div>`
+                );
+            }
+            objects.forEach(obj => {
+                switch (obj.type) {
+                    case "monster":
+                        let monsterTitle = `${icons.monster} ${obj.name}`;
+                        if (obj.level)
+                            monsterTitle += ` (${obj.level})`;
+                        if (obj.group)
+                            monsterTitle += " +";
+                        if (!monsterMode) {
+                            html.push(
+                                `<div class="itemsTooltip"><b>${monsterTitle}</b></div>`
+                            );
+                        }
+                        else {
+                            const stats = getMonsterStats(
+                                obj.id,
+                                obj.level
+                            );
+                            html.push(`
+                                <div class="monsterTooltip">
                                 <div class="monsterTooltipTitle"><b>${monsterTitle}</b></div>
                                 <table class="monsterTooltipTable">
                                 <tr>
@@ -144,42 +135,39 @@ function format(cells) {
                                 <td class="value">${monsterCalculator.calcStat(obj.id,"dod",obj.level)}</td>
                                 </tr>
                                 </table>
-                            </div>
-                        `);
-                        // небольшой отступ только после таблицы
-                        html.push(`<div class="monsterSpacer"></div>`);
-                    }
-                break;
+                                </div>
+                            `);
+                            html.push(`<div class="monsterSpacer"></div>`);
+                        }
+                    break;
                 
-                case "building":
-                    html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
-                break;
+                    case "building":
+                        html.push(`<div class="itemsTooltip">${icons.building} ${obj.name}</div>`);
+                    break;
                 
-                case "npc":
-                    html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
-                break;
+                    case "npc":
+                        html.push(`<div class="itemsTooltip">${icons.npc} ${obj.name}</div>`);
+                    break;
 
-                case "item":
-                    html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
-                break;
+                    case "item":
+                        html.push(`<div class="itemsTooltip">${icons.item} ${obj.name}</div>`);
+                    break;
 
-                case "comment":
-                    html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
-                break;
+                    case "comment":
+                        html.push(`<div class="itemsTooltip"><i>${icons.comment} ${obj.name}</i></div>`);
+                    break;
 
-                default:
-                    html.push(`<div class="itemsTooltip">${obj.name}</div>`);
+                    default:
+                        html.push(`<div class="itemsTooltip">${obj.name}</div>`);
+                }
+            });
 
+            if (index < cells.length - 1) {
+                html.push(`<hr class="tooltip-divider">`);
             }
         });
-
-        // разделитель только между объединенными клетками
-        if (index < cells.length - 1) {
-            html.push(`<hr class="tooltip-divider">`);
-        }
-    });
-    return html.join("");
-}
+        return html.join("");
+    }
 
     return {
         show,
