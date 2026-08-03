@@ -158,27 +158,6 @@ const renderMap = (function () {
         return el;
     }
 
-    function refreshSelection() {
-        cfg.mapContainer
-            .querySelectorAll(".cell.selected")
-            .forEach(el => el.classList.remove("selected"));
-        const currentGrid = cfg.gridMap.get(cfg.getCurrentMap());
-        if (!currentGrid)
-            return;
-        let group = null;
-        currentGrid.forEach(g => {
-            if (g.root.id === cfg.getSelectedCellId())
-                group = g;
-        });
-        if (!group)
-            return;
-        const el = cfg.mapContainer.querySelector(
-            `.cell[data-id="${cfg.getSelectedCellId()}"]`
-        );
-        if (el)
-            el.classList.add("selected");
-    }
-    
     function draw() {
         cfg.mapContainer.innerHTML = "";
         let maxCol = 0;
@@ -212,8 +191,7 @@ const renderMap = (function () {
 
     return {
         init,
-        draw,
-        refreshSelection
+        draw
     };
 
 })();
