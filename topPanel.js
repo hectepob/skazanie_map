@@ -1,5 +1,3 @@
-console.log("topPanel.js 2907 1325 ");
-
 const topPanelModule = (function () {
 const panel = document.getElementById("topPanel");
 
