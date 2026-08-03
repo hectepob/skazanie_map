@@ -1,5 +1,3 @@
-console.log("dataBuilder.js 1907 1045 ");
-
 const dataBuilder = (function () {
 
     function build(mapData, areaData) {
@@ -10,7 +8,6 @@ const dataBuilder = (function () {
         const floorsByMap = new Map();
 
         // ---------- AREA COLORS ----------
-
 areaData.forEach(a => {
     const key = `${a.area}|${a.subarea}`;
     areaMap.set(key, {
@@ -20,14 +17,12 @@ areaData.forEach(a => {
 });
 
         // ---------- byId ----------
-
         mapData.forEach(cell => {
             cell.parent_id = Number(cell.parent_id || 0);
             byId.set(cell.id, cell);
         });
 
         // ---------- GRID ----------
-
         mapData.forEach(cell => {
             let root = cell;
             while (root.parent_id !== 0) {
@@ -68,7 +63,6 @@ areaData.forEach(a => {
         });
 
         // ---------- GROUPS ----------
-
         gridMap.forEach(mapGrid => {
             mapGrid.forEach(group => {
                 group.cells.sort((a, b) => a.id - b.id);
