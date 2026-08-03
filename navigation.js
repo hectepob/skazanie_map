@@ -1,5 +1,3 @@
-console.log("navigation.js 2907 1440 ");
-
 const navigation = (function () {
 
     const CELL_SIZE = 40;
@@ -45,16 +43,16 @@ const navigation = (function () {
         clearHighlight = cfg.clearHighlight;
     }
     
-function centerOnCell(cell) {
-    setCurrentFloor(cell.floor);
-    setCurrentMap(cell.id_map);
-    render();
-    const x = (cell.col - 1) * CELL_SIZE;
-    const y = (cell.row - 1) * CELL_SIZE;
-    offset.x = mapViewport.clientWidth / 2 - (x + HALF_CELL) * scale.value;
-    offset.y = mapViewport.clientHeight / 2 - (y + HALF_CELL) * scale.value;
-    view.apply();
-}
+    function centerOnCell(cell) {
+        setCurrentFloor(cell.floor);
+        setCurrentMap(cell.id_map);
+        render();
+        const x = (cell.col - 1) * CELL_SIZE;
+        const y = (cell.row - 1) * CELL_SIZE;
+        offset.x = mapViewport.clientWidth / 2 - (x + HALF_CELL) * scale.value;
+        offset.y = mapViewport.clientHeight / 2 - (y + HALF_CELL) * scale.value;
+        view.apply();
+    }
     
     function keepView(id) {
         const cell = byId.get(id);
@@ -87,58 +85,58 @@ function centerOnCell(cell) {
         }
     }
 
-function gotoCell(id, center = true) {
-    tooltip.hide();
-    setSelectedCellId(Number(id));
-    const cell = byId.get(Number(id));
-    if (!cell)
-        return;
-    topPanel.selectCell(cell);
-    if (center)
-        centerOnCell(cell);
-    else
-        keepView(cell.id);
-    topPanel.setCurrentArea(
-        cell.area,
-        cell.subarea
-    );
-}
+    function gotoCell(id, center = true) {
+        tooltip.hide();
+        setSelectedCellId(Number(id));
+        const cell = byId.get(Number(id));
+        if (!cell)
+            return;
+        topPanel.selectCell(cell);
+        if (center)
+            centerOnCell(cell);
+        else
+            keepView(cell.id);
+        topPanel.setCurrentArea(
+            cell.area,
+            cell.subarea
+        );
+    }
 
-function changeFloor(step) {
-    const newFloor = getCurrentFloor() + step;
-    if (newFloor < getMinFloor() || newFloor > getMaxFloor())
-        return;
-    tooltip.hide();
-    setCurrentFloor(newFloor); 
-    setSelectedCellId(0);
-    topPanel.clearSelection();
-    render();
-}
+    function changeFloor(step) {
+        const newFloor = getCurrentFloor() + step;
+        if (newFloor < getMinFloor() || newFloor > getMaxFloor())
+            return;
+        tooltip.hide();
+        setCurrentFloor(newFloor); 
+        setSelectedCellId(0);
+        topPanel.clearSelection();
+        render();
+    }
 
-function setZoom(value) {
-    const rect = mapViewport.getBoundingClientRect();
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const oldScale = scale.value;
-    let newScale = Math.max(0.5, Math.min(2, value));
-    if (newScale === oldScale)
-        return;
-    const worldX = (cx - offset.x) / oldScale;
-    const worldY = (cy - offset.y) / oldScale;
-    scale.value = newScale;
-    offset.x = cx - worldX * newScale;
-    offset.y = cy - worldY * newScale;
-    view.apply();
-    topPanelModule.setZoom(scale.value);
-}
+    function setZoom(value) {
+        const rect = mapViewport.getBoundingClientRect();
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const oldScale = scale.value;
+        let newScale = Math.max(0.5, Math.min(2, value));
+        if (newScale === oldScale)
+            return;
+        const worldX = (cx - offset.x) / oldScale;
+        const worldY = (cy - offset.y) / oldScale;
+        scale.value = newScale;
+        offset.x = cx - worldX * newScale;
+        offset.y = cy - worldY * newScale;
+        view.apply();
+        topPanelModule.setZoom(scale.value);
+    }
     
-return {
-    init,
-    gotoCell,
-    changeFloor,
-    centerOnCell,
-    keepView,
-    setZoom
-};
+    return {
+        init,
+        gotoCell,
+        changeFloor,
+        centerOnCell,
+        keepView,
+        setZoom
+    };
 
 })();
