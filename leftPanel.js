@@ -2,7 +2,6 @@ const leftPanel = (function () {
 
     const panel = document.getElementById("leftPanel");
     let sections = {};
-    let selectedItem = null;
     let followCheckbox;
     let calcCheckbox;
     let currentInfoBlock = null;
@@ -147,7 +146,6 @@ row.onclick = function () {
         .querySelectorAll(".accordionItem.selected")
         .forEach(x => x.classList.remove("selected"));
     row.classList.add("selected");
-    selectedItem = item;
     foundCells = findCellsByObject(item);
 
     if (calcCheckbox.active && item.type === "monster") {
