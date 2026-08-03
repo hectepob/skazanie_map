@@ -1,5 +1,3 @@
-console.log("portalMenu.js 2107 1045 ");
-
 const portalMenu = (function () {
 
     let byId;
@@ -8,8 +6,7 @@ const portalMenu = (function () {
     let menu;
 
     function init(cfg) {
-        
-        byId = cfg.byId;
+                byId = cfg.byId;
         links = cfg.links;
         map = cfg.map;
         menu = document.createElement("div");
@@ -74,22 +71,13 @@ const portalMenu = (function () {
         const anchorRect = anchor.getBoundingClientRect();
         menu.style.display = "block";
         const h = menu.offsetHeight;
-
-// координата значка внутри карты
         const anchorY = anchorRect.top - mapRect.top + anchorRect.height / 2;
-
-// центрируем меню относительно значка
         let top = anchorY - h / 2;
-
-// не даём уйти выше карты
         top = Math.max(4, top);
-
-// не даём уйти ниже карты
         top = Math.min(
             top,
             map.clientHeight - h - 4
         );
-
         menu.style.left = (anchorRect.right - mapRect.left + 6) + "px";
         menu.style.top = top + "px";
     }
