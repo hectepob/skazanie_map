@@ -1,4 +1,3 @@
-console.log("dragTouch.js 2307 0650 ");
 const dragTouch = (function () {
 
     let viewport;
@@ -114,7 +113,6 @@ function onMove(e) {
             Math.abs(newY - offset.y) > 5
         ) {
             moved = true;
-        // пользователь действительно начал двигать карту
             portalMenu.hide();
             tooltip.hide();
         }
