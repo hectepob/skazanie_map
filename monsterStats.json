@@ -19,7 +19,7 @@
 {"object_id":1018,"name":"Гиена","hp_base":820,"hp_pl":20,"at_base":520,"at_pl":20,"dod_base":571,"dod_pl":21,"arm_base":720,"arm_pl":20,"minD_base":130,"minD_pl":10,"maxD_base":171,"maxD_pl":11},
 {"object_id":1019,"name":"Грифон","hp_base":1945,"hp_pl":145,"at_base":850,"at_pl":50,"dod_base":350,"dod_pl":50,"arm_base":2100,"arm_pl":100,"minD_base":130,"minD_pl":30,"maxD_base":360,"maxD_pl":30},
 {"object_id":1020,"name":"Гюрза","hp_base":700,"hp_pl":0,"at_base":650,"at_pl":0,"dod_base":800,"dod_pl":0,"arm_base":400,"arm_pl":0,"minD_base":120,"minD_pl":0,"maxD_base":140,"maxD_pl":0},
-{"object_id":1021,"name":"Древесный тролль","hp_base":1020,"hp_pl":0,"at_base":200,"at_pl":0,"dod_base":130,"dod_pl":0,"arm_base":1660,"arm_pl":0,"minD_base":180,"minD_pl":0,"maxD_base":230,"maxD_pl":0},
+{"object_id":1021,"name":"Древесный тролль","hp_base":1020,"hp_pl":80,"at_base":200,"at_pl":50,"dod_base":130,"dod_pl":40,"arm_base":1660,"arm_pl":110,"minD_base":180,"minD_pl":30,"maxD_base":230,"maxD_pl":30},
 {"object_id":1022,"name":"Древняя летучая мышь","hp_base":1590,"hp_pl":0,"at_base":2200,"at_pl":0,"dod_base":1600,"dod_pl":0,"arm_base":7000,"arm_pl":0,"minD_base":320,"minD_pl":0,"maxD_base":450,"maxD_pl":0},
 {"object_id":1023,"name":"Древогрыз","hp_base":510,"hp_pl":70,"at_base":450,"at_pl":50,"dod_base":470,"dod_pl":70,"arm_base":1310,"arm_pl":110,"minD_base":180,"minD_pl":30,"maxD_base":230,"maxD_pl":30},
 {"object_id":1024,"name":"Единорог","hp_base":1000,"hp_pl":100,"at_base":800,"at_pl":80,"dod_base":480,"dod_pl":80,"arm_base":2470,"arm_pl":70,"minD_base":180,"minD_pl":30,"maxD_base":240,"maxD_pl":30},
