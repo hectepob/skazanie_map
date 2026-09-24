@@ -1,3 +1,5 @@
+console.log('Текст для вывода');
+
 const helpWindow = (function () {
 
     let root;
