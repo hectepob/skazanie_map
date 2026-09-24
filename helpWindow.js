@@ -24,10 +24,29 @@ const helpWindow = (function () {
         loadHelp();
     }
 
-    async function loadHelp() {
-        const html = await fetch("help.html").then(r => r.text());
-        body.innerHTML = html;
-    }
+async function loadHelp() {
+    const [html, mapText] = await Promise.all([
+        fetch("help.html").then(r => r.text()),
+        fetch("map.json").then(r => r.text())
+    ]);
+
+    const cells = mapText
+        .trim()
+        .split(/\r?\n/)
+        .filter(Boolean)
+        .map(line => JSON.parse(line));
+
+    const maxId = Math.max(...cells.map(cell => cell.id));
+    const uniqueCount = cells.length;
+    const nonEmptyCount = cells.filter(
+        cell => cell.objects && cell.objects.length > 0
+    ).length;
+
+    body.innerHTML = html
+        .replace("{{MAX_ID}}", maxId)
+        .replace("{{UNIQUE_COUNT}}", uniqueCount)
+        .replace("{{NON_EMPTY_COUNT}}", nonEmptyCount);
+}
 
     function show() {
         root.style.display = "flex";
