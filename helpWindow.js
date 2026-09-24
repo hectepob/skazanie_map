@@ -34,10 +34,11 @@ async function loadHelp() {
         .trim()
         .split(/\r?\n/)
         .filter(Boolean)
-        .map(line => JSON.parse(line));
+        .map(line => JSON.parse(line.replace(/,\s*$/, "")));
 
     const maxId = Math.max(...cells.map(cell => cell.id));
     const uniqueCount = cells.length;
+
     const nonEmptyCount = cells.filter(
         cell => cell.objects && cell.objects.length > 0
     ).length;
