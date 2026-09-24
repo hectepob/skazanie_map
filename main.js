@@ -32,7 +32,7 @@ Promise.all([
     areaData = areasJson || [];
     linkData = linksJson || [];
     monsterCalculator.init(monsterStatsJson);
-    helpWindow.init(mapData);
+    helpWindow.init(Data);
     tooltip.setMonsterStats(monsterStatsJson);
     const built = dataBuilder.build(data, areaData);
     byId = built.byId;
