@@ -32,6 +32,14 @@ Promise.all([
     areaData = areasJson || [];
     linkData = linksJson || [];
     monsterCalculator.init(monsterStatsJson);
+
+    // Убираем монстров с неизвестным уровнем
+    data.forEach(cell => {
+        cell.objects = cell.objects.filter(
+            obj => obj.type !== "monster" || String(obj.level).trim() !== "-"
+        );
+    });
+    
     helpWindow.init(data);
     tooltip.setMonsterStats(monsterStatsJson);
     const built = dataBuilder.build(data, areaData);
