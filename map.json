@@ -6325,5 +6325,5 @@
 {"id":9606,"col":146,"row":278,"floor":8,"id_map":1,"area":"Нэвис","subarea":"Нэвис","north":"false","west":"false","south":"true","east":"true","stairs":{"up":"","down":""},"text_color":"","parent_id":0,"objects":[]},
 {"id":9607,"col":146,"row":279,"floor":8,"id_map":1,"area":"Нэвис","subarea":"Нэвис","north":"true","west":"true","south":"false","east":"false","stairs":{"up":"","down":""},"text_color":"","parent_id":0,"objects":[]},
 {"id":9608,"col":148,"row":279,"floor":8,"id_map":1,"area":"Нэвис","subarea":"Нэвис","north":"false","west":"true","south":"false","east":"true","stairs":{"up":"","down":""},"text_color":"","parent_id":0,"objects":[]},
-{"id":9609,"col":144,"row":279,"floor":8,"id_map":1,"area":"Нэвис","subarea":"Нэвис","north":"false","west":"false","south":"false","east":"true","stairs":{"up":"","down":""},"text_color":"","parent_id":0,"objects":[]},
+{"id":9609,"col":144,"row":279,"floor":8,"id_map":1,"area":"Нэвис","subarea":"Нэвис","north":"false","west":"false","south":"false","east":"true","stairs":{"up":"","down":""},"text_color":"","parent_id":0,"objects":[]}
 ]
