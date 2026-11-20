@@ -273,7 +273,7 @@ body::before {
     transform-origin: 0 0;
     will-change: transform;
     image-rendering: pixelated;
-    /*transform-style: preserve-3d;*/
+    transform-style: preserve-3d;
     filter: drop-shadow(0 0 8px rgba(0,0,0,0.55));
 }
 
