@@ -2,8 +2,8 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    /*font-family: Times;*/
+    /*font-family: Arial, sans-serif;*/
+    font-family: Times;
     background:
         linear-gradient(
             135deg,
@@ -290,7 +290,7 @@ body::before {
     color: var(--cell-color, #000);
     position: relative;
     overflow: hidden;
-    transform: translateZ(0);
+    /*transform: translateZ(0);*/
     backface-visibility: hidden;
 }
 
