@@ -2,8 +2,8 @@
 body {
     margin: 0;
     overflow: hidden;
-    /*font-family: Arial, sans-serif;*/
-    font-family: Times;
+    font-family: Arial, sans-serif;
+    /*font-family: Times;*/
     background:
         linear-gradient(
             135deg,
@@ -715,6 +715,10 @@ input[type="checkbox"]{
 
 .areaMenuRegion:hover {
     font-weight: bold;
+}
+
+.areaSubmenuItem {
+    font-weight: normal;
 }
 
 .areaSubmenuItem:hover {
