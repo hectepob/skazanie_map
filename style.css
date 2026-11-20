@@ -710,6 +710,7 @@ input[type="checkbox"]{
 
 .areaMenuRegion:hover, .areaSubmenuItem:hover {
     background: rgba(255,255,255,.18);
+    font-weight: bold;
 }
 
 .areaMenuButton {
