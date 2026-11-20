@@ -705,11 +705,18 @@ input[type="checkbox"]{
     padding: 6px 10px;
     cursor: pointer;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .areaMenuRegion:hover, .areaSubmenuItem:hover {
     background: rgba(255,255,255,.18);
+}
+
+.areaMenuRegion:hover {
+    font-weight: bold;
+}
+
+.areaSubmenuItem:hover {
     font-weight: bold;
 }
 
