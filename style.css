@@ -3,7 +3,6 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    /*font-family: "Times New Roman", "Times", "serif";*/
     background:
         linear-gradient(
             135deg,
@@ -498,7 +497,6 @@ body::before {
 .statName{
     width:58px;
     white-space:nowrap;
-    /*font-weight:bold;*/
 }
 
 .value{
@@ -707,6 +705,7 @@ input[type="checkbox"]{
     padding: 6px 10px;
     cursor: pointer;
     white-space: nowrap;
+    font-size: 14px;
 }
 
 .areaMenuRegion:hover, .areaSubmenuItem:hover {
@@ -732,7 +731,7 @@ input[type="checkbox"]{
 
 .topPanelCenter{
     position:absolute;
-    left:200px;      /* после кнопки Найти*/
+    left:200px; /* после кнопки Найти*/
     right:10px;
     top:0;
     bottom:0;
