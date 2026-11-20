@@ -155,7 +155,7 @@ row.onclick = function () {
     currentFoundIndex = 0;
     const ids = foundCells.map(c => c.id);
     highlight.setCells(ids);
-    renderMap.draw();
+    //renderMap.draw();
     showInfo(item);
     if (followCheckbox.active && foundCells.length > 0) {
         navigation.gotoCell(
