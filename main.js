@@ -47,6 +47,7 @@ Promise.all([
     gridMap = built.gridMap;
     areaMap = built.areaMap;
     floorsByMap = built.floorsByMap;
+    routeFinder.init({data, byId});
 
     if (data.length) {
         currentFloor = data[0].floor;
