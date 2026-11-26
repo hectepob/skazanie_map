@@ -19,7 +19,9 @@ let mapData = [];
 let routeSearchButton;
 let routeStartInput;
 let routeEndInput;
-let routeMarkCheckbox;
+let routeMarkButton;
+let routeActiveInput;
+let routeMarking = false;
 
 function init(areas, map) {
 
@@ -131,19 +133,12 @@ function init(areas, map) {
 
     // ---------- третья строка: поиск маршрута ----------
 
-// Флажок
-routeMarkCheckbox = document.createElement("input");
-routeMarkCheckbox.type = "checkbox";
-
-const routeMarkLabel = document.createElement("label");
-routeMarkLabel.style.display = "flex";
-routeMarkLabel.style.alignItems = "center";
-routeMarkLabel.style.gap = "4px";
-routeMarkLabel.style.whiteSpace = "nowrap";
-routeMarkLabel.appendChild(routeMarkCheckbox);
-routeMarkLabel.appendChild(
-    document.createTextNode("Отметить на карте")
-);
+// Кнопка режима отметки на карте
+routeMarkButton = document.createElement("button");
+routeMarkButton.type = "button";
+routeMarkButton.textContent = "Отметить на карте";
+routeMarkButton.style.fontSize = "13px";
+routeMarkButton.setAttribute("aria-pressed", "false");
 
 // Начало пути
 const routeStartLabel = document.createElement("span");
@@ -160,6 +155,10 @@ routeEndLabel.textContent = "Конец пути:";
 routeEndInput = document.createElement("input");
 routeEndInput.type = "text";
 routeEndInput.style.width = "85px";
+
+// Запоминаем, в какое поле пользователь поставил курсор
+routeStartInput.addEventListener("focus", function () {routeActiveInput = routeStartInput;});
+routeEndInput.addEventListener("focus", function () {routeActiveInput = routeEndInput;});
 
 // Кнопки
 const routeFindButton = document.createElement("button");
@@ -202,7 +201,7 @@ function createRouteSeparator() {
 }
 
 // Размещение элементов
-routeRow.appendChild(routeMarkLabel);
+routeRow.appendChild(routeMarkButton);
 routeRow.appendChild(createRouteSeparator());
 
 routeRow.appendChild(routeStartLabel);
@@ -251,22 +250,35 @@ routeRow.appendChild(routeCloseButton);
 
 // ---------- поиск маршрута ----------
 
-routeSearchButton.onclick = function () {
-    routeRow.style.display =
-        routeRow.style.display === "none" ? "flex" : "none";
-    updatePanelHeight();
-};
+    routeSearchButton.onclick = function () {
+        const isOpening = routeRow.style.display === "none";
+        routeRow.style.display = isOpening ? "flex" : "none";
+        setButtonPressed(routeSearchButton, isOpening);
+        if (!isOpening)
+            setRouteMarking(false);
+        updatePanelHeight();
+    };
 
-routeCloseButton.onclick = function () {
-    routeRow.style.display = "none";
-    updatePanelHeight();
-};
+    routeCloseButton.onclick = function () {
+        routeRow.style.display = "none";
+        setButtonPressed(routeSearchButton, false);
+        setRouteMarking(false);
+        updatePanelHeight();
+    };
 
-routeResetButton.onclick = function () {
-    routeStartInput.value = "";
-    routeEndInput.value = "";
-    routeMarkCheckbox.checked = false;
-};
+    routeResetButton.onclick = function () {
+        routeStartInput.value = "";
+        routeEndInput.value = "";
+        setRouteMarking(false);
+    };
+
+    routeMarkButton.onclick = function () {
+        setRouteMarking(!routeMarking);
+        if (routeMarking) {
+            routeActiveInput = routeStartInput;
+            routeStartInput.focus();
+        }
+    };
 
     
     
@@ -402,6 +414,53 @@ findButton.onclick = function () {
 
 }
 
+// Визуальное состояние нажатой кнопки
+function setButtonPressed(button, pressed) {
+    button.setAttribute("aria-pressed", String(pressed));
+
+    if (pressed) {
+        button.style.background =
+            "linear-gradient(180deg, #c8aa6b, #a8894e)";
+        button.style.boxShadow =
+            "inset 0 2px 5px rgba(0,0,0,.35)";
+    } else {
+        button.style.background = "";
+        button.style.boxShadow = "";
+    }
+}
+
+// Включение и выключение режима выбора клеток
+function setRouteMarking(enabled) {
+    routeMarking = enabled;
+    setButtonPressed(routeMarkButton, enabled);
+
+    if (!enabled)
+        routeActiveInput = null;
+}
+
+// Обработка клика по клетке карты для полей маршрута
+function handleMapCellClick(cell) {
+    if (!routeMarking || !cell)
+        return;
+
+    // Если активное поле не определено, начинаем с начала пути
+    if (
+        routeActiveInput !== routeStartInput &&
+        routeActiveInput !== routeEndInput
+    ) {
+        routeActiveInput = routeStartInput;
+    }
+
+    routeActiveInput.value = cell.id;
+
+    // После выбора начала автоматически переходим к концу
+    if (routeActiveInput === routeStartInput) {
+        routeActiveInput = routeEndInput;
+    }
+
+    routeActiveInput.focus();
+}
+    
 function updatePanelHeight() {
     requestAnimationFrame(() => {
         document.documentElement.style.setProperty(
@@ -428,6 +487,7 @@ function setCurrentArea(area, subarea) {
     
 return {
     init,
+    handleMapCellClick,
     setFloor(value) {
         floorLabel.textContent = value;
     },
