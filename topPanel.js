@@ -159,6 +159,8 @@ routeEndInput.style.width = "85px";
 // Запоминаем, в какое поле пользователь поставил курсор
 routeStartInput.addEventListener("focus", function () {routeActiveInput = routeStartInput;});
 routeEndInput.addEventListener("focus", function () {routeActiveInput = routeEndInput;});
+routeStartInput.addEventListener("change", updateRouteEndpoints);
+routeEndInput.addEventListener("change", updateRouteEndpoints);
 
 // Кнопки
 const routeFindButton = document.createElement("button");
@@ -266,11 +268,41 @@ routeRow.appendChild(routeCloseButton);
         updatePanelHeight();
     };
 
-    routeResetButton.onclick = function () {
-        routeStartInput.value = "";
-        routeEndInput.value = "";
-        setRouteMarking(false);
-    };
+routeResetButton.onclick = function () {
+    routeStartInput.value = "";
+    routeEndInput.value = "";
+    routeStartInput.classList.remove("inputError");
+    routeEndInput.classList.remove("inputError");
+    setRouteMarking(false);
+    routeFinder.clearRoute();
+    renderMap.draw();
+};
+
+routeFindButton.onclick = function () {
+    routeStartInput.classList.remove("inputError");
+    routeEndInput.classList.remove("inputError");
+    const result = routeFinder.findRoute(
+        routeStartInput.value,
+        routeEndInput.value
+    );
+
+    if (!result.success) {
+        if (result.reason === "invalidStart") {
+            routeStartInput.classList.add("inputError");
+            routeStartInput.focus();
+        }
+        if (result.reason === "invalidEnd") {
+            routeEndInput.classList.add("inputError");
+            routeEndInput.focus();
+        }
+        renderMap.draw();
+        if (result.reason === "notFound") {
+            alert("Маршрут между указанными клетками не найден.");
+        }
+        return;
+    }
+    renderMap.draw();
+};
 
     routeMarkButton.onclick = function () {
         setRouteMarking(!routeMarking);
@@ -279,8 +311,6 @@ routeRow.appendChild(routeCloseButton);
             routeStartInput.focus();
         }
     };
-
-    
     
 areaMenuButton.onclick = function () {
     if (areaMenu.style.display === "block") {
@@ -414,6 +444,19 @@ findButton.onclick = function () {
 
 }
 
+// Обновление точек после ручного ввода
+function updateRouteEndpoints() {
+    routeFinder.setEndpoints(
+        routeStartInput.value,
+        routeEndInput.value
+    );
+
+    routeStartInput.classList.remove("inputError");
+    routeEndInput.classList.remove("inputError");
+
+    renderMap.draw();
+}
+    
 // Визуальное состояние нажатой кнопки
 function setButtonPressed(button, pressed) {
     button.setAttribute("aria-pressed", String(pressed));
@@ -443,12 +486,18 @@ function handleMapCellClick(cell) {
     if (!routeMarking || !cell)
         return;
 
-    // Если активное поле не определено, начинаем с начала пути
-    if (
-        routeActiveInput !== routeStartInput &&
-        routeActiveInput !== routeEndInput
-    ) {
+    // Сначала проверяем, какое поле действительно находится в фокусе
+    if (document.activeElement === routeStartInput) {
         routeActiveInput = routeStartInput;
+    } else if (document.activeElement === routeEndInput) {
+        routeActiveInput = routeEndInput;
+    } else {
+        // Если ни одно поле не активно, выбираем первое незаполненное
+        if (!routeStartInput.value.trim()) {
+            routeActiveInput = routeStartInput;
+        } else {
+            routeActiveInput = routeEndInput;
+        }
     }
 
     routeActiveInput.value = cell.id;
@@ -458,7 +507,13 @@ function handleMapCellClick(cell) {
         routeActiveInput = routeEndInput;
     }
 
-    routeActiveInput.focus();
+    routeEndInput.focus();
+
+    // Обновляем точки и убираем предыдущий найденный маршрут
+    routeFinder.setEndpoints(
+        routeStartInput.value,
+        routeEndInput.value
+    );
 }
     
 function updatePanelHeight() {
