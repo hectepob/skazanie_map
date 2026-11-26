@@ -334,22 +334,16 @@ function setEndpoints(startValue, endValue, preserveRoute = false) {
         const routeIndex = route
             ? route.groupKeys.indexOf(key)
             : -1;
-        if (route) {
-            route.steps.forEach(step => {
-                if (step.type !== "stairs")
-                    return;
-                // Клетка, с которой начинается переход
-                if (step.fromKey === key) {
-                    stairs.push(step.direction);
-                }
-                // Клетка, в которую приходит переход
-                if (step.toKey === key) {
-                    stairs.push(
-                        step.direction === "up" ? "down" : "up"
-                    );
-                }
-            });
+if (route) {
+    route.steps.forEach(step => {
+        if (step.type !== "stairs")
+            return;
+        // Зелёный указатель ставим только на лестнице, с которой маршрут действительно начинается.
+        if (step.fromKey === key) {
+            stairs.push(step.direction);
         }
+    });
+}
 
 return {
     isStart: key !== null && key === startGroupKey,
