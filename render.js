@@ -16,10 +16,14 @@ const renderMap = (function () {
             el.classList.add("route-start");
         if (routeInfo.isEnd)
             el.classList.add("route-end");
-        if (routeInfo.isOnRoute)
+        if (routeInfo.isOnRoute) {
             el.classList.add("route-cell");
+            // Чем раньше клетка находится в маршруте, тем выше она располагается над следующими клетками.
+            el.style.zIndex = String(1000 - routeInfo.routeIndex);
+        }
         if (routeInfo.steps.some(step => step.type === "passage"))
-            el.classList.add("route-arrow-cell");        const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
+            el.classList.add("route-arrow-cell"); 
+                const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
         if (areaStyle) {
             if (areaStyle.bg_color)
                 el.style.backgroundColor = areaStyle.bg_color;
