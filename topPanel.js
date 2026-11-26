@@ -16,6 +16,11 @@ let zoomInput;
 let currentAreaLabel;
 let areaData = [];
 let mapData = [];
+let routeSearchButton;
+let routeRow;
+let routeStartInput;
+let routeEndInput;
+let routeMarkCheckbox;
 
 function init(areas, map) {
 
@@ -26,8 +31,19 @@ function init(areas, map) {
     topRow.className = "topRow";
     const bottomRow = document.createElement("div");
     bottomRow.className = "bottomRow";
+    const routeRow = document.createElement("div");
+    routeRow.className = "routeRow";
+    routeRow.style.display = "none";
+    routeRow.style.alignItems = "center";
+    routeRow.style.flexWrap = "nowrap";
+    routeRow.style.gap = "8px";
+    routeRow.style.width = "100%";
+    routeRow.style.padding = "2px 0";
+    routeRow.style.overflowX = "auto";
+    routeRow.style.boxSizing = "border-box";
     panel.appendChild(topRow);
     panel.appendChild(bottomRow);
+    panel.appendChild(routeRow);
     const centerBlock = document.createElement("div");
     centerBlock.className = "topPanelCenter";
     panel.appendChild(centerBlock);
@@ -78,6 +94,12 @@ function init(areas, map) {
     floorLabel.style.display = "inline-block";
     floorLabel.style.textAlign = "center";
 
+    routeSearchButton = document.createElement("button");
+    routeSearchButton.type = "button";
+    routeSearchButton.textContent = "Поиск маршрута";
+    routeSearchButton.className = "routeSearchButton";
+    routeSearchButton.style.padding = "5px 12px";
+    
     floorBlock = document.createElement("div");
     floorBlock.className = "floorBlock";
     const floorText = document.createElement("span");
@@ -107,6 +129,76 @@ function init(areas, map) {
     zoomBlock.appendChild(zoomInput);
     zoomBlock.appendChild(zoomMinus);
 
+    // ---------- третья строка: поиск маршрута ----------
+
+// Флажок
+routeMarkCheckbox = document.createElement("input");
+routeMarkCheckbox.type = "checkbox";
+
+const routeMarkLabel = document.createElement("label");
+routeMarkLabel.style.display = "flex";
+routeMarkLabel.style.alignItems = "center";
+routeMarkLabel.style.gap = "4px";
+routeMarkLabel.style.whiteSpace = "nowrap";
+routeMarkLabel.appendChild(routeMarkCheckbox);
+routeMarkLabel.appendChild(
+    document.createTextNode("Отметить на карте")
+);
+
+// Начало пути
+const routeStartLabel = document.createElement("span");
+routeStartLabel.textContent = "Начало пути:";
+
+routeStartInput = document.createElement("input");
+routeStartInput.type = "text";
+routeStartInput.style.width = "85px";
+
+// Конец пути
+const routeEndLabel = document.createElement("span");
+routeEndLabel.textContent = "Конец пути:";
+
+routeEndInput = document.createElement("input");
+routeEndInput.type = "text";
+routeEndInput.style.width = "85px";
+
+// Кнопки
+const routeFindButton = document.createElement("button");
+routeFindButton.type = "button";
+routeFindButton.textContent = "Найти маршрут";
+
+const routeResetButton = document.createElement("button");
+routeResetButton.type = "button";
+routeResetButton.textContent = "Сброс";
+
+const routeCloseButton = document.createElement("button");
+routeCloseButton.type = "button";
+routeCloseButton.textContent = "Закрыть";
+
+// Разделители
+function createRouteSeparator() {
+    const separator = document.createElement("span");
+    separator.textContent = "|";
+    separator.style.color = "#666";
+    separator.style.margin = "0 3px";
+    return separator;
+}
+
+// Размещение элементов
+routeRow.appendChild(routeMarkLabel);
+routeRow.appendChild(createRouteSeparator());
+
+routeRow.appendChild(routeStartLabel);
+routeRow.appendChild(routeStartInput);
+
+routeRow.appendChild(routeEndLabel);
+routeRow.appendChild(routeEndInput);
+
+routeRow.appendChild(routeFindButton);
+routeRow.appendChild(createRouteSeparator());
+
+routeRow.appendChild(routeResetButton);
+routeRow.appendChild(routeCloseButton);
+
 // ---------- разделители ----------
 
     const sep1 = document.createElement("span");
@@ -130,6 +222,7 @@ function init(areas, map) {
     topRow.appendChild(helpButton);
     
 // ---------- вторая строка ----------
+    bottomRow.appendChild(routeSearchButton);
     bottomRow.appendChild(floorBlock);
     bottomRow.appendChild(sep1);
     bottomRow.appendChild(zoomBlock);
@@ -138,6 +231,26 @@ function init(areas, map) {
 
 // ---------- обработчики ----------
 
+// ---------- поиск маршрута ----------
+
+routeSearchButton.onclick = function () {
+    routeRow.style.display = "flex";
+    updatePanelHeight();
+};
+
+routeCloseButton.onclick = function () {
+    routeRow.style.display = "none";
+    updatePanelHeight();
+};
+
+routeResetButton.onclick = function () {
+    routeStartInput.value = "";
+    routeEndInput.value = "";
+    routeMarkCheckbox.checked = false;
+};
+
+    
+    
 areaMenuButton.onclick = function () {
     if (areaMenu.style.display === "block") {
         areaMenu.style.display = "none";
@@ -266,15 +379,19 @@ findButton.onclick = function () {
         helpWindow.show();
     };
 
-    requestAnimationFrame(() => {
-    document.documentElement.style.setProperty(
-        "--topPanelHeight",
-        panel.offsetHeight + "px"
-    );
-});
+    updatePanelHeight();
 
 }
 
+function updatePanelHeight() {
+    requestAnimationFrame(() => {
+        document.documentElement.style.setProperty(
+            "--topPanelHeight",
+            panel.offsetHeight + "px"
+        );
+    });
+}    
+    
 function clearSelection() {
     locationInput.value = "";
     locationInput.classList.remove("inputError");
