@@ -1027,58 +1027,48 @@ input[type="checkbox"]{
 .routeArrow {
     position: absolute;
     z-index: 30;
-    width: 0;
-    height: 0;
+    width: 16px;
+    height: 18px;
+    background: #18320A;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
     pointer-events: none;
+}
 
-    /* Контрастная обводка */
-    filter:
-        drop-shadow(0 0 1px #ffffff)
-        drop-shadow(0 0 2px #17202a);
+/* Внутренняя часть стрелки — ярко-зелёная */
+.routeArrow::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: #C8FF00;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 /* Вправо */
 .routeArrow-east {
-    right: -5px;
+    right: -8px;
     top: 50%;
     transform: translateY(-50%);
-
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 10px solid #16a34a;
 }
 
 /* Влево */
 .routeArrow-west {
-    left: -5px;
+    left: -8px;
     top: 50%;
-    transform: translateY(-50%);
-
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-right: 10px solid #16a34a;
+    transform: translateY(-50%) rotate(180deg);
 }
 
 /* Вверх */
 .routeArrow-north {
-    top: -5px;
+    top: -8px;
     left: 50%;
-    transform: translateX(-50%);
-
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 10px solid #16a34a;
+    transform: translateX(-50%) rotate(-90deg);
 }
 
 /* Вниз */
 .routeArrow-south {
-    bottom: -5px;
+    bottom: -8px;
     left: 50%;
-    transform: translateX(-50%);
-
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 10px solid #16a34a;
+    transform: translateX(-50%) rotate(90deg);
 }
 
 /* ЛЕСТНИЦЫ НА ПУТИ */
