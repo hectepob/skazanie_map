@@ -170,6 +170,26 @@ routeStartInput.addEventListener("keydown", function (e) {
     if (e.key !== "Enter")
         return;
     e.preventDefault();
+    routeStartInput.classList.remove("inputError");
+    clearRouteMessage();
+    const value = routeStartInput.value.trim();
+    const id = Number(value);
+    // Проверяем существование начальной локации.
+    if (
+        !value ||
+        !Number.isInteger(id) ||
+        !byId.has(id)
+    ) {
+        routeStartInput.classList.add("inputError");
+        if (!value) {
+            showRouteMessage("Укажите начальную локацию.");
+        } else {
+            showRouteMessage(`Локации ${value} нет на карте.`);
+        }
+        routeStartInput.focus();
+        return;
+    }
+    // Если начало корректное, переходим к концу.
     routeEndInput.focus();
 });
 routeStartInput.addEventListener("input", function () {
