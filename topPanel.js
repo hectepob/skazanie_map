@@ -378,18 +378,37 @@ routeFindButton.onclick = function () {
         return;
     }
     const result = routeFinder.findRoute(startValue, endValue);
-    if (!result.success) {
-        renderMap.draw();
-        if (result.reason === "notFound") {
-            showRouteMessage(
-                "Путь не найден. Возможно, он проходит через неизвестное измерение."
-            );
-        }
-        return;
+if (!result.success) {
+    renderMap.draw();
+    if (result.reason === "notFound") {
+        showRouteMessage(
+            "Путь не найден. Возможно, он проходит через неизвестное измерение."
+        );
     }
+    return;
+}
 
-    // Центрируем карту на начальной локации
-    navigation.gotoCell(Number(startValue));
+// Количество переходов: все клетки маршрута, кроме начальной.
+const transitions = result.route.steps.length;
+
+// Правильное окончание слова «переход».
+const lastTwo = transitions % 100;
+const lastOne = transitions % 10;
+let word = "переходов";
+if (lastTwo < 11 || lastTwo > 14) {
+    if (lastOne === 1)
+        word = "переход";
+    else if (lastOne >= 2 && lastOne <= 4)
+        word = "перехода";
+}
+
+showRouteMessage(
+    `Кратчайший путь обнаружен и составит ${transitions} ${word}.`,
+    "success"
+);
+
+// Центрируем карту на начальной локации
+navigation.gotoCell(Number(startValue));
 };
     
     routeMarkButton.onclick = function () {
@@ -536,8 +555,11 @@ findButton.onclick = function () {
 }
 
 // Показ сообщения об ошибке
-function showRouteMessage(message) {
+function showRouteMessage(message, type = "error") {
     routeMessage.textContent = message;
+    routeMessage.className = type === "success"
+        ? "routeMessage routeMessageSuccess"
+        : "routeMessage";
     routeMessage.style.display = message ? "block" : "none";
     updatePanelHeight();
 }
