@@ -22,6 +22,7 @@ let routeEndInput;
 let routeMarkButton;
 let routeActiveInput;
 let routeMarking = false;
+let routeMessage;
 
 function init(areas, map) {
 
@@ -46,6 +47,14 @@ function init(areas, map) {
     panel.appendChild(topRow);
     panel.appendChild(bottomRow);
     panel.appendChild(routeRow);
+
+// Область для сообщений об ошибках
+    routeMessage = document.createElement("div");
+    routeMessage.className = "routeMessage";
+    routeMessage.setAttribute("role", "status");
+    routeMessage.setAttribute("aria-live", "polite");
+    routeMessage.style.display = "none";
+    panel.appendChild(routeMessage);
     const centerBlock = document.createElement("div");
     centerBlock.className = "topPanelCenter";
     panel.appendChild(centerBlock);
@@ -58,6 +67,10 @@ function init(areas, map) {
     locationInput = document.createElement("input");
     locationInput.type = "text";
     locationInput.style.width = "80px";
+    locationInput.addEventListener("input", function () {
+        locationInput.classList.remove("inputError");
+        clearRouteMessage();
+    });
     locationInput.addEventListener("keydown", function (e) {
         if (e.key !== "Enter")
             return;
@@ -98,7 +111,7 @@ function init(areas, map) {
 
     routeSearchButton = document.createElement("button");
     routeSearchButton.type = "button";
-    routeSearchButton.textContent = "Поиск маршрута";
+    routeSearchButton.textContent = "Поиск пути";
     routeSearchButton.className = "routeSearchButton";
     routeSearchButton.style.padding = "5px 12px";
     
@@ -143,18 +156,37 @@ routeMarkButton.setAttribute("aria-pressed", "false");
 // Начало пути
 const routeStartLabel = document.createElement("span");
 routeStartLabel.textContent = "Начало пути:";
-
 routeStartInput = document.createElement("input");
 routeStartInput.type = "text";
 routeStartInput.style.width = "85px";
+routeStartInput.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter")
+        return;
+    e.preventDefault();
+    routeEndInput.focus();
+});
+routeStartInput.addEventListener("input", function () {
+    routeStartInput.classList.remove("inputError");
+    clearRouteMessage();
+});
 
 // Конец пути
 const routeEndLabel = document.createElement("span");
 routeEndLabel.textContent = "Конец пути:";
-
 routeEndInput = document.createElement("input");
 routeEndInput.type = "text";
 routeEndInput.style.width = "85px";
+routeEndInput.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter")
+        return;
+    e.preventDefault();
+    routeFindButton.click();
+});
+
+routeEndInput.addEventListener("input", function () {
+    routeEndInput.classList.remove("inputError");
+    clearRouteMessage();
+});
 
 // Запоминаем, в какое поле пользователь поставил курсор
 routeStartInput.addEventListener("focus", function () {routeActiveInput = routeStartInput;});
@@ -165,7 +197,7 @@ routeEndInput.addEventListener("change", updateRouteEndpoints);
 // Кнопки
 const routeFindButton = document.createElement("button");
 routeFindButton.type = "button";
-routeFindButton.textContent = "Найти маршрут";
+routeFindButton.textContent = "Найти путь";
 routeFindButton.style.fontSize = "13px";
 
 // Иконки сброса и закрытия
@@ -252,58 +284,85 @@ routeRow.appendChild(routeCloseButton);
 
 // ---------- поиск маршрута ----------
 
-    routeSearchButton.onclick = function () {
-        const isOpening = routeRow.style.display === "none";
-        routeRow.style.display = isOpening ? "flex" : "none";
-        setButtonPressed(routeSearchButton, isOpening);
-        if (!isOpening)
-            setRouteMarking(false);
-        updatePanelHeight();
-    };
-
-    routeCloseButton.onclick = function () {
-        routeRow.style.display = "none";
-        setButtonPressed(routeSearchButton, false);
+routeSearchButton.onclick = function () {
+    const isOpening = routeRow.style.display === "none";
+    routeRow.style.display = isOpening ? "flex" : "none";
+    setButtonPressed(routeSearchButton, isOpening);
+    if (!isOpening) {
         setRouteMarking(false);
-        updatePanelHeight();
-    };
+        clearRouteMessage();
+    }
+    updatePanelHeight();
+};
 
+routeCloseButton.onclick = function () {
+    routeRow.style.display = "none";
+    setButtonPressed(routeSearchButton, false);
+    setRouteMarking(false);
+    clearRouteMessage();
+    updatePanelHeight();
+};
+
+// Сброс полей и найденного пути
 routeResetButton.onclick = function () {
     routeStartInput.value = "";
     routeEndInput.value = "";
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
+    clearRouteMessage();
     setRouteMarking(false);
     routeFinder.clearRoute();
     renderMap.draw();
 };
 
+// Поиск пути
 routeFindButton.onclick = function () {
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
-    const result = routeFinder.findRoute(
-        routeStartInput.value,
-        routeEndInput.value
-    );
+    clearRouteMessage();
+    const startValue = routeStartInput.value.trim();
+    const endValue = routeEndInput.value.trim();
+    // Проверяем начальную локацию
+    if (!startValue || !Number.isInteger(Number(startValue)) || !byId.has(Number(startValue))) {
+        routeFinder.setEndpoints(startValue, endValue);
+        renderMap.draw();
+        routeStartInput.classList.add("inputError");
+        if (!startValue) {
+            showRouteMessage("Укажите начальную локацию.");
+        } else {
+            showRouteMessage(`Локации ${startValue} нет на карте.`);
+        }
+        routeStartInput.focus();
+        return;
+    }
 
+    // Проверяем конечную локацию
+    if (!endValue || !Number.isInteger(Number(endValue)) || !byId.has(Number(endValue))) {
+        routeFinder.setEndpoints(startValue, endValue);
+        renderMap.draw();
+        routeEndInput.classList.add("inputError");
+        if (!endValue) {
+            showRouteMessage("Укажите конечную локацию.");
+        } else {
+            showRouteMessage(`Локации ${endValue} нет на карте.`);
+        }
+        routeEndInput.focus();
+        return;
+    }
+    const result = routeFinder.findRoute(startValue, endValue);
     if (!result.success) {
-        if (result.reason === "invalidStart") {
-            routeStartInput.classList.add("inputError");
-            routeStartInput.focus();
-        }
-        if (result.reason === "invalidEnd") {
-            routeEndInput.classList.add("inputError");
-            routeEndInput.focus();
-        }
         renderMap.draw();
         if (result.reason === "notFound") {
-            alert("Маршрут между указанными клетками не найден.");
+            showRouteMessage(
+                "Путь не найден. Возможно, он проходит через неизвестное измерение."
+            );
         }
         return;
     }
-    renderMap.draw();
-};
 
+    // Центрируем карту на начальной локации
+    navigation.gotoCell(Number(startValue));
+};
     routeMarkButton.onclick = function () {
         setRouteMarking(!routeMarking);
         if (routeMarking) {
@@ -404,11 +463,14 @@ function fitIntoViewport(menu){
   
 findButton.onclick = function () {
     locationInput.classList.remove("inputError");
-    if (locationInput.value.trim() === "")
+    clearRouteMessage();
+    const value = locationInput.value.trim();
+    if (value === "")
         return;
-    const id = Number(locationInput.value);
-    if (!byId.has(id)) {
+    const id = Number(value);
+    if (!Number.isInteger(id) || !byId.has(id)) {
         locationInput.classList.add("inputError");
+        showRouteMessage(`Локации ${value} нет на карте.`);
         return;
     }
     highlight.clear(false);
@@ -444,16 +506,32 @@ findButton.onclick = function () {
 
 }
 
+// Показ сообщения об ошибке
+function showRouteMessage(message) {
+    routeMessage.textContent = message;
+    routeMessage.style.display = message ? "block" : "none";
+    updatePanelHeight();
+}
+
+// Очистка сообщения об ошибке
+function clearRouteMessage() {
+    if (!routeMessage)
+        return;
+
+    routeMessage.textContent = "";
+    routeMessage.style.display = "none";
+    updatePanelHeight();
+}    
+    
 // Обновление точек после ручного ввода
 function updateRouteEndpoints() {
     routeFinder.setEndpoints(
         routeStartInput.value,
         routeEndInput.value
     );
-
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
-
+    clearRouteMessage();
     renderMap.draw();
 }
     
