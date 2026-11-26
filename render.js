@@ -11,6 +11,11 @@ const renderMap = (function () {
             el.classList.add("highlight");
         if (group.cells.some(c => c.id === cfg.getSelectedCellId()))
             el.classList.add("selected");
+        const routeInfo = cfg.routeFinder.getRenderInfo(group.cells);
+        if (routeInfo.isStart)
+            el.classList.add("route-start");
+        if (routeInfo.isEnd)
+            el.classList.add("route-end");
         const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
         if (areaStyle) {
             if (areaStyle.bg_color)
@@ -85,14 +90,40 @@ const renderMap = (function () {
         el.appendChild(num);
     }
 
+// Отображение переходов найденного маршрута
+function drawRoute(el, group) {
+
+    const routeInfo = cfg.routeFinder.getRenderInfo(group.cells);
+
+    // Обычные проходы: зелёные треугольники на границах клеток
+    routeInfo.steps.forEach(step => {
+
+        if (step.type !== "passage")
+            return;
+
+        const arrow = document.createElement("span");
+        arrow.className = `routeArrow routeArrow-${step.direction}`;
+
+        el.appendChild(arrow);
+    });
+
+    // Лестницы: зелёные указатели на обоих концах перехода
+    routeInfo.stairs.forEach(direction => {
+
+        const marker = document.createElement("span");
+        marker.className = "routeStairs";
+        marker.textContent = direction === "up" ? "▲" : "▼";
+
+        el.appendChild(marker);
+    });
+}
+    
     function attachTooltip(el, group) {
-        
-        el.addEventListener("mouseenter", () => {
+                el.addEventListener("mouseenter", () => {
             if (navigator.maxTouchPoints > 0)
                 return;
             cfg.tooltip.show(group.cells);
         });
-        
         el.addEventListener("mousemove", e => {
             if (navigator.maxTouchPoints > 0)
                 return;
@@ -154,6 +185,7 @@ const renderMap = (function () {
         drawStairs(el, cell);
         drawPortal(el, cell);
         drawCellId(el, group);
+        drawRoute(el, group);
         attachTooltip(el, group);
         attachClick(el, cell, group);
         return el;
