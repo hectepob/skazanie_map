@@ -10,7 +10,7 @@ const highlight = (function () {
         render = obj.render;
     }
 
-    function setCells(ids) {
+    function setCells(ids, redraw = true) {
         highlightCells.clear();
         ids.forEach(id => {
             const cell = byId.get(Number(id));
@@ -24,12 +24,14 @@ const highlight = (function () {
             }
             highlightCells.add(root.id);
         });
-        renderMap.draw();
+        if (redraw)
+            render();
     }
 
-    function clear() {
+    function clear(redraw = true) {
         highlightCells.clear();
-        renderMap.draw();
+        if (redraw)
+            render();
     }
 
     return {
