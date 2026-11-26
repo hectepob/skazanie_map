@@ -327,28 +327,21 @@ const routeFinder = (function () {
     function getRenderInfo(cells) {
 
         const firstCell = cells && cells.length ? cells[0] : null;
-
         const key = firstCell
             ? groupKeyByCellId.get(Number(firstCell.id))
             : null;
-
         const steps = route
             ? route.steps.filter(step => step.fromKey === key)
             : [];
-
         const stairs = [];
-
         if (route) {
             route.steps.forEach(step => {
-
                 if (step.type !== "stairs")
                     return;
-
                 // Клетка, с которой начинается переход
                 if (step.fromKey === key) {
                     stairs.push(step.direction);
                 }
-
                 // Клетка, в которую приходит переход
                 if (step.toKey === key) {
                     stairs.push(
@@ -358,12 +351,13 @@ const routeFinder = (function () {
             });
         }
 
-        return {
-            isStart: key !== null && key === startGroupKey,
-            isEnd: key !== null && key === endGroupKey,
-            steps,
-            stairs
-        };
+    return {
+        isStart: key !== null && key === startGroupKey,
+        isEnd: key !== null && key === endGroupKey,
+        isOnRoute: route ? route.groupKeys.includes(key) : false,
+        steps,
+        stairs
+    };
     }
 
     return {
