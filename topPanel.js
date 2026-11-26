@@ -207,8 +207,7 @@ regionRow.addEventListener("mouseleave", () => {
                             c.subarea === sub.subarea
                         )
                         .map(c => c.id);
-                    highlight.setCells(ids);
-                    renderMap.draw();
+                    highlight.setCells(ids, false);
                     navigation.gotoCell(sub.central_cell);
                 };
                 submenu.appendChild(row);
@@ -238,7 +237,7 @@ findButton.onclick = function () {
         locationInput.classList.add("inputError");
         return;
     }
-    highlight.clear();
+    highlight.clear(false);
     navigation.gotoCell(id);
 };
     
