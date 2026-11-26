@@ -1071,7 +1071,7 @@ input[type="checkbox"]{
     transform: translateX(-50%) rotate(90deg);
 }
 
-/* ЛЕСТНИЦЫ НА ПУТИ */
+/* ЛЕСТНИЦЫ, УЧАСТВУЮЩИЕ В МАРШРУТЕ */
 .routeStairs {
     position: absolute;
     z-index: 30;
@@ -1087,7 +1087,8 @@ input[type="checkbox"]{
     color: white;
     font-size: 9px;
     font-weight: bold;
-    pointer-events: none;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 /* СООБЩЕНИЯ ОБ ОШИБКАХ */
