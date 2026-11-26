@@ -183,7 +183,7 @@ routeCloseButton.setAttribute("aria-label", "Закрыть");
 // Оформление иконок:
 // true  — вариант А, в виде кнопок
 // false — вариант Б, плоские иконки
-const routeIconsAsButtons = true;
+const routeIconsAsButtons = false;
 
 [routeResetButton, routeCloseButton].forEach(button => {
     button.style.width = "28px";
