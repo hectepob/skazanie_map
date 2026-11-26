@@ -1,4 +1,3 @@
-
 const routeFinder = (function () {
 
     let data;
