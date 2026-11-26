@@ -43,25 +43,31 @@ const renderMap = (function () {
         });
     }
 
-    function drawStairs(el, cell) {
-        const stairs = [
-            {
-                id: cfg.toId(cell.stairs?.down),
-                className: "stairs down",
-                symbol: "▼"
-            },
-            {
-                id: cfg.toId(cell.stairs?.up),
-                className: "stairs up",
-                symbol: "▲"
-            }
-        ];
-        stairs.forEach(stair => {
+function drawStairs(el, cell, group) {
+    const routeInfo = cfg.routeFinder.getRenderInfo(group.cells);
+    const stairs = [
+        {
+            id: cfg.toId(cell.stairs?.down),
+            direction: "down",
+            className: "stairs down",
+            symbol: "▼"
+        },
+        {
+            id: cfg.toId(cell.stairs?.up),
+            direction: "up",
+            className: "stairs up",
+            symbol: "▲"
+        }
+    ];
+    stairs.forEach(stair => {
             if (stair.id === null)
                 return;
-            const span = document.createElement("span");
-            span.className = stair.className;
-            span.textContent = stair.symbol;
+    const span = document.createElement("span");
+    const isRouteStair = routeInfo.stairs.includes(stair.direction);
+    span.className = isRouteStair
+        ? `${stair.className} routeStairs`
+        : stair.className;
+    span.textContent = stair.symbol;
             span.onclick = e => {
                 e.stopPropagation();
                 const target = cfg.byId.get(stair.id);
@@ -114,15 +120,6 @@ function drawRoute(el, group) {
         el.appendChild(arrow);
     });
 
-    // Лестницы: зелёные указатели на обоих концах перехода
-    routeInfo.stairs.forEach(direction => {
-
-        const marker = document.createElement("span");
-        marker.className = "routeStairs";
-        marker.textContent = direction === "up" ? "▲" : "▼";
-
-        el.appendChild(marker);
-    });
 }
     
     function attachTooltip(el, group) {
@@ -189,7 +186,7 @@ function drawRoute(el, group) {
         el.style.top = ((cell.row - 1) * 40) + "px";
         applyCellStyle(el, group);
         drawPassages(el, cell);
-        drawStairs(el, cell);
+        drawStairs(el, cell, group);
         drawPortal(el, cell);
         drawCellId(el, group);
         drawRoute(el, group);
