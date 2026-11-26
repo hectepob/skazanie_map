@@ -202,22 +202,19 @@ const routeFinder = (function () {
     }
 
     // Обновление начальной и конечной клеток
-    function setEndpoints(startValue, endValue) {
-
-        startId = parseCellId(startValue);
-        endId = parseCellId(endValue);
-
-        startGroupKey = startId === null
-            ? null
-            : groupKeyByCellId.get(startId);
-
-        endGroupKey = endId === null
-            ? null
-            : groupKeyByCellId.get(endId);
-
-        // При изменении точек старый маршрут больше не актуален
+function setEndpoints(startValue, endValue, preserveRoute = false) {
+    startId = parseCellId(startValue);
+    endId = parseCellId(endValue);
+    startGroupKey = startId === null
+        ? null
+        : groupKeyByCellId.get(startId);
+    endGroupKey = endId === null
+        ? null
+        : groupKeyByCellId.get(endId);
+    // Удаляем старый маршрут только по запросу.
+    if (!preserveRoute)
         route = null;
-    }
+}
 
     // Поиск маршрута алгоритмом BFS
     function findRoute(startValue, endValue) {
