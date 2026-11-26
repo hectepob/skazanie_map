@@ -17,7 +17,6 @@ let currentAreaLabel;
 let areaData = [];
 let mapData = [];
 let routeSearchButton;
-let routeRow;
 let routeStartInput;
 let routeEndInput;
 let routeMarkCheckbox;
@@ -41,6 +40,7 @@ function init(areas, map) {
     routeRow.style.padding = "2px 0";
     routeRow.style.overflowX = "auto";
     routeRow.style.boxSizing = "border-box";
+    routeRow.style.fontSize = "13px";
     panel.appendChild(topRow);
     panel.appendChild(bottomRow);
     panel.appendChild(routeRow);
@@ -165,14 +165,43 @@ routeEndInput.style.width = "85px";
 const routeFindButton = document.createElement("button");
 routeFindButton.type = "button";
 routeFindButton.textContent = "Найти маршрут";
+routeFindButton.style.fontSize = "13px";
 
+// Иконки сброса и закрытия
 const routeResetButton = document.createElement("button");
 routeResetButton.type = "button";
-routeResetButton.textContent = "Сброс";
+routeResetButton.textContent = "↻";
+routeResetButton.title = "Сброс";
+routeResetButton.setAttribute("aria-label", "Сброс");
 
 const routeCloseButton = document.createElement("button");
 routeCloseButton.type = "button";
-routeCloseButton.textContent = "Закрыть";
+routeCloseButton.textContent = "×";
+routeCloseButton.title = "Закрыть";
+routeCloseButton.setAttribute("aria-label", "Закрыть");
+
+// Оформление иконок:
+// true  — вариант А, в виде кнопок
+// false — вариант Б, плоские иконки
+const routeIconsAsButtons = true;
+
+[routeResetButton, routeCloseButton].forEach(button => {
+    button.style.width = "28px";
+    button.style.height = "28px";
+    button.style.padding = "0";
+    button.style.fontSize = "20px";
+    button.style.lineHeight = "1";
+    button.style.display = "flex";
+    button.style.alignItems = "center";
+    button.style.justifyContent = "center";
+
+    if (!routeIconsAsButtons) {
+        button.style.background = "transparent";
+        button.style.border = "none";
+        button.style.boxShadow = "none";
+        button.style.borderRadius = "0";
+    }
+});
 
 // Разделители
 function createRouteSeparator() {
@@ -234,7 +263,8 @@ routeRow.appendChild(routeCloseButton);
 // ---------- поиск маршрута ----------
 
 routeSearchButton.onclick = function () {
-    routeRow.style.display = "flex";
+    routeRow.style.display =
+        routeRow.style.display === "none" ? "flex" : "none";
     updatePanelHeight();
 };
 
