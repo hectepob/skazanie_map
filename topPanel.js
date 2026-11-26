@@ -55,6 +55,13 @@ function init(areas, map) {
     routeMessage.setAttribute("aria-live", "polite");
     routeMessage.style.display = "none";
     panel.appendChild(routeMessage);
+
+    // Убираем сообщение об ошибке при любом клике.
+    // Capture нужен, чтобы старое сообщение исчезло до обработки нового клика.
+    document.addEventListener("click", function () {
+        clearRouteMessage();
+    }, true);
+    
     const centerBlock = document.createElement("div");
     centerBlock.className = "topPanelCenter";
     panel.appendChild(centerBlock);
