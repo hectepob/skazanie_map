@@ -334,6 +334,9 @@ const routeFinder = (function () {
             ? route.steps.filter(step => step.fromKey === key)
             : [];
         const stairs = [];
+        const routeIndex = route
+            ? route.groupKeys.indexOf(key)
+            : -1;
         if (route) {
             route.steps.forEach(step => {
                 if (step.type !== "stairs")
@@ -351,13 +354,14 @@ const routeFinder = (function () {
             });
         }
 
-    return {
-        isStart: key !== null && key === startGroupKey,
-        isEnd: key !== null && key === endGroupKey,
-        isOnRoute: route ? route.groupKeys.includes(key) : false,
-        steps,
-        stairs
-    };
+return {
+    isStart: key !== null && key === startGroupKey,
+    isEnd: key !== null && key === endGroupKey,
+    isOnRoute: routeIndex !== -1,
+    routeIndex,
+    steps,
+    stairs
+};
     }
 
     return {
