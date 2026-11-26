@@ -324,6 +324,7 @@ routeResetButton.onclick = function () {
 
 // Поиск пути
 routeFindButton.onclick = function () {
+    setRouteMarking(false);
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
     clearRouteMessage();
@@ -370,6 +371,7 @@ routeFindButton.onclick = function () {
     // Центрируем карту на начальной локации
     navigation.gotoCell(Number(startValue));
 };
+    
     routeMarkButton.onclick = function () {
         setRouteMarking(!routeMarking);
         if (routeMarking) {
@@ -571,14 +573,11 @@ function setRouteMarking(enabled) {
 function handleMapCellClick(cell) {
     if (!routeMarking || !cell)
         return;
-
-    // Сначала проверяем, какое поле действительно находится в фокусе
-    if (document.activeElement === routeStartInput) {
-        routeActiveInput = routeStartInput;
-    } else if (document.activeElement === routeEndInput) {
-        routeActiveInput = routeEndInput;
-    } else {
-        // Если ни одно поле не активно, выбираем первое незаполненное
+    // Если поле ещё не выбрано, определяем его по заполненности.
+    if (
+        routeActiveInput !== routeStartInput &&
+        routeActiveInput !== routeEndInput
+    ) {
         if (!routeStartInput.value.trim()) {
             routeActiveInput = routeStartInput;
         } else {
@@ -586,20 +585,27 @@ function handleMapCellClick(cell) {
         }
     }
 
-    routeActiveInput.value = cell.id;
+    // Запоминаем, какое именно поле заполняем.
+    const targetInput = routeActiveInput;
+    targetInput.value = cell.id;
+    targetInput.classList.remove("inputError");
+    clearRouteMessage();
 
-    // После выбора начала автоматически переходим к концу
-    if (routeActiveInput === routeStartInput) {
+    // После выбора начала переходим к концу.
+    if (targetInput === routeStartInput) {
+        routeActiveInput = routeEndInput;
+    } else {
         routeActiveInput = routeEndInput;
     }
-
     routeEndInput.focus();
 
-    // Обновляем точки и убираем предыдущий найденный маршрут
+    // Обновляем точки, но сохраняем ранее найденный маршрут.
     routeFinder.setEndpoints(
         routeStartInput.value,
-        routeEndInput.value
+        routeEndInput.value,
+        true
     );
+    renderMap.draw();
 }
     
 function updatePanelHeight() {
