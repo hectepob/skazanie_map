@@ -115,6 +115,7 @@ const renderMap = (function () {
         el.addEventListener("click", e => {
             if (cfg.drag.moved())
                 return;
+            cfg.topPanel.handleMapCellClick?.(cell);
             cfg.topPanel.clearAreaSelection?.();
             cfg.tooltip.hide();
             highlight.clear(false);
