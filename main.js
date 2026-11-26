@@ -139,6 +139,7 @@ Promise.all([
         gridMap,
         areaMap,
         byId,
+        routeFinder,
         navigation,
         topPanel: topPanelModule,
         tooltip,
