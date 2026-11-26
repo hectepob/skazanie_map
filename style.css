@@ -1103,3 +1103,9 @@ input[type="checkbox"]{
     border-left: 3px solid #b33;
     border-radius: 3px;
 }
+
+/* УСПЕШНЫЙ ПОИСК ПУТИ */
+.routeMessageSuccess {
+    color: #245b1b;
+    border-left-color: #4b9b35;
+}
