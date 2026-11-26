@@ -117,7 +117,7 @@ const renderMap = (function () {
                 return;
             cfg.topPanel.clearAreaSelection?.();
             cfg.tooltip.hide();
-            highlight.clear();
+            highlight.clear(false);
             cfg.navigation.gotoCell(cell.id, false);
             requestAnimationFrame(() => {
                 const currentEl = cfg.mapContainer.querySelector(
