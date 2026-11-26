@@ -183,7 +183,7 @@ routeCloseButton.setAttribute("aria-label", "Закрыть");
 // Оформление иконок:
 // true  — вариант А, в виде кнопок
 // false — вариант Б, плоские иконки
-const routeIconsAsButtons = false;
+//const routeIconsAsButtons = true;
 
 [routeResetButton, routeCloseButton].forEach(button => {
     button.style.width = "28px";
@@ -195,12 +195,12 @@ const routeIconsAsButtons = false;
     button.style.alignItems = "center";
     button.style.justifyContent = "center";
 
-    if (!routeIconsAsButtons) {
-        button.style.background = "transparent";
-        button.style.border = "none";
-        button.style.boxShadow = "none";
-        button.style.borderRadius = "0";
-    }
+//    if (!routeIconsAsButtons) {
+//        button.style.background = "transparent";
+//        button.style.border = "none";
+//        button.style.boxShadow = "none";
+//        button.style.borderRadius = "0";
+//    }
 });
 
 // Разделители
