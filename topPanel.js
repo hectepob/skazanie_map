@@ -534,7 +534,8 @@ function clearRouteMessage() {
 function updateRouteEndpoints() {
     routeFinder.setEndpoints(
         routeStartInput.value,
-        routeEndInput.value
+        routeEndInput.value,
+        true
     );
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
