@@ -16,7 +16,10 @@ const renderMap = (function () {
             el.classList.add("route-start");
         if (routeInfo.isEnd)
             el.classList.add("route-end");
-        const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
+        if (routeInfo.isOnRoute)
+            el.classList.add("route-cell");
+        if (routeInfo.steps.some(step => step.type === "passage"))
+            el.classList.add("route-arrow-cell");        const areaStyle = cfg.areaMap.get(`${cell.area}|${cell.subarea}`);
         if (areaStyle) {
             if (areaStyle.bg_color)
                 el.style.backgroundColor = areaStyle.bg_color;
