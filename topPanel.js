@@ -48,13 +48,13 @@ function init(areas, map) {
     panel.appendChild(bottomRow);
     panel.appendChild(routeRow);
 
-// Область для сообщений об ошибках
-    routeMessage = document.createElement("div");
-    routeMessage.className = "routeMessage";
-    routeMessage.setAttribute("role", "status");
-    routeMessage.setAttribute("aria-live", "polite");
-    routeMessage.style.display = "none";
-    panel.appendChild(routeMessage);
+// Область для сообщений и уведомлений
+routeMessage = document.createElement("div");
+routeMessage.className = "routeMessage";
+routeMessage.setAttribute("role", "status");
+routeMessage.setAttribute("aria-live", "polite");
+routeMessage.style.display = "none";
+document.body.appendChild(routeMessage);
 
     // Убираем сообщение об ошибке при любом клике.
     // Capture нужен, чтобы старое сообщение исчезло до обработки нового клика.
@@ -554,25 +554,24 @@ findButton.onclick = function () {
 
 }
 
-// Показ сообщения об ошибке
+// Показ сообщения
 function showRouteMessage(message, type = "error") {
     routeMessage.textContent = message;
     routeMessage.className = type === "success"
         ? "routeMessage routeMessageSuccess"
         : "routeMessage";
+
     routeMessage.style.display = message ? "block" : "none";
-    updatePanelHeight();
 }
 
-// Очистка сообщения об ошибке
+// Очистка сообщения
 function clearRouteMessage() {
     if (!routeMessage)
         return;
 
     routeMessage.textContent = "";
     routeMessage.style.display = "none";
-    updatePanelHeight();
-}    
+}
     
 // Обновление точек после ручного ввода
 function updateRouteEndpoints() {
@@ -658,6 +657,8 @@ function updatePanelHeight() {
         );
     });
 }    
+
+window.addEventListener("resize", updatePanelHeight);
     
 function clearSelection() {
     locationInput.value = "";
