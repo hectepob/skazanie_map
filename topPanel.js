@@ -777,6 +777,7 @@ return {
         if (!cell)
             return;
         locationInput.value = cell.id;
+        locationInput.classList.remove("inputError");
     }
 };
 })();
