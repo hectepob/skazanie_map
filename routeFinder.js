@@ -216,7 +216,7 @@ function setEndpoints(startValue, endValue, preserveRoute = false) {
         route = null;
 }
 
-    // Поиск маршрута алгоритмом BFS
+    // Поиск кратчайшего маршрута с минимальной суммой номеров клеток
     function findRoute(startValue, endValue) {
 
         setEndpoints(startValue, endValue);
@@ -239,19 +239,33 @@ function setEndpoints(startValue, endValue, preserveRoute = false) {
             return { success: true, route };
         }
 
-        const queue = [startGroupKey];
-        const visited = new Set([startGroupKey]);
-        const previous = new Map();
+        // Сумма номеров всех клеток физической группы
+        function getGroupIdSum(groupKey) {
+            const group = groups.get(groupKey);
 
-        let found = false;
+            return group.members.reduce(
+                (sum, cell) => sum + Number(cell.id),
+                0
+            );
+        }
+
+        // ЭТАП 1. Находим минимальное количество переходов
+        const queue = [startGroupKey];
+        const distances = new Map([[startGroupKey, 0]]);
+
         let queueIndex = 0;
+        let endDistance = null;
 
         while (queueIndex < queue.length) {
 
             const currentKey = queue[queueIndex++];
+            const currentDistance = distances.get(currentKey);
 
-            if (currentKey === endGroupKey) {
-                found = true;
+            // Все вершины предыдущего уровня уже обработаны
+            if (
+                endDistance !== null &&
+                currentDistance >= endDistance
+            ) {
                 break;
             }
 
@@ -259,25 +273,75 @@ function setEndpoints(startValue, endValue, preserveRoute = false) {
 
             edges.forEach(edge => {
 
-                if (visited.has(edge.toKey))
+                if (distances.has(edge.toKey))
                     return;
 
-                visited.add(edge.toKey);
+                const nextDistance = currentDistance + 1;
+
+                distances.set(edge.toKey, nextDistance);
+                queue.push(edge.toKey);
+
+                if (edge.toKey === endGroupKey)
+                    endDistance = nextDistance;
+            });
+        }
+
+        if (endDistance === null)
+            return { success: false, reason: "notFound" };
+
+        // ЭТАП 2. Среди кратчайших маршрутов выбираем минимальную сумму ID
+        const costs = new Map();
+        const previous = new Map();
+
+        costs.set(startGroupKey, getGroupIdSum(startGroupKey));
+
+        queue.forEach(currentKey => {
+
+            const currentDistance = distances.get(currentKey);
+
+            if (currentDistance >= endDistance)
+                return;
+
+            const currentCost = costs.get(currentKey);
+
+            if (currentCost === undefined)
+                return;
+
+            const edges = graph.get(currentKey) || [];
+
+            edges.forEach(edge => {
+
+                // Рассматриваем только переходы на следующий уровень
+                if (
+                    distances.get(edge.toKey) !==
+                    currentDistance + 1
+                ) {
+                    return;
+                }
+
+                const nextCost =
+                    currentCost + getGroupIdSum(edge.toKey);
+
+                const oldCost = costs.get(edge.toKey);
+
+                // При равной сумме сохраняем ранее найденный вариант
+                if (oldCost !== undefined && nextCost >= oldCost)
+                    return;
+
+                costs.set(edge.toKey, nextCost);
 
                 previous.set(edge.toKey, {
                     fromKey: currentKey,
                     type: edge.type,
                     direction: edge.direction
                 });
-
-                queue.push(edge.toKey);
             });
-        }
+        });
 
-        if (!found)
+        if (!costs.has(endGroupKey))
             return { success: false, reason: "notFound" };
 
-        // Восстанавливаем путь от конца к началу
+        // Восстанавливаем выбранный маршрут
         const groupKeys = [endGroupKey];
         const steps = [];
 
