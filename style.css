@@ -746,8 +746,8 @@ input[type="checkbox"]{
     position:absolute;
     left:200px; /* после кнопки Найти*/
     right:10px;
-    top:0;
-    bottom:0;
+    top:5px;
+    bottom:33px;
     display:flex;
     align-items:center;
     justify-content:center;
