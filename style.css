@@ -1072,23 +1072,11 @@ input[type="checkbox"]{
 }
 
 /* ЛЕСТНИЦЫ, УЧАСТВУЮЩИЕ В МАРШРУТЕ */
-.routeStairs {
-    position: absolute;
-    z-index: 30;
-    left: 2px;
-    top: 2px;
-    width: 13px;
-    height: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #16a34a;
-    color: white;
-    font-size: 9px;
+.stairs.routeStairs {
+    color: #16a34a;
     font-weight: bold;
-    cursor: pointer;
-    pointer-events: auto;
+    z-index: 30;
+    text-shadow: 0 0 2px white;
 }
 
 /* СООБЩЕНИЯ ОБ ОШИБКАХ */
