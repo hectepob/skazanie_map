@@ -1079,18 +1079,28 @@ input[type="checkbox"]{
     text-shadow: 0 0 2px white;
 }
 
-/* СООБЩЕНИЯ ОБ ОШИБКАХ */
+/* СООБЩЕНИЯ И УВЕДОМЛЕНИЯ */
 .routeMessage {
-    width: 100%;
+    position: fixed;
+    top: calc(var(--topPanelHeight, 40px) + 8px);
+    left: 8px;
+    width: min(420px, calc(100vw - 16px));
     box-sizing: border-box;
-    padding: 3px 6px;
+    padding: 7px 10px;
     color: #8b1e1e;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
-    line-height: 1.3;
-    background: rgba(255, 255, 255, .2);
-    border-left: 3px solid #b33;
-    border-radius: 3px;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    background: rgba(255, 248, 230, .96);
+    border: 1px solid rgba(120, 80, 40, .4);
+    border-left: 4px solid #b33;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    z-index: 1500;
+    pointer-events: none;
 }
 
 /* УСПЕШНЫЙ ПОИСК ПУТИ */
