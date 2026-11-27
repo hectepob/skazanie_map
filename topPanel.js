@@ -23,6 +23,10 @@ let routeMarkButton;
 let routeActiveInput;
 let routeMarking = false;
 let routeMessage;
+let routeSuccessMessage = "";
+let routeMessageActive = false;
+let tipClicks = 0;
+let lastTipChange = 0;
 
 function init(areas, map) {
 
@@ -57,12 +61,19 @@ routeMessage.style.display = "block";
 routeMessage.style.visibility = "hidden";
 panel.appendChild(routeMessage);
 
-    // Убираем сообщение об ошибке при любом клике.
-    // Capture нужен, чтобы старое сообщение исчезло до обработки нового клика.
-    document.addEventListener("click", function () {
-        clearRouteMessage();
-    }, true);
-    
+// Показываем первый совет
+showNextTip();
+
+// Проверяем, не пора ли сменить совет
+setInterval(function () {
+    if (
+        !routeMessageActive &&
+        Date.now() - lastTipChange >= 60000
+    ) {
+        showNextTip();
+    }
+}, 5000);
+
     const centerBlock = document.createElement("div");
     centerBlock.className = "topPanelCenter";
     panel.appendChild(centerBlock);
@@ -337,9 +348,10 @@ routeResetButton.onclick = function () {
     routeEndInput.value = "";
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
+    routeSuccessMessage = "";
+    routeFinder.clearRoute();
     clearRouteMessage();
     setRouteMarking(false);
-    routeFinder.clearRoute();
     renderMap.draw();
 };
 
@@ -348,6 +360,7 @@ routeFindButton.onclick = function () {
     setRouteMarking(false);
     routeStartInput.classList.remove("inputError");
     routeEndInput.classList.remove("inputError");
+    routeSuccessMessage = "";
     clearRouteMessage();
     const startValue = routeStartInput.value.trim();
     const endValue = routeEndInput.value.trim();
@@ -555,23 +568,80 @@ findButton.onclick = function () {
 
 }
 
-// Показ сообщения
+
+// Показ сообщения об ошибке или результате поиска
 function showRouteMessage(message, type = "error") {
+    if (!routeMessage)
+        return;
+
+    if (type === "success")
+        routeSuccessMessage = message;
+
+    routeMessageActive = true;
     routeMessage.textContent = message;
+    routeMessage.title = message;
+
     routeMessage.className = type === "success"
         ? "routeMessage routeMessageSuccess"
         : "routeMessage";
 
-    routeMessage.style.visibility = message ? "visible" : "hidden";
+    routeMessage.style.visibility = "visible";
 }
 
-// Очистка сообщения
+// Очистка сообщения с возвратом к советам
 function clearRouteMessage() {
     if (!routeMessage)
         return;
 
+    // Если маршрут всё ещё отображается, сохраняем его сообщение
+    if (routeSuccessMessage) {
+        showRouteMessage(routeSuccessMessage, "success");
+        return;
+    }
+
+    if (!routeMessageActive)
+        return;
+
+    routeMessageActive = false;
     routeMessage.textContent = "";
+    routeMessage.title = "";
     routeMessage.style.visibility = "hidden";
+
+    showNextTip();
+}
+
+// Показ следующего совета
+function showNextTip() {
+    if (!routeMessage || routeMessageActive)
+        return;
+
+    const tip = tipsModule.getNextTip();
+
+    if (!tip)
+        return;
+
+    routeMessage.textContent = tip;
+    routeMessage.title = tip;
+    routeMessage.className = "routeMessage routeMessageTip";
+    routeMessage.style.visibility = "visible";
+
+    lastTipChange = Date.now();
+    tipClicks = 0;
+}
+
+// Учитываем клики по клеткам карты
+function registerTipActivity() {
+    if (routeMessageActive)
+        return;
+
+    tipClicks++;
+
+    if (
+        tipClicks >= 10 &&
+        Date.now() - lastTipChange >= 15000
+    ) {
+        showNextTip();
+    }
 }
     
 // Обновление точек после ручного ввода
@@ -613,7 +683,14 @@ function setRouteMarking(enabled) {
 
 // Обработка клика по клетке карты для полей маршрута
 function handleMapCellClick(cell) {
-    if (!routeMarking || !cell)
+    if (!cell)
+        return;
+    registerTipActivity();
+    // Ошибку можно убрать кликом по карте.
+    // Сообщение об успешном маршруте при этом сохраняется.
+    if (routeMessageActive && !routeSuccessMessage)
+        clearRouteMessage();
+    if (!routeMarking)
         return;
     // Если поле ещё не выбрано, определяем его по заполненности.
     if (
@@ -631,7 +708,6 @@ function handleMapCellClick(cell) {
     const targetInput = routeActiveInput;
     targetInput.value = cell.id;
     targetInput.classList.remove("inputError");
-    clearRouteMessage();
 
     // После выбора начала переходим к концу.
     if (targetInput === routeStartInput) {
