@@ -53,8 +53,9 @@ routeMessage = document.createElement("div");
 routeMessage.className = "routeMessage";
 routeMessage.setAttribute("role", "status");
 routeMessage.setAttribute("aria-live", "polite");
-routeMessage.style.display = "none";
-document.body.appendChild(routeMessage);
+routeMessage.style.display = "block";
+routeMessage.style.visibility = "hidden";
+panel.appendChild(routeMessage);
 
     // Убираем сообщение об ошибке при любом клике.
     // Capture нужен, чтобы старое сообщение исчезло до обработки нового клика.
@@ -561,7 +562,7 @@ function showRouteMessage(message, type = "error") {
         ? "routeMessage routeMessageSuccess"
         : "routeMessage";
 
-    routeMessage.style.display = message ? "block" : "none";
+    routeMessage.style.visibility = message ? "visible" : "hidden";
 }
 
 // Очистка сообщения
@@ -570,7 +571,7 @@ function clearRouteMessage() {
         return;
 
     routeMessage.textContent = "";
-    routeMessage.style.display = "none";
+    routeMessage.style.visibility = "hidden";
 }
     
 // Обновление точек после ручного ввода
@@ -658,8 +659,6 @@ function updatePanelHeight() {
     });
 }    
 
-window.addEventListener("resize", updatePanelHeight);
-    
 function clearSelection() {
     locationInput.value = "";
     locationInput.classList.remove("inputError");
